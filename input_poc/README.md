@@ -1,0 +1,3 @@
+Various test codes and POC codes for a simple webcam input
+
+This is made first so that representation will be not theoretical unworking bullshit of mine but worked out after seeing some real data source at least...
