@@ -11,15 +11,15 @@ Why?
 How?
 ====
 
-1.) I plan to find a simple way to get camera frames on linux so that I can experiment with my webcam. Input however should be independent from the algorithm, just I will try to use YUYV.
-2.) I plan to print pictures with "circle-like" cylinders that have 4 colors - each in its opposite side different, creating 4 quarters.
-3.) A marker is at least two cilinders of these colored things in the same rotation.
-4.) Because it is a circle at least one scanline will pass through the opposite colored sides creating a readable pattern we search for (two opening colors and two closing colors).
-5.) I will try to find all and every data for telling which colors are the best for this. First I thought about purple but now I think again after reading about why chroma-keying is usually a green box. We need at least 2, optimally at least 4 colors though..
-6.) When in a scanline, we will collect each and every pattern that we look for (like a big vector on the right side of the picture vertically telling where the centers of these are). To support more than one marker, we could enlarge this data structure to be able to hold multiple found elements for each scanline (for example 64).
-7.) After processing all scanlines, we run through this vertical "vector" and find out the horizontal centers of the found markers. The x coordinates are already well calculated so what we need to do is to "unify" these vertically with a reasonably small delta value.
-8.) The y coordinate is obtained by the middle index of the above unification
-9.) Thus we get all (x,y) pairs for all these circular markers in the current camera frame.
+1. I plan to find a simple way to get camera frames on linux so that I can experiment with my webcam. Input however should be independent from the algorithm, just I will try to use YUYV.
+2. I plan to print pictures with "circle-like" cylinders that have 4 colors - each in its opposite side different, creating 4 quarters.
+3. A marker is at least two cilinders of these colored things in the same rotation.
+4. Because it is a circle at least one scanline will pass through the opposite colored sides creating a readable pattern we search for (two opening colors and two closing colors).
+5. I will try to find all and every data for telling which colors are the best for this. First I thought about purple but now I think again after reading about why chroma-keying is usually a green box. We need at least 2, optimally at least 4 colors though..
+6. When in a scanline, we will collect each and every pattern that we look for (like a big vector on the right side of the picture vertically telling where the centers of these are). To support more than one marker, we could enlarge this data structure to be able to hold multiple found elements for each scanline (for example 64).
+7. After processing all scanlines, we run through this vertical "vector" and find out the horizontal centers of the found markers. The x coordinates are already well calculated so what we need to do is to "unify" these vertically with a reasonably small delta value.
+8. The y coordinate is obtained by the middle index of the above unification
+9. Thus we get all (x,y) pairs for all these circular markers in the current camera frame.
 
 I think I should provide ways to only stop here and let the end-user process this data as they want:
 * If you put a lot of markers like this on a big wall and all you want is to render a wireframe of it (with no 3D calculations at all actually) then just use this 2D data and do so!
@@ -31,4 +31,5 @@ What if I screw up?
 ===================
 
 It is a very good question. This algorithm is just a weird idea so it might or might not work. If it would work it might be awsome for you because of its simplicity, but who knows if I just screw up or become bored to work on this.
-If you start to see visible results, then you might be happy to use this in your products if you tell who made it possible. Until then I do not advise using any of these in production code ;-)
+
+When you start to see visible results, then you might be happy to use this in your products if you tell who made it possible. Until then I do not advise using any of these in production code ;-)
