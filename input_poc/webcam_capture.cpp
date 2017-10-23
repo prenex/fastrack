@@ -26,29 +26,46 @@ const int K2 = int(0.714f * (1 << 16));
 const int K3 = int(0.334f * (1 << 16));
 const int K4 = int(1.772f * (1 << 16));
 
+// Contrains between min and max with saturation
+static inline void saturate(int& value, int min_val, int max_val) {
+	if (value < min_val) value = min_val;
+	if (value > max_val) value = max_val;
+}
+
 // Converts YUV 4:2:2 to an RGB_888 vector - possibly growing the target vector if needed.
 // The target vector will contain only the corresponding rgb888 result and nothing else
 std::vector<uint8_t> convertToRgb888FromYuv422(uint8_t *yuv422s, int yuvlen) {
     	std::vector<uint8_t> rgb888Block;	// vector of the rgb888 data for the current block
 	// 4byte = 2 pixels in yuv422!
 	for(int i = 0; i < yuvlen / 4; ++i) {
-		int y1  = (uint8_t)yuv422s[i*4];
-		int u = (uint8_t)yuv422s[i*4 + 1];
-		int y2  = (uint8_t)yuv422s[i*4 + 2];
-		int v = (uint8_t)yuv422s[i*4 + 3];
+		uint8_t y1  = (uint8_t)yuv422s[i*4];
+		uint8_t u = (uint8_t)yuv422s[i*4 + 1];
+		uint8_t y2  = (uint8_t)yuv422s[i*4 + 2];
+		uint8_t v = (uint8_t)yuv422s[i*4 + 3];
+
+		int8_t uf = u - 128;
+		int8_t vf = v - 128;
 
 		// Pixel1
+		// v0 (pastebin):
+		int r = y1 + (K1*vf >> 16);
+		int g = y1 - (K2*vf >> 16) - (K3*uf >> 16);
+		int b = y1 + (K4*uf >> 16);
+ 
+		saturate(r, 0, 255);
+		saturate(g, 0, 255);
+		saturate(b, 0, 255);
 		// v1 (interesting):
-		float r = (uint8_t)(y1 + 1.4065 * (v - 128));
-		float g = (uint8_t)(y1 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
-		float b = (uint8_t)(y1 + 1.7790 * (u - 128));
+//		float r = (uint8_t)(y1 + 1.4065 * (v - 128));
+//		float g = (uint8_t)(y1 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
+//		float b = (uint8_t)(y1 + 1.7790 * (u - 128));
 		// This prevents colour distortions in your rgb image
-		if (r < 0) r = 0;
-		else if (r > 255) r = 255;
-		if (g < 0) g = 0;
-		else if (g > 255) g = 255;
-		if (b < 0) b = 0;
-		else if (b > 255) b = 255;
+//		if (r < 0) r = 0;
+//		else if (r > 255) r = 255;
+//		if (g < 0) g = 0;
+//		else if (g > 255) g = 255;
+//		if (b < 0) b = 0;
+//		else if (b > 255) b = 255;
 		// v2:
 //		uint8_t r = uint8_t(y1 + 1.140*v);
 //		uint8_t g = uint8_t(y1 - 0.395*u - 0.581*v);
@@ -62,17 +79,25 @@ std::vector<uint8_t> convertToRgb888FromYuv422(uint8_t *yuv422s, int yuvlen) {
 		rgb888Block.push_back((uint8_t)b);
 
 		// Pixel2
+		// v0 (pastebin):
+		r = y2 + (K1*vf >> 16);
+		g = y2 - (K2*vf >> 16) - (K3*uf >> 16);
+		b = y2 + (K4*uf >> 16);
+ 
+		saturate(r, 0, 255);
+		saturate(g, 0, 255);
+		saturate(b, 0, 255);
 		// v1 (interesting):
-		r = (uint8_t)(y2 + 1.4075 * (v - 128));
-		g = (uint8_t)(y2 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
-		b = (uint8_t)(y2 + 1.7790 * (u - 128));
+//		r = (uint8_t)(y2 + 1.4075 * (v - 128));
+//		g = (uint8_t)(y2 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
+//		b = (uint8_t)(y2 + 1.7790 * (u - 128));
 		// This prevents colour distortions in your rgb image
-		if (r < 0) r = 0;
-		else if (r > 255) r = 255;
-		if (g < 0) g = 0;
-		else if (g > 255) g = 255;
-		if (b < 0) b = 0;
-		else if (b > 255) b = 255;
+//		if (r < 0) r = 0;
+//		else if (r > 255) r = 255;
+//		if (g < 0) g = 0;
+//		else if (g > 255) g = 255;
+//		if (b < 0) b = 0;
+//		else if (b > 255) b = 255;
 		// v2:
 //		r = uint8_t(y2 + 1.140*v);
 //		g = uint8_t(y2 - 0.395*u - 0.581*v);
