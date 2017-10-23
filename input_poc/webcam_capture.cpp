@@ -40,7 +40,7 @@ int main() {
     imageFormat.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     imageFormat.fmt.pix.width = 640;
     imageFormat.fmt.pix.height = 480;
-    imageFormat.fmt.pix.pixelformat = V4L2_PIX_FMT_MJPEG;
+    imageFormat.fmt.pix.pixelformat = V4L2_PIX_FMT_YUYV;
     imageFormat.fmt.pix.field = V4L2_FIELD_NONE;
     // tell the device you are using this format
     if(ioctl(fd, VIDIOC_S_FMT, &imageFormat) < 0){
