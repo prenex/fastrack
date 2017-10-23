@@ -24,32 +24,43 @@ using namespace std;
 // The target vector will contain only the corresponding rgb888 result and nothing else
 std::vector<uint8_t> convertToRgb888FromYuv422(uint8_t *yuv422s, int yuvlen) {
     	std::vector<uint8_t> rgb888Block;	// vector of the rgb888 data for the current block
-	//rgb888Block.resize(3 * yuvlen * 3 / 2);
 	// 4byte = 2 pixels in yuv422!
 	for(int i = 0; i < yuvlen / 4; ++i) {
-		uint8_t u  = yuv422s[i*4];
-		uint8_t y1 = yuv422s[i*4 + 1];
-		uint8_t v  = yuv422s[i*4 + 2];
-		uint8_t y2 = yuv422s[i*4 + 3];
+		uint8_t y1  = yuv422s[i*4];
+		uint8_t u = yuv422s[i*4 + 1];
+		uint8_t y2  = yuv422s[i*4 + 2];
+		uint8_t v = yuv422s[i*4 + 3];
 
 		// Pixel1
-		uint8_t r = (uint8_t)(y1 + 1.4075 * (v - 128));
-		uint8_t g = (uint8_t)(y1 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
-		uint8_t b = (uint8_t)(y1 + 1.7790 * (u - 128));
-		//rgb888Block[i*6] = r;
-		//rgb888Block[i*6 + 1] = g;
-		//rgb888Block[i*6 + 2] = b;
+		// v1 (interesting):
+		//uint8_t r = (uint8_t)(y1 + 1.4075 * (v - 128));
+		//uint8_t g = (uint8_t)(y1 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
+		//uint8_t b = (uint8_t)(y1 + 1.7790 * (u - 128));
+		// v2:
+		//uint8_t r = uint8_t(y1 + 1.140*v);
+		//uint8_t g = uint8_t(y1 - 0.395*u - 0.581*v);
+		//uint8_t b = uint8_t(y1 + 2.032*u);
+		// Grayscale (simple):
+		uint8_t r = u;
+		uint8_t g = y1;
+		uint8_t b = v;
 		rgb888Block.push_back(r);
 		rgb888Block.push_back(g);
 		rgb888Block.push_back(b);
 
 		// Pixel2
-		r = (uint8_t)(y2 + 1.4075 * (v - 128));
-		g = (uint8_t)(y2 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
-		b = (uint8_t)(y2 + 1.7790 * (u - 128));
-		//rgb888Block[i*6 + 3] = r;
-		//rgb888Block[i*6 + 4] = g;
-		//rgb888Block[i*6 + 5] = b;
+		// v1 (interesting):
+		//r = (uint8_t)(y2 + 1.4075 * (v - 128));
+		//g = (uint8_t)(y2 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
+		//b = (uint8_t)(y2 + 1.7790 * (u - 128));
+		// v2:
+		//r = uint8_t(y2 + 1.140*v);
+		//g = uint8_t(y2 - 0.395*u - 0.581*v);
+		//b = uint8_t(y2 + 2.032*u);
+		// Grayscale (simple):
+		r = u;
+		g = y2;
+		b = v;
 		rgb888Block.push_back(r);
 		rgb888Block.push_back(g);
 		rgb888Block.push_back(b);
