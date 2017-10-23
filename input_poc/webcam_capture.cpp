@@ -1,3 +1,5 @@
+/* g++ webcam_capture.cpp -o webcam_capture.out */
+
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,8 +15,48 @@
 #include <string.h>
 #include <fstream>
 #include <string>
+#include <vector> /* vector */
+#include <cstdint> /*uint8_t */
 
 using namespace std;
+
+// Converts YUV 4:2:2 to an RGB_888 vector - possibly growing the target vector if needed.
+// The target vector will contain only the corresponding rgb888 result and nothing else
+std::vector<uint8_t> convertToRgb888FromYuv422(uint8_t *yuv422s, int yuvlen) {
+    	std::vector<uint8_t> rgb888Block;	// vector of the rgb888 data for the current block
+	//rgb888Block.resize(3 * yuvlen * 3 / 2);
+	// 4byte = 2 pixels in yuv422!
+	for(int i = 0; i < yuvlen / 4; ++i) {
+		uint8_t u  = yuv422s[i*4];
+		uint8_t y1 = yuv422s[i*4 + 1];
+		uint8_t v  = yuv422s[i*4 + 2];
+		uint8_t y2 = yuv422s[i*4 + 3];
+
+		// Pixel1
+		uint8_t r = (uint8_t)(y1 + 1.4075 * (v - 128));
+		uint8_t g = (uint8_t)(y1 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
+		uint8_t b = (uint8_t)(y1 + 1.7790 * (u - 128));
+		//rgb888Block[i*6] = r;
+		//rgb888Block[i*6 + 1] = g;
+		//rgb888Block[i*6 + 2] = b;
+		rgb888Block.push_back(r);
+		rgb888Block.push_back(g);
+		rgb888Block.push_back(b);
+
+		// Pixel2
+		r = (uint8_t)(y2 + 1.4075 * (v - 128));
+		g = (uint8_t)(y2 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
+		b = (uint8_t)(y2 + 1.7790 * (u - 128));
+		//rgb888Block[i*6 + 3] = r;
+		//rgb888Block[i*6 + 4] = g;
+		//rgb888Block[i*6 + 5] = b;
+		rgb888Block.push_back(r);
+		rgb888Block.push_back(g);
+		rgb888Block.push_back(b);
+	}
+
+	return rgb888Block;
+}
 
 int main() {
     // 1.  Open the device
@@ -112,13 +154,16 @@ int main() {
             << " KBytes of data" << endl;
 
     // Write the data out to file
-    ofstream outFile;
-    outFile.open("webcam_output.jpeg", ios::binary| ios::app);
+    ofstream outFileYuv422;
+    ofstream outFileRgb888;
+    outFileYuv422.open("webcam_output.yuv422.data", ios::binary| ios::app);
+    outFileRgb888.open("webcam_output.rgb888.data", ios::binary| ios::app);
 
     int bufPos = 0, outFileMemBlockSize = 0;  // the position in the buffer and the amoun to copy from
                                         // the buffer
     int remainingBufferSize = bufferinfo.bytesused; // the remaining buffer size, is decremented by
                                                     // memBlockSize amount on each loop so we do not overwrite the buffer
+    std::vector<uint8_t> rgb888Block;	// vector of the rgb888 data for the current block
     char* outFileMemBlock = NULL;  // a pointer to a new memory block
     int itr = 0; // counts thenumber of iterations
     while(remainingBufferSize > 0) {
@@ -131,7 +176,13 @@ int main() {
 
         // copy 1024 bytes of data starting from buffer+bufPos
         memcpy(outFileMemBlock, buffer+bufPos, outFileMemBlockSize);
-        outFile.write(outFileMemBlock,outFileMemBlockSize);
+        outFileYuv422.write(outFileMemBlock, outFileMemBlockSize);
+
+	// Convert into RGB
+	rgb888Block = convertToRgb888FromYuv422((uint8_t*)outFileMemBlock, outFileMemBlockSize);
+	// Write out bytes into the rgb file too
+	printf("Writing %d rgb byte!", rgb888Block.size());
+	outFileRgb888.write((const char*)(&rgb888Block[0]), rgb888Block.size());
 
         // calculate the amount of memory left to read
         // if the memory block size is greater than the remaining
@@ -145,10 +196,12 @@ int main() {
 
         // display the remaining buffer size
         cout << itr++ << " Remaining bytes: "<< remainingBufferSize << endl;
+	// TODO: delete[] the outFileMemBlock!!!
     }
 
     // Close the file
-    outFile.close();
+    outFileYuv422.close();
+    outFileRgb888.close();
 
 
 /******************************** end looping here **********************/
