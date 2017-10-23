@@ -20,50 +20,70 @@
 
 using namespace std;
 
+// Magic constants
+const int K1 = int(1.402f * (1 << 16));
+const int K2 = int(0.714f * (1 << 16));
+const int K3 = int(0.334f * (1 << 16));
+const int K4 = int(1.772f * (1 << 16));
+
 // Converts YUV 4:2:2 to an RGB_888 vector - possibly growing the target vector if needed.
 // The target vector will contain only the corresponding rgb888 result and nothing else
 std::vector<uint8_t> convertToRgb888FromYuv422(uint8_t *yuv422s, int yuvlen) {
     	std::vector<uint8_t> rgb888Block;	// vector of the rgb888 data for the current block
 	// 4byte = 2 pixels in yuv422!
 	for(int i = 0; i < yuvlen / 4; ++i) {
-		uint8_t y1  = yuv422s[i*4];
-		uint8_t u = yuv422s[i*4 + 1];
-		uint8_t y2  = yuv422s[i*4 + 2];
-		uint8_t v = yuv422s[i*4 + 3];
+		int y1  = (uint8_t)yuv422s[i*4];
+		int u = (uint8_t)yuv422s[i*4 + 1];
+		int y2  = (uint8_t)yuv422s[i*4 + 2];
+		int v = (uint8_t)yuv422s[i*4 + 3];
 
 		// Pixel1
 		// v1 (interesting):
-		//uint8_t r = (uint8_t)(y1 + 1.4075 * (v - 128));
-		//uint8_t g = (uint8_t)(y1 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
-		//uint8_t b = (uint8_t)(y1 + 1.7790 * (u - 128));
+		float r = (uint8_t)(y1 + 1.4065 * (v - 128));
+		float g = (uint8_t)(y1 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
+		float b = (uint8_t)(y1 + 1.7790 * (u - 128));
+		// This prevents colour distortions in your rgb image
+		if (r < 0) r = 0;
+		else if (r > 255) r = 255;
+		if (g < 0) g = 0;
+		else if (g > 255) g = 255;
+		if (b < 0) b = 0;
+		else if (b > 255) b = 255;
 		// v2:
-		//uint8_t r = uint8_t(y1 + 1.140*v);
-		//uint8_t g = uint8_t(y1 - 0.395*u - 0.581*v);
-		//uint8_t b = uint8_t(y1 + 2.032*u);
+//		uint8_t r = uint8_t(y1 + 1.140*v);
+//		uint8_t g = uint8_t(y1 - 0.395*u - 0.581*v);
+//		uint8_t b = uint8_t(y1 + 2.032*u);
 		// Grayscale (simple):
-		uint8_t r = u;
-		uint8_t g = y1;
-		uint8_t b = v;
-		rgb888Block.push_back(r);
-		rgb888Block.push_back(g);
-		rgb888Block.push_back(b);
+		//uint8_t r = y1;
+		//uint8_t g = y1;
+		//uint8_t b = y1;
+		rgb888Block.push_back((uint8_t)r);
+		rgb888Block.push_back((uint8_t)g);
+		rgb888Block.push_back((uint8_t)b);
 
 		// Pixel2
 		// v1 (interesting):
-		//r = (uint8_t)(y2 + 1.4075 * (v - 128));
-		//g = (uint8_t)(y2 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
-		//b = (uint8_t)(y2 + 1.7790 * (u - 128));
+		r = (uint8_t)(y2 + 1.4075 * (v - 128));
+		g = (uint8_t)(y2 - 0.3455 * (u - 128) - (0.7169 * (v - 128)));
+		b = (uint8_t)(y2 + 1.7790 * (u - 128));
+		// This prevents colour distortions in your rgb image
+		if (r < 0) r = 0;
+		else if (r > 255) r = 255;
+		if (g < 0) g = 0;
+		else if (g > 255) g = 255;
+		if (b < 0) b = 0;
+		else if (b > 255) b = 255;
 		// v2:
-		//r = uint8_t(y2 + 1.140*v);
-		//g = uint8_t(y2 - 0.395*u - 0.581*v);
-		//b = uint8_t(y2 + 2.032*u);
+//		r = uint8_t(y2 + 1.140*v);
+//		g = uint8_t(y2 - 0.395*u - 0.581*v);
+//		b = uint8_t(y2 + 2.032*u);
 		// Grayscale (simple):
-		r = u;
-		g = y2;
-		b = v;
-		rgb888Block.push_back(r);
-		rgb888Block.push_back(g);
-		rgb888Block.push_back(b);
+		//r = y2;
+		//g = y2;
+		//b = y2;
+		rgb888Block.push_back((uint8_t)r);
+		rgb888Block.push_back((uint8_t)g);
+		rgb888Block.push_back((uint8_t)b);
 	}
 
 	return rgb888Block;
