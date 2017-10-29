@@ -1,8 +1,8 @@
-/* g++ webcam_capture.cpp -o webcam_capture.out */
+/* g++ webcam_capture.cpp -o webcam_capture.out --std==c++14 */
 
 #include <iostream>
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <linux/ioctl.h>
 #include <linux/types.h>
 #include <linux/v4l2-common.h>
@@ -20,16 +20,43 @@
 
 using namespace std;
 
-// Magic constants
+// Magic constants for YUYV -> RGB8 transform
 const int K1 = int(1.402f * (1 << 16));
 const int K2 = int(0.714f * (1 << 16));
 const int K3 = int(0.334f * (1 << 16));
 const int K4 = int(1.772f * (1 << 16));
 
-// Contrains between min and max with saturation
+// RGB: maximum squared distance between the marker color(s) and the found color to classify as a marker color
+const int RGB_MAX_MARKER_DIFF_SQ_DIST = 2048;
+
+// In some POCs we paint using this color when we are too far from the marker color (showing only markercolors on the whole pic for clarity)
+const uint8_t NO_MARK_COLOR_R = 0x00f;
+const uint8_t NO_MARK_COLOR_G = 0x00f;
+const uint8_t NO_MARK_COLOR_B = 0x00f;
+
+// RGB: Marker colors to look for
+const int RGB_MARK1_R = 0xff;
+const int RGB_MARK1_G = 0x55;
+const int RGB_MARK1_B = 0x38;
+// TODO: other 3 marker colors are needed here!
+
+// YUYV: Marker colors and max dist is currently TODO!
+
+// Constrains between min and max with saturation
 static inline void saturate(int& value, int min_val, int max_val) {
 	if (value < min_val) value = min_val;
 	if (value > max_val) value = max_val;
+}
+
+// Returns true if the given rgb triplet is a marker color
+bool isMarkerColor(int r, int g, int b) {
+	int rDiff = abs(r - RGB_MARK1_R);
+	int gDiff = abs(g - RGB_MARK1_G);
+	int bDiff = abs(b - RGB_MARK1_B);
+
+	auto sqDist = rDiff*rDiff + gDiff*gDiff + bDiff*bDiff;
+
+	return (sqDist < RGB_MAX_MARKER_DIFF_SQ_DIST);
 }
 
 // Converts YUV 4:2:2 to an RGB_888 vector - possibly growing the target vector if needed.
@@ -74,9 +101,18 @@ std::vector<uint8_t> convertToRgb888FromYuv422(uint8_t *yuv422s, int yuvlen) {
 		//uint8_t r = y1;
 		//uint8_t g = y1;
 		//uint8_t b = y1;
-		rgb888Block.push_back((uint8_t)r);
-		rgb888Block.push_back((uint8_t)g);
-		rgb888Block.push_back((uint8_t)b);
+
+		// By only looking for the marker color for pixel0s
+		// we can still show a picture whilst highlight the areas where we find stuff!
+		if(isMarkerColor(r, g, b)) {
+			rgb888Block.push_back((uint8_t)r);
+			rgb888Block.push_back((uint8_t)g);
+			rgb888Block.push_back((uint8_t)b);
+		} else {
+			rgb888Block.push_back(NO_MARK_COLOR_R);
+			rgb888Block.push_back(NO_MARK_COLOR_G);
+			rgb888Block.push_back(NO_MARK_COLOR_B);
+		}
 
 		// Pixel2
 		// v0 (pastebin):
