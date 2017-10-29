@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <cstdlib>
+#include <cmath>
 #include <linux/ioctl.h>
 #include <linux/types.h>
 #include <linux/v4l2-common.h>
@@ -27,7 +28,7 @@ const int K3 = int(0.334f * (1 << 16));
 const int K4 = int(1.772f * (1 << 16));
 
 // RGB: maximum squared distance between the marker color(s) and the found color to classify as a marker color
-const int RGB_MAX_MARKER_DIFF_SQ_DIST = 2048;
+const float RGB_MAX_MARKER_DIFF_SQ_DIST = 0.0314f;
 
 // In some POCs we paint using this color when we are too far from the marker color (showing only markercolors on the whole pic for clarity)
 const uint8_t NO_MARK_COLOR_R = 0x00f;
@@ -35,9 +36,9 @@ const uint8_t NO_MARK_COLOR_G = 0x00f;
 const uint8_t NO_MARK_COLOR_B = 0x00f;
 
 // RGB: Marker colors to look for
-const int RGB_MARK1_R = 0xff;
-const int RGB_MARK1_G = 0x55;
-const int RGB_MARK1_B = 0x38;
+const float RGB_MARK1_R = 0xff / (float)(0xff+0x55+0x38);
+const float RGB_MARK1_G = 0x55 / (float)(0xff+0x55+0x38);
+const float RGB_MARK1_B = 0x38 / (float)(0xff+0x55+0x38);
 // TODO: other 3 marker colors are needed here!
 
 // YUYV: Marker colors and max dist is currently TODO!
@@ -49,12 +50,16 @@ static inline void saturate(int& value, int min_val, int max_val) {
 }
 
 // Returns true if the given rgb triplet is a marker color
-bool isMarkerColor(int r, int g, int b) {
-	int rDiff = abs(r - RGB_MARK1_R);
-	int gDiff = abs(g - RGB_MARK1_G);
-	int bDiff = abs(b - RGB_MARK1_B);
+bool isMarkerColor(int R, int G, int B) {
+	float r = (float)R / (float)(R+G+B);
+	float g = (float)G / (float)(R+G+B);
+	float b = (float)B / (float)(R+G+B);
+	float rDiff = fabs(r - RGB_MARK1_R);
+	float gDiff = fabs(g - RGB_MARK1_G);
+	float bDiff = fabs(b - RGB_MARK1_B);
 
 	auto sqDist = rDiff*rDiff + gDiff*gDiff + bDiff*bDiff;
+	//printf("sqDist = %f\n", sqDist);
 
 	return (sqDist < RGB_MAX_MARKER_DIFF_SQ_DIST);
 }
@@ -273,7 +278,7 @@ int main() {
 	// Convert into RGB
 	rgb888Block = convertToRgb888FromYuv422((uint8_t*)outFileMemBlock, outFileMemBlockSize);
 	// Write out bytes into the rgb file too
-	printf("Writing %d rgb byte!", rgb888Block.size());
+	//printf("Writing %d rgb byte!", rgb888Block.size());
 	outFileRgb888.write((const char*)(&rgb888Block[0]), rgb888Block.size());
 
         // calculate the amount of memory left to read
