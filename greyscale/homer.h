@@ -55,6 +55,7 @@ public:
 	/** Send the next magnitude - return true if we are (still?) in an isHo area after the new element */
 	inline bool next(MT mag) noexcept {
 		if(!homarea.isHo && (abs((CT)homarea.last - (CT)mag) > homerSetup.hodeltaDiff)) {
+
 			// Looking for new homarea- but too big difference
 			// ===============================================
 			// Too big difference between the last and current magnitudes...
@@ -134,7 +135,7 @@ private:
 			magSum += mag;
 			last = mag;
 
-			bool isHo = (len >= hodeltaLen);
+			isHo = (len >= hodeltaLen);
 			return isHo;
 		}
 public:

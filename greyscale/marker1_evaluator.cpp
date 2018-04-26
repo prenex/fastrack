@@ -28,13 +28,9 @@ int main() {
 				// Rem.: last value means the 'red' channel
 				unsigned char redCol = image(i, y, 0, 0);
 				bool ho = h.isHo();
-				auto avg = h.getLen();
-				auto len = h.magAvg();
+				auto len = h.getLen();
+				auto avg = h.magAvg();
 				h.next(redCol);
-
-				if(h.isHo()) {
-					printf("isHo()!");
-				}
 
 				if(!h.isHo() && ho) {
 					// Here when ended a "ho"
