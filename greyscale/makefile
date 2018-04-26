@@ -1,7 +1,7 @@
 # for gcc5.1+:
-#CC=g++
+CC=g++
 # for clang3.4+:
-CC=clang++
+#CC=clang++
 # for emscripten / webgl
 #CC=em++
 
