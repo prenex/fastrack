@@ -110,8 +110,7 @@ public:
 		// Increment scanline-pointer
 		++sustate.x;
 
-		// TODO: we need to find the marker :-) 
-		return false;
+		return ret;
 	}
 private:
 	/**
@@ -165,7 +164,8 @@ private:
 #ifdef DEBUGLOG
 						printf("SUSPECT_MARKER_START! ");
 #endif //DEBUGLOG
-						// TODO: Save markerStart!
+						// Save markerStart!
+						sustate.markerStart = lastStartX;
 
 						// We will wait for the center to come
 						sustate.sState = PRE_CENTER;
@@ -180,9 +180,9 @@ private:
 			// even in the happy cases...
 			return false;
 		} else if(sustate.sState == PRE_CENTER) {
-			// TODO: Analyse if we see a paranthesis at all
+			// Analyse if we see a paranthesis at all
 			bool isParenthesis = true;
-			// TODO: CHECK: markContinueStripeSizeMaxDelta
+			// CHECK: markContinueStripeSizeMaxDelta
 			// - This means that the length must be basically the same
 			int delta = abs(sustate.lastLen - sustate.lastLastLen);
 			if(delta > setup.markContinueStripeSizeMaxDelta) {
@@ -230,14 +230,19 @@ private:
 					// CLOSE - this is the CENTER!!! (as suspected)
 
 					bool isRealCenterSuspected = true;
-					// TODO: CHECK: This must be nearly two times as big as the ealier ones!
+					// CHECK: This must be nearly two times as big as the ealier one(s)!
+					if((sustate.lastLen < sustate.lastLastLen) ||
+						   	(abs(sustate.lastLastLen - (sustate.lastLen - sustate.lastLastLen))
+							  < (setup.markContinueStripeSizeMaxDelta))) {
+						isRealCenterSuspected = false;
+					}
 					// TODO: CHECK: This must be the same amount change like at the marker start suspection!
 
 
 					if(isRealCenterSuspected) {
 						// REAL MARKER CENTER SUSPECTED!!!
 						// Save begin-end x positions for this center!
-						sustate.markerCenterStart = sustate.startX;
+						sustate.markerCenterStart = lastStartX;
 
 #ifdef DEBUGLOG
 						printf(" '*' ");
@@ -369,8 +374,16 @@ private:
 
 		/** Reset to the searching a new marker: reset parenthesing data and state machine */
 		inline void resetToPreMarker() {
-			// TODO: reset markerStart, markerEnd and markerCenterStart, markerCenterEnd
+			// State machine reset
 			sState = PRE_MARKER;
+
+			// reset markerStart, markerEnd and markerCenterStart, markerCenterEnd
+			markerStart = -1;
+			markerCenterStart = -1;
+			markerCenterEnd = -1;
+			markerEnd = -1;
+
+			// parenthesis collectors reset
 			openp = 0;
 			closep = 0;
 		}
