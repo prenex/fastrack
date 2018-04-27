@@ -1,6 +1,28 @@
+#ifndef FASTTRACK_HOMER_H
+#define FASTTRACK_HOMER_H
+
 #include <vector>
 #include <cstdint>
 #include <cmath>
+
+/** Holds configuration data values for Homer */
+struct HomerSetup {
+	/** Lenght of pixels with close to same magnitude to consider the area homogenous */
+	int hodeltaLen = 5;
+
+	/** 
+	 * Delta value for telling if this pixel differs too much from the earlier or not.
+	 * Must differ less than this to suspect a start of a homogenous area in our consideration
+	 */
+	int hodeltaDiff = 15;
+
+	/**
+	 * Delta value for telling if this pixel differs too much from the avarage of the earlier 
+	 * (in case we are in an isHo) or not: must differ less than this
+	 */
+	int hodeltaAvgDiff = 30;
+};
+
 
 /** 
  * Simple driver for instantly analysing 1D scanlines (in-place) for homogenous areas of interest.
@@ -9,24 +31,6 @@
 template<typename MT = uint8_t, typename CT = int>
 class Homer {
 public:
-	/** Holds configuration data values for Homer */
-	struct HomerSetup {
-		/** Lenght of pixels with close to same magnitude to consider the area homogenous */
-		int hodeltaLen = 5;
-
-		/** 
-		 * Delta value for telling if this pixel differs too much from the earlier or not.
-		 * Must differ less than this to suspect a start of a homogenous area in our consideration
-		 */
-		int hodeltaDiff = 15;
-
-		/**
-		 * Delta value for telling if this pixel differs too much from the avarage of the earlier 
-		 * (in case we are in an isHo) or not: must differ less than this
-		 */
-		int hodeltaAvgDiff = 30;
-	};
-
 	/** 
 	 * Create a driver for analysing 1D homogenous areas in scanlines
 	 * - using default state
@@ -124,8 +128,8 @@ public:
 
 private:
 	
-	/** Data holder for a a homogenous area / state */
-	struct Homarea {
+	/** Data holder for a (suspected) homogenous area and its state */
+	struct Homarea final {
 		/**
 		 * Length of the homogenous area
 		 * Not only non-zero when we are in a homogenous area according to the last few values 
@@ -180,4 +184,5 @@ public:
 	HomerSetup homerSetup;
 };
 
+#endif //FASTTRACK_HOMER_H
 // vim: tabstop=4 noexpandtab shiftwidth=4 softtabstop=4

@@ -1,6 +1,7 @@
 #include <cstdio>
 #include "CImg.h"
 #include "homer.h"
+#include "hoparser.h"
 
 using namespace cimg_library;
 int main() {
@@ -14,7 +15,8 @@ int main() {
 	CImgDisplay main_disp(image,"Click a point"), draw_disp(visu,"Intensity profile");
 
 	// Rem.: The default template arg is good for us...
-	Homer<> h;
+	//Homer<> h;
+	Hoparser<> hp;
 
 	while (!main_disp.is_closed() && !draw_disp.is_closed()) {
 		main_disp.wait();
@@ -24,30 +26,19 @@ int main() {
 			visu.draw_graph(image.get_crop(0,y,0,1,image.width()-1,y,0,1),green,1,1,0,255,0);
 			visu.draw_graph(image.get_crop(0,y,0,2,image.width()-1,y,0,2),blue,1,1,0,255,0).display(draw_disp);
 
-			// Reset the "homer"
-			h.reset();
+			// Indicate a line start because we evaluate the clicked scanline
+			//h.reset();
+			hp.newLine();
 
 			// Feed data into homer from the selected scanline
 			int i = 0;
 			for(i = 0; i < image.width(); ++i) {
 				// Rem.: last value means the 'red' channel
 				unsigned char redCol = image(i, y, 0, 0);
-				bool ho = h.isHo();
-				auto len = h.getLen();
-				auto avg = h.magAvg();
-				h.next(redCol);
-
-				if(!h.isHo() && ho) {
-					// Here when ended a "ho"8gg
-					printf("AVG: %d at LEN: %d @ i = %d\n", avg, len, i);
+				auto foundMarker = hp.next(redCol);
+				if(foundMarker) {
+					// TODO: Implement something to show this marker
 				}
-			}
-
-			if(h.isHo()) {
-				// Here when ended a "ho" in the end of the scanline
-				printf("=== AVG: %d at LEN: %d @ i = %d\n", h.magAvg(), h.getLen(), i);
-			} else {
-				printf("===\n");
 			}
 		}
 	}
