@@ -133,7 +133,7 @@ private:
 		if(sustate.sState == PRE_MARKER) {
 			// CHECK markStartSuspectionMagDeltaMin
 			if(
-					((sustate.lastLastMagAvg - sustate.lastMagAvg) > 0) && 
+					((sustate.lastLastMagAvg - sustate.lastMagAvg) <= 0) || 
 					(abs(sustate.lastLastMagAvg - sustate.lastMagAvg) < setup.markStartSuspectionMagDeltaMin)) {
 #ifdef DEBUGLOG
 				printf("NOT_MARKER_START: markStartSuspectionMagDeltaMin abs(%d - %d)<%d ",
@@ -212,7 +212,7 @@ private:
 				// for the start of an other marker as this was false positive.
 				sustate.resetToPreMarker();
 #ifdef DEBUGLOG
-				printf(" -> PRE_MARKER ");
+				printf(" -> PRE_MARKER (not parenthesis) ");
 #endif //DEBUGLOG
 			} else {
 				// We have found a parentheses
@@ -235,6 +235,9 @@ private:
 						   	(abs(sustate.lastLastLen - (sustate.lastLen - sustate.lastLastLen))
 							  < (setup.markContinueStripeSizeMaxDelta))) {
 						isRealCenterSuspected = false;
+#ifdef DEBUGLOG
+						printf(" NOT REAL CENTER (markContinueStripeSizeMaxDelta) ");
+#endif //DEBUGLOG
 					}
 					// TODO: CHECK: This must be the same amount change like at the marker start suspection!
 
@@ -251,7 +254,7 @@ private:
 						// Not a real center
 						sustate.resetToPreMarker();
 #ifdef DEBUGLOG
-						printf(" -> PRE_MARKER ");
+						printf(" -> PRE_MARKER(notrealcenter) ");
 #endif //DEBUGLOG
 					}
 				}
