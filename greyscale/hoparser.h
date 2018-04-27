@@ -35,7 +35,14 @@ struct HoparserSetup {
 	 * bigger than this difference is found in the Homer areas start/end, we stop suspecting
 	 * that we have a marker start and count the situation as a false positive.
 	 */
-	int markContinueTooBigWidthDelta = 40;
+	int markContinueTooBigWidthDelta = 20;
+
+	/**
+	 * Maximum this many pixels can be between the start of the current stripe and the last
+	 * While we are considering the stripes of the marker. Bigger difference means we revert
+	 * to search a new marker start and consider this as a false positive!
+	 */
+	int markContinueStripeSizeMaxDelta = 20;
 };
 
 /** 
@@ -171,26 +178,61 @@ private:
 			// even in the happy cases...
 			return false;
 		} else if(sustate.sState == PRE_CENTER) {
-			// TODO: Analyse if we see a paranthese at all
+			// TODO: Analyse if we see a paranthesis at all
+			bool isParenthesis = true;
+			// TODO: CHECK: markContinueStripeSizeMaxDelta
+			// - This means that the length must be basically the same
+			int delta = avg(sustate.lastLen - sustate.lastLastLen);
+			if(delta > markContinueStripeSizeMaxDelta) {
+				// PROBLEM: indicate no parenthesis
+				isParenthesis = false;
+#ifdef DEBUGLOG
+				printf("NOT_PARENTHESES: bad stripe diff delta (markContinueStripeSizeMaxDelta) ");
+#endif //DEBUGLOG
+			}
 
-			// TODO: Analyse if we see an opening or closing parentheses
-			bool openParentheses = true; // false == closing one
+			// CHECK: markContinueTooBigWidthDelta
+			// - Cannot be too much distance between homogen areas
+			int lastStartX = sustate.lastEndX - sustate.lastLen;
+			//Rem.: abs is not needed here: int transitionLen = abs(sustate.lastLastEndX - lastStartX);
+			int transitionLen = (sustate.lastLastEndX - lastStartX);
+			if(transitionLen > setup.markContinueTooBigWidthDelta) {
+				// PROBLEM: indicate no parenthesis
+				isParenthesis = false;
+#ifdef DEBUGLOG
+				printf("NOT_PARENTHESES: bad stripe len (setup.markContinueTooBigWidthDelta) ");
+#endif //DEBUGLOG
+			}
 
-			if(openParentheses) {
-				// OPEN
-				
-				// TODO: CHECK: This must be nearly the same big as the earlier ones before CENTER.
-				// TODO: Increment opening parenthesis count for marker acceptance later
+			if(!isParenthesis) {
+				// We have found this to be not a proper parenthesis that we need
+				// Because of this, we need to revert our state machine to search
+				// for the start of an other marker as this was false positive.
+				sustate.sState = PRE_MARKER;
+#ifdef DEBUGLOG
+				printf(" -> PRE_MARKER ");
+#endif //DEBUGLOG
 			} else {
-				// CLOSE - this is the CENTER!!! (as suspected)
+				// We have found a parentheses
+				// TODO: Analyse if we see an opening or closing parentheses
+				bool openParentheses = true; // false == closing one
 
-				// TODO CHECK: This must be nearly two times as big as the ealier ones!
-				// TODO: CHECK: This must be the same amount change like at the marker start suspection!
-				// TODO: Save begin-end x positions for this center!
+				if(openParentheses) {
+					// OPEN
+					
+					// TODO: CHECK: This must be nearly the same big as the earlier ones before CENTER.
+					// TODO: Increment opening parenthesis count for marker acceptance later
+				} else {
+					// CLOSE - this is the CENTER!!! (as suspected)
+
+					// TODO: CHECK: This must be nearly two times as big as the ealier ones!
+					// TODO: CHECK: This must be the same amount change like at the marker start suspection!
+					// TODO: Save begin-end x positions for this center!
+				}
 			}
 
 #ifdef DEBUGLOG
-			printf("NOT_MARKER: In PRE_CENTER state!\n");
+			printf("NOT_MARKER: Were in PRE_CENTER!\n");
 #endif //DEBUGLOG
 			// We will never tell we have found a marker here as
 			// we are in the very beginning of searching for it
