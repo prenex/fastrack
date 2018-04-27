@@ -165,6 +165,8 @@ private:
 #ifdef DEBUGLOG
 						printf("SUSPECT_MARKER_START! ");
 #endif //DEBUGLOG
+						// TODO: Save markerStart!
+
 						// We will wait for the center to come
 						sustate.sState = PRE_CENTER;
 					}
@@ -194,9 +196,9 @@ private:
 			// CHECK: markContinueTooBigWidthDelta
 			// - Cannot be too much distance between homogen areas
 			int lastStartX = sustate.lastEndX - sustate.lastLen;
-			//Rem.: abs is not needed here: int transitionLen = abs(sustate.lastLastEndX - lastStartX);
-			int transitionLen = (sustate.lastLastEndX - lastStartX);
-			if(transitionLen > setup.markContinueTooBigWidthDelta) {
+			//Rem.: abs is not needed here: int stripeLen = abs(sustate.lastLastEndX - lastStartX);
+			int stripeLen = (sustate.lastLastEndX - lastStartX);
+			if(stripeLen > setup.markContinueTooBigWidthDelta) {
 				// PROBLEM: indicate no parenthesis
 				isParenthesis = false;
 #ifdef DEBUGLOG
@@ -208,26 +210,45 @@ private:
 				// We have found this to be not a proper parenthesis that we need
 				// Because of this, we need to revert our state machine to search
 				// for the start of an other marker as this was false positive.
-				sustate.sState = PRE_MARKER;
+				sustate.resetToPreMarker();
 #ifdef DEBUGLOG
 				printf(" -> PRE_MARKER ");
 #endif //DEBUGLOG
 			} else {
 				// We have found a parentheses
-				// TODO: Analyse if we see an opening or closing parentheses
-				bool openParentheses = true; // false == closing one
+				// Analyse if we see an opening or closing parentheses
+				bool openParentheses = (sustate.lastMagAvg > sustate.lastLastMagAvg); // false == closing one
 
 				if(openParentheses) {
 					// OPEN
-					
-					// TODO: CHECK: This must be nearly the same big as the earlier ones before CENTER.
-					// TODO: Increment opening parenthesis count for marker acceptance later
+#ifdef DEBUGLOG
+				printf(" '(' ");
+#endif //DEBUGLOG
+					// Increment opening parenthesis count for marker acceptance later
+					++sustate.openp;
 				} else {
 					// CLOSE - this is the CENTER!!! (as suspected)
 
+					bool isRealCenterSuspected = true;
 					// TODO: CHECK: This must be nearly two times as big as the ealier ones!
 					// TODO: CHECK: This must be the same amount change like at the marker start suspection!
-					// TODO: Save begin-end x positions for this center!
+
+
+					if(isRealCenterSuspected) {
+						// REAL MARKER CENTER SUSPECTED!!!
+						// Save begin-end x positions for this center!
+						sustate.markerCenterStart = sustate.startX;
+
+#ifdef DEBUGLOG
+						printf(" '*' ");
+#endif //DEBUGLOG
+					} else {
+						// Not a real center
+						sustate.resetToPreMarker();
+#ifdef DEBUGLOG
+						printf(" -> PRE_MARKER ");
+#endif //DEBUGLOG
+					}
 				}
 			}
 
@@ -239,10 +260,14 @@ private:
 			// even in the happy cases...
 			return "false";
 		} else if(sustate.sState == POS_CENTER) {
+			// TODO: save markerCenterEnd and markerEnd
 			// TODO: Count closing parentheses and accept marker if it has been found 
 
 			// Reset our state to look for a next marker in this very same scanline
-			sustate.sState = PRE_MARKER;
+			sustate.resetToPreMarker();
+#ifdef DEBUGLOG
+			printf(" -> PRE_MARKER ");
+#endif //DEBUGLOG
 		}
 		
 #ifdef DEBUGLOG
@@ -340,6 +365,14 @@ private:
 		inline void updateLastAndLastBeforeEndX() {
 			lastLastEndX = lastEndX;
 			lastEndX = x;
+		}
+
+		/** Reset to the searching a new marker: reset parenthesing data and state machine */
+		inline void resetToPreMarker() {
+			// TODO: reset markerStart, markerEnd and markerCenterStart, markerCenterEnd
+			sState = PRE_MARKER;
+			openp = 0;
+			closep = 0;
 		}
 	};
 
