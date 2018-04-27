@@ -4,7 +4,11 @@
 
 using namespace cimg_library;
 int main() {
-	CImg<unsigned char> image("example_a4_small.jpg"), visu(620,900,1,3,0);
+	//CImg<unsigned char> image("example_a4_small.jpg"), visu(620,900,1,3,0);
+	CImg<unsigned char> image("real_test4_b.jpg"), visu(1436,900,1,3,0);
+	//CImg<unsigned char> image("real_test3.jpg"), visu(620,900,1,3,0);
+	//CImg<unsigned char> image("real_test2.jpg"), visu(620,900,1,3,0);
+	//CImg<unsigned char> image("real_test1.jpg"), visu(620,900,1,3,0);
 	const unsigned char red[] = { 255,0,0 }, green[] = { 0,255,0 }, blue[] = { 0,0,255 };
 	image.blur(2.5);
 	CImgDisplay main_disp(image,"Click a point"), draw_disp(visu,"Intensity profile");
@@ -23,8 +27,9 @@ int main() {
 			// Reset the "homer"
 			h.reset();
 
-			// Feed data from the scanline selected
-			for(int i = 0; i < image.width(); ++i) {
+			// Feed data into homer from the selected scanline
+			int i = 0;
+			for(i = 0; i < image.width(); ++i) {
 				// Rem.: last value means the 'red' channel
 				unsigned char redCol = image(i, y, 0, 0);
 				bool ho = h.isHo();
@@ -33,9 +38,16 @@ int main() {
 				h.next(redCol);
 
 				if(!h.isHo() && ho) {
-					// Here when ended a "ho"
-					printf("AVG: %d at LEN: %d\n", avg, len);
+					// Here when ended a "ho"8gg
+					printf("AVG: %d at LEN: %d @ i = %d\n", avg, len, i);
 				}
+			}
+
+			if(h.isHo()) {
+				// Here when ended a "ho" in the end of the scanline
+				printf("=== AVG: %d at LEN: %d @ i = %d\n", h.magAvg(), h.getLen(), i);
+			} else {
+				printf("===\n");
 			}
 		}
 	}

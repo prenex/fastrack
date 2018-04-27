@@ -124,7 +124,7 @@ int main(int argc, const char** argv) {
 	CImg<unsigned char> marker(sizeX,sizeY,1,3,0);
 	marker.fill(255);
 
-	unsigned char colstep = 255 / (circleStep-1);
+	unsigned char colstep = 255 / (circleStep-3);
 	unsigned char c = 0;
 	for(int i = circleStep - 1; i > 0; --i) {
 		Rgb col(c, c, c);

@@ -14,20 +14,32 @@ public:
 		/** Lenght of pixels with close to same magnitude to consider the area homogenous */
 		int hodeltaLen = 5;
 
-		/** Delta value for telling if this pixel differs too much from the earlier or not: must differ less than this */
-		int hodeltaDiff = 30;
+		/** 
+		 * Delta value for telling if this pixel differs too much from the earlier or not.
+		 * Must differ less than this to suspect a start of a homogenous area in our consideration
+		 */
+		int hodeltaDiff = 15;
 
-		/** Delta value for telling if this pixel differs too much from the avarage of the earlier (in case we are in an isHo) or not: must differ less than this */
+		/**
+		 * Delta value for telling if this pixel differs too much from the avarage of the earlier 
+		 * (in case we are in an isHo) or not: must differ less than this
+		 */
 		int hodeltaAvgDiff = 30;
 	};
 
-	/** Create a driver for analysing 1D homogenous areas in scanlines - using default state */
+	/** 
+	 * Create a driver for analysing 1D homogenous areas in scanlines
+	 * - using default state
+	 */
 	Homer() {
 		// Set default state
 		reset();
 	}
 
-	/** Create a driver for analysing 1D homogenous areas in scanlines - using default state and given setup */
+	/** 
+	 * Create a driver for analysing 1D homogenous areas in scanlines
+	 * - using default state and given setup
+	 */
 	Homer(HomerSetup setup) {
 		// Save setup
 		homerSetup = setup;
@@ -36,7 +48,10 @@ public:
 		reset();
 	}
 
-	/** Set default state - resets all the system knows about its homarea, but keeps configuration as-is */
+	/**
+	 * Set default state
+	 * - resets all the system knows about its homarea, but keeps configuration as-is
+	 */
 	inline void reset() noexcept {
 		// reset to default
 		homarea = Homarea();
@@ -99,7 +114,10 @@ public:
 		return homarea.magAvg();
 	}
 
-	/** When isHo() returns true - this is the lenght of the homogenous area. Otherwise it is the length of the currently suspected homogenous area (unsure!) */
+	/**
+	 * When isHo() returns true - this is the lenght of the homogenous area.
+	 * Otherwise it is the length of the currently suspected homogenous area (unsure!)
+	 */
 	inline int getLen() {
 		return homarea.len;
 	}
@@ -110,8 +128,10 @@ private:
 	struct Homarea {
 		/**
 		 * Length of the homogenous area
-		 * Not only non-zero when we are in a homogenous area according to the last few values and the configuration!
-		 * Rem.: In cases when lengh is non-zero and isHo is false - that means that we seem to be starting a homogenous area - but not sure yet!
+		 * Not only non-zero when we are in a homogenous area according to the last few values 
+		 * and the configuration!
+		 * Rem.: In cases when lengh is non-zero and isHo is false
+		 *       - that means that we seem to be starting a homogenous area - but not sure yet!
 		 */
 		int len = 0;
 
@@ -119,8 +139,10 @@ private:
 		CT magSum = 0;
 
 		/**
-		 * Only true when we are in a homogenous area according to the last few values and the configuration
-		 * Rem.: In cases when this is false, but lengh is non-zero - that means that we seem to be starting a homogenous area - but not sure yet!
+		 * Only true when we are in a homogenous area according to the last few values
+		 * and the configuration
+		 * Rem.: In cases when this is false, but lengh is non-zero
+		 *       - that means that we seem to be starting a homogenous area - but not sure yet!
 		 */
 		bool isHo = false;
 
@@ -128,7 +150,8 @@ private:
 		MT last = 0;
 
 		/**
-		 * Try to increment and open this area with the given magnitude. Returns true if the area is long enough and got opened (isHo turned true).
+		 * Try to increment and open this area with the given magnitude.
+		 * Returns true if the area is long enough and got opened (isHo turned true).
 		 */
 		inline bool tryOpenWith(MT mag, int hodeltaLen) {
 			++len;
@@ -139,7 +162,10 @@ private:
 			return isHo;
 		}
 public:
-		/** Avarages of the magnitudes already collected for an area - returns zero in zero lengh areas! */
+		/**
+		 * Avarages of the magnitudes already collected for an area
+		 * - returns zero in zero lengh areas!
+		 */
 		inline MT magAvg() {
 			if(len == 0) return 0;
 			// this must fit into an MT as it is the avarage of MT typed values...
