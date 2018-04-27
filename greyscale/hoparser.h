@@ -1,22 +1,26 @@
 #ifndef FASTTRACK_HOPARSER_H
 #define FASTTRACK_HOPARSER_H
 
+// Uncomment to see debug logging
+#define DEBUGLOG 1
+
 #include <vector>
 #include <cstdint>
 #include <cmath>
 #include "homer.h"
 
 /** Holds configuration values for a Hoparser*/
-class HoparserSetup {
+struct HoparserSetup {
 	/**
 	 * At least this many pixels of homogenous colour must be present before
 	 * the start of the marker is suspected on a transition.
 	 */
-	int markStartPrefixWhiteLenMin = 30;
+	int markStartPrefixHomoLenMin = 30;
 
 	/** 
 	 * Maximum this many pixels can pass on the marker start 
 	 * between the white->black transition. (depends resolution and camera?)
+	 * Rem.: Compare with differece between end of the lastLast and start of last homArea
 	 */
 	int markStartTransitionLenMax = 20;
 
@@ -59,7 +63,9 @@ public:
 
 	/** Should be called to indicate that a new scan line has started - basically a reset */
 	inline void newLine() {
-printf("===\n");
+#ifdef DEBUGLOG
+		printf("===\n");
+#endif //DEBUGLOG
 		// Reset the homogenity lexer
 		homer.reset();
 		// Reset our state to start from scratch
@@ -71,42 +77,123 @@ printf("===\n");
 	 * Returns true when a marker has been found!
 	 */
 	inline bool next(MT mag) noexcept {
-		// Save previous data.
-		// Rem.: default homer values are good for kickstarting!
-		sustate.wasInHo = homer.isHo();
-		sustate.lastLen = homer.getLen();
-		sustate.lastMagAvg = homer.magAvg();
+		bool ret;
 
-		// Update data from the homogenity lexer
+		// Update previous and pre-previous homogenity datas first.
+		sustate.updateLast(homer);
+
+		// Update data in the homogenity lexer
 		homer.next(mag);
 
 		// Check if the "homogenity" state has changed or not
 		if(!homer.isHo() && sustate.wasInHo) {
 			// Here when ended a "homogenity area"
-printf("AVG: %d at LEN: %d @ i = %d\n", sustate.lastMagAvg, sustate.lastLen, sustate.x);
+			// This is like a lexical token in compilers
+			// so here we need to process this "homogenity token"
+			ret = processHotoken(homer);
+
+			// Update the last-before datas (lastLast*)
+			sustate.updateLastBefore();
+		} else {
+			// We are surely not found the marker when we are
+			// still in the middle of a homogenity area (or inhomogen)
+			ret = false;
 		}
 
-		// increment scanline-pointer
+		// Increment scanline-pointer
 		++sustate.x;
 
 		// TODO: we need to find the marker :-) 
 		return false;
 	}
 private:
-	/** The undelying homer as lexer of homogenous areas */
-	Homer<MT, CT> homer;
+	/**
+	 * Process a homogenity token right after the homogenity area state changed.
+	 * Returns true when marker has been found and marker data can be asked for!
+	 * BEWARE: Changes/updates this->sustate!!!
+	 */
+	inline bool processHotoken(Homer<MT, CT> &homer) {
+#ifdef DEBUGLOG
+// Rem.: \n is always at the "return" operation!
+		printf("Token: AVG= %d at LEN= %d @ i= %d --- ", sustate.lastMagAvg, sustate.lastLen, sustate.x);
+#endif //DEBUGLOG
 
-	/** Holds configuration values for a Hoparser */
-	HoparserSetup setup;
+		// Update ending of last two homogenous areas
+		// This works because processHotoken is called only on the end of the areas
+		// and this method first moves the last* into the lastLast* and then save.
+		sustate.updateLastAndLastBeforeEndX();
+
+		// PRE_MARKER
+		if(sustate.sState == PRE_MARKER) {
+			// CHECK markStartSuspectionMagDeltaMin
+			if(abs(sustate.lastLastMagAvg - sustate.lastMagAvg) < setup.markStartSuspectionMagDeltaMin) {
+#ifdef DEBUGLOG
+				printf("NOT_MARKER_START: markStartSuspectionMagDeltaMin avg(%d - %d)<%d",
+					   	sustate.lastLastMagAvg,
+						sustate.lastMagAvg,
+						setup.markStartSuspectionMagDeltaMin
+				);
+#endif //DEBUGLOG
+			} else {
+				// If we are here, we suspect that this might be a start of a marker
+				if(sustate.lastLastLen < setup.markStartPrefixHomoLenMin) {
+#ifdef DEBUGLOG
+					printf("NOT_MARKER_START: markStartPrefixHomoLenMincheck! ");
+#endif //DEBUGLOG
+				} else {
+					// If we are here, we still suspect that we might change our generic state!
+
+					int lastStartX = sustate.lastEndX - sustate.lastLen;
+					//Rem.: abs is not needed here: int transitionLen = abs(sustate.lastLastEndX - lastStartX);
+					int transitionLen = (sustate.lastLastEndX - lastStartX);
+					if(transitionLen > setup.markStartTransitionLenMax) {
+#ifdef DEBUGLOG
+						printf("NOT_MARKER_START: markStartTransitionLenMax! ");
+#endif //DEBUGLOG
+					} else {
+						// If we are here, we can suspect that a marker starts here!
+						// Still not sure, but it is a good suspicion according to our best knowledge
+#ifdef DEBUGLOG
+						printf("SUSPECT_MARKER_START! ");
+#endif //DEBUGLOG
+						// We will wait for the center to come
+						sustate.sState = PRE_CENTER;
+					}
+				}
+			}
+#ifdef DEBUGLOG
+			printf("NOT_MARKER: In PRE_MARKER state!\n");
+#endif //DEBUGLOG
+			return false;
+		}
+		
+#ifdef DEBUGLOG
+		printf("TODO!\n");
+#endif //DEBUGLOG
+		return false;
+	}
+
+	/** Defines the overall suspection state */
+	enum SState {
+		/** We suspect that we are before marker in this scanline */
+		PRE_MARKER = 0,
+		/** We suspect that we are in a marker in this scanline - before its center */
+		PRE_CENTER = 1,
+		/** We suspect that we are in a marker in this scanline - after its center */
+		POS_CENTER = 2,
+	};
 
 	/**
 	 * Holds currently suspected marker state
 	 * Rem.: Used for simply resetting the state.
 	 */
 	struct SuspectionState final {
+	// GENERIC DATA
+		SState sState = PRE_MARKER;
 		/** Contains the current 'x' position in the scanline */
 		int x = 0;
 
+	// MARKER SUSPECTION DATA
 		/** -1 indicates no suspected marker */
 		int markerStart = -1;
 
@@ -119,12 +206,22 @@ private:
 		/** -1 indicates no suspection for the marker end yet */
 		int markerEnd = -1;
 
+	// PROPER PARENTHESES CHECK STATE
 		/** number of "opening parentheses" */
 		int openp = 0;
 
 		/** number of "closing parentheses" */
 		int closep = 0;
 
+	// LAST and LAST-BEFORE homogenity state end-X positions
+		/** Contains 'x' at the moment when the last */
+		int lastEndX = 0;
+
+		/** Contains 'x' at the moment when the last */
+		int lastLastEndX = 0;
+
+	// LAST and LAST-BEFORE homogenity states data
+		// LAST
 		/** Used for storing the one-time earlier state in the "next" operation. */
 		bool wasInHo = false;
 
@@ -133,7 +230,47 @@ private:
 
 		/** Used for storing the one-time earlier state in the "next" operation. */
 		MT lastMagAvg = 0;
+
+		// LAST-BEFORE
+		/** Used for storing the two-times earlier state in the "next" operation. */
+		bool wasWasIsHo = false;
+
+		/** Used for storing the two-times earlier state in the "next" operation. */
+		int lastLastLen = 0;
+
+		/** Used for storing the two-times earlier state in the "next" operation. */
+		MT lastLastMagAvg = 0;
+
+		/** Updates wasInHo, lastLen, lastMagAvg and wasWasIsHo, lastLastLen, lastLastMagAvg */
+		inline void updateLast(Homer<MT, CT> &homer) {
+			// Update new state
+			// Rem.: default homer values are good for kickstarting the first hotoken
+			wasInHo = homer.isHo();
+			lastLen = homer.getLen();
+			lastMagAvg = homer.magAvg();
+		}
+
+		inline void updateLastBefore() {
+			// Move the earlier last homogenity states into the last-before-last
+			// Rem.: default values ensure there are no-op at start-hotoken until the second!
+			wasWasIsHo = wasInHo;
+			lastLastLen = lastLen;
+			lastLastMagAvg = lastMagAvg;
+		}
+
+		/** Update the lastLastEndX and the lastEndX fields */
+		inline void updateLastAndLastBeforeEndX() {
+			lastLastEndX = lastEndX;
+			lastEndX = x;
+		}
 	};
+
+
+	/** The undelying homer as lexer of homogenous areas */
+	Homer<MT, CT> homer;
+
+	/** Holds configuration values for a Hoparser */
+	HoparserSetup setup;
 
 	/** Holds data about current suspections*/
 	SuspectionState sustate;
