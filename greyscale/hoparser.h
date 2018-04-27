@@ -137,7 +137,7 @@ private:
 					((sustate.lastLastMagAvg - sustate.lastMagAvg) > 0) && 
 					(abs(sustate.lastLastMagAvg - sustate.lastMagAvg) < setup.markStartSuspectionMagDeltaMin)) {
 #ifdef DEBUGLOG
-				printf("NOT_MARKER_START: markStartSuspectionMagDeltaMin avg(%d - %d)<%d ",
+				printf("NOT_MARKER_START: markStartSuspectionMagDeltaMin abs(%d - %d)<%d ",
 					   	sustate.lastLastMagAvg,
 						sustate.lastMagAvg,
 						setup.markStartSuspectionMagDeltaMin
@@ -182,8 +182,8 @@ private:
 			bool isParenthesis = true;
 			// TODO: CHECK: markContinueStripeSizeMaxDelta
 			// - This means that the length must be basically the same
-			int delta = avg(sustate.lastLen - sustate.lastLastLen);
-			if(delta > markContinueStripeSizeMaxDelta) {
+			int delta = abs(sustate.lastLen - sustate.lastLastLen);
+			if(delta > setup.markContinueStripeSizeMaxDelta) {
 				// PROBLEM: indicate no parenthesis
 				isParenthesis = false;
 #ifdef DEBUGLOG
@@ -242,7 +242,7 @@ private:
 			// TODO: Count closing parentheses and accept marker if it has been found 
 
 			// Reset our state to look for a next marker in this very same scanline
-			sustate.sState == PRE_MARKER;
+			sustate.sState = PRE_MARKER;
 		}
 		
 #ifdef DEBUGLOG
