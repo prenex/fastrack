@@ -126,9 +126,11 @@ private:
 		// PRE_MARKER
 		if(sustate.sState == PRE_MARKER) {
 			// CHECK markStartSuspectionMagDeltaMin
-			if(abs(sustate.lastLastMagAvg - sustate.lastMagAvg) < setup.markStartSuspectionMagDeltaMin) {
+			if(
+					((sustate.lastLastMagAvg - sustate.lastMagAvg) > 0) && 
+					(abs(sustate.lastLastMagAvg - sustate.lastMagAvg) < setup.markStartSuspectionMagDeltaMin)) {
 #ifdef DEBUGLOG
-				printf("NOT_MARKER_START: markStartSuspectionMagDeltaMin avg(%d - %d)<%d",
+				printf("NOT_MARKER_START: markStartSuspectionMagDeltaMin avg(%d - %d)<%d ",
 					   	sustate.lastLastMagAvg,
 						sustate.lastMagAvg,
 						setup.markStartSuspectionMagDeltaMin
@@ -164,7 +166,41 @@ private:
 #ifdef DEBUGLOG
 			printf("NOT_MARKER: In PRE_MARKER state!\n");
 #endif //DEBUGLOG
+			// We will never tell we have found a marker here as
+			// we are in the very beginning of searching for it
+			// even in the happy cases...
 			return false;
+		} else if(sustate.sState == PRE_CENTER) {
+			// TODO: Analyse if we see a paranthese at all
+
+			// TODO: Analyse if we see an opening or closing parentheses
+			bool openParentheses = true; // false == closing one
+
+			if(openParentheses) {
+				// OPEN
+				
+				// TODO: CHECK: This must be nearly the same big as the earlier ones before CENTER.
+				// TODO: Increment opening parenthesis count for marker acceptance later
+			} else {
+				// CLOSE - this is the CENTER!!! (as suspected)
+
+				// TODO CHECK: This must be nearly two times as big as the ealier ones!
+				// TODO: CHECK: This must be the same amount change like at the marker start suspection!
+				// TODO: Save begin-end x positions for this center!
+			}
+
+#ifdef DEBUGLOG
+			printf("NOT_MARKER: In PRE_CENTER state!\n");
+#endif //DEBUGLOG
+			// We will never tell we have found a marker here as
+			// we are in the very beginning of searching for it
+			// even in the happy cases...
+			return "false";
+		} else if(sustate.sState == POS_CENTER) {
+			// TODO: Count closing parentheses and accept marker if it has been found 
+
+			// Reset our state to look for a next marker in this very same scanline
+			sustate.sState == PRE_MARKER;
 		}
 		
 #ifdef DEBUGLOG

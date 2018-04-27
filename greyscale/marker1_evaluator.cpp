@@ -12,7 +12,7 @@ int main() {
 	//CImg<unsigned char> image("real_test1.jpg"), visu(620,900,1,3,0);
 	const unsigned char red[] = { 255,0,0 }, green[] = { 0,255,0 }, blue[] = { 0,0,255 };
 	image.blur(2.5);
-	CImgDisplay main_disp(image,"Click a point"), draw_disp(visu,"Intensity profile");
+	CImgDisplay main_disp(image,"Select a scanline to run Hoparser!"), draw_disp(visu,"Intensity profile and marker data");
 
 	// Rem.: The default template arg is good for us...
 	//Homer<> h;
