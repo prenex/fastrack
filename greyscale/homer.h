@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdint>
 #include <cmath>
+#include <limits> // for templated min-max integer values
 
 /** Holds configuration data values for Homer */
 struct HomerSetup {
@@ -89,18 +90,26 @@ public:
 			if(homarea.isHo) {
 				// We were in an area already...
 				// Can we continue this area?
-				if(abs((CT)homarea.magAvg() - (CT)mag) > homerSetup.hodeltaAvgDiff) {
+
+				// TODO: Check difference from the min/max between too much
+
+
+				// Check difference from the avarage being too much
+				// Rem.: it is faster to multiply here twice at every pixel than to use magAvg() which uses division!!! 
+				bool tooMuchDiffFromAvg = (abs((long long)homarea.getMagSum() - (long long)(mag * homarea.getLen()))
+					   	> ((long long)homerSetup.hodeltaAvgDiff * homarea.getLen()));
+				if(tooMuchDiffFromAvg) {
 					// Too big is the difference - reset current homarea :-(
 					reset(mag); // Rem.: We need to set the "last" to "mag" here!
 					return false;
 				} else {
 					// Rem.: This will always return true - but we update the data
-					return homarea.tryOpenWith(mag, homerSetup.hodeltaLen);
+					return homarea.tryOpenOrKeepWith(mag, homerSetup.hodeltaLen);
 				}
 			} else {
 				// Can we "open" an area? (Can we set isHo already?)
 				// Rem.: When we are here, (abs((CT)homarea.last - (CT)mag) <= hodeltaDiff) is sure
-				return homarea.tryOpenWith(mag, homerSetup.hodeltaLen);
+				return homarea.tryOpenOrKeepWith(mag, homerSetup.hodeltaLen);
 			}
 		}
 	}
@@ -142,6 +151,11 @@ private:
 		/** Sum of the magnitudes */
 		CT magSum = 0;
 
+		// Rem.: min/max values are need to be set according to the magnitude type!
+		/** Minimal magnitude in this area */
+		MT magMin = std::numeric_limits<MT>::max();
+		MT magMax = std::numeric_limits<MT>::min();
+
 		/**
 		 * Only true when we are in a homogenous area according to the last few values
 		 * and the configuration
@@ -155,13 +169,15 @@ private:
 
 		/**
 		 * Try to increment and open this area with the given magnitude.
-		 * Returns true if the area is long enough and got opened (isHo turned true).
+		 * Updates: length, magSum, min/max values, isHo
+		 * Returns true if the area is long enough and got/stay opened (isHo turned true).
 		 */
-		inline bool tryOpenWith(MT mag, int hodeltaLen) {
+		inline bool tryOpenOrKeepWith(MT mag, int hodeltaLen) {
 			++len;
 			magSum += mag;
 			last = mag;
 
+			// TODO: min/max difference check here
 			isHo = (len >= hodeltaLen);
 			return isHo;
 		}
@@ -175,6 +191,16 @@ public:
 			// this must fit into an MT as it is the avarage of MT typed values...
 			auto ret = (MT) (magSum / len);
 			return ret;
+		}
+
+		/** Sum of the magnitues in the area */
+		inline CT getMagSum() {
+			return magSum;
+		}
+
+		/** Length of this area */
+		inline int getLen() {
+			return len;
 		}
 	};
 
