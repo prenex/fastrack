@@ -21,24 +21,29 @@ int main() {
 	while (!main_disp.is_closed() && !draw_disp.is_closed()) {
 		main_disp.wait();
 		if (main_disp.button() && main_disp.mouse_y()>=0) {
-			const int y = main_disp.mouse_y();
-			visu.fill(0).draw_graph(image.get_crop(0,y,0,0,image.width()-1,y,0,0),red,1,1,0,255,0);
-			visu.draw_graph(image.get_crop(0,y,0,1,image.width()-1,y,0,1),green,1,1,0,255,0);
-			visu.draw_graph(image.get_crop(0,y,0,2,image.width()-1,y,0,2),blue,1,1,0,255,0).display(draw_disp);
+			if(main_disp.button()&1) { // left-click
+				const int y = main_disp.mouse_y();
+				visu.fill(0).draw_graph(image.get_crop(0,y,0,0,image.width()-1,y,0,0),red,1,1,0,255,0);
+				visu.draw_graph(image.get_crop(0,y,0,1,image.width()-1,y,0,1),green,1,1,0,255,0);
+				visu.draw_graph(image.get_crop(0,y,0,2,image.width()-1,y,0,2),blue,1,1,0,255,0).display(draw_disp);
 
-			// Indicate a line start because we evaluate the clicked scanline
-			//h.reset();
-			hp.newLine();
+				// Indicate a line start because we evaluate the clicked scanline
+				//h.reset();
+				hp.newLine();
 
-			// Feed data into homer from the selected scanline
-			int i = 0;
-			for(i = 0; i < image.width(); ++i) {
-				// Rem.: last value means the 'red' channel
-				unsigned char redCol = image(i, y, 0, 0);
-				auto foundMarker = hp.next(redCol);
-				if(foundMarker) {
-					// TODO: Implement something to show this marker
+				// Feed data into homer from the selected scanline
+				int i = 0;
+				for(i = 0; i < image.width(); ++i) {
+					// Rem.: last value means the 'red' channel
+					unsigned char redCol = image(i, y, 0, 0);
+					auto foundMarker = hp.next(redCol);
+					if(foundMarker) {
+						// TODO: Implement something to show this marker
+						printf("*** Found marker at %d ***\n", i);
+					}
 				}
+			} else if(main_disp.button()&2) { // right-click
+				printf("--- X position of the mouse on right click: %d\n", main_disp.mouse_x());
 			}
 		}
 	}
