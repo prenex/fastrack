@@ -4,9 +4,26 @@
 #include "hoparser.h"
 
 using namespace cimg_library;
+
+CImg<unsigned char>& drawBoxAround(CImg<unsigned char> &img, int x, int y, unsigned char* color) {
+	return img.draw_point(x, y, color)
+		.draw_point(x-1, y-1, color)
+		.draw_point(x, y-1, color)
+		.draw_point(x+1, y-1, color)
+		.draw_point(x-1, y, color)
+		.draw_point(x+1, y, color)
+		.draw_point(x-1, y+1, color)
+		.draw_point(x, y+1, color)
+		.draw_point(x+1, y+1, color);
+}
+
 int main() {
+	// TODO: use command line parameter(s) for image creation?
 	//CImg<unsigned char> image("example_a4_small.jpg"), visu(620,900,1,3,0);
 	CImg<unsigned char> image("real_test4_b.jpg"), visu(1436,900,1,3,0);
+
+	// Copy image
+	CImg<unsigned char> origImage = image;
 	//CImg<unsigned char> image("real_test3.jpg"), visu(620,900,1,3,0);
 	//CImg<unsigned char> image("real_test2.jpg"), visu(620,900,1,3,0);
 	//CImg<unsigned char> image("real_test1.jpg"), visu(620,900,1,3,0);
@@ -21,8 +38,8 @@ int main() {
 	while (!main_disp.is_closed() && !draw_disp.is_closed()) {
 		main_disp.wait();
 		if (main_disp.button() && main_disp.mouse_y()>=0) {
+			const int y = main_disp.mouse_y();
 			if(main_disp.button()&1) { // left-click
-				const int y = main_disp.mouse_y();
 				visu.fill(0).draw_graph(image.get_crop(0,y,0,0,image.width()-1,y,0,0),red,1,1,0,255,0);
 				visu.draw_graph(image.get_crop(0,y,0,1,image.width()-1,y,0,1),green,1,1,0,255,0);
 				visu.draw_graph(image.get_crop(0,y,0,2,image.width()-1,y,0,2),blue,1,1,0,255,0).display(draw_disp);
@@ -36,14 +53,20 @@ int main() {
 				for(i = 0; i < image.width(); ++i) {
 					// Rem.: last value means the 'red' channel
 					unsigned char redCol = image(i, y, 0, 0);
-					auto foundMarker = hp.next(redCol);
-					if(foundMarker) {
+					auto res = hp.next(redCol);
+					if(res.isToken) {
+						drawBoxAround(image, i, y, (unsigned char*)&red).display(main_disp);
+					}
+					if(res.foundMarker) {
 						// TODO: Implement something to show this marker
 						printf("*** Found marker at %d ***\n", i);
 					}
 				}
 			} else if(main_disp.button()&2) { // right-click
-				printf("--- X position of the mouse on right click: %d\n", main_disp.mouse_x());
+				// Log mouse click position
+				printf("--- (X, Y) position of the mouse on right click: (%d, %d)\n", main_disp.mouse_x(), y);
+				// Reset image
+				image.assign(origImage);
 			}
 		}
 	}

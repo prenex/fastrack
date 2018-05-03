@@ -9,6 +9,14 @@
 #include <cmath>
 #include "homer.h"
 
+/** Result of a Hoparser::next() operation */
+struct NexRes {
+	/** A marker has been found - see details for marker position */
+	bool foundMarker;
+	/** A token has found at the current position */
+	bool isToken;
+};
+
 /** Holds configuration values for a Hoparser*/
 struct HoparserSetup {
 	/**
@@ -83,8 +91,8 @@ public:
 	 * Should be called for every pixel in the scanline - with the magnitude value.
 	 * Returns true when a marker has been found!
 	 */
-	inline bool next(MT mag) noexcept {
-		bool ret;
+	inline NexRes next(MT mag) noexcept {
+		NexRes ret;
 
 		// Update previous and pre-previous homogenity datas first.
 		sustate.updateLast(homer);
@@ -97,14 +105,16 @@ public:
 			// Here when ended a "homogenity area"
 			// This is like a lexical token in compilers
 			// so here we need to process this "homogenity token"
-			ret = processHotoken(homer);
+			ret.foundMarker = processHotoken(homer);
+			ret.isToken = true;
 
 			// Update the last-before datas (lastLast*)
 			sustate.updateLastBefore();
 		} else {
 			// We are surely not found the marker when we are
 			// still in the middle of a homogenity area (or inhomogen)
-			ret = false;
+			ret.foundMarker = false;
+			ret.isToken = false;
 		}
 
 		// Increment scanline-pointer
