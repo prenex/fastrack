@@ -6,6 +6,90 @@
 #include <cmath>
 #include <limits> // for templated min-max integer values
 
+/* Use this for exponential: affection #define EXPONENTIAL_ATTRITION */
+
+/** For parametrization of the lenAffect(...) methods */
+struct LenAffectParams {
+	/** Until this length we keep values unaffected */
+	int fullAffectLenUpCons = 50;
+	/** This defines the end length of consideration for calculating */
+   	int leastAffectLenBottCons = 300;
+	/** There will be (2^stepPointExponential) steps in the interpolation */
+	unsigned int stepPointExponential = 4;
+	/** An "attrition" value: when 0, we change simply linearly, when bigger value we change less steep! */
+	unsigned int attrExp = 0;
+};
+
+/**
+ * Devalvate "value" using the length
+ * Useful for: devalving check constraints so that they are relative to length 
+ * and not absolute! Many constrainst are best when relative.
+ *
+ * BEWARE: Only 0, 1, 2, 4, 8, ... "steps" are supported because of performance, so stepPointExponential
+ *         values 0, 1, 2, 3, 4 means the above mentioned powers of two when considering step counts!
+ * BEWARE: The fullAffectLenUpCons must be smaller than leastAffectLenBottCons. Just give both
+ *         of these parameters something big in order to default to not affect the value at all!
+ *
+ * Remarks:
+ * - Any length smaller than fullAffectLenUpCons will have the full "value"
+ * - Any length longer than leastAffectLenBottCons will have the value halved "step"-times...
+ * - Any length in-between is (approximately) interpolateda with "2^(stepPointExponential)" number of halving-steps!
+ * Remarks: Best is to use only a small number of "stepPointExponential" and the possibly longerst fullAffectLenUpCons
+ *          to achieve the best speed and branch prediction operations here.
+ */
+template<typename T>
+inline T lenAffect(T value, int len, LenAffectParams params) {
+	T ret = value;
+
+	// Reasons for the fast-path:
+	// 1.) Not reached minimal delta length for starting the stepping procedure
+	// 2.) We are configured to not do any step at all (zero stepping)
+	// 3.) The special case when the length is zero at the start of suspecting areas
+	// 4.) In case the original value is zero (which would stay zero - just faster without calc.)
+	if((len < params.fullAffectLenUpCons) || (params.stepPointExponential == 0) || (len == 0) || (ret == 0)) {
+		// fast-path - mostly we are coming here with a right setup!!!
+		return ret;
+	} else {
+		// slower path (still just fast halving-params.stepPointExponential and simple calculations)
+		int curStepLen = params.leastAffectLenBottCons - params.fullAffectLenUpCons;
+		// Rem.: Here substraction is needed as the stepping should start from full
+		//       magnitude at the least affected length bottom constraint!
+		int curLen = len - params.fullAffectLenUpCons;
+		unsigned int realSteps = (1 << (params.stepPointExponential - 1)); // always bit shift
+		// The loop variable realSteps runs like [...16, 8, 4, 2, 1]
+		// But the loop runs always "params.stepPointExponential" times and not more!
+		do {
+			// Step the loop variable used both as exit condition and division rate
+			realSteps >>= 1; // always bit-shift
+			curStepLen >>= 1; // halving the binary tree of walking
+printf("rs:%d  ", realSteps);
+			if(curLen > curStepLen) {
+				// Remaining length is in the upper half of this halving-step
+				// We calculate halving-params.stepPointExponential like walking on a binary
+				// tree while the loop is going!
+				// Rem.: this shift does all divisions beforehand!
+#ifdef EXPONENTIAL_ATTRITION
+				ret <<= realSteps; // division by 2^(realSteps)
+#else
+printf("***");
+				ret = ret + ((ret >> params.attrExp) * realSteps);
+#endif // EXPONENTIAL_ATTRITION
+
+				// For iterating with the tree, we must update the len to the remaining
+				// (the right side of the cut-down part of the stepping is kept)
+				curLen -= curStepLen;
+
+			}/* else {
+				// Remaining lenght is in the lower half of the binary tree step
+				// NO-OP
+			}*/
+		} while(realSteps);
+	}
+
+	return ret;
+}
+
+
 /** Holds configuration data values for Homer */
 struct HomerSetup {
 	/** Lenght of pixels with close to same magnitude to consider the area homogenous */
@@ -215,71 +299,6 @@ private:
 		/** The last magnitude */
 		MT last = 0;
 
-	
-		/**
-		 * Devalvate "value" using the length of the current area.
-		 * Useful for: devalving check constraints so that they are relative to length 
-		 * and not absolute! Many constrainst are best when relative.
-		 *
-		 * BEWARE: Only 0, 1, 2, 4, 8, ... "stepCountExponentialBase" are supported because of performance, so
-		 *         values 0, 1, 2, 3, 4 means the above mentioned powers of two when considering step counts!
-		 * BEWARE: The fullAffectLenUpCons must be smaller than leastAffectLenBottCons. Just give both
-		 *         of these parameters something big in order to default to not affect the value at all!
-		 *
-		 * Remarks:
-		 * - Any length smaller than fullAffectLenUpCons will have the full "value"
-		 * - Any length longer than leastAffectLenBottCons will have the value halved "step"-times...
-		 * - Any length in-between is (approximately) interpolateda with "2^(stepCountExponentialBase)" number of halving-steps!
-		 * Rem.: Best is to use only a small number of "stepCountExponentialBase" and the possibly longerst fullAffectLenUpCons
-		 *       to achieve the best speed and branch prediction operations here.
-		 */
-		template<typename T>
-		inline T lenAffect(T value, int fullAffectLenUpCons, int leastAffectLenBottCons, unsigned int stepCountExponentialBase) {
-			T ret = value;
-
-			// Reasons for the fast-path:
-			// 1.) Not reached minimal delta length for starting the stepping procedure
-			// 2.) We are configured to not do any step at all (zero stepping)
-			// 3.) The special case when the length is zero at the start of suspecting areas
-			// 4.) In case the original value is zero (which would stay zero - just faster without calc.)
-			if((len < fullAffectLenUpCons) || (stepCountExponentialBase == 0) || (len == 0) || (ret == 0)) {
-				// fast-path - mostly we are coming here with a right setup!!!
-				return ret;
-			} else {
-				// slower path (still just fast halving-stepCountExponentialBase and simple calculations)
-				int curStepLen = leastAffectLenBottCons - fullAffectLenUpCons;
-				// Rem.: Here substraction is needed as the stepping should start from full
-				//       magnitude at the least affected length bottom constraint!
-				int curLen = len - fullAffectLenUpCons;
-				unsigned int realSteps = (1 << (stepCountExponentialBase - 1)); // always bit shift
-				// The loop variable realSteps runs like [...16, 8, 4, 2, 1]
-				// But the loop runs always "stepCountExponentialBase" times and not more!
-				do {
-					// Step the loop variable used both as exit condition and division rate
-					realSteps >>= 1; // always bit-shift
-					curStepLen >>= 1; // halving the binary tree of walking
-
-					if(curLen > curStepLen) {
-						// Remaining length is in the upper half of this halving-step
-						// We calculate halving-stepCountExponentialBase like walking on a binary
-						// tree while the loop is going!
-						// Rem.: this shift does all divisions beforehand!
-						ret >>= realSteps; // division by 2^(realSteps)
-
-						// For iterating with the tree, we must update the len to the remaining
-						// (the right side of the cut-down part of the stepping is kept)
-						curLen -= curStepLen;
-
-					}/* else {
-						// Remaining lenght is in the lower half of the binary tree step
-						// NO-OP
-					}*/
-				} while(realSteps);
-			}
-
-			return ret;
-		}
-
 		/**
 		 * Try to increment and open this area with the given magnitude.
 		 * hodeltaLen and minMaxDeltaMax are values from the setup
@@ -348,6 +367,28 @@ private:
 		inline MT magMinMaxAvg() {
 			if(len == 0) return 0; // Against calculation errors
 			else return ((magMax - magMin) / 2) + magMin; // Rem.: no division, but bit-shift usually
+		}
+	
+		/**
+		 * Devalvate "value" using len of this Homarea as the length
+		 * Useful for: devalving check constraints so that they are relative to length 
+		 * and not absolute! Many constrainst are best when relative.
+		 *
+		 * BEWARE: Only 0, 1, 2, 4, 8, ... "steps" are supported because of performance, so stepPointExponential
+		 *         values 0, 1, 2, 3, 4 means the above mentioned powers of two when considering step counts!
+		 * BEWARE: The fullAffectLenUpCons must be smaller than leastAffectLenBottCons. Just give both
+		 *         of these parameters something big in order to default to not affect the value at all!
+		 *
+		 * Remarks:
+		 * - Any length smaller than fullAffectLenUpCons will have the full "value"
+		 * - Any length longer than leastAffectLenBottCons will have the value halved "step"-times...
+		 * - Any length in-between is (approximately) interpolateda with "2^(stepPointExponential)" number of halving-steps!
+		 * Remarks: Best is to use only a small number of "stepPointExponential" and the possibly longerst fullAffectLenUpCons
+		 *          to achieve the best speed and branch prediction operations here.
+		 */
+		template<typename T>
+		inline T lenAffect(T value, LenAffectParams params) {
+			lenAffect(value, len, params);
 		}
 	};
 

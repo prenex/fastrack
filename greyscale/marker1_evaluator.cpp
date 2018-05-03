@@ -20,7 +20,9 @@ CImg<unsigned char>& drawBoxAround(CImg<unsigned char> &img, int x, int y, unsig
 int main() {
 	// TODO: use command line parameter(s) for image creation?
 	//CImg<unsigned char> image("example_a4_small.jpg"), visu(620,900,1,3,0);
-	CImg<unsigned char> image("real_test4_b.jpg"), visu(1436,900,1,3,0);
+	CImg<unsigned char> image("real_test4_b.jpg");
+	CImg<unsigned char> visu(image.width(),image.height(),1,3,0);
+	CImg<unsigned char> lenAffImg(800,100,1,3,0);
 
 	// Copy image
 	CImg<unsigned char> origImage = image;
@@ -29,13 +31,16 @@ int main() {
 	//CImg<unsigned char> image("real_test1.jpg"), visu(620,900,1,3,0);
 	const unsigned char red[] = { 255,0,0 }, green[] = { 0,255,0 }, blue[] = { 0,0,255 };
 	image.blur(2.5);
-	CImgDisplay main_disp(image,"Select a scanline to run Hoparser!"), draw_disp(visu,"Intensity profile and marker data");
+	CImgDisplay lenAffDisp(lenAffImg, "The length-based value affection test window");
+	CImgDisplay draw_disp(visu,"Intensity profile and marker data");
+	CImgDisplay main_disp(image,"Select a scanline to run Hoparser!");
 
 	// Rem.: The default template arg is good for us...
 	//Homer<> h;
 	Hoparser<> hp;
+	LenAffectParams params;
 
-	while (!main_disp.is_closed() && !draw_disp.is_closed()) {
+	while (!main_disp.is_closed() && !draw_disp.is_closed() && !lenAffDisp.is_closed()) {
 		main_disp.wait();
 		if (main_disp.button() && main_disp.mouse_y()>=0) {
 			const int y = main_disp.mouse_y();
@@ -48,6 +53,17 @@ int main() {
 				//h.reset();
 				hp.newLine();
 
+				// Draw length affectedness testing values
+				unsigned char lenAffCol[] = { 255,0,0 };
+				for(int j = 0; j < lenAffImg.width(); ++j) {
+					auto affected = lenAffect(10, j, params);
+					lenAffCol[0] = affected;
+					lenAffCol[1] = affected;
+					lenAffCol[2] = affected;
+					lenAffImg.draw_line(j, 0, j, lenAffImg.height(), (unsigned char*)&lenAffCol);
+				}
+				lenAffImg.display(lenAffDisp);
+
 				// Feed data into homer from the selected scanline
 				int i = 0;
 				for(i = 0; i < image.width(); ++i) {
@@ -55,7 +71,7 @@ int main() {
 					unsigned char redCol = image(i, y, 0, 0);
 					auto res = hp.next(redCol);
 					if(res.isToken) {
-						drawBoxAround(image, i, y, (unsigned char*)&red).display(main_disp);
+						drawBoxAround(image, i, y, (unsigned char*)&blue).display(main_disp);
 					}
 					if(res.foundMarker) {
 						// TODO: Implement something to show this marker
