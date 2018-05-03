@@ -29,14 +29,14 @@ struct HomerSetup {
 	 * we consider the area closed/ended! Similar to the minMaxDeltaMax - but this value is not
 	 * a difference between the extremal values - but a difference from their avarage!
 	 */
-	int hodeltaMinMaxAvgDiff = 10;
+	int hodeltaMinMaxAvgDiff = 13;
 
 	/**
 	 * The maximum difference between minimal and maximal values in a homogenous area to consider
 	 * it still being homogenous. Area change happens if a bigger than this change happens.
 	 * BEWARE: This must be bigger than hodeltaMinMaxAvgDiff!
 	 */
-	int minMaxDeltaMax = 25;
+	int minMaxDeltaMax = 26;
 };
 
 
