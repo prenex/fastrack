@@ -17,7 +17,7 @@ struct LenAffectParams {
 	/** There will be (2^stepPointExponential) steps in the interpolation */
 	unsigned int stepPointExponential = 4;
 	/** An "attrition" value: when 0, we change simply linearly, when bigger value we change less steep! */
-	unsigned int attrExp = 0;
+	unsigned int attrExp = 2;
 };
 
 /**
@@ -62,7 +62,7 @@ inline T lenAffect(T value, int len, LenAffectParams params) {
 			// Step the loop variable used both as exit condition and division rate
 			realSteps >>= 1; // always bit-shift
 			curStepLen >>= 1; // halving the binary tree of walking
-printf("rs:%d  ", realSteps);
+//printf("rs:%d  ", realSteps);
 			if(curLen > curStepLen) {
 				// Remaining length is in the upper half of this halving-step
 				// We calculate halving-params.stepPointExponential like walking on a binary
@@ -71,7 +71,7 @@ printf("rs:%d  ", realSteps);
 #ifdef EXPONENTIAL_ATTRITION
 				ret <<= realSteps; // division by 2^(realSteps)
 #else
-printf("***");
+//printf("***");
 				ret = ret + ((ret >> params.attrExp) * realSteps);
 #endif // EXPONENTIAL_ATTRITION
 
@@ -85,6 +85,8 @@ printf("***");
 			}*/
 		} while(realSteps);
 	}
+
+//printf("l:%d r:%d", len, ret);
 
 	return ret;
 }
@@ -105,7 +107,7 @@ struct HomerSetup {
 	 * Delta value for telling if this pixel differs too much from the avarage of the earlier 
 	 * (in case we are in an isHo) or not: must differ less than this
 	 */
-	int hodeltaAvgDiff = 27;
+	int hodeltaAvgDiff = 17;
 
 	/**
 	 * The maximum difference of the current magnitude from the avarage between the min and max
@@ -113,14 +115,29 @@ struct HomerSetup {
 	 * we consider the area closed/ended! Similar to the minMaxDeltaMax - but this value is not
 	 * a difference between the extremal values - but a difference from their avarage!
 	 */
-	int hodeltaMinMaxAvgDiff = 13;
+	int hodeltaMinMaxAvgDiff = 7;
 
 	/**
 	 * The maximum difference between minimal and maximal values in a homogenous area to consider
 	 * it still being homogenous. Area change happens if a bigger than this change happens.
 	 * BEWARE: This must be bigger than hodeltaMinMaxAvgDiff!
 	 */
-	int minMaxDeltaMax = 26;
+	int minMaxDeltaMax = 10;
+
+	/** Uses lenAffect(..) to change the values in a returned copy - does not change the original  */
+	inline HomerSetup applyLenAffection(int len, LenAffectParams params = LenAffectParams{}) {
+		// Create a new setup with default values
+		HomerSetup ret;
+
+		// Apply affections and copy original data
+		ret.hodeltaLen = lenAffect(this->hodeltaLen, len, params);
+		ret.hodeltaDiff = lenAffect(this->hodeltaDiff, len, params);
+		ret.hodeltaAvgDiff = lenAffect(this->hodeltaAvgDiff, len, params);
+		ret.hodeltaMinMaxAvgDiff = lenAffect(this->hodeltaMinMaxAvgDiff, len, params);
+		ret.minMaxDeltaMax = lenAffect(this->minMaxDeltaMax, len, params);
+
+		return ret;
+	}
 };
 
 
@@ -193,25 +210,28 @@ public:
 				// We were in an area already...
 				// Can we continue this area?
 
+				// Apply lengthAffection to the homerSetup values when in a homogenous area!
+				auto lenAffectedHomerSetup = homerSetup.applyLenAffection(homarea.getLen());
+
 				// Check delta difference from the min/max magnitudes centerlne - too much indicates non-homogenity
 				// Rem.: First the faster check so the optimizer can optimize jumps better...
 				// Rem.: Because when we come here if we already have a "suspected" area, len is > 0
 				//       and this is real value - not the zero indicating the zero len!!!
-				bool tooMuchDiffFromMinMaxAvg = (abs(homarea.magMinMaxAvg() - mag) > homerSetup.hodeltaMinMaxAvgDiff);
+				bool tooMuchDiffFromMinMaxAvg = (abs(homarea.magMinMaxAvg() - mag) > lenAffectedHomerSetup.hodeltaMinMaxAvgDiff);
 				// Check difference from the avarage being too much
 				// Rem.: it is faster to multiply here twice at every pixel than to use magAvg() which uses division!!! 
 				bool tooMuchDiffFromAvg = (abs((long long)homarea.getMagSum() - (long long)(mag * homarea.getLen()))
-					   	> ((long long)homerSetup.hodeltaAvgDiff * homarea.getLen()));
+					   	> ((long long)lenAffectedHomerSetup.hodeltaAvgDiff * homarea.getLen()));
 				if(tooMuchDiffFromMinMaxAvg || tooMuchDiffFromAvg) {
 					//printf("B: %d,%d\n", tooMuchDiffFromMinMaxAvg, tooMuchDiffFromAvg);
-					//printf("B1: abs(%d - %d) > %d [len:%d]", homarea.magMinMaxAvg(), mag, homerSetup.hodeltaMinMaxAvgDiff, homarea.len);
+					//printf("B1: abs(%d - %d) > %d [len:%d]", homarea.magMinMaxAvg(), mag, lenAffectedHomerSetup.hodeltaMinMaxAvgDiff, homarea.len);
 					// Too big is the difference - reset current homarea :-(
 					reset(mag); // Rem.: We need to set the "last" to "mag" here!
 					return false;
 				} else {
 					// Rem.: This will always return true EXCEPT when the min-max does not differ greatly
 					//       because all other checks are done above...
-					bool isOpenStill = homarea.tryOpenOrKeepWith(mag, homerSetup.hodeltaLen, homerSetup.minMaxDeltaMax);
+					bool isOpenStill = homarea.tryOpenOrKeepWith(mag, lenAffectedHomerSetup.hodeltaLen, lenAffectedHomerSetup.minMaxDeltaMax);
 					// Do our reset if someone closed the area
 					if(!isOpenStill) {
 						reset(mag);
