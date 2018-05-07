@@ -70,12 +70,18 @@ int main() {
 					// Rem.: last value means the 'red' channel
 					unsigned char redCol = image(i, y, 0, 0);
 					auto res = hp.next(redCol);
+
+					// TODO: maybe do this only for debugging?
 					if(res.isToken) {
 						drawBoxAround(image, i, y, (unsigned char*)&blue).display(main_disp);
 					}
+
+					// CHECK FOR FINAL RESULTS!
 					if(res.foundMarker) {
-						// TODO: Implement something to show this marker
-						printf("*** Found marker at %d ***\n", i);
+						// Log and show this marker centerX
+						int centerX = hp.getMarkerX();
+						printf("*** Found marker at %d and centerX: %d ***\n", i, centerX);
+						drawBoxAround(image, centerX, y, (unsigned char*)&green).display(main_disp);
 					}
 				}
 			} else if(main_disp.button()&2) { // right-click

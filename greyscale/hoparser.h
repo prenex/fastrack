@@ -97,6 +97,12 @@ public:
 		sustate = SuspectionState();
 	}
 
+	/** Only returns valid value when a marker is already found */
+	inline int getMarkerX() {
+		// The best approximation is the avarage of the centerEnd and centerStart positions!
+		return (sustate.markerCenterEnd - sustate.markerCenterStart) / 2 + sustate.markerCenterStart;
+	}
+
 	/**
 	 * Should be called for every pixel in the scanline - with the magnitude value.
 	 * Returns true when a marker has been found!
@@ -184,7 +190,7 @@ private:
 						// If we are here, we can suspect that a marker starts here!
 						// Still not sure, but it is a good suspicion according to our best knowledge
 #ifdef DEBUGLOG
-						printf("SUSPECT_MARKER_START! ");
+						printf(" '(' - SUSPECT_MARKER_START! ");
 #endif //DEBUGLOG
 						// Save markerStart!
 						sustate.markerStart = lastStartX;
@@ -373,6 +379,8 @@ private:
 					// Change state when necessary (after first closing parenthesis)
 					if(sustate.sState == POS_CENTER_START) {
 						sustate.sState = POS_CENTER_FINISHING;
+						// Save begin-end x positions for this center!
+						sustate.markerCenterEnd = lastStartX;
 					}
 
 					// Check if we have found a finish of the marker
@@ -381,6 +389,8 @@ private:
 #ifdef DEBUGLOG
 						printf(" REAL MARKER COMPLETED! \n");
 #endif //DEBUGLOG
+						// Save marker end position!
+						sustate.markerEnd = lastStartX;
 						// Indicate that we have found a marker
 						// Rem.: we cannot clear the state as the user of us need to fetch the data!!!
 						return true;
