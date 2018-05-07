@@ -51,6 +51,16 @@ struct HoparserSetup {
 	 * to search a new marker start and consider this as a false positive!
 	 */
 	int markContinueStripeSizeMaxDelta = 20;
+
+	/**
+	 * We must ignore all "hotoken" that is smaller than this delta length.
+	 * Because the "Homer" class might return very small homogenity areas
+	 * in some edge-cases, this extra ignore step helps to sort-out mistakes
+	 * in the earlier layer! This is what enables the "*Continue*" parameters
+	 * to really work: not only they work in the non-homogenous cases, but
+	 * also when some error/mistake shows homogenous and is not that in reality!
+	 */
+	int ignoreSmallHotokenDeltaLen = 10;
 };
 
 /** 
@@ -101,7 +111,9 @@ public:
 		homer.next(mag);
 
 		// Check if the "homogenity" state has changed or not
-		if(!homer.isHo() && sustate.wasInHo) {
+		// And then check if the homogenity area is too small or not
+		if(!homer.isHo() && sustate.wasInHo
+			   	&& homer.len < setup.ignoreSmallHotokenDeltaLen) {
 			// Here when ended a "homogenity area"
 			// This is like a lexical token in compilers
 			// so here we need to process this "homogenity token"
