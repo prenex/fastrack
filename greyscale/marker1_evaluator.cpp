@@ -73,7 +73,7 @@ int main() {
 
 					// TODO: maybe do this only for debugging?
 					if(res.isToken) {
-						drawBoxAround(image, i, y, (unsigned char*)&blue).display(main_disp);
+						drawBoxAround(image, i, y, (unsigned char*)&blue);
 					}
 
 					// CHECK FOR FINAL RESULTS!
@@ -81,9 +81,11 @@ int main() {
 						// Log and show this marker centerX
 						int centerX = hp.getMarkerX();
 						printf("*** Found marker at %d and centerX: %d ***\n", i, centerX);
-						drawBoxAround(image, centerX, y, (unsigned char*)&green).display(main_disp);
+						drawBoxAround(image, centerX, y, (unsigned char*)&green);
 					}
 				}
+
+				image.display(main_disp);
 			} else if(main_disp.button()&2) { // right-click
 				// Log mouse click position
 				printf("--- (X, Y) position of the mouse on right click: (%d, %d)\n", main_disp.mouse_x(), y);
