@@ -91,7 +91,6 @@ inline T lenAffect(T value, int len, LenAffectParams params) {
 	return ret;
 }
 
-
 /** Holds configuration data values for Homer */
 struct HomerSetup {
 	/** Lenght of pixels with close to same magnitude to consider the area homogenous */

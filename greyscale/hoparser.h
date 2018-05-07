@@ -113,7 +113,7 @@ public:
 		// Check if the "homogenity" state has changed or not
 		// And then check if the homogenity area is too small or not
 		if(!homer.isHo() && sustate.wasInHo
-			   	&& homer.len < setup.ignoreSmallHotokenDeltaLen) {
+			   	&& homer.getLen() < setup.ignoreSmallHotokenDeltaLen) {
 			// Here when ended a "homogenity area"
 			// This is like a lexical token in compilers
 			// so here we need to process this "homogenity token"
