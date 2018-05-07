@@ -50,7 +50,7 @@ struct HoparserSetup {
 	 * While we are considering the stripes of the marker. Bigger difference means we revert
 	 * to search a new marker start and consider this as a false positive!
 	 */
-	int markContinueStripeSizeMaxDelta = 20;
+	int markContinueStripeSizeMaxDelta = 40;
 
 	/**
 	 * We must ignore all "hotoken" that is smaller than this delta length.
@@ -143,7 +143,7 @@ private:
 	inline bool processHotoken(Homer<MT, CT> &homer) {
 #ifdef DEBUGLOG
 // Rem.: \n is always at the "return" operation!
-		printf("Token: AVG= %d at LEN= %d @ i= %d --- ", sustate.lastMagAvg, sustate.lastLen, sustate.x);
+		printf("Token: AVG= %d at LEN= %d @ %d..%d --- ", sustate.lastMagAvg, sustate.lastLen, sustate.x - sustate.lastLen, sustate.x);
 #endif //DEBUGLOG
 
 		// Update ending of last two homogenous areas
@@ -206,7 +206,11 @@ private:
 			bool isParenthesis = true;
 			// CHECK: markContinueStripeSizeMaxDelta
 			// - This means that the length must be basically the same
+			// BEWARE: The center has twice the length so we need to check also for
+			//         similarity with twice the lengths and take the smaller delta!
 			int delta = abs(sustate.lastLen - sustate.lastLastLen);
+			int delta_cen = abs(sustate.lastLen - sustate.lastLastLen * 2);
+			delta = (delta < delta_cen) ? delta : delta_cen;
 			if(delta > setup.markContinueStripeSizeMaxDelta) {
 				// PROBLEM: indicate no parenthesis
 				isParenthesis = false;
@@ -252,6 +256,7 @@ private:
 					// CLOSE - this is the CENTER!!! (as suspected)
 
 					bool isRealCenterSuspected = true;
+					/*
 					// CHECK: This must be nearly two times as big as the ealier one(s)!
 					if((sustate.lastLen < sustate.lastLastLen) ||
 						   	(abs(sustate.lastLastLen - (sustate.lastLen - sustate.lastLastLen))
@@ -261,6 +266,7 @@ private:
 						printf(" NOT REAL CENTER (markContinueStripeSizeMaxDelta) ");
 #endif //DEBUGLOG
 					}
+					*/
 					// TODO: CHECK: This must be the same amount change like at the marker start suspection!
 
 
@@ -271,7 +277,13 @@ private:
 
 #ifdef DEBUGLOG
 						printf(" '*' ");
+						printf(" -> POS_CENTER_START ");
 #endif //DEBUGLOG
+						sustate.sState = POS_CENTER_START;
+						// This is needed because we do not increment openp when
+						// we meet the very first opening parenthesis but we do
+						// count the very last in the other direction!!!
+						++sustate.openp;
 					} else {
 						// Not a real center
 						sustate.resetToPreMarker();
@@ -288,21 +300,99 @@ private:
 			// We will never tell we have found a marker here as
 			// we are in the very beginning of searching for it
 			// even in the happy cases...
-			return "false";
-		} else if(sustate.sState == POS_CENTER) {
-			// TODO: save markerCenterEnd and markerEnd
-			// TODO: Count closing parentheses and accept marker if it has been found 
-
-			// Reset our state to look for a next marker in this very same scanline
-			sustate.resetToPreMarker();
+			return false;
+		// BEWARE HERE FOR OPTIMIZE MISSING COMPARISON!!! (!!!!)
+		} else if((sustate.sState >= POS_CENTER_START) && (sustate.sState <= POS_CENTER_FINISHING)) {
+			// After the center when we are here!
+			// Check common constrains first
+			// Analyse if we see a paranthesis at all
+			bool isParenthesis = true;
+			// CHECK: markContinueStripeSizeMaxDelta
+			// - This means that the length must be basically the same
+			// BEWARE: The center has twice the length so we need to check also for
+			//         similarity with twice the lengths (of last ones) and take the smaller delta!
+			int delta = abs(sustate.lastLen - sustate.lastLastLen);
+			int delta_cen = abs(sustate.lastLen - sustate.lastLastLen / 2); // nodiv: just a right shift here!
+			delta = (delta < delta_cen) ? delta : delta_cen;
+			if(delta > setup.markContinueStripeSizeMaxDelta) {
+				// PROBLEM: indicate no parenthesis
+				isParenthesis = false;
 #ifdef DEBUGLOG
-			printf(" -> PRE_MARKER ");
+				printf("NOT_PARENTHESES: bad stripe diff delta (markContinueStripeSizeMaxDelta) ");
 #endif //DEBUGLOG
+			}
+
+			// CHECK: markContinueTooBigWidthDelta
+			// - Cannot be too much distance between homogen areas
+			int lastStartX = sustate.lastEndX - sustate.lastLen;
+			//Rem.: abs is not needed here: int stripeLen = abs(sustate.lastLastEndX - lastStartX);
+			int stripeLen = (sustate.lastLastEndX - lastStartX);
+			if(stripeLen > setup.markContinueTooBigWidthDelta) {
+				// PROBLEM: indicate no parenthesis
+				isParenthesis = false;
+#ifdef DEBUGLOG
+				printf("NOT_PARENTHESES: bad stripe len (setup.markContinueTooBigWidthDelta) ");
+#endif //DEBUGLOG
+			}
+
+			if(!isParenthesis) {
+				// We have found this to be not a proper parenthesis that we need
+				// Because of this, we need to revert our state machine to search
+				// for the start of an other marker as this was false positive.
+				sustate.resetToPreMarker();
+#ifdef DEBUGLOG
+				printf(" -> PRE_MARKER (not parenthesis) ");
+#endif //DEBUGLOG
+			} else {
+				// We have found a parentheses
+				// Analyse if we see an opening or closing parentheses
+				bool openParentheses = (sustate.lastMagAvg > sustate.lastLastMagAvg); // false == closing one
+				// Right in first case after center start we find the open parenthesis in the opposite magnitude 
+				// change direction because the center->nocenter transition is not decreasing in magnitude!
+				if(sustate.sState == POS_CENTER_START) {
+					openParentheses = !openParentheses;
+				}
+
+				if(openParentheses) {
+					// OPEN
+					// This is not good for as because we expect closing parenthesis now!
+					sustate.resetToPreMarker();
+#ifdef DEBUGLOG
+					printf(" '(' ");
+					printf(" -> PRE_MARKER (bad parenthesing) ");
+#endif //DEBUGLOG
+				} else {
+					// CLOSING
+					// We count these ones
+#ifdef DEBUGLOG
+					printf(" ')' ");
+#endif //DEBUGLOG
+					// Increment closing parenthesis count for comparing with the openp values
+					++sustate.closep;
+
+					// Change state when necessary (after first closing parenthesis)
+					if(sustate.sState == POS_CENTER_START) {
+						sustate.sState = POS_CENTER_FINISHING;
+					}
+
+					// Check if we have found a finish of the marker
+					// Rem.: We might get here even if there were only one closing parentheses!
+					if(sustate.openp == sustate.closep) {
+#ifdef DEBUGLOG
+						printf(" REAL MARKER COMPLETED! \n");
+#endif //DEBUGLOG
+						// Indicate that we have found a marker
+						// Rem.: we cannot clear the state as the user of us need to fetch the data!!!
+						return true;
+					} else {
+						// We still wait until enough parethesis arrives!
+						printf(" (%d != %d)! \n", sustate.openp, sustate.closep);
+						return false;
+					}
+				}
+			}
 		}
 		
-#ifdef DEBUGLOG
-		printf("TODO!\n");
-#endif //DEBUGLOG
 		return false;
 	}
 
@@ -312,8 +402,10 @@ private:
 		PRE_MARKER = 0,
 		/** We suspect that we are in a marker in this scanline - before its center */
 		PRE_CENTER = 1,
-		/** We suspect that we are in a marker in this scanline - after its center */
-		POS_CENTER = 2,
+		/** We suspect that we are in a marker in this scanline - right after its center */
+		POS_CENTER_START = 2,
+		/** We suspect that we are in a marker in this scanline - somewhere after its center */
+		POS_CENTER_FINISHING = 3,
 	};
 
 	/**
