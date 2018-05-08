@@ -97,6 +97,11 @@ public:
 		sustate = SuspectionState();
 	}
 
+	/** Number of found stripes */
+	inline int getOrder() {
+		return sustate.openp;
+	}
+
 	/** Only returns valid value when a marker is already found */
 	inline int getMarkerX() {
 		// The best approximation is the avarage of the centerEnd and centerStart positions!

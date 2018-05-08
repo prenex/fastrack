@@ -1,9 +1,12 @@
 #include <cstdio>
+#include <string>
 #include "CImg.h"
 #include "homer.h"
 #include "hoparser.h"
 
 using namespace cimg_library;
+
+#define TEST_FILE_DEFAULT "real_test4_b.jpg"
 
 CImg<unsigned char>& drawBoxAround(CImg<unsigned char> &img, int x, int y, unsigned char* color) {
 	return img.draw_point(x, y, color)
@@ -17,10 +20,37 @@ CImg<unsigned char>& drawBoxAround(CImg<unsigned char> &img, int x, int y, unsig
 		.draw_point(x+1, y+1, color);
 }
 
-int main() {
-	// TODO: use command line parameter(s) for image creation?
-	//CImg<unsigned char> image("example_a4_small.jpg"), visu(620,900,1,3,0);
-	CImg<unsigned char> image("real_test4_b.jpg");
+void printUsageAndQuit() {
+	printf("USAGE:\n");
+	printf("------\n\n");
+
+	printf("marker1_eval                  - test with " TEST_FILE_DEFAULT "\n");
+	printf("marker1_eval my_img.png       - test with my_img.png\n");
+	printf("marker1_eval --help           - show this message\n");
+
+	// Quit immediately!
+	exit(0);
+}
+
+int main(int argc, char** argv) {
+	std::string testFile(TEST_FILE_DEFAULT);
+	std::string help("--help");
+
+	// Handle possible --help or image parameter
+	if(argc == 2) {
+		// Print help if they ask
+		if(argv[1] == help) {
+			printUsageAndQuit();
+		}
+
+		// Use provided test file if they provide
+		testFile = std::string(argv[1]);
+	} else if(argc > 2) {
+		// Print help if they need
+		printUsageAndQuit();
+	}
+
+	CImg<unsigned char> image(testFile.c_str());
 	CImg<unsigned char> visu(image.width(),image.height(),1,3,0);
 	CImg<unsigned char> lenAffImg(800,100,1,3,0);
 
@@ -80,8 +110,13 @@ int main() {
 					if(res.foundMarker) {
 						// Log and show this marker centerX
 						int centerX = hp.getMarkerX();
-						printf("*** Found marker at %d and centerX: %d ***\n", i, centerX);
-						drawBoxAround(image, centerX, y, (unsigned char*)&green);
+						auto order = hp.getOrder();
+						if(order > 2) {
+							printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
+							drawBoxAround(image, centerX, y, (unsigned char*)&green);
+						} else {
+							printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
+						}
 					}
 				}
 
