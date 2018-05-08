@@ -64,8 +64,10 @@ struct HoparserSetup {
 };
 
 /** 
+ * A scanline-parser as described below.
  * This class acts as if we do a "parsing" by considering the result of "homer" as lexer data.
  * The result of the parse are the suspected marker center positions in the scanline!
+ * Rem.: Template parameters are those of Homer!
  */
 template<typename MT = uint8_t, typename CT = int>
 class Hoparser {

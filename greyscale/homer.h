@@ -141,6 +141,7 @@ struct HomerSetup {
 
 
 /** 
+ * A scanline-parser as described below.
  * Simple driver for instantly analysing 1D scanlines (in-place) for homogenous areas of interest.
  * MT: "Magnitude Type" and CT: "Magnitude Collector type" (later is for sum calculations)
  */
