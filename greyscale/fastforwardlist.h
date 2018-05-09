@@ -42,14 +42,14 @@ class FastForwardList {
 	using NODE = std::pair<T, int>;
 
 	// The current length of this list
-	int curLen = 0;
+	int curLen;
 
 	// Index of the current head element
 	// -1 represents the nullptr in indices
 	// Rem.: This being right before data array means to ensure good
 	//       cache behaviour when asking the head and iterating over
 	//       a short list. It will be nearly always cache hit then!
-	int headIndex = -1;
+	int headIndex;
 
 	// Our list is represented as an array
 	// Rem.: this enables simple default std::move and copy!!!
@@ -63,6 +63,8 @@ class FastForwardList {
 public:
 	/** This is a logical position before the head. Useful for inserting before head! */
 	static constexpr FFLPosition NIL_POS = FFLPosition(-1);
+
+	FastForwardList() : curLen(0), headIndex(-1) {}
 
 	// Move and copy constructors are just the default generated ones!
 	FastForwardList(const FastForwardList& ffl)            = default;
@@ -106,7 +108,7 @@ public:
 	 * non-NILL position from this list.
 	 */
 	inline T& operator[](FFLPosition positionFromTheList) noexcept  {
-		return &(data[positionFromTheList.index].first);
+		return (data[positionFromTheList.index].first);
 	}
 
 	/**
@@ -114,7 +116,7 @@ public:
 	 * the given non-NILL position from this list
 	 */
 	inline const T& operator[](FFLPosition positionFromTheList) const noexcept {
-		return &(data[positionFromTheList.index].first);
+		return (data[positionFromTheList.index].first);
 	}
 
 	/**
@@ -171,8 +173,8 @@ public:
 			//     This ensures the proper linkage
 			data[curLen].second = nextToUse;
 
-			// 4.) Update head pointer when there is no valid head pointer right now
-			if(isEmpty()) {
+			// 4.) Update head pointer when we add at the front
+			if(position.isNil()) {
 				headIndex = curLen;
 			}
 

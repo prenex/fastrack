@@ -41,8 +41,8 @@ M1_EV_OBJECTS=$(M1_EV_SOURCES:.cpp=.o)
 M1_EV_EXECUTABLE=marker1_eval
 
 
-all: marker1gen marker2gen marker1_ev ffltest
-ffltest: $(FFLT_SOURCES) $(FFLT_EXECUTABLE)
+all: marker1gen marker2gen marker1_ev ffl_test
+ffl_test: $(FFLT_SOURCES) $(FFLT_EXECUTABLE)
 marker1gen: $(M1_SOURCES) $(M1_EXECUTABLE)
 marker2gen: $(M2_SOURCES) $(M2_EXECUTABLE)
 
