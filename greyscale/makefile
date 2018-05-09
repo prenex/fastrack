@@ -24,6 +24,10 @@ else
 endif
 endif
 
+FFLT_SOURCES=ffltest.cpp
+FFLT_OBJECTS=$(FFLT_SOURCES:.cpp=.o)
+FFLT_EXECUTABLE=ffltest
+
 M1_SOURCES=marker1_gen.cpp #$(wildcard dxflib/*.cpp) $(wildcard ObjMaster/*.cpp)
 M1_OBJECTS=$(M1_SOURCES:.cpp=.o)
 M1_EXECUTABLE=marker1_gen
@@ -37,7 +41,8 @@ M1_EV_OBJECTS=$(M1_EV_SOURCES:.cpp=.o)
 M1_EV_EXECUTABLE=marker1_eval
 
 
-all: marker1gen marker2gen marker1_ev
+all: marker1gen marker2gen marker1_ev ffltest
+ffltest: $(FFLT_SOURCES) $(FFLT_EXECUTABLE)
 marker1gen: $(M1_SOURCES) $(M1_EXECUTABLE)
 marker2gen: $(M2_SOURCES) $(M2_EXECUTABLE)
 
@@ -48,6 +53,16 @@ ifeq ($(CC),em++)
 	$(CC) $(M1_EV_OBJECTS) -o $@.html $(LDFLAGS)
 else
 	$(CC) $(M1_EV_OBJECTS) -o $@ $(LDFLAGS)
+endif
+
+# The LDFLAGS should be after the files
+# because of some lazyness in newer toolchains!
+$(FFLT_EXECUTABLE): $(FFLT_OBJECTS) 
+# In case of emscripten build, we make a html5/webgl output
+ifeq ($(CC),em++)
+	$(CC) $(FFLT_OBJECTS) -o $@.html $(LDFLAGS)
+else
+	$(CC) $(FFLT_OBJECTS) -o $@ $(LDFLAGS)
 endif
 
 # The LDFLAGS should be after the files
@@ -74,6 +89,6 @@ endif
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -f *.o $(M1_EXECUTABLE) $(M2_EXECUTABLE) $(M1_EV_EXECUTABLE)
+	rm -f *.o $(M1_EXECUTABLE) $(M2_EXECUTABLE) $(M1_EV_EXECUTABLE) $(FFLT_EXECUTABLE)
 
 # vim: tabstop=4 noexpandtab shiftwidth=4 softtabstop=4

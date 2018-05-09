@@ -7,15 +7,14 @@
 // Rem.: BASICALLY JUST AN INTEGER WITH MORE TYPE SAFETY :-)
 /** Simple iterator-like index to an element of a FastForwardList. Useful for getting the successor and the value. */
 class FFLPosition final {
+	template<typename U, int MAX>
 	friend class FastForwardList; // let them use the underlying index and constructor
 private:
 	// Rem.: This is much faster then always returning the complete NODE!!!
 	int index;
 
 	/** Construct the position handle with i as its underlying index */
-	FFLPosition(int i) noexcept {
-		index = i;
-	}
+	constexpr FFLPosition(int i) noexcept : index(i) {}
 public:
 	/**
 	 * Returns true if the handle is not referring to any element.
@@ -63,7 +62,7 @@ class FastForwardList {
 
 public:
 	/** This is a logical position before the head. Useful for inserting before head! */
-	constexpr FFLPosition NIL_POS = FFLPosition(-1);
+	static constexpr FFLPosition NIL_POS = FFLPosition(-1);
 
 	// Move and copy constructors are just the default generated ones!
 	FastForwardList(const FastForwardList& ffl)            = default;
@@ -86,7 +85,7 @@ public:
 	 * Rem.: Much faster than assigning an empty list!
 	 * Rem.: Every earlier handle is considered invalid!
 	 */
-	inline reset() noexcept {
+	inline void reset() noexcept {
 		// This should be enough
 		headIndex = -1;
 		curLen=0;
