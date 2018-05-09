@@ -1,6 +1,9 @@
 #include <cstdio>
 #include "fastforwardlist.h"
 
+// You need to define this if you want to test the range checks (and with them)
+#define FFL_INSERT_RANGE_CHECK 1
+
 int main() {
 	printf("Testing fastforwardlist.h...\n");
 
@@ -54,8 +57,9 @@ int main() {
 	}
 	printf("\n");
 
-	// (C) Overfilling and reset test
-	printf("Overfilling TEST:\n");
+	// (C) Range-check and reset test
+#ifdef FFL_INSERT_RANGE_CHECK
+	printf("Range-check TEST:\n");
 	while(ffl.push_front(42)) {};
 	// Writeout after testing
 	readHead = ffl.head();
@@ -67,6 +71,7 @@ int main() {
 		readHead = ffl.next(readHead);
 	}
 	printf("\n");
+#endif
 	printf("Reset TEST:\n");
 	// reset
 	ffl.reset();

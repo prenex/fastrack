@@ -4,6 +4,9 @@
 #include<array>         // std::array
 #include<utility>       // std::pair
 
+// You need to define this if you want range checks:
+/*#define FFL_INSERT_RANGE_CHECK 1*/
+
 // Rem.: BASICALLY JUST AN INTEGER WITH MORE TYPE SAFETY :-)
 /** Simple iterator-like index to an element of a FastForwardList. Useful for getting the successor and the value. */
 class FFLPosition final {
@@ -59,6 +62,16 @@ class FastForwardList {
 	//       fit easily into the cache lines so asking for the head will
 	//       just load teh whole list, because headIndex is read above!
 	std::array<NODE, MAX> data;
+
+	// Contains indices of "holes" of nodes we have unlinked
+	std::array<int, MAX> unlinkHoles;
+
+	// TODO: implement these
+	// Start of the unlinkHoles circular queue
+	unsigned int holeStart;
+	// End of the unlinkHoles circular queue
+	unsigned int holeEnd;
+	
 
 public:
 	/** This is a logical position before the head. Useful for inserting before head! */
@@ -140,10 +153,13 @@ public:
 	 * Inserts a copy of the provided element AFTER the provided position.
 	 * Rem.: insertAfter(elem, head()); ensured to work for an empty list!
 	 * Returns false only when there is no more place to insert the element!
+	 *         (beware that we always return true if range checking is off!)
 	 */
 	inline bool insertAfter(T element, FFLPosition position) noexcept {
+#ifdef FFL_INSERT_RANGE_CHECK
 		// Do range check to ensure: (curLen+1 <= MAX)
 		if(curLen < MAX) {
+#endif
 			// Do the core stuff:
 			// 1.) Copy data to the "new" node at the end
 			data[curLen].first = element;
@@ -185,10 +201,35 @@ public:
 			// either the range check was ok, or we do 
 			// not care for range checking...
 			return true;
+#ifdef FFL_INSERT_RANGE_CHECK
 		} else {
 			// Range check failed and there is no place
 			return false;
 		}
+#endif
+	}
+
+	/**
+	 * Teies to unlink/delete the node at the given position.
+	 * Returns a position AFTER the unlinked element
+	 * Rem.: Might return NIL_POS on range check errors! 
+	 * Rem.: The element at position will get changed to point to the successor!
+	 */
+	inline FFLPosition unlinkAfter(FFLPosition position) noexcept {
+#ifdef FFL_INSERT_RANGE_CHECK
+		if(position.index < 0 || position.index > MAX) {
+			return NIL_POS;
+		}
+#endif
+		// Get successor position
+		FFLPosition successorPosition(data[position].second);
+
+		// TODO: implement
+
+		// TODO: need to change a lot in the class for this to work well
+
+		// Return the position of the successor of the unlinked element
+		return successorPosition;
 	}
 };
 
