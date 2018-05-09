@@ -2,14 +2,20 @@
 #define FASTTRACK_MC_PARSER_H
 
 #include "hoparser.h"
+#include "fastforwardlist.h"
+
+#define MAX_MARKER_PER_SCANLINE 2048 // Could be smaller I guess
 
 /**
- * A 2D marker with its confidence and position.
+ * A 2D marker with its confidence, order and position.
+ * The confidence is useful for knowing how stable was the marker
+ * The order is an integer number encoded in the marker (not ensured to be unique)
  */
 struct 2DMarker {
 	unsigned int x;
 	unsigned int y;
 	unsigned int confidence;
+	unsigned int order;
 };
 
 /**
@@ -24,6 +30,9 @@ public:
 	unsigned int maxY;
 	unsigned int signalCount;
 private:
+	// Rem.: marker.confidence is only updated with this when maxY is also updated!
+	// This is needed to have the real confidence value there, but we need
+	// a different variable for ending the marker center then. This is it.
 	unsigned int confidenceTemp;
 };
 
@@ -38,9 +47,8 @@ private:
  *     for the next possible frame that might come later.
  * Rem.: Template parameters are those of Hoparser!
  */
-struct ImageFrameRes{
-	// TODO: Maybe replace with our custom - cache-friendly and array based - forward list???
-	//       Or keep it like this because of easier built-in std::move and stuff???
+struct ImageFrameResult{
+	/** The found and properly closed MarkerCenters */
 	std::vector<MarkerCenter> markerCenters;
 };
 
@@ -64,10 +72,12 @@ public:
 	/**
 	 * Ends the current image frame and returns all found 2D marker locations on the image
 	 */
-	inline ImageFrameRes endImageFrame() noexcept {
+	inline ImageFrameResult endImageFrame() noexcept {
 		// TODO
 	}
 private:
 };
 
 #endif // _FT_MC_PARSER_H
+
+// vim: tabstop=4 noexpandtab shiftwidth=4 softtabstop=4
