@@ -8,7 +8,9 @@
 /*#define FFL_INSERT_RANGE_CHECK 1*/
 
 // Rem.: BASICALLY JUST AN INTEGER WITH MORE TYPE SAFETY :-)
-/** Simple iterator-like index to an element of a FastForwardList. Useful for getting the successor and the value. */
+/**
+ * Simple iterator-like index to an element of a FastForwardList. Useful for getting the successor and the value.
+ */
 class FFLPosition final {
 	template<typename U, int MAX>
 	friend class FastForwardList; // let them use the underlying index and constructor
@@ -38,6 +40,8 @@ public:
  * with fastest speed and access in realtime code!
  *
  * Rem.: Most optimized for "small" lists but good all-round.
+ * Rem.: Insertion/deletion speed is faster when MAX is 
+ * power-of-two minus ONE! (like 63, 127, etc)
  */
 template<typename T, int MAX>
 class FastForwardList {
@@ -63,16 +67,62 @@ class FastForwardList {
 	//       just load teh whole list, because headIndex is read above!
 	std::array<NODE, MAX> data;
 
-	// Contains indices of "holes" of nodes we have unlinked
-	std::array<int, MAX> unlinkHoles;
+	// Data structure for keeping unlink-data
+	class HoleKeeper final {
+		// Contains indices of "holes" of nodes we have unlinked
+		std::array<int, MAX+1> holes;
 
-	// TODO: implement these
-	// Start of the unlinkHoles circular queue
-	unsigned int holeStart;
-	// End of the unlinkHoles circular queue
-	unsigned int holeEnd;
-	
+		// Start of the unlinkHoles circular queue
+		unsigned int holeStart;
+		// End of the unlinkHoles circular queue
+		unsigned int holeEnd;
+	public:
+		// Updates holeStart, holeEnd and unlinkHoles
+		inline void addHolePos(int unlinkPos) {
+#ifdef FFL_INSERT_RANGE_CHECK
+			// When range checking is on, we should do nothing if:
+			// - The two indices are equal and the circular queue is full!
+			// - When unlinkPos is negative (Nil)
+			// - When unlinkPos is too big (>MAX)
+			if((holeStart == holeEnd)
+			  ||(unlinkPos < 0)
+			  // Rem.: Here we deliberately use MAX and not (MAX+1)!
+			  ||(unlinkPos > MAX) {
+				return;
+			}
+#endif
+			// Rem.: Because the two arrays are of the same size
+			//       theoretically we never get the state when holeStart == holeEnd
+			// Save the unlink position
+			holes[holeEnd] = unlinkPos;
+			// Rem.: This operation is fastest when MAX is (power of two) - 1
+			// as the compiler should optimise it as a binary & operator!
+			holeEnd = (holeEnd + 1) % (MAX+1);
+		}
 
+		/** Gets a previously occupied, but unlinked hole - undefined when there is no such! */
+		inline int getHolePos() {
+			// We need to increment first to ensure invariants!
+			// When the circular buffer is empty, there Start-End point nearby
+			// each other and in this circular End is next of start.
+			// It is easy to see that we need to increment BEFORE reading when
+			// this is the first reading ever.
+			holeStart = (holeStart + 1) % (MAX+1);
+			// Return the previously saved unlink position
+			int ret = holes[holeStart];	
+			// Rem.: This operation is fastest when MAX is (power of two) - 1
+			// as the compiler should optimise it as a binary & operator!
+			return ret;
+		}
+
+		/** Tells if there is at least one available hole to get */
+		inline bool hasHole() {
+			return (holeStart != holeEnd);
+		}
+	};
+
+	// Data structure for keeping unlink-data
+	HoleKeeper holeKeeper;
 public:
 	/** This is a logical position before the head. Useful for inserting before head! */
 	static constexpr FFLPosition NIL_POS = FFLPosition(-1);
@@ -156,6 +206,7 @@ public:
 	 *         (beware that we always return true if range checking is off!)
 	 */
 	inline bool insertAfter(T element, FFLPosition position) noexcept {
+		// TODO: implement usage of holes
 #ifdef FFL_INSERT_RANGE_CHECK
 		// Do range check to ensure: (curLen+1 <= MAX)
 		if(curLen < MAX) {
@@ -217,19 +268,46 @@ public:
 	 */
 	inline FFLPosition unlinkAfter(FFLPosition position) noexcept {
 #ifdef FFL_INSERT_RANGE_CHECK
-		if(position.index < 0 || position.index > MAX) {
+		if(position.index > MAX) {
+			// No deletion because of index-checking
 			return NIL_POS;
 		}
 #endif
 		// Get successor position
-		FFLPosition successorPosition(data[position].second);
+		int unlinkPos;
+		if(position.index < 0) {
+			// NIL_POS parameter means that we delete the current HEAD
+			unlinkPos = headIndex;
+		} else {
+			// Otherwise we 
+			unlinkPos = data[position.index].second;
+		}
 
-		// TODO: implement
+#ifdef FFL_INSERT_RANGE_CHECK
+		if((unlinkPos < 0) || unlinkPos > MAX) {
+			// No deletion because there is nothing to delete
+			// (just another index checking)
+			return NIL_POS;
+		}
+#endif
+		// Get the 'next' of the unlinked position
+		FFLPosition succUnlinkPos = next(FFLPosition(unlinkPos));
 
-		// TODO: need to change a lot in the class for this to work well
+		// Get the position that is the 'next' of the elem to 'unlink'
+		if(position.index < 0) {
+			// NIL_POS parameter means that we delete the current HEAD
+			// so we need to update the head pointer only after the deletion
+			headIndex = succUnlinkPos.index;
+		} else {
+			// Unlink - quite literally - by 
+			data[position.index].second = succUnlinkPos.index;
+		}
+
+		// Mark hole for reuse
+		holeKeeper.addHolePos(unlinkPos);
 
 		// Return the position of the successor of the unlinked element
-		return successorPosition;
+		return succUnlinkPos;
 	}
 };
 

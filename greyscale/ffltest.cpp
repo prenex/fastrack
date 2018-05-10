@@ -7,8 +7,9 @@
 int main() {
 	printf("Testing fastforwardlist.h...\n");
 
-	// Create a maximum 128 length list
-	FastForwardList<int, 128> ffl;
+	// Create a maximum 127 length list
+	// Rem.: (2^x)-1 is the most optimal and the smaller the better!
+	FastForwardList<int, 127> ffl;
 
 	// (A) Simple test
 	printf("SIMPLE TEST:\n");
