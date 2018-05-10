@@ -1,8 +1,9 @@
 #include <cstdio>
-#include "fastforwardlist.h"
 
 // You need to define this if you want to test the range checks (and with them)
 #define FFL_INSERT_RANGE_CHECK 1
+
+#include "fastforwardlist.h"
 
 int main() {
 	printf("Testing fastforwardlist.h...\n");

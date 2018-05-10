@@ -87,7 +87,7 @@ class FastForwardList {
 			if((holeStart == holeEnd)
 			  ||(unlinkPos < 0)
 			  // Rem.: Here we deliberately use MAX and not (MAX+1)!
-			  ||(unlinkPos > MAX) {
+			  ||(unlinkPos > MAX)) {
 				return;
 			}
 #endif
