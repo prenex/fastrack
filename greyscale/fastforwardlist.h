@@ -134,7 +134,7 @@ class FastForwardList {
 	// Data structure for keeping unlink-data
 	HoleKeeper holeKeeper;
 public:
-	/** This is a logical position before the head. Useful for inserting before head! */
+	/** This is a logical position before the head of any FastForwardList. Useful for inserting before head! */
 	static constexpr FFLPosition NIL_POS = FFLPosition(-1);
 
 	FastForwardList() : curLen(0), filledLenMax(0), headIndex(-1) {}
@@ -289,8 +289,13 @@ public:
 #endif
 	}
 
+	/** Unlink/delete the head node. Returns position after the unlinked element. */
+	inline FFLPosition unlinkHead() noexcept {
+		return unlinkAfter(NIL_POS);
+	}	
+
 	/**
-	 * Teies to unlink/delete the node at the given position.
+	 * Unlink/delete the node at the given position.
 	 * Returns a position AFTER the unlinked element
 	 * Rem.: Might return NIL_POS on range check errors! 
 	 * Rem.: The element at position will get changed to point to the successor!

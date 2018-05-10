@@ -100,7 +100,22 @@ int main() {
 	}
 	printf("\n");
 
-	// TODO: Delete test (when there will be deletion)
+	// Delete test (when there will be deletion)
+	printf("Delete TEST:\n");
+
+	// Remove head
+	ffl.unlinkHead();
+
+	// Writeout after delete test
+	readHead = ffl.head();
+	first = true;
+	while(!readHead.isNil()) {
+		if(!first) printf(", "); else first = false;
+		auto val = ffl[readHead];
+		printf("%d", val);
+		readHead = ffl.next(readHead);
+	}
+	printf("\n");
 
 	printf("...testing fastforwardlist.h ended!\n");
 }
