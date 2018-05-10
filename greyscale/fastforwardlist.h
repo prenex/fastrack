@@ -291,7 +291,8 @@ public:
 
 	/** Unlink/delete the head node. Returns position after the unlinked element. */
 	inline FFLPosition unlinkHead() noexcept {
-		return unlinkAfter(NIL_POS);
+		//return unlinkAfter(NIL_POS); - DID NOT WORK IN CLANG
+		return unlinkAfter(FFLPosition(-1));
 	}	
 
 	/**
