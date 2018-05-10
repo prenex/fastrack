@@ -51,6 +51,10 @@ class FastForwardList {
 	// The current length of this list
 	int curLen;
 
+	// The left-to-right filled area size - not counting holes
+	// and unlinking that happened at the end.
+	int filledLenMax;
+
 	// Index of the current head element
 	// -1 represents the nullptr in indices
 	// Rem.: This being right before data array means to ensure good
@@ -73,9 +77,11 @@ class FastForwardList {
 		std::array<int, MAX+1> holes;
 
 		// Start of the unlinkHoles circular queue
-		unsigned int holeStart;
+		// Rem.: Setup for the empty buffer
+		unsigned int holeStart = 0;
 		// End of the unlinkHoles circular queue
-		unsigned int holeEnd;
+		// Rem.: SEtup for the empty buffer
+		unsigned int holeEnd = 1;
 	public:
 		// Updates holeStart, holeEnd and unlinkHoles
 		inline void addHolePos(int unlinkPos) {
@@ -117,7 +123,11 @@ class FastForwardList {
 
 		/** Tells if there is at least one available hole to get */
 		inline bool hasHole() {
-			return (holeStart != holeEnd);
+			// True if: Start is smaller (pointers are in the same loopNo) with enough space to have elements
+			// OR the end is earlier than the start (it is one loopNo ahead in circular buffer modulo group)
+			// and start is not at the end of the buffer (as that would be the only case of too small difference).
+			return ((int)holeStart < ((int)holeEnd - 1))
+			   	|| ((holeStart != MAX-1) && (holeEnd < holeStart));
 		}
 	};
 
@@ -127,7 +137,7 @@ public:
 	/** This is a logical position before the head. Useful for inserting before head! */
 	static constexpr FFLPosition NIL_POS = FFLPosition(-1);
 
-	FastForwardList() : curLen(0), headIndex(-1) {}
+	FastForwardList() : curLen(0), filledLenMax(0), headIndex(-1) {}
 
 	// Move and copy constructors are just the default generated ones!
 	FastForwardList(const FastForwardList& ffl)            = default;
@@ -154,6 +164,7 @@ public:
 		// This should be enough
 		headIndex = -1;
 		curLen=0;
+		filledLenMax = 0;
 	}
 
 	/**
@@ -193,12 +204,21 @@ public:
 		return insertAfter(element, FFLPosition(-1));
 	}
 
+	/** Tells if the list is empty or not */
 	inline bool isEmpty() {
 		return (curLen == 0);
 	}
 
-	// TODO: do something to "compact the list" maybe? Or insert at an "empty" position?
-	// TODO: how do we know which positions are empty when not on the end?
+	/** Tells the number of elements in the list */
+	inline int size() {
+		return curLen;
+	}
+
+	/** Tells the number of remaining free positions in the list */
+	inline int freeCapacity() {
+		return MAX - curLen;
+	}
+
 	/**
 	 * Inserts a copy of the provided element AFTER the provided position.
 	 * Rem.: insertAfter(elem, head()); ensured to work for an empty list!
@@ -206,14 +226,21 @@ public:
 	 *         (beware that we always return true if range checking is off!)
 	 */
 	inline bool insertAfter(T element, FFLPosition position) noexcept {
-		// TODO: implement usage of holes
 #ifdef FFL_INSERT_RANGE_CHECK
 		// Do range check to ensure: (curLen+1 <= MAX)
 		if(curLen < MAX) {
 #endif
+			// Define our target insertion position
+			int targetInsertPos;
+			if(holeKeeper.hasHole()) {
+				targetInsertPos = holeKeeper.getHolePos();
+			} else {
+				targetInsertPos = filledLenMax;
+			}
+
 			// Do the core stuff:
 			// 1.) Copy data to the "new" node at the end
-			data[curLen].first = element;
+			data[targetInsertPos].first = element;
 			// 2.) Save "position.next" and UPDATE the earlier to point to us
 			// Rem.: We need to handle the spec. case of  the completely empty list!
 			// Rem.: In most architectures forwards jumps are not predicted to be taken
@@ -223,7 +250,7 @@ public:
 		   	if(!position.isNil()) {
 				// Fast-path: adding non-head element
 				nextToUse = data[position.index].second;
-				data[position.index].second = curLen;
+				data[position.index].second = targetInsertPos;
 			} else {
 				// Slower-path: adding new head
 				if(isEmpty()) {
@@ -238,16 +265,18 @@ public:
 			}
 			// 3.) Update the 'next' of the added node holding the new element to the saved one.
 			//     This ensures the proper linkage
-			data[curLen].second = nextToUse;
+			data[targetInsertPos].second = nextToUse;
 
 			// 4.) Update head pointer when we add at the front
 			if(position.isNil()) {
-				headIndex = curLen;
+				headIndex = targetInsertPos;
 			}
 
 			// Update state that defines if we are isEmpty() or not:
 			// Update size if range checking is on
 			++curLen;
+			// Update pointer to use when there are no holes
+			++filledLenMax;
 			// If we are here we surely return true as
 			// either the range check was ok, or we do 
 			// not care for range checking...
@@ -305,6 +334,9 @@ public:
 
 		// Mark hole for reuse
 		holeKeeper.addHolePos(unlinkPos);
+
+		// Decrement size as the hole can be reused
+		--curLen;
 
 		// Return the position of the successor of the unlinked element
 		return succUnlinkPos;
