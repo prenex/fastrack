@@ -4,6 +4,9 @@
 #include<array>         // std::array
 #include<utility>       // std::pair
 
+/** This is a logical position before the head of any FastForwardList. Useful for inserting before head! */
+#define NIL_POS  FFLPosition(-1)
+
 // You need to define this if you want range checks:
 /*#define FFL_INSERT_RANGE_CHECK 1*/
 
@@ -21,6 +24,9 @@ private:
 	/** Construct the position handle with i as its underlying index */
 	constexpr FFLPosition(int i) noexcept : index(i) {}
 public:
+	// Creates the Nil position!
+	FFLPosition() noexcept : index(-1) { }
+
 	/**
 	 * Returns true if the handle is not referring to any element.
 	 * A FastForwardList cannot return anything reasonable for an invalid handle.
@@ -144,9 +150,6 @@ class FastForwardList {
 	// Data structure for keeping unlink-data
 	HoleKeeper holeKeeper;
 public:
-	/** This is a logical position before the head of any FastForwardList. Useful for inserting before head! */
-	static constexpr FFLPosition NIL_POS = FFLPosition(-1);
-
 	FastForwardList() : curLen(0), filledLenMax(0), headIndex(-1) {}
 
 	// Move and copy constructors are just the default generated ones!
@@ -301,8 +304,8 @@ public:
 
 	/** Unlink/delete the head node. Returns position after the unlinked element. */
 	inline FFLPosition unlinkHead() noexcept {
-		//return unlinkAfter(NIL_POS); - DID NOT WORK IN CLANG
-		return unlinkAfter(FFLPosition(-1));
+		//return unlinkAfter(FFLPosition(-1));
+		return unlinkAfter(NIL_POS);
 	}	
 
 	/**

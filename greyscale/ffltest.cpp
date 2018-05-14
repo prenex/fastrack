@@ -1,7 +1,7 @@
 #include <cstdio>
 
 // You need to define this if you want to test the range checks (and with them)
-#define FFL_INSERT_RANGE_CHECK 1
+//#define FFL_INSERT_RANGE_CHECK 1
 
 #include "fastforwardlist.h"
 
@@ -106,7 +106,7 @@ int main() {
 	// Remove head
 	ffl.unlinkHead();
 
-	// Writeout after delete test
+	// Writeout after delete test No.1
 	readHead = ffl.head();
 	first = true;
 	while(!readHead.isNil()) {
@@ -116,6 +116,55 @@ int main() {
 		readHead = ffl.next(readHead);
 	}
 	printf("\n");
+
+#ifdef FFL_INSERT_RANGE_CHECK
+	printf("Unlink range check...\n");
+	// Nothing should happen when range checking is on
+	for(int i = 0; i < 1024; ++i) {
+		ffl.unlinkHead();
+	}
+	printf("...Unlink range check OK!\n");
+#endif
+
+	// 10 9 8 7 6 5 4 3 2 1 0
+	FFLPosition zeroPos;
+	bool firstIteration = true;
+	for(int i = 0; i < 11; ++i) {
+		ffl.push_front(i);
+		// Save the position of head when zero is the head!
+		if(firstIteration) {
+			zeroPos = ffl.head();
+			firstIteration = false;
+		}
+	}
+
+	// Reorder it as incremented:
+	// - insert value AFTER the earlier list
+	// - unlink the values - except until reaching zeroPos
+	// Should result in: 10 0 1 2 3 4 5 6 7 8 9
+	// (only 0 stayed in its original memory slot however)
+	FFLPosition writeHead = zeroPos;
+	FFLPosition unlinkHead = ffl.head(); // keep 10 (head elem) but unlink after that!
+	readHead = ffl.head();
+	readHead = ffl.next(readHead);
+	// turn around numbers in an other list
+	while(readHead != zeroPos) {
+		ffl.insertAfter(ffl[readHead], writeHead);
+		writeHead = ffl.next(writeHead);
+		readHead = ffl.unlinkAfter(unlinkHead);
+	}
+
+	// Writeout after delete test No.2: complex big testing!
+	readHead = ffl.head();
+	first = true;
+	while(!readHead.isNil()) {
+		if(!first) printf(", "); else first = false;
+		auto val = ffl[readHead];
+		printf("%d", val);
+		readHead = ffl.next(readHead);
+	}
+	printf("\n");
+
 
 	printf("...testing fastforwardlist.h ended!\n");
 }
