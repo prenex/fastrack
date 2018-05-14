@@ -31,6 +31,16 @@ public:
 		// then the index is either negative (nil index) or a good one!
 		return (index < 0);
 	}
+
+	/** EQ-op */
+	inline bool operator==(const FFLPosition& other) {
+		return (index == other.index);
+	}
+
+	/** NEQ-op */
+	inline bool operator!=(const FFLPosition& other) {
+		return (index != other.index);
+	}
 };
 
 /**
