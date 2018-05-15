@@ -182,8 +182,8 @@ public:
 
 	/**
 	 * Gets the next position after the provided one.
-	 * This function does returns an invalid position 
-	 * if the list ended with the provided current position!
+	 * This function returns an invalid position in case
+	 * the list ended with the provided current position!
 	 */
 	inline FFLPosition next(FFLPosition current) noexcept {
 		// This is just a return of an integer - but typesafe
