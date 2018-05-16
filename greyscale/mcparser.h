@@ -438,7 +438,7 @@ public:
 		lastPos = NIL_POS;
 		// Reset x book-keeping
 		x = 0;
-		// Increment y book-keeping
+		// Reset y book-keeping
 		y = 0;
 		// Indicate newline
 		afterNewLine = true;
