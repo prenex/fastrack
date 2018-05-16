@@ -3,6 +3,7 @@
 #include "CImg.h"
 #include "homer.h"
 #include "hoparser.h"
+#include "mcparser.h"
 
 using namespace cimg_library;
 

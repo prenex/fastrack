@@ -21,11 +21,17 @@ private:
 	// Rem.: This is much faster then always returning the complete NODE!!!
 	int index;
 
-	/** Construct the position handle with i as its underlying index */
-	constexpr FFLPosition(int i) noexcept : index(i) {}
 public:
 	// Creates the Nil position!
 	FFLPosition() noexcept : index(-1) { }
+
+	/**
+	 * DO NOT USE THIS IN USER CODE!
+	 * Construct the position handle with i as its
+	 * underlying index. Beware as there is no range
+	 * chekcing done here ever!
+	 */
+	constexpr FFLPosition(int i) noexcept : index(i) {}
 
 	/**
 	 * Returns true if the handle is not referring to any element.

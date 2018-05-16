@@ -25,7 +25,7 @@
  * The confidence is useful for knowing how stable was the marker - the bigger is better.
  * The order is an integer number encoded in the marker (not ensured to be unique)
  */
-struct 2DMarker {
+struct Marker2D {
 	unsigned int x;
 	unsigned int y;
 	unsigned int confidence;
@@ -56,7 +56,7 @@ struct MCParserConfig {
 
 	/** Marker is closed if there was no pixel for it in the last 50 rows */
 	unsigned int closeDiffY = 50;
-}
+};
 
 /**
  * Defines a marker center we are currently suspecting
@@ -68,7 +68,7 @@ public:
 		SKIPPED,
 		EXTENDED,
 		CLOSED,
-	}
+	};
 
 	// Always the X coordinate of the last-line center from hoparser
 	// !! SHOULD BE FIRST!!!
@@ -87,7 +87,7 @@ public:
 	int confidence;
 
 	/** Construct with un-initialized data */
-	MarkerCenter() {	}
+	MarkerCenter() { }
 
 	/** Construct with data to "start" a marker centerline right now */
 	MarkerCenter(unsigned int x, unsigned int y, uint8_t order) {
@@ -141,7 +141,7 @@ public:
 	 * skipUpd() was called internally.
 	 */
 	inline bool tryExtend(unsigned int x, unsigned int y, uint8_t order,
-		   	unsigned int deltaDiffMax, unsgined int widthDiffMax) {
+		   	unsigned int deltaDiffMax, unsigned int widthDiffMax) {
 		// lastX access loads cache properly
 		if(abs(lastX - x) > deltaDiffMax) {
 			// Skipped
@@ -186,13 +186,16 @@ public:
 		//       confidence between minY and maxY and not counting the 
 		//       lot of missing values AFTER the marker center.
 		confidence = confidenceTemp;
+
+		// Indicate that we extended!
+		return true;
 	}
 
 	/**
 	 * Construct a marker using the centerline information we have gathered so far.
 	 * Rem.: Best used when this center became "CLOSED" (but will return data anyways)
 	 */
-	inline 2DMarker constructMarker() {
+	inline Marker2D constructMarker() {
 		// TODO: maybe do better than this avarage?
 		unsigned int x = ((maxX - minX) / 2) + minX;
 		unsigned int y = ((maxY - minY) / 2) + minY;
@@ -206,9 +209,9 @@ public:
 			}
 		} // hope for loop unrolling here...
 
-		return 2DMarker{
+		return Marker2D{
 			x, y,
-			confidence,
+			static_cast<unsigned int>(confidence),
 			order
 		};
 	}
@@ -231,21 +234,25 @@ private:
  */
 struct ImageFrameResult{
 	/** Build using the found and properly closed MarkerCenters */
-	std::vector<2DMarker> markers;
+	std::vector<Marker2D> markers;
 };
 
 /**
  * A whole-image parser as described below.
  * Basically finds every marker1 marker on an image!
  * Parses "vertical MarkerCenters" by using an 
- * underlying Hoparser results.
+ * underlying TOKENIZER (default: Hoparser) results.
+ *
  * Use next(<pixel>) call for providing magnitude data
  * Use endLine() call to indicate the end of line
  * Use endImageFrame() to get results and reset the parser
  *     for the next possible frame that might come later.
- * Rem.: Template parameters are those of Hoparser!
+ * Rem.: Template parameters are those of the TOKENIZER (def.: Hoparser)
+ *       and of course the tokenizer itself so this template can be
+ *       used with more than one kind of tokenizer that provides
+ *       per-scanline 1D marker positions. This enables experimenting!
  */
-template<typename MT = uint8_t, typename CT = int>
+template<typename MT = uint8_t, typename CT = int, typename TOKENIZER = Hoparser<MT, CT>>
 class MCParser {
 public:
 
@@ -263,15 +270,15 @@ public:
 		// Use the tokenizer to only process "tokens" and not every pixel
 		// These tokens are already the 1D marker centers that the system
 		// suspects with the per scanline algorithm.
-		auto ret = hp.next();
+		auto ret = tokenizer.next();
 
 		// See if the hoparser finds an 1D marker at the pixel in this scanline
 		// We only run all the following code for that rare case (see green dots
 		// in the marker1_eval application when it finds these for the scanlines)
 		if(ret.foundMarker) {
 			// get marker data
-			int centerX = hp.getMarkerX();
-			auto order = hp.getOrder();
+			int centerX = tokenizer.getMarkerX();
+			auto order = tokenizer.getOrder();
 			if(config.ignoreOrderSmallerThan < order) {
 				// If not too small to ignore, process it!
 
@@ -462,7 +469,7 @@ private:
 	MCParserConfig config;
 
 	/** Used for parsing per-scanline data and tokenizing it as 1D markers */
-	Hoparser<MT, CT> hp;
+	TOKENIZER tokenizer;
 
 	/** We start with "before head" position */
 	FFLPosition lastPos;
