@@ -37,7 +37,7 @@ struct MCParserConfig {
 	 * Ignore every suspected marker-pos in the scanlines
 	 * which has smaller order than this value
 	 */
-	unsigned int ignoreOrderSmallerThan = 2;
+	unsigned int ignoreOrderSmallerThan = 3;
 
 	/**
 	 * Maximum difference between the marker center position 
@@ -260,9 +260,14 @@ public:
 
 	/** Returns the same data as HoParser - mostly debug-only! */
 	inline NexRes next(MT mag) noexcept {
+		// Use the tokenizer to only process "tokens" and not every pixel
+		// These tokens are already the 1D marker centers that the system
+		// suspects with the per scanline algorithm.
 		auto ret = hp.next();
 
-		// See if the hoparser finds a(n 1D) marker at the pixel in this scanline
+		// See if the hoparser finds an 1D marker at the pixel in this scanline
+		// We only run all the following code for that rare case (see green dots
+		// in the marker1_eval application when it finds these for the scanlines)
 		if(ret.foundMarker) {
 			// get marker data
 			int centerX = hp.getMarkerX();
@@ -276,10 +281,14 @@ public:
 				// Advance list position when we are the first test on a newline
 				// And the list is not empty. The second handles cases when the
 				// list is completely empty
-				// TODO: ensure this line is OK:
-				if(afterNewLine && !(mcCurrentList.isEmpty())) {
-					lastPos = listPos;
-					listPos = mcCurrentList.next(listPos);
+				// TODO: ensure these line are OK:
+				if(afterNewLine) {
+					// If the list is empty: lastPos == listPos == NIL_POS
+					// If it already has data, we step on the valid data
+					if(!(mcCurrentList.isEmpty())) {
+						lastPos = listPos;
+						listPos = mcCurrentList.next(listPos);
+					}
 					afterNewLine = false;
 				}
 
@@ -291,7 +300,7 @@ public:
 				// - And a list of "1D markers at this scanline"
 				//
 				// These two lists are ordered by the x-coordinate (the first is ordered by
-				// its "lastX") and now in this place we are processing them to make a
+				// its FIRST "lastX") and now in this place we are processing them to make a
 				// vertical parsing. If we would have these two lists at every scanline end
 				// then we could go through both of them and update the first list with the 
 				// latter new line data list.
@@ -302,18 +311,19 @@ public:
 				// the markers center lines are! The existing list is the one we named
 				// the "first" above and we are ourselves in the iterator of the other
 				// list actually: we do that second one on-the-fly without collecting.
-				// At the first moment we had to move the "first" list to a valid pos.
+				// At the first moment we had to move the "first" list to a valid pos
+				// if that is possible (otherwise just keep listPos, lastPos at NIL_POS
 				// if that was possible as next(..) call indicates there is a valid
 				// suspected pixel in this scanline! (see marker1_eval test app for
 				// these green pixels when you are clicking in that application).
 				// 
 				// Rem.: This is basically a two-variabled-one-valued elementwise
-				//       processing algorithm for unification update if the list.
+				//       processing algorithm for unification updates of the list.
 				//       The difference is that this is an "online" working version.
 				//       (*): In Hungarian, this special case is an "Időszerűsítés".
 
 				// Add this new token we have found as a new marker centerline or
-				// extend an already existing marker centerline!
+				// extend an already existing marker centerline! Loop until processed.
 				bool tokenProcessed = false;
 				while(!tokenProcessed) {
 					if(listPos.isNil()) {
@@ -357,10 +367,16 @@ public:
 							// lastPos insertion position or not:
 							if((((currentCenter.maxX - currentCenter.minX) / 2) - (config.widthDiffMax / 2)) > x) {
 								// Completely new suspected marker - in the middle of the list
+								// Rem.: We know we need to insert this here and there will be no list position
+								//       to extend, because the list is ordered by the 'x' coordinate and next()
+								//       is called also in an ordered way. Because of insertion, the list also
+								//       kept ordered now so later iterations and calls to next() work as well!
 								mcCurrentList.insertAfter(
 										std::move(MarkerCenter(x, y, order)),
-										lastPos);
+										lastPos); // Rem.: lastPos insertion is needed as we insert BEFORE listPos
 								// Mark this token as processed
+								// Rem.: We should not move with the list iteraor as the next time of the next(..)
+								//       call might return extension/continuation of what is under the head now!
 								tokenProcessed = true;
 							} else { // Rem.: This else is necessary or we would need to step with the lastPos too!
 								// See if things indicate we need to close the earlier found stuff
@@ -370,14 +386,15 @@ public:
 									frameResult.markers.push_back(currentCenter.constructMarker());
 
 									// Close / Unlink the added one as it is considered to be closed!
-									mcCurrentList.unlinkAfter(lastPos);
+									// Rem.: We need to update list position to a valid position!
+									// Rem.: lastPos keeps to be valid too
+									listPos = mcCurrentList.unlinkAfter(lastPos);
+								} else {
+									// If there was nothing to close, we just update our "iterators"
+									lastPos = listPos;
+									listPos = mcCurrentList.next(listPos);
 								}
 							}
-
-							// If we did still haven't succeeded, then we still always step
-							// with the earlier list and try finding the next element.
-							lastPos = listPos;
-							listPos = mcCurrentList.next(listPos);
 						}
 					}
 				}
@@ -394,7 +411,8 @@ public:
 	 */
 	inline void endLine() noexcept {
 		// Reset read head in the ordered list
-		suspectionPos = NIL_POS;
+		listPos = NIL_POS;
+		lastPos = NIL_POS;
 		// Reset x book-keeping
 		x = 0;
 		// Increment y book-keeping
@@ -408,6 +426,23 @@ public:
 	 * Rem.: The returned reference is only valid until the next() function is called once again.
 	 */
 	inline const ImageFrameResult endImageFrame() noexcept {
+		// Reset state
+		listPos = NIL_POS;
+		lastPos = NIL_POS;
+		// Reset x book-keeping
+		x = 0;
+		// Increment y book-keeping
+		y = 0;
+		// Indicate newline
+		afterNewLine = true;
+
+		// Reset vertical marker-centerline collector list!
+		// Needed when it is not empty on the last scanline
+		// of the earlier frame!
+		mcCurrentList.reset();
+
+
+		// Reset result and return any earlier collected result
 		// TODO: Check - I just hope this is optimal and works too...
 		// This both resets the original variable
 		// and returns the collection of markers.
