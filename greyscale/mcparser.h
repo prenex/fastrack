@@ -149,7 +149,7 @@ public:
 	 */
 	inline int getRightMostCurrentAcceptableX(unsigned int deltaDiffMax, unsigned int widthDiffMax) {
 		// RightMost X calculated by the DelteDiffMax criteria
-		int ddmx = lastXi + deltaDiffMax;
+		int ddmx = lastX + deltaDiffMax;
 		// Rightmost X calculated by teh widthDiffMax criteria
 		// Rem.: This is minX+widthDiffMax because that is the last X
 		//       coordinate that will work with the "if((newMaxX - newMinX) > widthDiffMax)"
@@ -402,7 +402,8 @@ public:
 							// is so much before the one in the earlier list that
 							// it should be added as a new element at the current
 							// lastPos insertion position or not:
-							if(currentCenter.getRightMostCurrentAcceptableX() > x) {
+							if(currentCenter.getRightMostCurrentAcceptableX(config.deltaDiffMax, config.widthDiffMax)
+								   	> x) {
 								// Completely new suspected marker - in the middle of the list
 								// Rem.: We know we need to insert this here and there will be no list position
 								//       to extend, because the list is ordered by the 'x' coordinate and next()
