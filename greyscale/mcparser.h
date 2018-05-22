@@ -108,8 +108,8 @@ public:
 		confidence = START_CONFIDENCE;
 		confidenceTemp = START_CONFIDENCE;
 		// We try to count the various supported order values
-		// and return the most common one later qwhen closing this.
-		ord[order + MIN_ORDER - 1] = 1;
+		// and return the most common one later when closing this.
+		ord[order - MIN_ORDER] = 1;
 	}
 
 	/**
@@ -133,6 +133,30 @@ public:
 		// y is always bigger or equal than the current maxY here
 		// so no abs(..) is needed
 		return ((y - maxY) > maxYDiff);
+	}
+
+	/**
+	 * Returns the X-coordinate that is the biggest currently acceptable for extending
+	 * in the current state. Useful to know if an X position is too big for extending
+	 * or small enough that it could have been extended already when going ordered from
+	 * left-to-right "handle" token parsing.
+	 * 
+	 * Mostly used when stepping left-to-right and trying to insert or extend: it can be
+	 * seen easily using this method if insertion BEFORE the current head is necessary
+	 * or insertion/extension will be necessary only later (AFTER we already know that
+	 * we cannot extend the current one, we can check for surely if we NEED to insert
+	 * before the current in the ordered list)
+	 */
+	inline int getRightMostCurrentAcceptableX(unsigned int deltaDiffMax, unsigned int widthDiffMax) {
+		// RightMost X calculated by the DelteDiffMax criteria
+		int ddmx = lastXi + deltaDiffMax;
+		// Rightmost X calculated by teh widthDiffMax criteria
+		// Rem.: This is minX+widthDiffMax because that is the last X
+		//       coordinate that will work with the "if((newMaxX - newMinX) > widthDiffMax)"
+		//       criteria as a non-skipped value.
+		int wdmx = minX + widthDiffMax;
+		// Use the smaller value - it tells the rightmost X-pos that would be 'extensible'
+		return ((ddmx > wdmx) ? ddmx : wdmx);
 	}
 
 	/**
@@ -166,7 +190,7 @@ public:
 		lastX = x;
 
 		// Update order counts
-		ord[order + MIN_ORDER - 1] = 1;
+		++ord[order - MIN_ORDER];
 
 		// Update min-max X
 		minX = newMinX;
@@ -200,12 +224,12 @@ public:
 		unsigned int x = ((maxX - minX) / 2) + minX;
 		unsigned int y = ((maxY - minY) / 2) + minY;
 
-		unsigned int order = 2;
+		unsigned int order = MIN_ORDER;
 		uint8_t orderMaxCnt = ord[0];
-		for(int i = 1; i < (1 + MAX_ORDER - MIN_ORDER); ++i) {
+		for(int i = 0; i < (1 + MAX_ORDER - MIN_ORDER); ++i) {
 			if(ord[i] > orderMaxCnt) {
 				orderMaxCnt = ord[i];
-				order = i+2; // 1 and 0 is unused to spare space
+				order = i+MIN_ORDER; // 1 and 0 is unused to spare space
 			}
 		} // hope for loop unrolling here...
 
@@ -226,7 +250,7 @@ private:
 	// counted in ord[0], ord[1], ord[2], ord[3] respectively
 	// We need this so that we can return with the most probable one
 	// !! SHOULD BE LAST - or close to end
-	uint8_t ord[MAX_ORDER - MIN_ORDER];
+	uint8_t ord[1 + MAX_ORDER - MIN_ORDER];
 };
 
 /**
@@ -290,12 +314,18 @@ public:
 				// list is completely empty
 				// TODO: ensure these line are OK:
 				if(afterNewLine) {
-					// If the list is empty: lastPos == listPos == NIL_POS
-					// If it already has data, we step on the valid data
+					// If the list is empty stays: lastPos == listPos == NIL_POS
+					// If it already has data, we step on the valid data and not be NIL
+					// Rem.: The above if ensures that we are on the beginning NIL_POS
 					if(!(mcCurrentList.isEmpty())) {
 						lastPos = listPos;
 						listPos = mcCurrentList.next(listPos);
 					}
+					/*
+					else  NIL_POS and NIL_POS for both
+					*/
+
+					// Indicate that we have handled the flag
 					afterNewLine = false;
 				}
 
@@ -372,7 +402,7 @@ public:
 							// is so much before the one in the earlier list that
 							// it should be added as a new element at the current
 							// lastPos insertion position or not:
-							if((((currentCenter.maxX - currentCenter.minX) / 2) - (config.widthDiffMax / 2)) > x) {
+							if(currentCenter.getRightMostCurrentAcceptableX() > x) {
 								// Completely new suspected marker - in the middle of the list
 								// Rem.: We know we need to insert this here and there will be no list position
 								//       to extend, because the list is ordered by the 'x' coordinate and next()
@@ -381,6 +411,9 @@ public:
 								mcCurrentList.insertAfter(
 										std::move(MarkerCenter(x, y, order)),
 										lastPos); // Rem.: lastPos insertion is needed as we insert BEFORE listPos
+								// Increment is needed to keep invariant that lastPost is literally the position 
+								// "before" the listpos. Because of the above insertion it would be not true anymore!
+								lastPos = mcCurrentList.next(lastPos);
 								// Mark this token as processed
 								// Rem.: We should not move with the list iteraor as the next time of the next(..)
 								//       call might return extension/continuation of what is under the head now!
@@ -471,9 +504,9 @@ private:
 	/** Used for parsing per-scanline data and tokenizing it as 1D markers */
 	TOKENIZER tokenizer;
 
-	/** We start with "before head" position */
+	/** We start with "before head" position (NIL_POS) */
 	FFLPosition lastPos;
-	/** We start with "before head" position */
+	/** We start with "before head" position (NIL_POS) */
 	FFLPosition listPos;
 
 	/** For book-keeping x: start in upper-left corner */
