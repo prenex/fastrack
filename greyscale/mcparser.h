@@ -37,6 +37,11 @@ struct Marker2D {
 
 struct MCParserConfig {
 	/**
+	 * Ignore every markercenter that has smaller than this many signals
+	 */
+	unsigned int ignoreWhenSignalCountLessThan = 2;
+
+	/**
 	 * Ignore every suspected marker-pos in the scanlines
 	 * which has smaller order than this value
 	 */
@@ -221,20 +226,26 @@ public:
 	/**
 	 * Construct a marker using the centerline information we have gathered so far.
 	 * Rem.: Best used when this center became "CLOSED" (but will return data anyways)
+	 * Rem.: Returns an order of zero is signalCount was smaller than the configured threshold!
 	 */
-	inline Marker2D constructMarker() {
+	inline Marker2D constructMarker(unsigned int ignoreWhenSignalCountLessThan) {
 		// TODO: maybe do better than this avarage?
 		unsigned int x = ((maxX - minX) / 2) + minX;
 		unsigned int y = ((maxY - minY) / 2) + minY;
 
 		unsigned int order = MIN_ORDER;
-		uint8_t orderMaxCnt = ord[0];
-		for(int i = 0; i < (1 + MAX_ORDER - MIN_ORDER); ++i) {
-			if(ord[i] > orderMaxCnt) {
-				orderMaxCnt = ord[i];
-				order = i+MIN_ORDER; // 1 and 0 is unused to spare space
-			}
-		} // hope for loop unrolling here...
+		if(signalCount >= ignoreWhenSignalCountLessThan) {
+			uint8_t orderMaxCnt = ord[0];
+			for(int i = 0; i < (1 + MAX_ORDER - MIN_ORDER); ++i) {
+				if(ord[i] > orderMaxCnt) {
+					orderMaxCnt = ord[i];
+					order = i+MIN_ORDER; // 1 and 0 is unused to spare space
+				}
+			} // hope for loop unrolling here...
+		} else {
+			// Ignore these
+			order = 0;
+		}
 
 		return Marker2D{
 			x, y,
@@ -449,7 +460,11 @@ printf("N(%d,%d) ", centerX, y);
 								if(currentCenter.shouldClose(y, config.closeDiffY)) {
 									// Add the generated marker from it to the frame results
 									// Rem.: This adds poor quality markers too, but with small confidence
-									frameResult.markers.push_back(currentCenter.constructMarker());
+									auto marker2d = currentCenter.constructMarker(config.ignoreWhenSignalCountLessThan);
+									if(marker2d.order > 0) {
+										// negative order means that the signal count was too small for the threshold!
+										frameResult.markers.push_back(marker2d);
+									}
 
 									// Close / Unlink the added one as it is considered to be closed!
 									// Rem.: We need to update list position to a valid position!
@@ -511,7 +526,11 @@ printf("*(%d,%d) ", centerX, y);
 			if(currentCenter.shouldClose(y, config.closeDiffY)) {
 				// Add the generated marker from it to the frame results
 				// Rem.: This adds poor quality markers too, but with small confidence
-				frameResult.markers.push_back(currentCenter.constructMarker());
+				auto marker2d = currentCenter.constructMarker(config.ignoreWhenSignalCountLessThan);
+				if(marker2d.order > 0) {
+					// negative order means that the signal count was too small for the threshold!
+					frameResult.markers.push_back(marker2d);
+				}
 			}
 			readHead = mcCurrentList.next(readHead);
 		}

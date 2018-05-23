@@ -261,16 +261,7 @@ public:
 				// Rem.: it is faster to multiply here twice at every pixel than to use magAvg() which uses division!!! 
 				bool tooMuchDiffFromAvg = (abs((long long)homarea.getMagSum() - (long long)(mag * homarea.getLen()))
 					   	> ((long long)lenAffectedHomerSetup.hodeltaAvgDiff * homarea.getLen()));
-				if(tooMuchDiffFromMinMaxAvg || tooMuchDiffFromAvg) {
-					//printf("B: %d,%d\n", tooMuchDiffFromMinMaxAvg, tooMuchDiffFromAvg);
-					//printf("B1: abs(%d - %d) > %d [len:%d]", homarea.magMinMaxAvg(), mag, lenAffectedHomerSetup.hodeltaMinMaxAvgDiff, homarea.len);
-					// Too big is the difference - reset current homarea :-(
-					reset(mag); // Rem.: We need to set the "last" to "mag" here!
-#ifdef HOMER_MEASURE_NEXT_BRANCHES
-					++branch_2_reset;
-#endif // HOMER_MEASURE_NEXT_BRANCHES
-					return false;
-				} else {
+				if(!tooMuchDiffFromMinMaxAvg && !tooMuchDiffFromAvg) {
 					// Rem.: This will always return true EXCEPT when the min-max does not differ greatly
 					//       because all other checks are done above...
 					bool isOpenStill = homarea.tryOpenOrKeepWith(mag, lenAffectedHomerSetup.hodeltaLen, lenAffectedHomerSetup.minMaxDeltaMax);
@@ -288,6 +279,15 @@ public:
 					// Indicate if we are open or not
 					//printf("C: %d\n", (int)isOpenStill);
 					return isOpenStill;
+				} else {
+					//printf("B: %d,%d\n", tooMuchDiffFromMinMaxAvg, tooMuchDiffFromAvg);
+					//printf("B1: abs(%d - %d) > %d [len:%d]", homarea.magMinMaxAvg(), mag, lenAffectedHomerSetup.hodeltaMinMaxAvgDiff, homarea.len);
+					// Too big is the difference - reset current homarea :-(
+					reset(mag); // Rem.: We need to set the "last" to "mag" here!
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+					++branch_2_reset;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
+					return false;
 				}
 			} else {
 				// SUSPECTED NEW AREA?

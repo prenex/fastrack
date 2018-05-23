@@ -151,6 +151,16 @@ class FastForwardList {
 			return ((int)holeStart < ((int)holeEnd - 1))
 			   	|| ((holeStart != MAX-1) && (holeEnd < holeStart));
 		}
+
+		/** Resets the holekeeper structure */
+		inline void reset() {
+			// Start of the unlinkHoles circular queue
+			// Rem.: Setup for the empty buffer
+			unsigned int holeStart = 0;
+			// End of the unlinkHoles circular queue
+			// Rem.: SEtup for the empty buffer
+			unsigned int holeEnd = 1;
+		}
 	};
 
 	// Data structure for keeping unlink-data
@@ -184,6 +194,8 @@ public:
 		headIndex = -1;
 		curLen=0;
 		filledLenMax = 0;
+
+		holeKeeper.reset();
 	}
 
 	/**
