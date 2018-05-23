@@ -371,10 +371,10 @@ public:
 						// means insertion at the head - the case of empty list is 
 						// handled here too and exactly that way as you can see!
 						mcCurrentList.insertAfter(
-								std::move(MarkerCenter(x, y, order)),
+								std::move(MarkerCenter(centerX, y, order)),
 							   	lastPos);
 						tokenProcessed = true;
-printf("+(%d,%d) ", x, y);
+printf("+(%d,%d) ", centerX, y);
 					} else {
 						// Compare if we can merge the next()-ed element into the list
 						// position element... For this we better get a reference to it
@@ -383,7 +383,7 @@ printf("+(%d,%d) ", x, y);
 						// Try extending the existing element
 						// This is a NO-OP when we cannot extend it
 						bool extendedIt = currentCenter.tryExtend(
-								x, y, order, 
+								centerX, y, order, 
 								config.deltaDiffMax, config.widthDiffMax);
 
 						// See if we succeeded or not
@@ -398,21 +398,21 @@ printf("+(%d,%d) ", x, y);
 							tokenProcessed = true;
 							lastPos = listPos;
 							listPos = mcCurrentList.next(listPos);
-printf("E(%d,%d) ", x, y);
+printf("E(%d,%d) ", centerX, y);
 						} else {
 							// If we did not succeed, we need to see if the element
 							// is so much before the one in the earlier list that
 							// it should be added as a new element at the current
 							// lastPos insertion position or not:
 							if(currentCenter.getRightMostCurrentAcceptableX(config.deltaDiffMax, config.widthDiffMax)
-								   	> x) {
+								   	> centerX) {
 								// Completely new suspected marker - in the middle of the list
 								// Rem.: We know we need to insert this here and there will be no list position
 								//       to extend, because the list is ordered by the 'x' coordinate and next()
 								//       is called also in an ordered way. Because of insertion, the list also
 								//       kept ordered now so later iterations and calls to next() work as well!
 								mcCurrentList.insertAfter(
-										std::move(MarkerCenter(x, y, order)),
+										std::move(MarkerCenter(centerX, y, order)),
 										lastPos); // Rem.: lastPos insertion is needed as we insert BEFORE listPos
 								// Increment is needed to keep invariant that lastPost is literally the position 
 								// "before" the listpos. Because of the above insertion it would be not true anymore!
@@ -421,7 +421,7 @@ printf("E(%d,%d) ", x, y);
 								// Rem.: We should not move with the list iteraor as the next time of the next(..)
 								//       call might return extension/continuation of what is under the head now!
 								tokenProcessed = true;
-printf("N(%d,%d) ", x, y);
+printf("N(%d,%d) ", centerX, y);
 							} else { // Rem.: This else is necessary or we would need to step with the lastPos too!
 								// See if things indicate we need to close the earlier found stuff
 								if(currentCenter.shouldClose(y, config.closeDiffY)) {
@@ -433,12 +433,12 @@ printf("N(%d,%d) ", x, y);
 									// Rem.: We need to update list position to a valid position!
 									// Rem.: lastPos keeps to be valid too
 									listPos = mcCurrentList.unlinkAfter(lastPos);
-printf("C(%d,%d) ", x, y);
+printf("C(%d,%d) ", centerX, y);
 								} else {
 									// If there was nothing to close, we just update our "iterators"
 									lastPos = listPos;
 									listPos = mcCurrentList.next(listPos);
-printf("*(%d,%d) ", x, y);
+printf("*(%d,%d) ", centerX, y);
 								}
 							}
 						}
