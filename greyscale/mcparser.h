@@ -475,6 +475,21 @@ printf("*(%d,%d) ", centerX, y);
 	 * Rem.: The returned reference is only valid until the next() function is called once again.
 	 */
 	inline const ImageFrameResult endImageFrame() noexcept {
+		// Add Marker2Ds from any still unclosed MarkerCenters
+		// This is necessary as things are only closed because of
+		// a Garbage collecting-like operation in the fastforwardlist
+		// of ours for cases where many markers are on the image frame!
+		auto readHead = mcCurrentList.head();
+		while(!readHead.isNil()) {
+			auto currentCenter = mcCurrentList[readHead];
+			if(currentCenter.shouldClose(y, config.closeDiffY)) {
+				// Add the generated marker from it to the frame results
+				// Rem.: This adds poor quality markers too, but with small confidence
+				frameResult.markers.push_back(currentCenter.constructMarker());
+			}
+			readHead = mcCurrentList.next(readHead);
+		}
+
 		// Reset state
 		listPos = NIL_POS;
 		lastPos = NIL_POS;
