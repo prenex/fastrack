@@ -2,7 +2,7 @@
 #define FASTTRACK_HOMER_H
 
 // Enable this if you want to profile which branches of the next(..) call got called how many times
-#define HOMER_MEASURE_NEXT_BRANCHES 1
+//#define HOMER_MEASURE_NEXT_BRANCHES 1
 
 #include <vector>
 #include <cstdint>
@@ -282,6 +282,7 @@ public:
 #endif // HOMER_MEASURE_NEXT_BRANCHES
 					}
 #ifdef HOMER_MEASURE_NEXT_BRANCHES
+					// 82% of times on last measurement!
 					else ++branch_4_stillopen;
 #endif // HOMER_MEASURE_NEXT_BRANCHES
 					// Indicate if we are open or not
@@ -306,6 +307,7 @@ public:
 #endif // HOMER_MEASURE_NEXT_BRANCHES
 				}
 #ifdef HOMER_MEASURE_NEXT_BRANCHES
+				// 15% of times on last measurement!
 				else ++branch_6_openedNew;
 #endif // HOMER_MEASURE_NEXT_BRANCHES
 				// Indicate if we are open or not
