@@ -12,7 +12,10 @@ using namespace cimg_library;
 #define TEST_FILE_DEFAULT "real_test4_b.jpg"
 
 // Enable this to draw some of the debug points and log some more info as in the marker1_eval application
+/*
 #define DEBUG_POINTS 1
+#define MC_DEBUG_LOG 1
+*/
 
 /** Draws a measurable-sized dot as a "box" around a pixel */
 CImg<unsigned char>& drawBoxAround(CImg<unsigned char> &img, int x, int y, unsigned char* color) {
@@ -141,8 +144,8 @@ int main(int argc, char** argv) {
 					auto mc = results.markers[i].confidence;
 					auto mo = results.markers[i].order;
 					printf(" - (%d, %d)*%d @ %d confidence!\n", mx, my, mo, mc);
+					// Draw them all :) 
 					drawBoxAround(image, mx, my, (unsigned char*)&red);
-
 				}
 
 				// Update image

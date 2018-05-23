@@ -10,6 +10,9 @@
 #define MAX_MARKER_PER_SCANLINE 1024 // Could be smaller I guess
 #endif
 
+// Only define to see debug logs
+/*#define MC_DEBUG_LOG 1*/
+
 // Best to keep these values as-is
 // Most of them are hand-picked to be good both for speed and usage!
 #ifndef MAX_ORDER
@@ -374,7 +377,9 @@ public:
 								std::move(MarkerCenter(centerX, y, order)),
 							   	lastPos);
 						tokenProcessed = true;
+#ifdef MC_DEBUG_LOG
 printf("+(%d,%d) ", centerX, y);
+#endif // MC_DEBUG_LOG
 					} else {
 						// Compare if we can merge the next()-ed element into the list
 						// position element... For this we better get a reference to it
@@ -398,7 +403,9 @@ printf("+(%d,%d) ", centerX, y);
 							tokenProcessed = true;
 							lastPos = listPos;
 							listPos = mcCurrentList.next(listPos);
+#ifdef MC_DEBUG_LOG
 printf("E(%d,%d) ", centerX, y);
+#endif // MC_DEBUG_LOG
 						} else {
 							// If we did not succeed, we need to see if the element
 							// is so much before the one in the earlier list that
@@ -421,7 +428,9 @@ printf("E(%d,%d) ", centerX, y);
 								// Rem.: We should not move with the list iteraor as the next time of the next(..)
 								//       call might return extension/continuation of what is under the head now!
 								tokenProcessed = true;
+#ifdef MC_DEBUG_LOG
 printf("N(%d,%d) ", centerX, y);
+#endif // MC_DEBUG_LOG
 							} else { // Rem.: This else is necessary or we would need to step with the lastPos too!
 								// See if things indicate we need to close the earlier found stuff
 								if(currentCenter.shouldClose(y, config.closeDiffY)) {
@@ -433,12 +442,16 @@ printf("N(%d,%d) ", centerX, y);
 									// Rem.: We need to update list position to a valid position!
 									// Rem.: lastPos keeps to be valid too
 									listPos = mcCurrentList.unlinkAfter(lastPos);
+#ifdef MC_DEBUG_LOG
 printf("C(%d,%d) ", centerX, y);
+#endif // MC_DEBUG_LOG
 								} else {
 									// If there was nothing to close, we just update our "iterators"
 									lastPos = listPos;
 									listPos = mcCurrentList.next(listPos);
+#ifdef MC_DEBUG_LOG
 printf("*(%d,%d) ", centerX, y);
+#endif // MC_DEBUG_LOG
 								}
 							}
 						}
