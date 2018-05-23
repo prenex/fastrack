@@ -1,13 +1,20 @@
 #include <cstdio>
 #include <string>
+#include <iostream>
+#include <chrono>
 #include "CImg.h"
 #include "homer.h"
 #include "hoparser.h"
+#include "mcparser.h"
 
 using namespace cimg_library;
 
 #define TEST_FILE_DEFAULT "real_test4_b.jpg"
 
+// Enable this to draw some of the debug points and log some more info as in the marker1_eval application
+#define DEBUG_POINTS 1
+
+/** Draws a measurable-sized dot as a "box" around a pixel */
 CImg<unsigned char>& drawBoxAround(CImg<unsigned char> &img, int x, int y, unsigned char* color) {
 	return img.draw_point(x, y, color)
 		.draw_point(x-1, y-1, color)
@@ -24,9 +31,9 @@ void printUsageAndQuit() {
 	printf("USAGE:\n");
 	printf("------\n\n");
 
-	printf("marker1_eval                  - test with " TEST_FILE_DEFAULT "\n");
-	printf("marker1_eval my_img.png       - test with my_img.png\n");
-	printf("marker1_eval --help           - show this message\n");
+	printf("marker1_mc_eval                  - test with " TEST_FILE_DEFAULT "\n");
+	printf("marker1_mc_eval my_img.png       - test with my_img.png\n");
+	printf("marker1_mc_eval --help           - show this message\n");
 
 	// Quit immediately!
 	exit(0);
@@ -54,6 +61,8 @@ int main(int argc, char** argv) {
 	CImg<unsigned char> visu(image.width(),image.height(),1,3,0);
 	CImg<unsigned char> lenAffImg(800,100,1,3,0);
 
+	// Copy image
+	CImg<unsigned char> origImage = image;
 	//CImg<unsigned char> image("real_test3.jpg"), visu(620,900,1,3,0);
 	//CImg<unsigned char> image("real_test2.jpg"), visu(620,900,1,3,0);
 	//CImg<unsigned char> image("real_test1.jpg"), visu(620,900,1,3,0);
@@ -64,8 +73,8 @@ int main(int argc, char** argv) {
 	CImgDisplay main_disp(image,"Select a scanline to run Hoparser!");
 
 	// Rem.: The default template arg is good for us...
-	//Homer<> h;
-	Hoparser<> hp;
+	//Hoparser<> hp;
+	MCParser<> mcp;
 	LenAffectParams params;
 
 	while (!main_disp.is_closed() && !draw_disp.is_closed() && !lenAffDisp.is_closed()) {
@@ -73,14 +82,9 @@ int main(int argc, char** argv) {
 		if (main_disp.button() && main_disp.mouse_y()>=0) {
 			const int y = main_disp.mouse_y();
 			if(main_disp.button()&1) { // left-click
-				// Show graphs of the colors
-				visu.fill(0).draw_graph(image.get_crop(0,y,0,0,image.width()-1,y,0,0),red,1,1,0,255,0);
-				visu.draw_graph(image.get_crop(0,y,0,1,image.width()-1,y,0,1),green,1,1,0,255,0);
-				visu.draw_graph(image.get_crop(0,y,0,2,image.width()-1,y,0,2),blue,1,1,0,255,0).display(draw_disp);
 
-				// Indicate a line start because we evaluate the clicked scanline
-				//h.reset();
-				hp.newLine();
+				// start measuring time
+				auto start = std::chrono::steady_clock::now();
 
 				// Draw length affectedness testing values
 				unsigned char lenAffCol[] = { 255,0,0 };
@@ -93,41 +97,64 @@ int main(int argc, char** argv) {
 				}
 				lenAffImg.display(lenAffDisp);
 
-				// Feed data into homer from the selected scanline
-				int i = 0;
-				for(i = 0; i < image.width(); ++i) {
-					// Rem.: last value means the 'red' channel
-					unsigned char redCol = image(i, y, 0, 0);
-					auto res = hp.next(redCol);
+				// Parse all the scanlines properly
+				for(int j = 0; j < image.height(); ++j) {
+					for(int i = 0; i < image.width(); ++i) {
+						// Rem.: The last value means the 'red' channel
+						//       and we can use that to approximate the greyscale :-)
+						unsigned char redCol = image(i, j, 0, 0);
+						auto res = mcp.next(redCol);
 
-					// TODO: maybe do this only for debugging?
-					if(res.isToken) {
-						drawBoxAround(image, i, y, (unsigned char*)&blue);
-					}
-
-					// CHECK FOR FINAL RESULTS!
-					if(res.foundMarker) {
-						// Log and show this marker centerX
-						int centerX = hp.getMarkerX();
-						auto order = hp.getOrder();
-						if(order > 2) {
-							printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
-							drawBoxAround(image, centerX, y, (unsigned char*)&green);
-						} else {
-							printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
+#ifdef DEBUG_POINTS 
+						// do this only for debugging?
+						// These should not be on the image actually
+						if(res.isToken) {
+							// Cant do this now as it overwrites the next scanline:
+							// drawBoxAround(image, i, j, (unsigned char*)&blue);
+							// Muh better debug indicator:
+							image.draw_point(i, j, (unsigned char*)&blue);
 						}
+						if(res.foundMarker) {
+							// We can not easily log the center location as of now
+							printf("*** Found 1D marker at %d ***\n", i);
+						}
+#endif // DEBUG_POINTS 
 					}
+
+					// Notify MCParser about the end of the line
+					mcp.endLine();
 				}
 
+				// notify MCParserv about the end of the image frame and get the results
+				auto results = mcp.endImageFrame();
+
+				// Calculate time of run
+				auto endCalc = std::chrono::steady_clock::now();
+				auto diff = endCalc - start;
+				std::cout << "calculation took " << std::chrono::duration <double, std::milli> (diff).count() << " ms" << std::endl;
+
+				// TODO: show the results
+				printf("Found %lu 2D markers on the photo!\n", results.markers.size());
+				for(int i = 0; i < results.markers.size(); ++i) {
+					auto mx = results.markers[i].x;
+					auto my = results.markers[i].y;
+					auto mc = results.markers[i].confidence;
+					auto mo = results.markers[i].order;
+					printf(" - (%d, %d)*%d @ %d confidence!\n", mx, my, mo, mc);
+					drawBoxAround(image, mx, my, (unsigned char*)&red);
+
+				}
+
+				// Update image
 				image.display(main_disp);
 			} else if(main_disp.button()&2) { // right-click
-
 				// Log mouse click position
 				printf("--- (X, Y) position of the mouse on right click: (%d, %d)\n", main_disp.mouse_x(), y);
-				// Reset image
-				//image.assign(origImage);  - this does not work properly!
-				CImg<unsigned char> newImg(testFile.c_str());
-				image = newImg;
+
+				// Show graphs
+				visu.fill(0).draw_graph(image.get_crop(0,y,0,0,image.width()-1,y,0,0),red,1,1,0,255,0);
+				visu.draw_graph(image.get_crop(0,y,0,1,image.width()-1,y,0,1),green,1,1,0,255,0);
+				visu.draw_graph(image.get_crop(0,y,0,2,image.width()-1,y,0,2),blue,1,1,0,255,0).display(draw_disp);
 			}
 		}
 	}

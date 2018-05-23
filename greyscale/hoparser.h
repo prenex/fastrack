@@ -2,7 +2,7 @@
 #define FASTTRACK_HOPARSER_H
 
 // Uncomment to see debug logging
-#define DEBUGLOG 1
+//#define DEBUGLOG 1
 
 #include <vector>
 #include <cstdint>
@@ -403,7 +403,9 @@ private:
 						return true;
 					} else {
 						// We still wait until enough parethesis arrives!
-						printf(" (%d != %d)! \n", sustate.openp, sustate.closep);
+#ifdef DEBUGLOG
+						//printf(" (%d != %d)! \n", sustate.openp, sustate.closep);
+#endif //DEBUGLOG
 						return false;
 					}
 				}

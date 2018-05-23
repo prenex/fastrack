@@ -173,7 +173,7 @@ public:
 			return false;
 		}
 
-		// Check width constrain
+		// Check width constraint
 		// Rem.: This might load cache of next object
 		// This ensures faster addition nearby each in some cases
 		// due to bogus and random cache optimizations :D
@@ -289,12 +289,12 @@ public:
 		config = parserConfig;
 	}
 
-	/** Returns the same data as HoParser - mostly debug-only! */
+	/** FEED OF THE NEXT MAGNITUDE: Returns the same data as HoParser - mostly debug-only return value! */
 	inline NexRes next(MT mag) noexcept {
 		// Use the tokenizer to only process "tokens" and not every pixel
 		// These tokens are already the 1D marker centers that the system
 		// suspects with the per scanline algorithm.
-		auto ret = tokenizer.next();
+		auto ret = tokenizer.next(mag);
 
 		// See if the hoparser finds an 1D marker at the pixel in this scanline
 		// We only run all the following code for that rare case (see green dots
@@ -374,6 +374,7 @@ public:
 								std::move(MarkerCenter(x, y, order)),
 							   	lastPos);
 						tokenProcessed = true;
+printf("+(%d,%d) ", x, y);
 					} else {
 						// Compare if we can merge the next()-ed element into the list
 						// position element... For this we better get a reference to it
@@ -397,6 +398,7 @@ public:
 							tokenProcessed = true;
 							lastPos = listPos;
 							listPos = mcCurrentList.next(listPos);
+printf("E(%d,%d) ", x, y);
 						} else {
 							// If we did not succeed, we need to see if the element
 							// is so much before the one in the earlier list that
@@ -419,6 +421,7 @@ public:
 								// Rem.: We should not move with the list iteraor as the next time of the next(..)
 								//       call might return extension/continuation of what is under the head now!
 								tokenProcessed = true;
+printf("N(%d,%d) ", x, y);
 							} else { // Rem.: This else is necessary or we would need to step with the lastPos too!
 								// See if things indicate we need to close the earlier found stuff
 								if(currentCenter.shouldClose(y, config.closeDiffY)) {
@@ -430,10 +433,12 @@ public:
 									// Rem.: We need to update list position to a valid position!
 									// Rem.: lastPos keeps to be valid too
 									listPos = mcCurrentList.unlinkAfter(lastPos);
+printf("C(%d,%d) ", x, y);
 								} else {
 									// If there was nothing to close, we just update our "iterators"
 									lastPos = listPos;
 									listPos = mcCurrentList.next(listPos);
+printf("*(%d,%d) ", x, y);
 								}
 							}
 						}
@@ -442,6 +447,7 @@ public:
 			}
 		}
 
+		++x;
 		return ret;
 	}
 
@@ -460,6 +466,8 @@ public:
 		++y;
 		// Indicate newline
 		afterNewLine = true;
+		// Necessary for hoparser knowing its state should be reseted for new line
+		tokenizer.newLine();
 	}
 
 	/**

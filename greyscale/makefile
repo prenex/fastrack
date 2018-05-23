@@ -40,11 +40,23 @@ M1_EV_SOURCES=marker1_evaluator.cpp
 M1_EV_OBJECTS=$(M1_EV_SOURCES:.cpp=.o)
 M1_EV_EXECUTABLE=marker1_eval
 
+M1_MC_EV_SOURCES=marker1_mc_evaluator.cpp 
+M1_MC_EV_OBJECTS=$(M1_MC_EV_SOURCES:.cpp=.o)
+M1_MC_EV_EXECUTABLE=marker1_mc_eval
 
-all: marker1gen marker2gen marker1_ev ffl_test
+all: marker1gen marker2gen marker1_ev ffl_test marker1_mc_ev
 ffl_test: $(FFLT_SOURCES) $(FFLT_EXECUTABLE)
 marker1gen: $(M1_SOURCES) $(M1_EXECUTABLE)
 marker2gen: $(M2_SOURCES) $(M2_EXECUTABLE)
+
+marker1_mc_ev: $(M1_MC_EV_SOURCES) $(M1_MC_EV_EXECUTABLE)
+$(M1_MC_EV_EXECUTABLE): $(M1_MC_EV_OBJECTS)
+# In case of emscripten build, we make a html5/webgl output
+ifeq ($(CC),em++)
+	$(CC) $(M1_MC_EV_OBJECTS) -o $@.html $(LDFLAGS)
+else
+	$(CC) $(M1_MC_EV_OBJECTS) -o $@ $(LDFLAGS)
+endif
 
 marker1_ev: $(M1_EV_SOURCES) $(M1_EV_EXECUTABLE)
 $(M1_EV_EXECUTABLE): $(M1_EV_OBJECTS)
@@ -89,6 +101,6 @@ endif
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -f *.o $(M1_EXECUTABLE) $(M2_EXECUTABLE) $(M1_EV_EXECUTABLE) $(FFLT_EXECUTABLE)
+	rm -f *.o $(M1_EXECUTABLE) $(M2_EXECUTABLE) $(M1_EV_EXECUTABLE) $(FFLT_EXECUTABLE) $(M1_MC_EV_EXECUTABLE)
 
 # vim: tabstop=4 noexpandtab shiftwidth=4 softtabstop=4
