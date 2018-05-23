@@ -295,6 +295,13 @@ public:
 		config = parserConfig;
 	}
 
+	/** Create a markercenter-parser with the given configurations - works only for Hoparser usage */
+	MCParser(MCParserConfig parserConfig, HoparserSetup hoparserSetup, HomerSetup homerSetup) {
+		config = parserConfig;
+		// TODO: ensure this works when other template parameters are provided
+		tokenizer = Hoparser<MT, CT>(homerSetup, hoparserSetup);
+	}
+
 	/** FEED OF THE NEXT MAGNITUDE: Returns the same data as HoParser - mostly debug-only return value! */
 	inline NexRes next(MT mag) noexcept {
 		// Use the tokenizer to only process "tokens" and not every pixel
