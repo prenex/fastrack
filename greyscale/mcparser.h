@@ -40,7 +40,7 @@ struct MCParserConfig {
 	 * Ignore every suspected marker-pos in the scanlines
 	 * which has smaller order than this value
 	 */
-	unsigned int ignoreOrderSmallerThan = 3;
+	unsigned int ignoreOrderSmallerThan = 2;
 
 	/**
 	 * Maximum difference between the marker center position 
@@ -55,10 +55,10 @@ struct MCParserConfig {
 	 * in a MarkerCenter when consecutive scanlines would grow this
 	 * difference too much. When bigger, we "SKIP" extending.
 	 */
-	unsigned int widthDiffMax = 50;
+	unsigned int widthDiffMax = 30;
 
 	/** Marker is closed if there was no pixel for it in the last 50 rows */
-	unsigned int closeDiffY = 50;
+	unsigned int closeDiffY = 20;
 };
 
 /**
@@ -388,11 +388,14 @@ printf("+(%d,%d) ", centerX, y);
 						// position element... For this we better get a reference to it
 						MarkerCenter &currentCenter = mcCurrentList[listPos];
 
-						// Try extending the existing element
-						// This is a NO-OP when we cannot extend it
-						bool extendedIt = currentCenter.tryExtend(
-								centerX, y, order, 
-								config.deltaDiffMax, config.widthDiffMax);
+						bool extendedIt = false;
+						if(!currentCenter.shouldClose(y, config.closeDiffY)) {
+							// Try extending the existing element
+							// This is a NO-OP when we cannot extend it
+							extendedIt = currentCenter.tryExtend(
+									centerX, y, order, 
+									config.deltaDiffMax, config.widthDiffMax);
+						}
 
 						// See if we succeeded or not
 						if(extendedIt) {

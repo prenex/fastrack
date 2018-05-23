@@ -15,7 +15,7 @@ struct LenAffectParams {
 	/** This defines the end length of consideration for calculating */
    	int leastAffectLenBottCons = 300;
 	/** There will be (2^stepPointExponential) steps in the interpolation */
-	unsigned int stepPointExponential = 4;
+	unsigned int stepPointExponential = 2;
 	/** An "attrition" value: when 0, we change simply linearly, when bigger value we change less steep! */
 	unsigned int attrExp = 2;
 };
@@ -43,6 +43,11 @@ inline T lenAffect(T value, int len, LenAffectParams params) {
 #ifdef NO_ATTRITION
 	return ret;
 #endif // NO_ATTRITION
+
+#ifdef SIMPLE_ATTRITION
+	if(len < params.fullAffectLenUpCons) return ret;
+	else return (ret<<1);
+#endif // SIMPLE_ATTRITION
 
 	// Reasons for the fast-path:
 	// 1.) Not reached minimal delta length for starting the stepping procedure
@@ -97,19 +102,19 @@ inline T lenAffect(T value, int len, LenAffectParams params) {
 /** Holds configuration data values for Homer */
 struct HomerSetup {
 	/** Lenght of pixels with close to same magnitude to consider the area homogenous */
-	int hodeltaLen = 4;
+	int hodeltaLen = 6;
 
 	/** 
 	 * Delta value for telling if this pixel differs too much from the earlier or not.
 	 * Must differ less than this to suspect a start of a homogenous area in our consideration
 	 */
-	int hodeltaDiff = 50;
+	int hodeltaDiff = 25;
 
 	/**
 	 * Delta value for telling if this pixel differs too much from the avarage of the earlier 
 	 * (in case we are in an isHo) or not: must differ less than this
 	 */
-	int hodeltaAvgDiff = 47;
+	int hodeltaAvgDiff = 20;
 
 	/**
 	 * The maximum difference of the current magnitude from the avarage between the min and max
@@ -117,14 +122,14 @@ struct HomerSetup {
 	 * we consider the area closed/ended! Similar to the minMaxDeltaMax - but this value is not
 	 * a difference between the extremal values - but a difference from their avarage!
 	 */
-	int hodeltaMinMaxAvgDiff = 30;
+	int hodeltaMinMaxAvgDiff = 20;
 
 	/**
 	 * The maximum difference between minimal and maximal values in a homogenous area to consider
 	 * it still being homogenous. Area change happens if a bigger than this change happens.
 	 * BEWARE: This must be bigger than hodeltaMinMaxAvgDiff!
 	 */
-	int minMaxDeltaMax = 30;
+	int minMaxDeltaMax = 20;
 
 	/** Uses lenAffect(..) to change the values in a returned copy - does not change the original  */
 	inline HomerSetup applyLenAffection(int len, LenAffectParams params = LenAffectParams{}) {

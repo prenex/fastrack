@@ -1,4 +1,10 @@
-#define NO_ATTRITION 1 // fastest operation (2x speedup)
+//#define NO_ATTRITION 1 // fastest operation (2x speedup - but harder to use proper parameters)
+#define SIMPLE_ATTRITION 1 // second fastest operation mode (nearly as good as the NO_ATTRITION)
+// Enable this to draw some of the debug points and log some more info as in the marker1_eval application
+#define DEBUG_POINTS 1
+#define MC_DEBUG_LOG 1
+/*
+*/
 
 #include <cstdio>
 #include <string>
@@ -12,12 +18,6 @@
 using namespace cimg_library;
 
 #define TEST_FILE_DEFAULT "real_test4_b.jpg"
-
-// Enable this to draw some of the debug points and log some more info as in the marker1_eval application
-#define DEBUG_POINTS 1
-/*
-#define MC_DEBUG_LOG 1
-*/
 
 /** Draws a measurable-sized dot as a "box" around a pixel */
 CImg<unsigned char>& drawBoxAround(CImg<unsigned char> &img, int x, int y, unsigned char* color) {
