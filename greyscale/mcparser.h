@@ -283,6 +283,9 @@ template<typename MT = uint8_t, typename CT = int, typename TOKENIZER = Hoparser
 class MCParser {
 public:
 
+	/** Used for parsing per-scanline data and tokenizing it as 1D markers */
+	TOKENIZER tokenizer;
+
 	/** Create a markercenter-parser with default configuration */
 	MCParser() {
 	}
@@ -537,9 +540,6 @@ private:
 	 * Holds the current configuration values
 	 */
 	MCParserConfig config;
-
-	/** Used for parsing per-scanline data and tokenizing it as 1D markers */
-	TOKENIZER tokenizer;
 
 	/** We start with "before head" position (NIL_POS) */
 	FFLPosition lastPos;

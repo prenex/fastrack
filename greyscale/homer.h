@@ -40,6 +40,9 @@ struct LenAffectParams {
 template<typename T>
 inline T lenAffect(T value, int len, LenAffectParams params) {
 	T ret = value;
+#ifdef NO_ATTRITION
+	return ret;
+#endif // NO_ATTRITION
 
 	// Reasons for the fast-path:
 	// 1.) Not reached minimal delta length for starting the stepping procedure
@@ -94,19 +97,19 @@ inline T lenAffect(T value, int len, LenAffectParams params) {
 /** Holds configuration data values for Homer */
 struct HomerSetup {
 	/** Lenght of pixels with close to same magnitude to consider the area homogenous */
-	int hodeltaLen = 6;
+	int hodeltaLen = 4;
 
 	/** 
 	 * Delta value for telling if this pixel differs too much from the earlier or not.
 	 * Must differ less than this to suspect a start of a homogenous area in our consideration
 	 */
-	int hodeltaDiff = 13;
+	int hodeltaDiff = 50;
 
 	/**
 	 * Delta value for telling if this pixel differs too much from the avarage of the earlier 
 	 * (in case we are in an isHo) or not: must differ less than this
 	 */
-	int hodeltaAvgDiff = 17;
+	int hodeltaAvgDiff = 47;
 
 	/**
 	 * The maximum difference of the current magnitude from the avarage between the min and max
@@ -114,14 +117,14 @@ struct HomerSetup {
 	 * we consider the area closed/ended! Similar to the minMaxDeltaMax - but this value is not
 	 * a difference between the extremal values - but a difference from their avarage!
 	 */
-	int hodeltaMinMaxAvgDiff = 7;
+	int hodeltaMinMaxAvgDiff = 30;
 
 	/**
 	 * The maximum difference between minimal and maximal values in a homogenous area to consider
 	 * it still being homogenous. Area change happens if a bigger than this change happens.
 	 * BEWARE: This must be bigger than hodeltaMinMaxAvgDiff!
 	 */
-	int minMaxDeltaMax = 10;
+	int minMaxDeltaMax = 30;
 
 	/** Uses lenAffect(..) to change the values in a returned copy - does not change the original  */
 	inline HomerSetup applyLenAffection(int len, LenAffectParams params = LenAffectParams{}) {

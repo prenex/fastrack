@@ -1,3 +1,5 @@
+#define NO_ATTRITION 1 // fastest operation (2x speedup)
+
 #include <cstdio>
 #include <string>
 #include <iostream>
@@ -12,8 +14,8 @@ using namespace cimg_library;
 #define TEST_FILE_DEFAULT "real_test4_b.jpg"
 
 // Enable this to draw some of the debug points and log some more info as in the marker1_eval application
-/*
 #define DEBUG_POINTS 1
+/*
 #define MC_DEBUG_LOG 1
 */
 
@@ -61,16 +63,28 @@ int main(int argc, char** argv) {
 	}
 
 	CImg<unsigned char> image(testFile.c_str());
+	//image.blur(2.5);
 	CImg<unsigned char> visu(image.width(),image.height(),1,3,0);
 	CImg<unsigned char> lenAffImg(800,100,1,3,0);
 
-	// Copy image
-	CImg<unsigned char> origImage = image;
+	// Create a 'bitmap' so that we do not need to measure CImg effectivity
+	// in our test throughout the application!
+	std::vector<unsigned char> origPixels(image.width() * image.height(), 0);
+	for(int y = 0; y < image.height(); ++y) {
+		for(int x = 0; x < image.width(); ++x) {
+			// TODO: should be actually grey magnitude, but red channel is good-enough!
+			unsigned char redCol = image(x, y, 0, 0);
+			origPixels[x + y*image.width()] = redCol;
+		}
+	}
+	
+
+	printf("Processing image (%d, %d) with pixelcount: %lu\n", image.width(), image.height(), origPixels.size());
+
 	//CImg<unsigned char> image("real_test3.jpg"), visu(620,900,1,3,0);
 	//CImg<unsigned char> image("real_test2.jpg"), visu(620,900,1,3,0);
 	//CImg<unsigned char> image("real_test1.jpg"), visu(620,900,1,3,0);
 	const unsigned char red[] = { 255,0,0 }, green[] = { 0,255,0 }, blue[] = { 0,0,255 };
-	image.blur(2.5);
 	CImgDisplay lenAffDisp(lenAffImg, "The length-based value affection test window");
 	CImgDisplay draw_disp(visu,"Intensity profile and marker data");
 	CImgDisplay main_disp(image,"Select a scanline to run Hoparser!");
@@ -86,9 +100,7 @@ int main(int argc, char** argv) {
 			const int y = main_disp.mouse_y();
 			if(main_disp.button()&1) { // left-click
 
-				// start measuring time
-				auto start = std::chrono::steady_clock::now();
-
+#ifdef DEBUG_POINTS 
 				// Draw length affectedness testing values
 				unsigned char lenAffCol[] = { 255,0,0 };
 				for(int j = 0; j < lenAffImg.width(); ++j) {
@@ -99,14 +111,20 @@ int main(int argc, char** argv) {
 					lenAffImg.draw_line(j, 0, j, lenAffImg.height(), (unsigned char*)&lenAffCol);
 				}
 				lenAffImg.display(lenAffDisp);
+#endif // DEBUG_POINTS 
+
+				// start measuring time
+				auto start = std::chrono::steady_clock::now();
 
 				// Parse all the scanlines properly
 				for(int j = 0; j < image.height(); ++j) {
 					for(int i = 0; i < image.width(); ++i) {
 						// Rem.: The last value means the 'red' channel
 						//       and we can use that to approximate the greyscale :-)
-						unsigned char redCol = image(i, j, 0, 0);
-						auto res = mcp.next(redCol);
+						//unsigned char redCol = image(i, j, 0, 0);
+						unsigned char redCol2 = origPixels[i + j*image.width()];
+						//if(redCol != redCol2) printf("%d != %d\n", redCol, redCol2);
+						auto res = mcp.next(redCol2);
 
 #ifdef DEBUG_POINTS 
 						// do this only for debugging?
@@ -117,9 +135,17 @@ int main(int argc, char** argv) {
 							// Muh better debug indicator:
 							image.draw_point(i, j, (unsigned char*)&blue);
 						}
+						// Check for 1D marker result
 						if(res.foundMarker) {
-							// We can not easily log the center location as of now
-							printf("*** Found 1D marker at %d ***\n", i);
+							// Log and show this marker centerX
+							int centerX = mcp.tokenizer.getMarkerX();
+							auto order = mcp.tokenizer.getOrder();
+							if(order > 2) {
+								printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
+								drawBoxAround(image, centerX, j, (unsigned char*)&green);
+							} else {
+								printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
+							}
 						}
 #endif // DEBUG_POINTS 
 					}
