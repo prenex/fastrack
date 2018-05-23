@@ -1,6 +1,9 @@
 #ifndef FASTTRACK_HOMER_H
 #define FASTTRACK_HOMER_H
 
+// Enable this if you want to profile which branches of the next(..) call got called how many times
+#define HOMER_MEASURE_NEXT_BRANCHES 1
+
 #include <vector>
 #include <cstdint>
 #include <cmath>
@@ -155,7 +158,32 @@ struct HomerSetup {
  */
 template<typename MT = uint8_t, typename CT = int>
 class Homer {
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+	unsigned int branch_1_looking = 0;
+	unsigned int branch_2_reset = 0;
+	unsigned int branch_3_closed = 0;
+	unsigned int branch_4_stillopen = 0;
+	unsigned int branch_5_susreset = 0;
+	unsigned int branch_6_openedNew = 0;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
 public:
+	/** An inlined NOOP except when HOMER_MEASURE_NEXT_BRANCHES is #define-d */
+	inline void flushBranchProfileData() {
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+		printf("branch_1_looking   = %u\n", branch_1_looking);
+		printf("branch_2_reset     = %u\n", branch_2_reset);
+		printf("branch_3_closed    = %u\n", branch_3_closed);
+		printf("branch_4_stillopen = %u\n", branch_4_stillopen);
+		printf("branch_5_susreset  = %u\n", branch_5_susreset);
+		printf("branch_6_openedNew = %u\n", branch_6_openedNew);
+		branch_1_looking = 0;
+		branch_2_reset = 0;
+		branch_3_closed = 0;
+		branch_4_stillopen = 0;
+		branch_5_susreset = 0;
+		branch_6_openedNew = 0;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
+	}
 	/** 
 	 * Create a driver for analysing 1D homogenous areas in scanlines
 	 * - using default state
@@ -208,6 +236,9 @@ public:
 
 			// NO AREA
 			//printf("A: 0\n");
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+			++branch_1_looking;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
 			return false;
 		} else {
 			// Either we are in a homarea or difference was small enough (or both)
@@ -235,6 +266,9 @@ public:
 					//printf("B1: abs(%d - %d) > %d [len:%d]", homarea.magMinMaxAvg(), mag, lenAffectedHomerSetup.hodeltaMinMaxAvgDiff, homarea.len);
 					// Too big is the difference - reset current homarea :-(
 					reset(mag); // Rem.: We need to set the "last" to "mag" here!
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+					++branch_2_reset;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
 					return false;
 				} else {
 					// Rem.: This will always return true EXCEPT when the min-max does not differ greatly
@@ -243,7 +277,13 @@ public:
 					// Do our reset if someone closed the area
 					if(!isOpenStill) {
 						reset(mag);
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+						++branch_3_closed;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
 					}
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+					else ++branch_4_stillopen;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
 					// Indicate if we are open or not
 					//printf("C: %d\n", (int)isOpenStill);
 					return isOpenStill;
@@ -261,7 +301,13 @@ public:
 				if(!homarea.isMinMaxDeltaMaxOk(homerSetup.minMaxDeltaMax)) {
 					//printf("D: %d; ", homarea.len);
 					reset(mag);
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+					++branch_5_susreset;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
 				}
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+				else ++branch_6_openedNew;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
 				// Indicate if we are open or not
 				//printf("D: %d\n", (int)stillOpen);
 				return openedNew;

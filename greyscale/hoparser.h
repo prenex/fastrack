@@ -95,6 +95,8 @@ public:
 #endif //DEBUGLOG
 		// Reset the homogenity lexer
 		homer.reset();
+		// This is NO-OP unless we are profiling!
+		homer.flushBranchProfileData();
 		// Reset our state to start from scratch
 		sustate = SuspectionState();
 	}
