@@ -1,8 +1,10 @@
 #ifndef FASTTRACK_HOMER_H
 #define FASTTRACK_HOMER_H
 
-// Enable this if you want to profile which branches of the next(..) call got called how many times
+// Enable this (from client code) if you want to profile which branches of the next(..) call got called how many times
 //#define HOMER_MEASURE_NEXT_BRANCHES 1
+// Enable this (from client code) if you want more "imul" operations per pixel in exchange for better precision :-)
+//#define SLOW_PRECISE_HOMER 1 
 
 #include <vector>
 #include <cstdint>
@@ -247,10 +249,16 @@ public:
 				//       and this is real value - not the zero indicating the zero len!!!
 				bool tooMuchDiffFromMinMaxAvg = (abs(homarea.magMinMaxAvg() - mag) > lenAffectedHomerSetup.hodeltaMinMaxAvgDiff);
 				// Check difference from the avarage being too much
-				// Rem.: it is faster to multiply here twice at every pixel than to use magAvg() which uses division!!! 
+				// Rem.: it is faster to multiply here twice at every pixel than to use magAvg() which uses division!!!
+#ifdef SLOW_PRECISE_HOMER
 				bool tooMuchDiffFromAvg = (abs((long long)homarea.getMagSum() - (long long)(mag * homarea.getLen()))
 					   	> ((long long)lenAffectedHomerSetup.hodeltaAvgDiff * homarea.getLen()));
-				if(LIKELY(!tooMuchDiffFromMinMaxAvg && !tooMuchDiffFromAvg)) {
+#endif // SLOW_PRECISE_HOMER
+				if(LIKELY(!tooMuchDiffFromMinMaxAvg
+#ifdef SLOW_PRECISE_HOMER
+						   	&& !tooMuchDiffFromAvg
+#endif // SLOW_PRECISE_HOMER
+							)) {
 					// Rem.: This will always return true EXCEPT when the min-max does not differ greatly
 					//       because all other checks are done above...
 					bool isOpenStill = homarea.tryOpenOrKeepWith(mag, lenAffectedHomerSetup.hodeltaLen, lenAffectedHomerSetup.minMaxDeltaMax);

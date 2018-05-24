@@ -79,7 +79,7 @@ int main(int argc, char** argv) {
 	}
 	
 
-	printf("Processing image (%d, %d) with pixelcount: %lu\n", image.width(), image.height(), origPixels.size());
+	printf("Processing image (%d, %d) with pixelcount: %d\n", image.width(), image.height(), (int)origPixels.size());
 
 	//CImg<unsigned char> image("real_test3.jpg"), visu(620,900,1,3,0);
 	//CImg<unsigned char> image("real_test2.jpg"), visu(620,900,1,3,0);
@@ -118,7 +118,8 @@ int main(int argc, char** argv) {
 				auto start = std::chrono::steady_clock::now();
 
 				// Parse all the scanlines properly
-				for(int j = 0; j < image.height()*image.width(); j+=image.width()) {
+				int fullSize = image.height()*image.width();
+				for(int j = 0; j < fullSize; j+=image.width()) {
 					for(int i = 0; i < image.width(); ++i) {
 						// Rem.: The last value means the 'red' channel
 						//       and we can use that to approximate the greyscale :-)
@@ -165,7 +166,7 @@ int main(int argc, char** argv) {
 				std::cout << "calculation took " << std::chrono::duration <double, std::milli> (diff).count() << " ms" << std::endl;
 
 				// TODO: show the results
-				printf("Found %lu 2D markers on the photo!\n", results.markers.size());
+				printf("Found %d 2D markers on the photo!\n", (int)results.markers.size());
 				for(int i = 0; i < results.markers.size(); ++i) {
 					auto mx = results.markers[i].x;
 					auto my = results.markers[i].y;
