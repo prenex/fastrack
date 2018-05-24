@@ -156,10 +156,10 @@ class FastForwardList {
 		inline void reset() {
 			// Start of the unlinkHoles circular queue
 			// Rem.: Setup for the empty buffer
-			unsigned int holeStart = 0;
+			holeStart = 0;
 			// End of the unlinkHoles circular queue
 			// Rem.: SEtup for the empty buffer
-			unsigned int holeEnd = 1;
+			holeEnd = 1;
 		}
 	};
 
