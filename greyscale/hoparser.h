@@ -121,6 +121,8 @@ public:
 
 		// Update previous and pre-previous homogenity datas first.
 		sustate.updateLast(homer);
+		// Some calculations are deferred here because they had division!
+		sustate.saveDataForUpdateLastMagAvg(homer); // See: (*)
 
 		// Update data in the homogenity lexer
 		homer.next(mag);
@@ -129,6 +131,7 @@ public:
 		// And then check if the homogenity area is too small or not
 		if(!homer.isHo() && sustate.wasInHo
 			   	&& homer.getLen() < setup.ignoreSmallHotokenDeltaLen) {
+			sustate.updateLastMagAvg(homer); // (*)
 			// Here when ended a "homogenity area"
 			// This is like a lexical token in compilers
 			// so here we need to process this "homogenity token"
@@ -487,13 +490,29 @@ private:
 		/** Used for storing the two-times earlier state in the "next" operation. */
 		MT lastLastMagAvg = 0;
 
-		/** Updates wasInHo, lastLen, lastMagAvg and wasWasIsHo, lastLastLen, lastLastMagAvg */
+		/** Updates wasInHo and lastLen */
 		inline void updateLast(Homer<MT, CT> &homer) {
 			// Update new state
 			// Rem.: default homer values are good for kickstarting the first hotoken
 			wasInHo = homer.isHo();
 			lastLen = homer.getLen();
-			lastMagAvg = homer.magAvg();
+		}
+
+		// Rem.: This is only here because of optimizing out the division from the inner loop
+		//       that runs for every pixel of the image. This way no div will be necessary!
+		//       This only saves out simple values as you can see!
+		/** Saves data for the updateLastMagAvg(..) call without doing a slow division op */
+		inline void saveDataForUpdateLastMagAvg(Homer<MT, CT> &homer) {
+			__hackz_saved_homarea_len = homer.getLen();
+			__hackz_saved_homarea_magSum = homer.getMagSum();
+		}
+		int __hackz_saved_homarea_len = 0;
+		CT __hackz_saved_homarea_magSum = 0;
+
+		/** Updates lastMagAvg */
+		inline void updateLastMagAvg(Homer<MT, CT> &homer) {
+			lastMagAvg = (MT) (__hackz_saved_homarea_magSum / __hackz_saved_homarea_len);
+			//lastMagAvg = homer.magAvg();
 		}
 
 		inline void updateLastBefore() {

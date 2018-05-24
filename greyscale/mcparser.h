@@ -550,7 +550,6 @@ printf("*(%d,%d) ", centerX, y);
 		// of the earlier frame!
 		mcCurrentList.reset();
 
-
 		// Reset result and return any earlier collected result
 		// TODO: Check - I just hope this is optimal and works too...
 		// This both resets the original variable

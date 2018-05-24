@@ -111,13 +111,13 @@ struct HomerSetup {
 	 * Delta value for telling if this pixel differs too much from the earlier or not.
 	 * Must differ less than this to suspect a start of a homogenous area in our consideration
 	 */
-	int hodeltaDiff = 25;
+	int hodeltaDiff = 15;
 
 	/**
 	 * Delta value for telling if this pixel differs too much from the avarage of the earlier 
 	 * (in case we are in an isHo) or not: must differ less than this
 	 */
-	int hodeltaAvgDiff = 20;
+	int hodeltaAvgDiff = 15;
 
 	/**
 	 * The maximum difference of the current magnitude from the avarage between the min and max
@@ -125,7 +125,7 @@ struct HomerSetup {
 	 * we consider the area closed/ended! Similar to the minMaxDeltaMax - but this value is not
 	 * a difference between the extremal values - but a difference from their avarage!
 	 */
-	int hodeltaMinMaxAvgDiff = 20;
+	int hodeltaMinMaxAvgDiff = 18;
 
 	/**
 	 * The maximum difference between minimal and maximal values in a homogenous area to consider
@@ -328,6 +328,11 @@ public:
 	 */
 	inline MT magAvg() {
 		return homarea.magAvg();
+	}
+
+	/** Sum of the magnitues in the area - good for optimizations */
+	inline CT getMagSum() {
+		return homarea.getMagSum();
 	}
 
 	/**
