@@ -9,6 +9,8 @@
 #include <cmath>
 #include <limits> // for templated min-max integer values
 
+#include "microshackz.h"
+
 /* Use this for exponential: affection #define EXPONENTIAL_ATTRITION */
 
 /** For parametrization of the lenAffect(...) methods */
@@ -48,7 +50,8 @@ inline T lenAffect(T value, int len, LenAffectParams params) {
 #endif // NO_ATTRITION
 
 #ifdef SIMPLE_ATTRITION
-	if(len < params.fullAffectLenUpCons) return ret;
+	// Usually the fullAffectLenUpCons is not a really-really big value!
+	if(UNLIKELY(len < params.fullAffectLenUpCons)) return ret;
 	else return (ret<<1);
 #endif // SIMPLE_ATTRITION
 
@@ -57,7 +60,7 @@ inline T lenAffect(T value, int len, LenAffectParams params) {
 	// 2.) We are configured to not do any step at all (zero stepping)
 	// 3.) The special case when the length is zero at the start of suspecting areas
 	// 4.) In case the original value is zero (which would stay zero - just faster without calc.)
-	if((len < params.fullAffectLenUpCons) || (params.stepPointExponential == 0) || (len == 0) || (ret == 0)) {
+	if(LIKELY((len < params.fullAffectLenUpCons) || (params.stepPointExponential == 0) || (len == 0) || (ret == 0))) {
 		// fast-path - mostly we are coming here with a right setup!!!
 		return ret;
 	} else {
@@ -226,24 +229,10 @@ public:
 
 	/** Send the next magnitude - return true if we are (still?) in an isHo area after the new element */
 	inline bool next(MT mag) noexcept {
-		if(!homarea.isHo && (abs((CT)homarea.last - (CT)mag) > homerSetup.hodeltaDiff)) {
-
-			// Looking for new homarea- but too big difference
-			// ===============================================
-			// Too big difference between the last and current magnitudes...
-			// Reset the current homarea as there cannot be any current area
-			reset(mag); // Rem.: We need to set the "last" to "mag" here!
-
-			// NO AREA
-			//printf("A: 0\n");
-#ifdef HOMER_MEASURE_NEXT_BRANCHES
-			++branch_1_looking;
-#endif // HOMER_MEASURE_NEXT_BRANCHES
-			return false;
-		} else {
+		if(LIKELY(homarea.isHo || !(abs((CT)homarea.last - (CT)mag) > homerSetup.hodeltaDiff))) {
 			// Either we are in a homarea or difference was small enough (or both)
 			// ===================================================================
-			if(homarea.isHo) {
+			if(LIKELY(homarea.isHo)) {
 				// CONTINUE AREA?
 
 				// We were in an area already...
@@ -261,12 +250,12 @@ public:
 				// Rem.: it is faster to multiply here twice at every pixel than to use magAvg() which uses division!!! 
 				bool tooMuchDiffFromAvg = (abs((long long)homarea.getMagSum() - (long long)(mag * homarea.getLen()))
 					   	> ((long long)lenAffectedHomerSetup.hodeltaAvgDiff * homarea.getLen()));
-				if(!tooMuchDiffFromMinMaxAvg && !tooMuchDiffFromAvg) {
+				if(LIKELY(!tooMuchDiffFromMinMaxAvg && !tooMuchDiffFromAvg)) {
 					// Rem.: This will always return true EXCEPT when the min-max does not differ greatly
 					//       because all other checks are done above...
 					bool isOpenStill = homarea.tryOpenOrKeepWith(mag, lenAffectedHomerSetup.hodeltaLen, lenAffectedHomerSetup.minMaxDeltaMax);
 					// Do our reset if someone closed the area
-					if(!isOpenStill) {
+					if(UNLIKELY(!isOpenStill)) {
 						reset(mag);
 #ifdef HOMER_MEASURE_NEXT_BRANCHES
 						++branch_3_closed;
@@ -299,7 +288,7 @@ public:
 				// ONLY RESET if there is a problem with the min-max delta max check!
 				// We come here also when everything is good except the length, so we cannot rely on isHo!
 				// Rem.: Because both this and the above is inline, the optimizer should optimize duplications...
-				if(!homarea.isMinMaxDeltaMaxOk(homerSetup.minMaxDeltaMax)) {
+				if(UNLIKELY(!homarea.isMinMaxDeltaMaxOk(homerSetup.minMaxDeltaMax))) {
 					//printf("D: %d; ", homarea.len);
 					reset(mag);
 #ifdef HOMER_MEASURE_NEXT_BRANCHES
@@ -314,6 +303,20 @@ public:
 				//printf("D: %d\n", (int)stillOpen);
 				return openedNew;
 			}
+		} else {
+
+			// Looking for new homarea- but too big difference
+			// ===============================================
+			// Too big difference between the last and current magnitudes...
+			// Reset the current homarea as there cannot be any current area
+			reset(mag); // Rem.: We need to set the "last" to "mag" here!
+
+			// NO AREA
+			//printf("A: 0\n");
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+			++branch_1_looking;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
+			return false;
 		}
 	}
 
@@ -392,8 +395,8 @@ private:
 			magSum += mag;
 			last = mag;
 			// Update min/max
-			if(magMax < mag) magMax = mag;
-			if(magMin > mag) magMin = mag;
+			if(UNLIKELY(magMax < mag)) magMax = mag;
+			if(UNLIKELY(magMin > mag)) magMin = mag;
 
 			// Checks: minMax and length checking
 			// Rem.: Most checks that we check HERE are are those checks we do before
@@ -428,7 +431,7 @@ private:
 		 * - returns zero in zero lengh areas!
 		 */
 		inline MT magAvg() {
-			if(len == 0) return 0;
+			if(UNLIKELY(len == 0)) return 0;
 			// this must fit into an MT as it is the avarage of MT typed values...
 			auto ret = (MT) (magSum / len);
 			return ret;
@@ -446,7 +449,7 @@ private:
 
 		/** Avarage between the min and max magnitudes - returns zero at start (on len 0)! */
 		inline MT magMinMaxAvg() {
-			if(len == 0) return 0; // Against calculation errors
+			if(UNLIKELY(len == 0)) return 0; // Against calculation errors
 			else return ((magMax - magMin) / 2) + magMin; // Rem.: no division, but bit-shift usually
 		}
 	

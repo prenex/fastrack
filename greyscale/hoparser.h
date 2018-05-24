@@ -129,8 +129,17 @@ public:
 
 		// Check if the "homogenity" state has changed or not
 		// And then check if the homogenity area is too small or not
-		if(!homer.isHo() && sustate.wasInHo
-			   	&& homer.getLen() < setup.ignoreSmallHotokenDeltaLen) {
+		if(LIKELY(homer.isHo() || !(sustate.wasInHo
+			   	&& homer.getLen() < setup.ignoreSmallHotokenDeltaLen))) {
+			// We are surely not found the marker when we are
+			// still in the middle of a homogenity area (or inhomogen)
+			ret.foundMarker = false;
+			ret.isToken = false;
+		} else {
+			// Rem.: The following line is here but uses the snapshot data 
+			//       as here we only come much more rarely and this line
+			//       contains a division which would be quite slow for each
+			//       pixel values!!!
 			sustate.updateLastMagAvg(homer); // (*)
 			// Here when ended a "homogenity area"
 			// This is like a lexical token in compilers
@@ -140,11 +149,6 @@ public:
 
 			// Update the last-before datas (lastLast*)
 			sustate.updateLastBefore();
-		} else {
-			// We are surely not found the marker when we are
-			// still in the middle of a homogenity area (or inhomogen)
-			ret.foundMarker = false;
-			ret.isToken = false;
 		}
 
 		// Increment scanline-pointer
@@ -170,11 +174,11 @@ private:
 		sustate.updateLastAndLastBeforeEndX();
 
 		// PRE_MARKER
-		if(sustate.sState == PRE_MARKER) {
+		if(LIKELY(sustate.sState == PRE_MARKER)) {
 			// CHECK markStartSuspectionMagDeltaMin
-			if(
+			if(LIKELY(
 					((sustate.lastLastMagAvg - sustate.lastMagAvg) <= 0) || 
-					(abs(sustate.lastLastMagAvg - sustate.lastMagAvg) < setup.markStartSuspectionMagDeltaMin)) {
+					(abs(sustate.lastLastMagAvg - sustate.lastMagAvg) < setup.markStartSuspectionMagDeltaMin))) {
 #ifdef DEBUGLOG
 				printf("NOT_MARKER_START: markStartSuspectionMagDeltaMin abs(%d - %d)<%d ",
 					   	sustate.lastLastMagAvg,
@@ -184,7 +188,7 @@ private:
 #endif //DEBUGLOG
 			} else {
 				// If we are here, we suspect that this might be a start of a marker
-				if(sustate.lastLastLen < setup.markStartPrefixHomoLenMin) {
+				if(LIKELY(sustate.lastLastLen < setup.markStartPrefixHomoLenMin)) {
 #ifdef DEBUGLOG
 					printf("NOT_MARKER_START: markStartPrefixHomoLenMincheck! ");
 #endif //DEBUGLOG
@@ -194,7 +198,7 @@ private:
 					int lastStartX = sustate.lastEndX - sustate.lastLen;
 					//Rem.: abs is not needed here: int transitionLen = abs(sustate.lastLastEndX - lastStartX);
 					int transitionLen = (sustate.lastLastEndX - lastStartX);
-					if(transitionLen > setup.markStartTransitionLenMax) {
+					if(LIKELY(transitionLen > setup.markStartTransitionLenMax)) {
 #ifdef DEBUGLOG
 						printf("NOT_MARKER_START: markStartTransitionLenMax! ");
 #endif //DEBUGLOG
@@ -219,7 +223,7 @@ private:
 			// we are in the very beginning of searching for it
 			// even in the happy cases...
 			return false;
-		} else if(sustate.sState == PRE_CENTER) {
+		} else if(UNLIKELY(sustate.sState == PRE_CENTER)) {
 			// Analyse if we see a paranthesis at all
 			bool isParenthesis = true;
 			// CHECK: markContinueStripeSizeMaxDelta
@@ -320,7 +324,7 @@ private:
 			// even in the happy cases...
 			return false;
 		// BEWARE HERE FOR OPTIMIZE MISSING COMPARISON!!! (!!!!)
-		} else if((sustate.sState >= POS_CENTER_START) && (sustate.sState <= POS_CENTER_FINISHING)) {
+		} else if(UNLIKELY((sustate.sState >= POS_CENTER_START) && (sustate.sState <= POS_CENTER_FINISHING))) {
 			// After the center when we are here!
 			// Check common constrains first
 			// Analyse if we see a paranthesis at all

@@ -1,9 +1,9 @@
 //#define NO_ATTRITION 1 // fastest operation (2x speedup - but harder to use proper parameters)
 #define SIMPLE_ATTRITION 1 // second fastest operation mode (nearly as good as the NO_ATTRITION)
 // Enable this to draw some of the debug points and log some more info as in the marker1_eval application
+/*
 #define DEBUG_POINTS 1
 #define MC_DEBUG_LOG 1
-/*
 */
 
 #include <cstdio>
@@ -94,6 +94,7 @@ int main(int argc, char** argv) {
 	MCParser<> mcp;
 	LenAffectParams params;
 
+	unsigned long long nextCallNo = 0; // counting total next(..) pixel calls
 	while (!main_disp.is_closed() && !draw_disp.is_closed() && !lenAffDisp.is_closed()) {
 		main_disp.wait();
 		if (main_disp.button() && main_disp.mouse_y()>=0) {
@@ -127,6 +128,7 @@ int main(int argc, char** argv) {
 						auto res = mcp.next(redCol2);
 
 #ifdef DEBUG_POINTS 
+						++nextCallNo;
 						// do this only for debugging?
 						// These should not be on the image actually
 						if(res.isToken) {
@@ -187,6 +189,10 @@ int main(int argc, char** argv) {
 			}
 		}
 	}
+#ifdef DEBUG_POINTS 
+	printf("Number of total next(<pixel>) calls: %llu\n", nextCallNo);
+#endif // DEBUG_POINTS
+
 	return 0;
 }
 

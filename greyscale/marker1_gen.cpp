@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
-#include <errno.h>
+#include <cerrno>
+#include <climits>
 #include "CImg.h"
 using namespace cimg_library;
 
