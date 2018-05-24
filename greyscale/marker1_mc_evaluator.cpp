@@ -118,12 +118,12 @@ int main(int argc, char** argv) {
 				auto start = std::chrono::steady_clock::now();
 
 				// Parse all the scanlines properly
-				for(int j = 0; j < image.height(); ++j) {
+				for(int j = 0; j < image.height()*image.width(); j+=image.width()) {
 					for(int i = 0; i < image.width(); ++i) {
 						// Rem.: The last value means the 'red' channel
 						//       and we can use that to approximate the greyscale :-)
 						//unsigned char redCol = image(i, j, 0, 0);
-						unsigned char redCol2 = origPixels[i + j*image.width()];
+						unsigned char redCol2 = origPixels[i + j];
 						//if(redCol != redCol2) printf("%d != %d\n", redCol, redCol2);
 						auto res = mcp.next(redCol2);
 
