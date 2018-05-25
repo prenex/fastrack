@@ -3,6 +3,8 @@
 
 // Uncomment to see debug logging
 //#define DEBUGLOG 1
+// Uncomment for profiling this class
+#define HOPARSER_MEASURE_NEXT_BRANCHES
 
 #include <vector>
 #include <cstdint>
@@ -71,7 +73,22 @@ struct HoparserSetup {
  */
 template<typename MT = uint8_t, typename CT = int>
 class Hoparser {
+// For simple branch profiling data measurement
+#ifdef HOPARSER_MEASURE_NEXT_BRANCHES
+	int branch_1_isho = 0;
+	int branch_2_noho = 0;
+#endif // HOPARSER_MEASURE_NEXT_BRANCHES
 public:
+	/** An inlined NOOP except when HOPARSER_MEASURE_NEXT_BRANCHES is #define-d */
+	inline void flushBranchProfileData() {
+#ifdef HOPARSER_MEASURE_NEXT_BRANCHES
+		printf("branch_1_isho   = %u\n", branch_1_isho);
+		printf("branch_2_noho   = %u\n", branch_2_noho);
+		branch_1_isho = 0;
+		branch_2_noho = 0;
+#endif // HOPARSER_MEASURE_NEXT_BRANCHES
+	}
+
 	
 	Hoparser() {
 		// NO-OP: Just the default values for now
@@ -97,6 +114,7 @@ public:
 		homer.reset();
 		// This is NO-OP unless we are profiling!
 		homer.flushBranchProfileData();
+		flushBranchProfileData();
 		// Reset our state to start from scratch
 		sustate = SuspectionState();
 	}
@@ -111,7 +129,7 @@ public:
 		// The best approximation is the avarage of the centerEnd and centerStart positions!
 		return (sustate.markerCenterEnd - sustate.markerCenterStart) / 2 + sustate.markerCenterStart;
 	}
-
+	
 	/**
 	 * Should be called for every pixel in the scanline - with the magnitude value.
 	 * Returns true when a marker has been found!
@@ -126,6 +144,14 @@ public:
 
 		// Update data in the homogenity lexer
 		homer.next(mag);
+
+#ifdef HOPARSER_MEASURE_NEXT_BRANCHES
+		if(homer.isHo()) {
+			++branch_1_isho;
+		} else{
+			++branch_2_noho;
+		}
+#endif // HOPARSER_MEASURE_NEXT_BRANCHES
 
 		// Check if the "homogenity" state has changed or not
 		// And then check if the homogenity area is too small or not
