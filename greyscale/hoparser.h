@@ -156,39 +156,47 @@ public:
 		}
 #endif // HOPARSER_MEASURE_NEXT_BRANCHES
 
+		// FAST_PATH
 		if(LIKELY(homer.isHo())) {
-			goto fastpath;
-		}
-
-		// Check if the "homogenity" state has changed or not
-		// And then check if the homogenity area is too small or not
-		if(!(sustate.wasInHo
-			   	&& homer.getLen() < setup.ignoreSmallHotokenDeltaLen)) {
-fastpath:
 			// We are surely not found the marker when we are
 			// still in the middle of a homogenity area (or inhomogen)
 			ret.foundMarker = false;
 			ret.isToken = false;
+
+			// Increment scanline-pointer
+			++sustate.x;
+			// Return
+			return ret;
 		} else {
-			// Rem.: The following line is here but uses the snapshot data 
-			//       as here we only come much more rarely and this line
-			//       contains a division which would be quite slow for each
-			//       pixel values!!!
-			sustate.updateLastMagAvg(homer); // (*)
-			// Here when ended a "homogenity area"
-			// This is like a lexical token in compilers
-			// so here we need to process this "homogenity token"
-			ret.foundMarker = processHotoken(homer);
-			ret.isToken = true;
+			// Check if the "homogenity" state has changed or not
+			// And then check if the homogenity area is too small or not
+			if(!(sustate.wasInHo
+					&& homer.getLen() < setup.ignoreSmallHotokenDeltaLen)) {
+				// We are surely not found the marker when we are
+				// still in the middle of a homogenity area (or inhomogen)
+				ret.foundMarker = false;
+				ret.isToken = false;
+			} else {
+				// Rem.: The following line is here but uses the snapshot data 
+				//       as here we only come much more rarely and this line
+				//       contains a division which would be quite slow for each
+				//       pixel values!!!
+				sustate.updateLastMagAvg(homer); // (*)
+				// Here when ended a "homogenity area"
+				// This is like a lexical token in compilers
+				// so here we need to process this "homogenity token"
+				ret.foundMarker = processHotoken(homer);
+				ret.isToken = true;
 
-			// Update the last-before datas (lastLast*)
-			sustate.updateLastBefore();
+				// Update the last-before datas (lastLast*)
+				sustate.updateLastBefore();
+			}
+
+			// Increment scanline-pointer
+			++sustate.x;
+
+			return ret;
 		}
-
-		// Increment scanline-pointer
-		++sustate.x;
-
-		return ret;
 	}
 private:
 	/**
