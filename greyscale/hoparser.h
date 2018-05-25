@@ -135,8 +135,6 @@ public:
 	 * Returns true when a marker has been found!
 	 */
 	inline NexRes next(MT mag) noexcept {
-		NexRes ret;
-
 		// Update previous and pre-previous homogenity datas first.
 		sustate.updateLast(homer);
 		// Some calculations are deferred here because they had division!
@@ -158,6 +156,8 @@ public:
 
 		// FAST_PATH
 		if(LIKELY(homer.isHo())) {
+			NexRes ret;
+
 			// We are surely not found the marker when we are
 			// still in the middle of a homogenity area (or inhomogen)
 			ret.foundMarker = false;
@@ -168,6 +168,8 @@ public:
 			// Return
 			return ret;
 		} else {
+			NexRes ret;
+
 			// Check if the "homogenity" state has changed or not
 			// And then check if the homogenity area is too small or not
 			if(!(sustate.wasInHo

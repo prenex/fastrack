@@ -231,86 +231,83 @@ public:
 
 	/** Send the next magnitude - return true if we are (still?) in an isHo area after the new element */
 	inline bool next(MT mag) noexcept {
-		if(LIKELY(homarea.isHo || !(abs((CT)homarea.last - (CT)mag) > homerSetup.hodeltaDiff))) {
-			// Either we are in a homarea or difference was small enough (or both)
-			// ===================================================================
-			if(LIKELY(homarea.isHo)) {
-				// CONTINUE AREA?
+		if(LIKELY(homarea.isHo)) {
+			// FAST-PATH: CONTINUE A HOMAREA - this nearly always happens!
+			// ===========================================================
+			// Decide if we need to CONTINUE this area
 
-				// We were in an area already...
-				// Can we continue this area?
+			// Apply lengthAffection to the homerSetup values when in a homogenous area!
+			auto lenAffectedHomerSetup = homerSetup.applyLenAffection(homarea.getLen());
 
-				// Apply lengthAffection to the homerSetup values when in a homogenous area!
-				auto lenAffectedHomerSetup = homerSetup.applyLenAffection(homarea.getLen());
-
-				// Check delta difference from the min/max magnitudes centerlne - too much indicates non-homogenity
-				// Rem.: First the faster check so the optimizer can optimize jumps better...
-				// Rem.: Because when we come here if we already have a "suspected" area, len is > 0
-				//       and this is real value - not the zero indicating the zero len!!!
-				bool tooMuchDiffFromMinMaxAvg = (abs(homarea.magMinMaxAvg() - mag) > lenAffectedHomerSetup.hodeltaMinMaxAvgDiff);
-				// Check difference from the avarage being too much
-				// Rem.: it is faster to multiply here twice at every pixel than to use magAvg() which uses division!!!
+			// Check delta difference from the min/max magnitudes centerlne - too much indicates non-homogenity
+			// Rem.: First the faster check so the optimizer can optimize jumps better...
+			// Rem.: Because when we come here if we already have a "suspected" area, len is > 0
+			//       and this is real value - not the zero indicating the zero len!!!
+			bool tooMuchDiffFromMinMaxAvg = (abs(homarea.magMinMaxAvg() - mag) > lenAffectedHomerSetup.hodeltaMinMaxAvgDiff);
+			// Check difference from the avarage being too much
+			// Rem.: it is faster to multiply here twice at every pixel than to use magAvg() which uses division!!!
 #ifdef SLOW_PRECISE_HOMER
-				bool tooMuchDiffFromAvg = (abs((long long)homarea.getMagSum() - (long long)(mag * homarea.getLen()))
-					   	> ((long long)lenAffectedHomerSetup.hodeltaAvgDiff * homarea.getLen()));
+			bool tooMuchDiffFromAvg = (abs((long long)homarea.getMagSum() - (long long)(mag * homarea.getLen()))
+					> ((long long)lenAffectedHomerSetup.hodeltaAvgDiff * homarea.getLen()));
 #endif // SLOW_PRECISE_HOMER
-				if(LIKELY(!tooMuchDiffFromMinMaxAvg
+			if(LIKELY(!tooMuchDiffFromMinMaxAvg
 #ifdef SLOW_PRECISE_HOMER
-						   	&& !tooMuchDiffFromAvg
+						&& !tooMuchDiffFromAvg
 #endif // SLOW_PRECISE_HOMER
-							)) {
-					// Rem.: This will always return true EXCEPT when the min-max does not differ greatly
-					//       because all other checks are done above...
-					bool isOpenStill = homarea.tryOpenOrKeepWith(mag, lenAffectedHomerSetup.hodeltaLen, lenAffectedHomerSetup.minMaxDeltaMax);
-					// Do our reset if someone closed the area
-					if(UNLIKELY(!isOpenStill)) {
-						reset(mag);
-#ifdef HOMER_MEASURE_NEXT_BRANCHES
-						++branch_3_closed;
-#endif // HOMER_MEASURE_NEXT_BRANCHES
-					}
-#ifdef HOMER_MEASURE_NEXT_BRANCHES
-					// 82% of times on last measurement!
-					else ++branch_4_stillopen;
-#endif // HOMER_MEASURE_NEXT_BRANCHES
-					// Indicate if we are open or not
-					//printf("C: %d\n", (int)isOpenStill);
-					return isOpenStill;
-				} else {
-					//printf("B: %d,%d\n", tooMuchDiffFromMinMaxAvg, tooMuchDiffFromAvg);
-					//printf("B1: abs(%d - %d) > %d [len:%d]", homarea.magMinMaxAvg(), mag, lenAffectedHomerSetup.hodeltaMinMaxAvgDiff, homarea.len);
-					// Too big is the difference - reset current homarea :-(
-					reset(mag); // Rem.: We need to set the "last" to "mag" here!
-#ifdef HOMER_MEASURE_NEXT_BRANCHES
-					++branch_2_reset;
-#endif // HOMER_MEASURE_NEXT_BRANCHES
-					return false;
-				}
-			} else {
-				// SUSPECTED NEW AREA?
-
-				// Can we "open" an area? (Can we set isHo already?)
-				// Rem.: When we are here, (abs((CT)homarea.last - (CT)mag) <= hodeltaDiff) is sure
-				// Rem.: When we are here we are waiting for length to be enough!!!
-				bool openedNew = homarea.tryOpenOrKeepWith(mag, homerSetup.hodeltaLen, homerSetup.minMaxDeltaMax);
-				// ONLY RESET if there is a problem with the min-max delta max check!
-				// We come here also when everything is good except the length, so we cannot rely on isHo!
-				// Rem.: Because both this and the above is inline, the optimizer should optimize duplications...
-				if(UNLIKELY(!homarea.isMinMaxDeltaMaxOk(homerSetup.minMaxDeltaMax))) {
-					//printf("D: %d; ", homarea.len);
+						)) {
+				// Rem.: This will always return true EXCEPT when the min-max does not differ greatly
+				//       because all other checks are done above...
+				bool isOpenStill = homarea.tryOpenOrKeepWith(mag, lenAffectedHomerSetup.hodeltaLen, lenAffectedHomerSetup.minMaxDeltaMax);
+				// Do our reset if someone closed the area
+				if(UNLIKELY(!isOpenStill)) {
 					reset(mag);
 #ifdef HOMER_MEASURE_NEXT_BRANCHES
-					++branch_5_susreset;
+					++branch_3_closed;
 #endif // HOMER_MEASURE_NEXT_BRANCHES
 				}
 #ifdef HOMER_MEASURE_NEXT_BRANCHES
-				// 15% of times on last measurement!
-				else ++branch_6_openedNew;
+				// 82% of times on last measurement!
+				else ++branch_4_stillopen;
 #endif // HOMER_MEASURE_NEXT_BRANCHES
 				// Indicate if we are open or not
-				//printf("D: %d\n", (int)stillOpen);
-				return openedNew;
+				//printf("C: %d\n", (int)isOpenStill);
+				return isOpenStill;
+			} else {
+				//printf("B: %d,%d\n", tooMuchDiffFromMinMaxAvg, tooMuchDiffFromAvg);
+				//printf("B1: abs(%d - %d) > %d [len:%d]", homarea.magMinMaxAvg(), mag, lenAffectedHomerSetup.hodeltaMinMaxAvgDiff, homarea.len);
+				// Too big is the difference - reset current homarea :-(
+				reset(mag); // Rem.: We need to set the "last" to "mag" here!
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+				++branch_2_reset;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
+				return false;
 			}
+		} else if(!(abs((CT)homarea.last - (CT)mag) > homerSetup.hodeltaDiff)) {
+		// The difference was small enough - but we are not in the homarea
+		// ===============================================================
+			// SUSPECTED NEW AREA?
+
+			// Can we "open" an area? (Can we set isHo already?)
+			// Rem.: When we are here, (abs((CT)homarea.last - (CT)mag) <= hodeltaDiff) is sure
+			// Rem.: When we are here we are waiting for length to be enough!!!
+			bool openedNew = homarea.tryOpenOrKeepWith(mag, homerSetup.hodeltaLen, homerSetup.minMaxDeltaMax);
+			// ONLY RESET if there is a problem with the min-max delta max check!
+			// We come here also when everything is good except the length, so we cannot rely on isHo!
+			// Rem.: Because both this and the above is inline, the optimizer should optimize duplications...
+			if(UNLIKELY(!homarea.isMinMaxDeltaMaxOk(homerSetup.minMaxDeltaMax))) {
+				//printf("D: %d; ", homarea.len);
+				reset(mag);
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+				++branch_5_susreset;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
+			}
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+			// 15% of times on last measurement!
+			else ++branch_6_openedNew;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
+			// Indicate if we are open or not
+			//printf("D: %d\n", (int)stillOpen);
+			return openedNew;
 		} else {
 
 			// Looking for new homarea- but too big difference
