@@ -298,16 +298,16 @@ public:
 	TOKENIZER tokenizer;
 
 	/** Create a markercenter-parser with default configuration */
-	MCParser() {
+	MCParser() noexcept {
 	}
 
 	/** Create a markercenter-parser with the given configuration */
-	MCParser(MCParserConfig parserConfig) {
+	MCParser(MCParserConfig parserConfig) noexcept {
 		config = parserConfig;
 	}
 
 	/** Create a markercenter-parser with the given configurations - works only for Hoparser usage */
-	MCParser(MCParserConfig parserConfig, HoparserSetup hoparserSetup, HomerSetup homerSetup) {
+	MCParser(MCParserConfig parserConfig, HoparserSetup hoparserSetup, HomerSetup homerSetup) noexcept {
 		config = parserConfig;
 		// TODO: ensure this works when other template parameters are provided
 		tokenizer = Hoparser<MT, CT>(homerSetup, hoparserSetup);

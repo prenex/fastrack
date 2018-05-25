@@ -16,7 +16,7 @@
 /* Use this for exponential: affection #define EXPONENTIAL_ATTRITION */
 
 /** For parametrization of the lenAffect(...) methods */
-struct LenAffectParams {
+struct LenAffectParams final {
 	/** Until this length we keep values unaffected */
 	int fullAffectLenUpCons = 50;
 	/** This defines the end length of consideration for calculating */
@@ -108,7 +108,7 @@ inline T lenAffect(T value, int len, LenAffectParams params) {
 }
 
 /** Holds configuration data values for Homer */
-struct HomerSetup {
+struct HomerSetup final {
 	/** Lenght of pixels with close to same magnitude to consider the area homogenous */
 	int hodeltaLen = 6;
 
@@ -140,7 +140,7 @@ struct HomerSetup {
 	int minMaxDeltaMax = 20;
 
 	/** Uses lenAffect(..) to change the values in a returned copy - does not change the original  */
-	inline HomerSetup applyLenAffection(int len, LenAffectParams params = LenAffectParams{}) {
+	inline HomerSetup applyLenAffection(int len, LenAffectParams params = LenAffectParams{}) noexcept {
 		// Create a new setup with default values
 		HomerSetup ret;
 
@@ -162,7 +162,7 @@ struct HomerSetup {
  * MT: "Magnitude Type" and CT: "Magnitude Collector type" (later is for sum calculations)
  */
 template<typename MT = uint8_t, typename CT = int>
-class Homer {
+class Homer final {
 #ifdef HOMER_MEASURE_NEXT_BRANCHES
 	unsigned int branch_1_looking = 0;
 	unsigned int branch_2_reset = 0;
@@ -193,7 +193,7 @@ public:
 	 * Create a driver for analysing 1D homogenous areas in scanlines
 	 * - using default state
 	 */
-	Homer() {
+	Homer() noexcept {
 		// Set default state
 		reset();
 	}
@@ -202,7 +202,7 @@ public:
 	 * Create a driver for analysing 1D homogenous areas in scanlines
 	 * - using default state and given setup
 	 */
-	Homer(HomerSetup setup) {
+	Homer(HomerSetup setup) noexcept {
 		// Save setup
 		homerSetup = setup;
 
@@ -329,7 +329,7 @@ public:
 	}
 
 	/** Tells if we are in a homogenous area according to the last "next" call or not */
-	inline bool isHo() {
+	inline bool isHo() const noexcept {
 		return homarea.isHo;
 	}
 
@@ -337,12 +337,12 @@ public:
 	 * Avarages of the magnitudes already collected for an area
 	 * Rem.: returns zero in zero lengh areas and might return bogus values even when isHo() is false!
 	 */
-	inline MT magAvg() {
+	inline MT magAvg() const noexcept {
 		return homarea.magAvg();
 	}
 
 	/** Sum of the magnitues in the area - good for optimizations */
-	inline CT getMagSum() {
+	inline CT getMagSum() const noexcept {
 		return homarea.getMagSum();
 	}
 
@@ -350,7 +350,7 @@ public:
 	 * When isHo() returns true - this is the lenght of the homogenous area.
 	 * Otherwise it is the length of the currently suspected homogenous area (unsure!)
 	 */
-	inline int getLen() {
+	inline int getLen() const noexcept {
 		return homarea.len;
 	}
 
@@ -397,7 +397,7 @@ private:
 		 * Updates: length, magSum, min/max values, isHo
 		 * Returns true if the area is (still) open - basically it returns isHo!
 		 */
-		inline bool tryOpenOrKeepWith(MT mag, int hodeltaLen, int minMaxDeltaMax) {
+		inline bool tryOpenOrKeepWith(MT mag, int hodeltaLen, int minMaxDeltaMax) noexcept {
 			// Update core data
 			++len;
 			magSum += mag;
@@ -421,7 +421,7 @@ private:
 		// Rem.: This is inline so that the optimizer can keep values 
 		//       from other inline calls where we use this when you use it directly too!
 		/** Checks the current min/max magnitudes difference if it is too big or not */
-		inline bool isMinMaxDeltaMaxOk(int minMaxDeltaMax) {
+		inline bool isMinMaxDeltaMaxOk(int minMaxDeltaMax) const noexcept {
 			bool ret = ((len == 0) || ((magMax - magMin) < minMaxDeltaMax));
 			//if(!ret) printf("***not(%d-%d<%d)@%d***\n", magMax, magMin, minMaxDeltaMax, len);
 			return ret;
@@ -430,7 +430,7 @@ private:
 		// Rem.: This is inline so that the optimizer can keep values 
 		//       from other inline calls where we use this when you use it directly too!
 		/** Checks the current length agains the provided one */
-		inline bool isLenOK(int hodeltaLen) {
+		inline bool isLenOK(int hodeltaLen) const noexcept {
 			return (len >= hodeltaLen);
 		}
 
@@ -438,7 +438,7 @@ private:
 		 * Avarages of the magnitudes already collected for an area
 		 * - returns zero in zero lengh areas!
 		 */
-		inline MT magAvg() {
+		inline MT magAvg() const noexcept {
 			if(UNLIKELY(len == 0)) return 0;
 			// this must fit into an MT as it is the avarage of MT typed values...
 			auto ret = (MT) (magSum / len);
@@ -446,17 +446,17 @@ private:
 		}
 
 		/** Sum of the magnitues in the area */
-		inline CT getMagSum() {
+		inline CT getMagSum() const noexcept {
 			return magSum;
 		}
 
 		/** Length of this area */
-		inline int getLen() {
+		inline int getLen() const noexcept {
 			return len;
 		}
 
 		/** Avarage between the min and max magnitudes - returns zero at start (on len 0)! */
-		inline MT magMinMaxAvg() {
+		inline MT magMinMaxAvg() const noexcept {
 			if(UNLIKELY(len == 0)) return 0; // Against calculation errors
 			else return ((magMax - magMin) / 2) + magMin; // Rem.: no division, but bit-shift usually
 		}
@@ -479,7 +479,7 @@ private:
 		 *          to achieve the best speed and branch prediction operations here.
 		 */
 		template<typename T>
-		inline T lenAffect(T value, LenAffectParams params) {
+		inline T lenAffect(T value, LenAffectParams params) const noexcept {
 			lenAffect(value, len, params);
 		}
 	};

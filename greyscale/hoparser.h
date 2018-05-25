@@ -4,7 +4,7 @@
 // Uncomment to see debug logging
 //#define DEBUGLOG 1
 // Uncomment for profiling this class
-#define HOPARSER_MEASURE_NEXT_BRANCHES
+//#define HOPARSER_MEASURE_NEXT_BRANCHES
 
 #include <vector>
 #include <cstdint>
@@ -12,7 +12,7 @@
 #include "homer.h"
 
 /** Result of a Hoparser::next() operation */
-struct NexRes {
+struct NexRes final {
 	/** A marker has been found - see details for marker position */
 	bool foundMarker;
 	/** A token has found at the current position */
@@ -20,7 +20,7 @@ struct NexRes {
 };
 
 /** Holds configuration values for a Hoparser*/
-struct HoparserSetup {
+struct HoparserSetup final {
 	/**
 	 * At least this many pixels of homogenous colour must be present before
 	 * the start of the marker is suspected on a transition.
@@ -72,7 +72,7 @@ struct HoparserSetup {
  * Rem.: Template parameters are those of Homer!
  */
 template<typename MT = uint8_t, typename CT = int>
-class Hoparser {
+class Hoparser final {
 // For simple branch profiling data measurement
 #ifdef HOPARSER_MEASURE_NEXT_BRANCHES
 	int branch_1_isho = 0;
@@ -90,23 +90,23 @@ public:
 	}
 
 	
-	Hoparser() {
+	Hoparser() noexcept {
 		// NO-OP: Just the default values for now
 	}
 
 	/** Create a Hoparser using the default configuration and the given Homer setup values */
-	Hoparser(HomerSetup hs) {
+	Hoparser(HomerSetup hs) noexcept {
 		homer = Homer<MT, CT>(hs);
 	}
 
 	/** Create a Hoparser using the given configuration and the given Homer setup values */
-	Hoparser(HomerSetup hs, HoparserSetup hps) {
+	Hoparser(HomerSetup hs, HoparserSetup hps) noexcept {
 		homer = Homer<MT, CT>(hs);
 		setup = hps;
 	}
 
 	/** Should be called to indicate that a new scan line has started - basically a reset */
-	inline void newLine() {
+	inline void newLine() noexcept {
 #ifdef DEBUGLOG
 		printf("===\n");
 #endif //DEBUGLOG
@@ -120,12 +120,12 @@ public:
 	}
 
 	/** Number of found stripes */
-	inline int getOrder() {
+	inline int getOrder() const noexcept {
 		return sustate.openp;
 	}
 
 	/** Only returns valid value when a marker is already found */
-	inline int getMarkerX() {
+	inline int getMarkerX() const noexcept {
 		// The best approximation is the avarage of the centerEnd and centerStart positions!
 		return (sustate.markerCenterEnd - sustate.markerCenterStart) / 2 + sustate.markerCenterStart;
 	}
@@ -147,16 +147,24 @@ public:
 
 #ifdef HOPARSER_MEASURE_NEXT_BRANCHES
 		if(homer.isHo()) {
+			// Usually taken 2484 times per scanline (out of 2592)
+			// LIKELY!
 			++branch_1_isho;
 		} else{
+			// Usually taken 108 times per scanline (out of 2592)
 			++branch_2_noho;
 		}
 #endif // HOPARSER_MEASURE_NEXT_BRANCHES
 
+		if(LIKELY(homer.isHo())) {
+			goto fastpath;
+		}
+
 		// Check if the "homogenity" state has changed or not
 		// And then check if the homogenity area is too small or not
-		if(LIKELY(homer.isHo() || !(sustate.wasInHo
-			   	&& homer.getLen() < setup.ignoreSmallHotokenDeltaLen))) {
+		if(!(sustate.wasInHo
+			   	&& homer.getLen() < setup.ignoreSmallHotokenDeltaLen)) {
+fastpath:
 			// We are surely not found the marker when we are
 			// still in the middle of a homogenity area (or inhomogen)
 			ret.foundMarker = false;
@@ -188,7 +196,7 @@ private:
 	 * Returns true when marker has been found and marker data can be asked for!
 	 * BEWARE: Changes/updates this->sustate!!!
 	 */
-	inline bool processHotoken(Homer<MT, CT> &homer) {
+	inline bool processHotoken(Homer<MT, CT> &homer) noexcept {
 #ifdef DEBUGLOG
 // Rem.: \n is always at the "return" operation!
 		printf("Token: AVG= %d at LEN= %d @ %d..%d --- ", sustate.lastMagAvg, sustate.lastLen, sustate.x - sustate.lastLen, sustate.x);
@@ -521,7 +529,7 @@ private:
 		MT lastLastMagAvg = 0;
 
 		/** Updates wasInHo and lastLen */
-		inline void updateLast(Homer<MT, CT> &homer) {
+		inline void updateLast(Homer<MT, CT> &homer) noexcept {
 			// Update new state
 			// Rem.: default homer values are good for kickstarting the first hotoken
 			wasInHo = homer.isHo();
@@ -532,7 +540,7 @@ private:
 		//       that runs for every pixel of the image. This way no div will be necessary!
 		//       This only saves out simple values as you can see!
 		/** Saves data for the updateLastMagAvg(..) call without doing a slow division op */
-		inline void saveDataForUpdateLastMagAvg(Homer<MT, CT> &homer) {
+		inline void saveDataForUpdateLastMagAvg(Homer<MT, CT> &homer) noexcept {
 			__hackz_saved_homarea_len = homer.getLen();
 			__hackz_saved_homarea_magSum = homer.getMagSum();
 		}
@@ -540,12 +548,12 @@ private:
 		CT __hackz_saved_homarea_magSum = 0;
 
 		/** Updates lastMagAvg */
-		inline void updateLastMagAvg(Homer<MT, CT> &homer) {
+		inline void updateLastMagAvg(Homer<MT, CT> &homer) noexcept {
 			//A faster: lastMagAvg = homer.magAvg();
 			lastMagAvg = (MT) (__hackz_saved_homarea_magSum / __hackz_saved_homarea_len);
 		}
 
-		inline void updateLastBefore() {
+		inline void updateLastBefore() noexcept {
 			// Move the earlier last homogenity states into the last-before-last
 			// Rem.: default values ensure there are no-op at start-hotoken until the second!
 			wasWasIsHo = wasInHo;
@@ -554,13 +562,13 @@ private:
 		}
 
 		/** Update the lastLastEndX and the lastEndX fields */
-		inline void updateLastAndLastBeforeEndX() {
+		inline void updateLastAndLastBeforeEndX() noexcept {
 			lastLastEndX = lastEndX;
 			lastEndX = x;
 		}
 
 		/** Reset to the searching a new marker: reset parenthesing data and state machine */
-		inline void resetToPreMarker() {
+		inline void resetToPreMarker() noexcept {
 			// State machine reset
 			sState = PRE_MARKER;
 
