@@ -1,5 +1,3 @@
-// This file contains various "hackz" and "micros" for optimization purposes
-
 #ifndef _MICROS_HACKZ_H
 #define _MICROS_HACKZ_H
 
@@ -17,5 +15,3 @@
 
 
 #endif // _MICROS_HACKZ_H
-
-// vim: tabstop=4 noexpandtab shiftwidth=4 softtabstop=4

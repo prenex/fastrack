@@ -515,8 +515,8 @@ private:
 
 		/** Updates lastMagAvg */
 		inline void updateLastMagAvg(Homer<MT, CT> &homer) {
+			//A faster: lastMagAvg = homer.magAvg();
 			lastMagAvg = (MT) (__hackz_saved_homarea_magSum / __hackz_saved_homarea_len);
-			//lastMagAvg = homer.magAvg();
 		}
 
 		inline void updateLastBefore() {
