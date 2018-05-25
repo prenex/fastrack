@@ -323,7 +323,10 @@ public:
 		// See if the hoparser finds an 1D marker at the pixel in this scanline
 		// We only run all the following code for that rare case (see green dots
 		// in the marker1_eval application when it finds these for the scanlines)
-		if(ret.foundMarker) {
+		if(LIKELY(!ret.foundMarker)) {
+			++x;
+			return ret;
+		} else {
 			// get marker data
 			int centerX = tokenizer.getMarkerX();
 			auto order = tokenizer.getOrder();
@@ -486,10 +489,10 @@ printf("*(%d,%d) ", centerX, y);
 					}
 				}
 			}
-		}
 
-		++x;
-		return ret;
+			++x;
+			return ret;
+		}
 	}
 
 	/**
