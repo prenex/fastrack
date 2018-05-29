@@ -327,6 +327,7 @@ public:
 			++x;
 			return ret;
 		} else {
+			// TODO: extract into method
 			// get marker data
 			int centerX = tokenizer.getMarkerX();
 			auto order = tokenizer.getOrder();

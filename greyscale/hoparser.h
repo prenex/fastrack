@@ -166,41 +166,48 @@ public:
 			// Increment scanline-pointer
 			++sustate.x;
 			// Return
-			return ret;
+			return std::move(ret);
 		} else {
-			NexRes ret;
-
-			// Check if the "homogenity" state has changed or not
-			// And then check if the homogenity area is too small or not
-			if(!(sustate.wasInHo
-					&& homer.getLen() < setup.ignoreSmallHotokenDeltaLen)) {
-				// We are surely not found the marker when we are
-				// still in the middle of a homogenity area (or inhomogen)
-				ret.foundMarker = false;
-				ret.isToken = false;
-			} else {
-				// Rem.: The following line is here but uses the snapshot data 
-				//       as here we only come much more rarely and this line
-				//       contains a division which would be quite slow for each
-				//       pixel values!!!
-				sustate.updateLastMagAvg(homer); // (*)
-				// Here when ended a "homogenity area"
-				// This is like a lexical token in compilers
-				// so here we need to process this "homogenity token"
-				ret.foundMarker = processHotoken(homer);
-				ret.isToken = true;
-
-				// Update the last-before datas (lastLast*)
-				sustate.updateLastBefore();
-			}
-
-			// Increment scanline-pointer
-			++sustate.x;
-
-			return ret;
+			return slowNext();
 		}
 	}
 private:
+
+	// Rem.: Not inlined because this is the rare part and is only here to make the hot-spot more cache friendly!
+	NexRes NOINLINE slowNext() {
+		// TODO: extract into method
+		NexRes ret;
+
+		// Check if the "homogenity" state has changed or not
+		// And then check if the homogenity area is too small or not
+		if(!(sustate.wasInHo
+				&& homer.getLen() < setup.ignoreSmallHotokenDeltaLen)) {
+			// We are surely not found the marker when we are
+			// still in the middle of a homogenity area (or inhomogen)
+			ret.foundMarker = false;
+			ret.isToken = false;
+		} else {
+			// Rem.: The following line is here but uses the snapshot data 
+			//       as here we only come much more rarely and this line
+			//       contains a division which would be quite slow for each
+			//       pixel values!!!
+			sustate.updateLastMagAvg(homer); // (*)
+			// Here when ended a "homogenity area"
+			// This is like a lexical token in compilers
+			// so here we need to process this "homogenity token"
+			ret.foundMarker = processHotoken(homer);
+			ret.isToken = true;
+
+			// Update the last-before datas (lastLast*)
+			sustate.updateLastBefore();
+		}
+
+		// Increment scanline-pointer
+		++sustate.x;
+
+		return ret;
+	}
+
 	/**
 	 * Process a homogenity token right after the homogenity area state changed.
 	 * Returns true when marker has been found and marker data can be asked for!
