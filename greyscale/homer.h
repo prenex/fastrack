@@ -270,8 +270,7 @@ public:
 					// Indicate if we are open or not
 					//printf("C: %d\n", (int)isOpenStill);
 					return isOpenStill;
-				}
-				else {
+				} else {
 					reset(mag);
 #ifdef HOMER_MEASURE_NEXT_BRANCHES
 					++branch_3_closed;

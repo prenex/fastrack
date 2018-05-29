@@ -15,6 +15,8 @@
 #include "hoparser.h"
 #include "mcparser.h"
 
+#define RUNS_PER_FRAME 128
+
 using namespace cimg_library;
 
 #define TEST_FILE_DEFAULT "real_test4_b.jpg"
@@ -117,8 +119,10 @@ int main(int argc, char** argv) {
 				// start measuring time
 				auto start = std::chrono::steady_clock::now();
 
+				ImageFrameResult results;
 				// Parse all the scanlines properly
 				int fullSize = image.height()*image.width();
+for(int k = 0; k < RUNS_PER_FRAME; ++k) {
 				for(int j = 0; j < fullSize; j+=image.width()) {
 					for(int i = 0; i < image.width(); ++i) {
 						// Rem.: The last value means the 'red' channel
@@ -158,7 +162,8 @@ int main(int argc, char** argv) {
 				}
 
 				// notify MCParserv about the end of the image frame and get the results
-				auto results = mcp.endImageFrame();
+				results = mcp.endImageFrame();
+}
 
 				// Calculate time of run
 				auto endCalc = std::chrono::steady_clock::now();

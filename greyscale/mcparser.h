@@ -325,174 +325,10 @@ public:
 		// in the marker1_eval application when it finds these for the scanlines)
 		if(LIKELY(!ret.foundMarker)) {
 			++x;
-			return ret;
 		} else {
-			// TODO: extract into method
-			// get marker data
-			int centerX = tokenizer.getMarkerX();
-			auto order = tokenizer.getOrder();
-			if(config.ignoreOrderSmallerThan < order) {
-				// If not too small to ignore, process it!
-
-				// PRE-READ TECHNIQUE
-				// ==================
-				//
-				// Advance list position when we are the first test on a newline
-				// And the list is not empty. The second handles cases when the
-				// list is completely empty
-				if(afterNewLine) {
-					// If the list is empty stays: lastPos == listPos == NIL_POS
-					// If it already has data, we step on the valid data and not be NIL
-					// Rem.: The above if ensures that we are on the beginning NIL_POS
-					if(!(mcCurrentList.isEmpty())) {
-						lastPos = listPos;
-						listPos = mcCurrentList.next(listPos);
-					}
-					/*
-					else  NIL_POS and NIL_POS for both
-					*/
-
-					// Indicate that we have handled the flag
-					afterNewLine = false;
-				}
-
-				// AFTER THIS POINT WE ARE IN THE INVARIANT!
-				// =========================================
-				//
-				// The best way to imagine this is to imagine always two lists:
-				// - A list of already suspected marker centers up until the last scanline
-				// - And a list of "1D markers at this scanline"
-				//
-				// These two lists are ordered by the x-coordinate (the first is ordered by
-				// its FIRST "lastX") and now in this place we are processing them to make a
-				// vertical parsing. If we would have these two lists at every scanline end
-				// then we could go through both of them and update the first list with the 
-				// latter new line data list.
-				//
-				// In reality however this is an on-line algorithm so there are no two
-				// seperate lists - just this "next(..)" function that gets the pixels
-				// by some provider as a source and the list about what we think where
-				// the markers center lines are! The existing list is the one we named
-				// the "first" above and we are ourselves in the iterator of the other
-				// list actually: we do that second one on-the-fly without collecting.
-				// At the first moment we had to move the "first" list to a valid pos
-				// if that is possible (otherwise just keep listPos, lastPos at NIL_POS
-				// if that was possible as next(..) call indicates there is a valid
-				// suspected pixel in this scanline! (see marker1_eval test app for
-				// these green pixels when you are clicking in that application).
-				// 
-				// Rem.: This is basically a two-variabled-one-valued elementwise
-				//       processing algorithm for unification updates of the list.
-				//       The difference is that this is an "online" working version.
-				//       (*): In Hungarian, this special case is an "Időszerűsítés".
-
-				// Add this new token we have found as a new marker centerline or
-				// extend an already existing marker centerline! Loop until processed.
-				bool tokenProcessed = false;
-				while(!tokenProcessed) {
-					if(listPos.isNil()) {
-						// End of list is reached and the token is not processed yet.
-						// In this case we need to add it to the end of the list right
-						// after the last list Position. We need to insert at the last
-						// valid position - we cannot insert at a NIL position as that
-						// means insertion at the head - the case of empty list is 
-						// handled here too and exactly that way as you can see!
-						mcCurrentList.insertAfter(
-								std::move(MarkerCenter(centerX, y, order)),
-							   	lastPos);
-						tokenProcessed = true;
-#ifdef MC_DEBUG_LOG
-printf("+(%d,%d) ", centerX, y);
-#endif // MC_DEBUG_LOG
-					} else {
-						// Compare if we can merge the next()-ed element into the list
-						// position element... For this we better get a reference to it
-						MarkerCenter &currentCenter = mcCurrentList[listPos];
-
-						bool extendedIt = false;
-						if(!currentCenter.shouldClose(y, config.closeDiffY)) {
-							// Try extending the existing element
-							// This is a NO-OP when we cannot extend it
-							extendedIt = currentCenter.tryExtend(
-									centerX, y, order, 
-									config.deltaDiffMax, config.widthDiffMax);
-						}
-
-						// See if we succeeded or not
-						if(extendedIt) {
-							// Because if we did, we processed this token:
-							// Both the lists moves and the user can provide next()
-							// so if there would be two lists, we would move with both
-							// and in this case we move the current list and exit the
-							// loop so that the next() function can be called with the
-							// next token-pixel that is a marker center somewhere...
-							// These both happen in an x-ordered way!
-							tokenProcessed = true;
-							lastPos = listPos;
-							listPos = mcCurrentList.next(listPos);
-#ifdef MC_DEBUG_LOG
-printf("E(%d,%d) ", centerX, y);
-#endif // MC_DEBUG_LOG
-						} else {
-							// If we did not succeed, we need to see if the element
-							// is so much before the one in the earlier list that
-							// it should be added as a new element at the current
-							// lastPos insertion position or not:
-							if(currentCenter.getRightMostCurrentAcceptableX(config.deltaDiffMax, config.widthDiffMax)
-								   	> centerX) {
-								// Completely new suspected marker - in the middle of the list
-								// Rem.: We know we need to insert this here and there will be no list position
-								//       to extend, because the list is ordered by the 'x' coordinate and next()
-								//       is called also in an ordered way. Because of insertion, the list also
-								//       kept ordered now so later iterations and calls to next() work as well!
-								mcCurrentList.insertAfter(
-										std::move(MarkerCenter(centerX, y, order)),
-										lastPos); // Rem.: lastPos insertion is needed as we insert BEFORE listPos
-								// Increment is needed to keep invariant that lastPost is literally the position 
-								// "before" the listpos. Because of the above insertion it would be not true anymore!
-								lastPos = mcCurrentList.next(lastPos);
-								// Mark this token as processed
-								// Rem.: We should not move with the list iteraor as the next time of the next(..)
-								//       call might return extension/continuation of what is under the head now!
-								tokenProcessed = true;
-#ifdef MC_DEBUG_LOG
-printf("N(%d,%d) ", centerX, y);
-#endif // MC_DEBUG_LOG
-							} else { // Rem.: This else is necessary or we would need to step with the lastPos too!
-								// See if things indicate we need to close the earlier found stuff
-								if(currentCenter.shouldClose(y, config.closeDiffY)) {
-									// Add the generated marker from it to the frame results
-									// Rem.: This adds poor quality markers too, but with small confidence
-									auto marker2d = currentCenter.constructMarker(config.ignoreWhenSignalCountLessThan);
-									if(marker2d.order > 0) {
-										// negative order means that the signal count was too small for the threshold!
-										frameResult.markers.push_back(marker2d);
-									}
-
-									// Close / Unlink the added one as it is considered to be closed!
-									// Rem.: We need to update list position to a valid position!
-									// Rem.: lastPos keeps to be valid too
-									listPos = mcCurrentList.unlinkAfter(lastPos);
-#ifdef MC_DEBUG_LOG
-printf("C(%d,%d) ", centerX, y);
-#endif // MC_DEBUG_LOG
-								} else {
-									// If there was nothing to close, we just update our "iterators"
-									lastPos = listPos;
-									listPos = mcCurrentList.next(listPos);
-#ifdef MC_DEBUG_LOG
-printf("*(%d,%d) ", centerX, y);
-#endif // MC_DEBUG_LOG
-								}
-							}
-						}
-					}
-				}
-			}
-
-			++x;
-			return ret;
+			process1DMarker();
 		}
+		return ret;
 	}
 
 	/**
@@ -561,6 +397,172 @@ printf("*(%d,%d) ", centerX, y);
 		return std::move(ret);
 	}
 private:
+
+	// Rem.: Not inlined because this is the rare part and is only here to make the hot-spot more cache friendly!
+	NexRes NOINLINE process1DMarker() {
+		// get marker data
+		int centerX = tokenizer.getMarkerX();
+		auto order = tokenizer.getOrder();
+		if(config.ignoreOrderSmallerThan < order) {
+			// If not too small to ignore, process it!
+
+			// PRE-READ TECHNIQUE
+			// ==================
+			//
+			// Advance list position when we are the first test on a newline
+			// And the list is not empty. The second handles cases when the
+			// list is completely empty
+			if(afterNewLine) {
+				// If the list is empty stays: lastPos == listPos == NIL_POS
+				// If it already has data, we step on the valid data and not be NIL
+				// Rem.: The above if ensures that we are on the beginning NIL_POS
+				if(!(mcCurrentList.isEmpty())) {
+					lastPos = listPos;
+					listPos = mcCurrentList.next(listPos);
+				}
+				/*
+				else  NIL_POS and NIL_POS for both
+				*/
+
+				// Indicate that we have handled the flag
+				afterNewLine = false;
+			}
+
+			// AFTER THIS POINT WE ARE IN THE INVARIANT!
+			// =========================================
+			//
+			// The best way to imagine this is to imagine always two lists:
+			// - A list of already suspected marker centers up until the last scanline
+			// - And a list of "1D markers at this scanline"
+			//
+			// These two lists are ordered by the x-coordinate (the first is ordered by
+			// its FIRST "lastX") and now in this place we are processing them to make a
+			// vertical parsing. If we would have these two lists at every scanline end
+			// then we could go through both of them and update the first list with the 
+			// latter new line data list.
+			//
+			// In reality however this is an on-line algorithm so there are no two
+			// seperate lists - just this "next(..)" function that gets the pixels
+			// by some provider as a source and the list about what we think where
+			// the markers center lines are! The existing list is the one we named
+			// the "first" above and we are ourselves in the iterator of the other
+			// list actually: we do that second one on-the-fly without collecting.
+			// At the first moment we had to move the "first" list to a valid pos
+			// if that is possible (otherwise just keep listPos, lastPos at NIL_POS
+			// if that was possible as next(..) call indicates there is a valid
+			// suspected pixel in this scanline! (see marker1_eval test app for
+			// these green pixels when you are clicking in that application).
+			// 
+			// Rem.: This is basically a two-variabled-one-valued elementwise
+			//       processing algorithm for unification updates of the list.
+			//       The difference is that this is an "online" working version.
+			//       (*): In Hungarian, this special case is an "Időszerűsítés".
+
+			// Add this new token we have found as a new marker centerline or
+			// extend an already existing marker centerline! Loop until processed.
+			bool tokenProcessed = false;
+			while(!tokenProcessed) {
+				if(listPos.isNil()) {
+					// End of list is reached and the token is not processed yet.
+					// In this case we need to add it to the end of the list right
+					// after the last list Position. We need to insert at the last
+					// valid position - we cannot insert at a NIL position as that
+					// means insertion at the head - the case of empty list is 
+					// handled here too and exactly that way as you can see!
+					mcCurrentList.insertAfter(
+							std::move(MarkerCenter(centerX, y, order)),
+							lastPos);
+					tokenProcessed = true;
+#ifdef MC_DEBUG_LOG
+printf("+(%d,%d) ", centerX, y);
+#endif // MC_DEBUG_LOG
+				} else {
+					// Compare if we can merge the next()-ed element into the list
+					// position element... For this we better get a reference to it
+					MarkerCenter &currentCenter = mcCurrentList[listPos];
+
+					bool extendedIt = false;
+					if(!currentCenter.shouldClose(y, config.closeDiffY)) {
+						// Try extending the existing element
+						// This is a NO-OP when we cannot extend it
+						extendedIt = currentCenter.tryExtend(
+								centerX, y, order, 
+								config.deltaDiffMax, config.widthDiffMax);
+					}
+
+					// See if we succeeded or not
+					if(extendedIt) {
+						// Because if we did, we processed this token:
+						// Both the lists moves and the user can provide next()
+						// so if there would be two lists, we would move with both
+						// and in this case we move the current list and exit the
+						// loop so that the next() function can be called with the
+						// next token-pixel that is a marker center somewhere...
+						// These both happen in an x-ordered way!
+						tokenProcessed = true;
+						lastPos = listPos;
+						listPos = mcCurrentList.next(listPos);
+#ifdef MC_DEBUG_LOG
+printf("E(%d,%d) ", centerX, y);
+#endif // MC_DEBUG_LOG
+					} else {
+						// If we did not succeed, we need to see if the element
+						// is so much before the one in the earlier list that
+						// it should be added as a new element at the current
+						// lastPos insertion position or not:
+						if(currentCenter.getRightMostCurrentAcceptableX(config.deltaDiffMax, config.widthDiffMax)
+								> centerX) {
+							// Completely new suspected marker - in the middle of the list
+							// Rem.: We know we need to insert this here and there will be no list position
+							//       to extend, because the list is ordered by the 'x' coordinate and next()
+							//       is called also in an ordered way. Because of insertion, the list also
+							//       kept ordered now so later iterations and calls to next() work as well!
+							mcCurrentList.insertAfter(
+									std::move(MarkerCenter(centerX, y, order)),
+									lastPos); // Rem.: lastPos insertion is needed as we insert BEFORE listPos
+							// Increment is needed to keep invariant that lastPost is literally the position 
+							// "before" the listpos. Because of the above insertion it would be not true anymore!
+							lastPos = mcCurrentList.next(lastPos);
+							// Mark this token as processed
+							// Rem.: We should not move with the list iteraor as the next time of the next(..)
+							//       call might return extension/continuation of what is under the head now!
+							tokenProcessed = true;
+#ifdef MC_DEBUG_LOG
+printf("N(%d,%d) ", centerX, y);
+#endif // MC_DEBUG_LOG
+						} else { // Rem.: This else is necessary or we would need to step with the lastPos too!
+							// See if things indicate we need to close the earlier found stuff
+							if(currentCenter.shouldClose(y, config.closeDiffY)) {
+								// Add the generated marker from it to the frame results
+								// Rem.: This adds poor quality markers too, but with small confidence
+								auto marker2d = currentCenter.constructMarker(config.ignoreWhenSignalCountLessThan);
+								if(marker2d.order > 0) {
+									// negative order means that the signal count was too small for the threshold!
+									frameResult.markers.push_back(marker2d);
+								}
+
+								// Close / Unlink the added one as it is considered to be closed!
+								// Rem.: We need to update list position to a valid position!
+								// Rem.: lastPos keeps to be valid too
+								listPos = mcCurrentList.unlinkAfter(lastPos);
+#ifdef MC_DEBUG_LOG
+printf("C(%d,%d) ", centerX, y);
+#endif // MC_DEBUG_LOG
+							} else {
+								// If there was nothing to close, we just update our "iterators"
+								lastPos = listPos;
+								listPos = mcCurrentList.next(listPos);
+#ifdef MC_DEBUG_LOG
+printf("*(%d,%d) ", centerX, y);
+#endif // MC_DEBUG_LOG
+							}
+						}
+					}
+				}
+			}
+		}
+		++x;
+	}
 	/**
 	 * We are collecting the results in this
 	 */
