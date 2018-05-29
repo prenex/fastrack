@@ -206,7 +206,7 @@ private:
 	 * Returns true when marker has been found and marker data can be asked for!
 	 * BEWARE: Changes/updates this->sustate!!!
 	 */
-	inline bool processHotoken(Homer<MT, CT> &homer) noexcept {
+	bool processHotoken(Homer<MT, CT> &homer) noexcept {
 #ifdef DEBUGLOG
 // Rem.: \n is always at the "return" operation!
 		printf("Token: AVG= %d at LEN= %d @ %d..%d --- ", sustate.lastMagAvg, sustate.lastLen, sustate.x - sustate.lastLen, sustate.x);
@@ -333,8 +333,6 @@ private:
 #endif //DEBUGLOG
 					}
 					*/
-					// TODO: CHECK: This must be the same amount change like at the marker start suspection!
-
 
 					if(isRealCenterSuspected) {
 						// REAL MARKER CENTER SUSPECTED!!!

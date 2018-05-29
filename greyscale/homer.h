@@ -49,14 +49,13 @@ inline T lenAffect(T value, int len, LenAffectParams params) {
 	T ret = value;
 #ifdef NO_ATTRITION
 	return ret;
-#endif // NO_ATTRITION
+#else
 
 #ifdef SIMPLE_ATTRITION
 	// Usually the fullAffectLenUpCons is not a really-really big value!
 	if(UNLIKELY(len < params.fullAffectLenUpCons)) return ret;
 	else return (ret<<1);
-#endif // SIMPLE_ATTRITION
-
+#else
 	// Reasons for the fast-path:
 	// 1.) Not reached minimal delta length for starting the stepping procedure
 	// 2.) We are configured to not do any step at all (zero stepping)
@@ -105,6 +104,8 @@ inline T lenAffect(T value, int len, LenAffectParams params) {
 //printf("l:%d r:%d", len, ret);
 
 	return ret;
+#endif // SIMPLE_ATTRITION
+#endif // NO_ATTRITION
 }
 
 /** Holds configuration data values for Homer */
@@ -214,7 +215,8 @@ public:
 	 * Set default state
 	 * - resets all the system knows about its homarea, but keeps configuration as-is
 	 */
-	inline void reset() noexcept {
+	// Rem.: This is not inlined because it is rare!!!
+	void NOINLINE reset() noexcept {
 		// reset to default
 		homarea = Homarea();
 	}
@@ -224,7 +226,8 @@ public:
 	 * First resets all the system knows about its homarea, but keeps configuration 
 	 * as-is then change this state with "last"
 	 */
-	inline void reset(MT last) noexcept {
+	// Rem.: This is not inlined because it is rare!!!
+	void NOINLINE reset(MT last) noexcept {
 		reset();
 		homarea.last = last;
 	}
@@ -259,19 +262,22 @@ public:
 				//       because all other checks are done above...
 				bool isOpenStill = homarea.tryOpenOrKeepWith(mag, lenAffectedHomerSetup.hodeltaLen, lenAffectedHomerSetup.minMaxDeltaMax);
 				// Do our reset if someone closed the area
-				if(UNLIKELY(!isOpenStill)) {
+				if(LIKELY(isOpenStill)) {
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+					// 82% of times on last measurement!
+					++branch_4_stillopen;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
+					// Indicate if we are open or not
+					//printf("C: %d\n", (int)isOpenStill);
+					return isOpenStill;
+				}
+				else {
 					reset(mag);
 #ifdef HOMER_MEASURE_NEXT_BRANCHES
 					++branch_3_closed;
 #endif // HOMER_MEASURE_NEXT_BRANCHES
+					return isOpenStill;
 				}
-#ifdef HOMER_MEASURE_NEXT_BRANCHES
-				// 82% of times on last measurement!
-				else ++branch_4_stillopen;
-#endif // HOMER_MEASURE_NEXT_BRANCHES
-				// Indicate if we are open or not
-				//printf("C: %d\n", (int)isOpenStill);
-				return isOpenStill;
 			} else {
 				//printf("B: %d,%d\n", tooMuchDiffFromMinMaxAvg, tooMuchDiffFromAvg);
 				//printf("B1: abs(%d - %d) > %d [len:%d]", homarea.magMinMaxAvg(), mag, lenAffectedHomerSetup.hodeltaMinMaxAvgDiff, homarea.len);
@@ -282,46 +288,8 @@ public:
 #endif // HOMER_MEASURE_NEXT_BRANCHES
 				return false;
 			}
-		} else if(!(abs((CT)homarea.last - (CT)mag) > homerSetup.hodeltaDiff)) {
-		// The difference was small enough - but we are not in the homarea
-		// ===============================================================
-			// SUSPECTED NEW AREA?
-
-			// Can we "open" an area? (Can we set isHo already?)
-			// Rem.: When we are here, (abs((CT)homarea.last - (CT)mag) <= hodeltaDiff) is sure
-			// Rem.: When we are here we are waiting for length to be enough!!!
-			bool openedNew = homarea.tryOpenOrKeepWith(mag, homerSetup.hodeltaLen, homerSetup.minMaxDeltaMax);
-			// ONLY RESET if there is a problem with the min-max delta max check!
-			// We come here also when everything is good except the length, so we cannot rely on isHo!
-			// Rem.: Because both this and the above is inline, the optimizer should optimize duplications...
-			if(UNLIKELY(!homarea.isMinMaxDeltaMaxOk(homerSetup.minMaxDeltaMax))) {
-				//printf("D: %d; ", homarea.len);
-				reset(mag);
-#ifdef HOMER_MEASURE_NEXT_BRANCHES
-				++branch_5_susreset;
-#endif // HOMER_MEASURE_NEXT_BRANCHES
-			}
-#ifdef HOMER_MEASURE_NEXT_BRANCHES
-			// 15% of times on last measurement!
-			else ++branch_6_openedNew;
-#endif // HOMER_MEASURE_NEXT_BRANCHES
-			// Indicate if we are open or not
-			//printf("D: %d\n", (int)stillOpen);
-			return openedNew;
 		} else {
-
-			// Looking for new homarea- but too big difference
-			// ===============================================
-			// Too big difference between the last and current magnitudes...
-			// Reset the current homarea as there cannot be any current area
-			reset(mag); // Rem.: We need to set the "last" to "mag" here!
-
-			// NO AREA
-			//printf("A: 0\n");
-#ifdef HOMER_MEASURE_NEXT_BRANCHES
-			++branch_1_looking;
-#endif // HOMER_MEASURE_NEXT_BRANCHES
-			return false;
+			return slowNext(homarea, homerSetup, mag);
 		}
 	}
 
@@ -352,7 +320,6 @@ public:
 	}
 
 private:
-
 	/** Data holder for a (suspected) homogenous area and its state */
 	struct Homarea final {
 		/**
@@ -480,6 +447,51 @@ private:
 			lenAffect(value, len, params);
 		}
 	};
+
+	// Rem.: Not inlined because this is the rare part and is only here to make the hot-spot more cache friendly!
+	bool NOINLINE slowNext(Homarea &homarea, HomerSetup &homerSetup, MT mag) {
+		if(!(abs((CT)homarea.last - (CT)mag) > homerSetup.hodeltaDiff)) {
+			// The difference was small enough - but we are not in the homarea
+			// ===============================================================
+			// SUSPECTED NEW AREA?
+
+			// Can we "open" an area? (Can we set isHo already?)
+			// Rem.: When we are here, (abs((CT)homarea.last - (CT)mag) <= hodeltaDiff) is sure
+			// Rem.: When we are here we are waiting for length to be enough!!!
+			bool openedNew = homarea.tryOpenOrKeepWith(mag, homerSetup.hodeltaLen, homerSetup.minMaxDeltaMax);
+			// ONLY RESET if there is a problem with the min-max delta max check!
+			// We come here also when everything is good except the length, so we cannot rely on isHo!
+			// Rem.: Because both this and the above is inline, the optimizer should optimize duplications...
+			if(UNLIKELY(!homarea.isMinMaxDeltaMaxOk(homerSetup.minMaxDeltaMax))) {
+				//printf("D: %d; ", homarea.len);
+				reset(mag);
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+				++branch_5_susreset;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
+			}
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+			// 15% of times on last measurement!
+			else ++branch_6_openedNew;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
+			// Indicate if we are open or not
+			//printf("D: %d\n", (int)stillOpen);
+			return openedNew;
+		} else {
+			// Looking for new homarea- but too big difference
+			// ===============================================
+			// Too big difference between the last and current magnitudes...
+			// Reset the current homarea as there cannot be any current area
+			reset(mag); // Rem.: We need to set the "last" to "mag" here!
+
+			// NO AREA
+			//printf("A: 0\n");
+#ifdef HOMER_MEASURE_NEXT_BRANCHES
+			++branch_1_looking;
+#endif // HOMER_MEASURE_NEXT_BRANCHES
+			return false;
+		}
+	}
+
 
 	/** Current homogenous area */
 	Homarea homarea;

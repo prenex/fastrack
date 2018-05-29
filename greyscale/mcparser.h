@@ -339,7 +339,6 @@ public:
 				// Advance list position when we are the first test on a newline
 				// And the list is not empty. The second handles cases when the
 				// list is completely empty
-				// TODO: ensure these line are OK:
 				if(afterNewLine) {
 					// If the list is empty stays: lastPos == listPos == NIL_POS
 					// If it already has data, we step on the valid data and not be NIL
@@ -554,7 +553,6 @@ printf("*(%d,%d) ", centerX, y);
 		mcCurrentList.reset();
 
 		// Reset result and return any earlier collected result
-		// TODO: Check - I just hope this is optimal and works too...
 		// This both resets the original variable
 		// and returns the collection of markers.
 		ImageFrameResult ret;
