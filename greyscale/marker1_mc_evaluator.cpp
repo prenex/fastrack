@@ -15,7 +15,7 @@
 #include "hoparser.h"
 #include "mcparser.h"
 
-#define RUNS_PER_FRAME 128
+#define RUNS_PER_FRAME 1
 
 using namespace cimg_library;
 
