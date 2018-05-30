@@ -1,0 +1,66 @@
+prenex@ubuntu:~/munka/c_c++/fastrack/greyscale$ ./marker1_mc_eval v2_test/lores_07_56_00_Pro.jpg
+Processing image (640, 360) with pixelcount: 230400
+calculation took 997.325 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+prenex@ubuntu:~/munka/c_c++/fastrack/greyscale$ ./marker1_mc_eval v2_test/lores_07_56_00_Pro.jpg
+Processing image (640, 360) with pixelcount: 230400
+calculation took 850.873 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+prenex@ubuntu:~/munka/c_c++/fastrack/greyscale$ ./marker1_mc_eval v2_test/
+lores_07_56_00_Pro.jpg                  WP_20180507_07_55_35_Pro.jpg            WP_20180508_09_05_52_Pro.jpg
+test_first_good_reasonable_midres2.png  WP_20180507_07_56_00_Pro.jpg            
+test_first_good_reasonable_midres.png   WP_20180508_09_05_47_Pro.jpg            
+prenex@ubuntu:~/munka/c_c++/fastrack/greyscale$ ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 12637.4 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+prenex@ubuntu:~/munka/c_c++/fastrack/greyscale$ 
+
+
+
+From these results it seems that the big picture is under 100ms and the small is under 8ms
+
+
+
+
+
+
+
+
+
+
+PERFORMANCE STATS:
+------------------
+
+
+prenex@ubuntu:~/munka/c_c++/fastrack/greyscale$ perf stat ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 12700.3 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+
+ Performance counter stats for './marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg':
+
+      12409,890081      task-clock (msec)         #    0,703 CPUs utilized          
+             6.923      context-switches          #    0,558 K/sec                  
+                 0      cpu-migrations            #    0,000 K/sec                  
+             6.503      page-faults               #    0,524 K/sec                  
+    19.819.489.407      cycles                    #    1,597 GHz                      (24,81%)
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+    36.313.376.715      instructions              #    1,83  insns per cycle          (25,08%)
+     5.212.790.871      branches                  #  420,051 M/sec                    (25,06%)
+        55.706.055      branch-misses             #    1,07% of all branches          (25,17%)
+
+      17,662918151 seconds time elapsed
