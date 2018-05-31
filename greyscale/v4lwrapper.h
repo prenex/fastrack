@@ -2,7 +2,7 @@
 #define _V4L_WRAPPER_H
 
 // Define when you need debug logging data
-#define V4L_WRAPPER_DEBUG_LOG 1
+//#define V4L_WRAPPER_DEBUG_LOG 1
 
 // define if you want exit(1) got called on errors - otherwise just the flag is set
 #define EXIT_ON_ERROR 1
