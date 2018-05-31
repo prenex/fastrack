@@ -10,19 +10,7 @@
 #include <GL/gl.h>
 #include <GL/glx.h>
 
-#include <cmath>
-#include <linux/ioctl.h>
-#include <linux/types.h>
-#include <linux/v4l2-common.h>
-#include <linux/v4l2-controls.h>
-#include <linux/videodev2.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/ioctl.h>
-#include <sys/mman.h>
 #include <vector> /* vector */
-#include <cstdint> /*uint8_t */
-
 
 // Use this for wrapping video4linux
 #include "v4lwrapper.h"
@@ -53,8 +41,6 @@ double elapsedMsec(const struct timeval *start, const struct timeval *stop) {
 	return ((stop->tv_sec  - start->tv_sec ) * 1000.0 +
 			(stop->tv_usec - start->tv_usec) / 1000.0);
 }
-
-bool HAXHAX = false;
 
 /** This is where we need to show our frames */
 void draw() {
@@ -335,7 +321,7 @@ void mainLoop() {
 	Atom wm_delete_window = XInternAtom(Win.display, "WM_DELETE_WINDOW", False);
 	XSetWMProtocols(Win.display, Win.win, &wm_delete_window, True);
 
-	while (1) {
+	while(1) {
 		/* Redraw window (after it's mapped) */
 		if (Win.displayed)
 			draw();
@@ -345,8 +331,8 @@ void mainLoop() {
 		struct timeval now;
 		gettimeofday(&now, 0);
 
-		/* Check X events every 1/10 second */
-		if (elapsedMsec(&last_xcheck, &now) > 100) {
+		/* Check X events every 250ms second - as we should not do this too much! */
+		if (elapsedMsec(&last_xcheck, &now) > 250) {
 			processXEvents(wm_protocols, wm_delete_window);
 			last_xcheck = now;
 		}

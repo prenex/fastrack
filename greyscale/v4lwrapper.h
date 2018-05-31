@@ -1,12 +1,27 @@
 #ifndef _V4L_WRAPPER_H
 #define _V4L_WRAPPER_H
 
+#include<chrono>
+#include <cstdint> /*uint8_t */
+#include <cmath>
+#include <linux/ioctl.h>
+#include <linux/types.h>
+#include <linux/v4l2-common.h>
+#include <linux/v4l2-controls.h>
+#include <linux/videodev2.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <sys/mman.h>
+
 // Define when you need debug logging data
 //#define V4L_WRAPPER_DEBUG_LOG 1
 
 // define if you want exit(1) got called on errors - otherwise just the flag is set
 #define EXIT_ON_ERROR 1
 
+// when defined we try to log how much time some of the operations take
+#define V4L_WRAPPER_DEBUG_TIME 1
 
 template<int WIDTH = 640, int HEIGHT = 480>
 class V4LWrapper {
@@ -134,8 +149,16 @@ public:
 		close(fd);
 	}
 
+	/**
+	 * Asks the hardware to grab a frame and then wait for it to return raw data.
+	 * Rem.: This method is completely synchronous and thus might lose valuable CPU time!
+	 */
 	uint8_t* nextFrame() {
-		// Queue the buffer
+#ifdef V4L_WRAPPER_DEBUG_TIME
+		// start measuring time
+		auto start = std::chrono::steady_clock::now();
+#endif // V4L_WRAPPER_DEBUG_TIME
+		// Queue the buffer - this asks the HW to start filling the buffer
 		if(ioctl(fd, VIDIOC_QBUF, &bufferinfo) < 0){
 			perror("Could not queue buffer, VIDIOC_QBUF");
 #ifdef EXIT_ON_ERROR
@@ -144,7 +167,12 @@ public:
 			errorFlag = true;
 		}
 
-		// Dequeue the buffer
+#ifdef V4L_WRAPPER_DEBUG_TIME
+		// start measuring time
+		auto mid = std::chrono::steady_clock::now();
+#endif // V4L_WRAPPER_DEBUG_TIME
+
+		// Dequeue the buffer - this waits here until hardware finishes
 		if(ioctl(fd, VIDIOC_DQBUF, &bufferinfo) < 0){
 			perror("Could not dequeue the buffer, VIDIOC_DQBUF");
 #ifdef EXIT_ON_ERROR
@@ -157,9 +185,20 @@ public:
 #ifdef V4L_WRAPPER_DEBUG_LOG
 		printf("The buffer has %d KBytes of data\n", bufferinfo.bytesused / 1024);
 #endif // V4L_WRAPPER_DEBUG_LOG
+
+#ifdef V4L_WRAPPER_DEBUG_TIME
+		// start measuring time
+		auto end = std::chrono::steady_clock::now();
+		auto mdiff = mid - start;
+		auto diff = end - start;
+		printf("Videoframe grab took %f ms\n", std::chrono::duration<double, std::milli>(diff).count());
+		printf(" * Until midtime took %f ms\n", std::chrono::duration<double, std::milli>(mdiff).count());
+#endif // V4L_WRAPPER_DEBUG_TIME
+
 		return buffer;
 	}
 
+	/** This tells the number of bytes filled into the buffer after nextFrame returns */
 	unsigned int getBytesUsed() {
 		return bufferinfo.bytesused;
 	}
