@@ -75,21 +75,38 @@ void draw() {
 
 	uint8_t *rawData = cameraWrapper.nextFrame();
 
-	int bufPos = 0, memBlockSize = 0;  // the position in the buffer and the amoun to copy from the buffer; The latter is 0 here because of hackz for first loop!
-	int remainingBufferSize = cameraWrapper.getBytesUsed(); // the remaining buffer size, is decremented by memBlockSize on each loop so we do not overwrite the buffer
+	// the position in the buffer and the amoun to copy from the buffer; The latter is 0 here because of hackz for first loop!
+	int bufPos = 0, memBlockSize = 0; 
+	// the remaining buffer size, is decremented by memBlockSize on each loop so we do not overwrite the buffer
+	int remainingBufferSize = cameraWrapper.getBytesUsed();
+	int lineOffset = 0;
+	int destOffset = 0;
+	// For each line:
     while(remainingBufferSize > 0) {
 		bufPos += memBlockSize;
 		// We read the whole line as a buffered reading
-		memBlockSize = CAM_XRES; // ex. 640
-        memcpy(pixBuf, rawData+bufPos, memBlockSize);
+		memBlockSize = CAM_XRES * (4/2); // 4byte = 2pixel in YUYV so reading 2 bytes get us a greyscale pixel!
+        //memcpy(pixBuf, rawData+bufPos, memBlockSize);
+		for(int i = 0; i < memBlockSize; i += 2) {
+			// YUYV - so the two relevant grey values are in the Ys (every second byte)
+			uint8_t mag = (rawData+bufPos)[i];
 
-		// check for end of frame special cases...
+			// TODO: run marker detection code here with MCParser::next(mag);
+
+			//Write our output buffer for showing the results
+			pixBuf[destOffset++] = mag;
+		}
+
+		// Check for end of frame special cases...
         if(memBlockSize > remainingBufferSize)
             memBlockSize = remainingBufferSize;
 
-        // subtract the amount of data we have to copy
+        // Subtract the amount of data we have to copy
         // from the remaining buffer size
         remainingBufferSize -= memBlockSize;
+
+		// Increment line offset
+		lineOffset += memBlockSize;
 	}
 	/*
 	uint8_t col = rand() % 256;
@@ -154,7 +171,7 @@ GLXFBConfig chooseFBConfig(Display *display, int screen) {
 		GLX_STENCIL_SIZE  , 8,
 		GLX_DOUBLEBUFFER  , True,
 		GLX_SAMPLE_BUFFERS, 1,
-		GLX_SAMPLES		  , 4,
+		GLX_SAMPLES		  , 1,
 		None
 	};
 	int attribs [ 100 ] ;
@@ -198,10 +215,10 @@ GLXContext createContext(Display *display, int screen,
 	glXMakeCurrent(display, None, 0);
 	glXDestroyContext(display, ctx_old);
 
-	/* Try to allocate a GL 4.2 COMPATIBILITY context */
+	/* Try to allocate a GL 2.1 COMPATIBILITY context */
 	static int Context_attribs[] = {
-		GLX_CONTEXT_MAJOR_VERSION_ARB, 4,
-		GLX_CONTEXT_MINOR_VERSION_ARB, 2,
+		GLX_CONTEXT_MAJOR_VERSION_ARB, 2,
+		GLX_CONTEXT_MINOR_VERSION_ARB, 1,
 		GLX_CONTEXT_PROFILE_MASK_ARB , GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB,
 		/*GLX_CONTEXT_PROFILE_MASK_ARB, GLX_CONTEXT_CORE_PROFILE_BIT_ARB, */
 		/*GLX_CONTEXT_FLAGS_ARB		  , GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB, */
@@ -213,10 +230,10 @@ GLXContext createContext(Display *display, int screen,
 	/* Forcably wait on any resulting X errors */
 	XSync(display, False);
 	if (!context) {
-		printf("Failed to allocate a GL 4.2 context\n");
+		printf("Failed to allocate a GL 2.1 context\n");
 		exit(EXIT_FAILURE);
 	}
-	printf("Created GL 4.2 context\n");
+	printf("Created GL 2.1 context\n");
 	return context;
 }
 

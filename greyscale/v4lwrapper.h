@@ -34,13 +34,30 @@ public:
 			errorFlag = true;
 		}
 
+		// 2.5.) Check for video capture and streaming capabilities
+		if(!(capability.capabilities & V4L2_CAP_VIDEO_CAPTURE)){
+			fprintf(stderr, "The device does not handle single-planar video capture.\n");
+#ifdef EXIT_ON_ERROR
+			exit(1);
+#endif
+			errorFlag = true;
+		}
+
+		if(!(capability.capabilities & V4L2_CAP_STREAMING)){
+			fprintf(stderr, "The device does not handle video capture streaming.\n");
+#ifdef EXIT_ON_ERROR
+			exit(1);
+#endif
+			errorFlag = true;
+		}
+
 
 		// 3. Set Image format
 		imageFormat.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 		imageFormat.fmt.pix.width = WIDTH;
 		imageFormat.fmt.pix.height = HEIGHT;
 		imageFormat.fmt.pix.pixelformat = V4L2_PIX_FMT_YUYV;
-		imageFormat.fmt.pix.field = V4L2_FIELD_NONE;
+		imageFormat.fmt.pix.field = V4L2_FIELD_NONE; // we could choose interlacing here - not interlaced
 		// tell the device you are using this format
 		if(ioctl(fd, VIDIOC_S_FMT, &imageFormat) < 0){
 			perror("Device could not set format, VIDIOC_S_FMT");
@@ -64,9 +81,9 @@ public:
 			errorFlag = true;
 		}
 
-
 		// 5. Query the buffer to get raw data ie. ask for the requested buffer
 		// and allocate memory for it
+		memset(&queryBuffer, 0, sizeof(queryBuffer));
 		queryBuffer.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 		queryBuffer.memory = V4L2_MEMORY_MMAP;
 		queryBuffer.index = 0;
@@ -140,6 +157,7 @@ public:
 #ifdef V4L_WRAPPER_DEBUG_LOG
 		printf("The buffer has %d KBytes of data\n", bufferinfo.bytesused / 1024);
 #endif // V4L_WRAPPER_DEBUG_LOG
+		return buffer;
 	}
 
 	unsigned int getBytesUsed() {
