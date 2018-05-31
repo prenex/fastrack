@@ -8,7 +8,7 @@ CC=g++
 ifeq ($(CC),g++)
 	# g++ (ver 5.1+ tested)
 	CFLAGS=-c -std=c++14 -g -O3 #-funsafe-loop-optimizations -freorder-blocks-and-partition # -O0 #-Wall # sadly we are having a lot of unused functions for tests so this is undesirable...
-	LDFLAGS=-g -lpthread -lX11 -O3 #-funsafe-loop-optimizations -freorder-blocks-and-partition #-lglut -lGLESv2 -lm -g # -O0
+	LDFLAGS=-g -lpthread -lX11 -O3 -lglut -lGLESv2 #-funsafe-loop-optimizations -freorder-blocks-and-partition #-lglut -lGLESv2 -lm -g # -O0
 else 
 ifeq ($(CC),em++)
 	# TODO: This is just copy paste from old projects, please change accordingly
@@ -20,7 +20,7 @@ else
 	# clang++ (ver 3.4+ tested)
 	# clang uses 1y instead of 14 here, we need the LLVM libc so that streams are copyable (or a more recent gcc toolchain than the 4.9 at my work!)
 	CFLAGS=-c -stdlib=libc++ -std=c++1y -g -O3 # -fsanitize=address -fno-omit-frame-pointer
-	LDFLAGS=-g -stdlib=libc++ -lpthread -lX11 -v -O3 #-lglut -lGLESv2 -lm -stdlib=libc++ -g # -fsanitize=address -fsanitize-memory-track-origins
+	LDFLAGS=-g -stdlib=libc++ -lpthread -lX11 -v -O3 -lglut -lGLESv2 -lm -stdlib=libc++ # -fsanitize=address -fsanitize-memory-track-origins
 endif
 endif
 
@@ -44,10 +44,15 @@ M1_MC_EV_SOURCES=marker1_mc_evaluator.cpp
 M1_MC_EV_OBJECTS=$(M1_MC_EV_SOURCES:.cpp=.o)
 M1_MC_EV_EXECUTABLE=marker1_mc_eval
 
-all: marker1gen marker2gen marker1_ev ffl_test marker1_mc_ev
+CAMAPP_SOURCES=marker_camapp.cpp
+CAMAPP_OBJECTS=$(CAMAPP_SOURCES:.cpp=.o)
+CAMAPP_EXECUTABLE=marker_camapp
+
+all: marker1gen marker2gen marker1_ev ffl_test marker1_mc_ev camapp
 ffl_test: $(FFLT_SOURCES) $(FFLT_EXECUTABLE)
 marker1gen: $(M1_SOURCES) $(M1_EXECUTABLE)
 marker2gen: $(M2_SOURCES) $(M2_EXECUTABLE)
+camapp: $(CAMAPP_SOURCES) $(CAMAPP_EXECUTABLE)
 
 marker1_mc_ev: $(M1_MC_EV_SOURCES) $(M1_MC_EV_EXECUTABLE)
 $(M1_MC_EV_EXECUTABLE): $(M1_MC_EV_OBJECTS)
@@ -77,6 +82,14 @@ else
 	$(CC) $(FFLT_OBJECTS) -o $@ $(LDFLAGS)
 endif
 
+$(CAMAPP_EXECUTABLE): $(CAMAPP_OBJECTS)
+# In case of emscripten build, we make a html5/webgl output
+ifeq ($(CC),em++)
+	$(CC) $(CAMAPP_OBJECTS) -o $@.html $(LDFLAGS)
+else
+	$(CC) $(CAMAPP_OBJECTS) -o $@ $(LDFLAGS)
+endif
+
 # The LDFLAGS should be after the files
 # because of some lazyness in newer toolchains!
 $(M1_EXECUTABLE): $(M1_OBJECTS) 
@@ -101,6 +114,6 @@ endif
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -f *.o $(M1_EXECUTABLE) $(M2_EXECUTABLE) $(M1_EV_EXECUTABLE) $(FFLT_EXECUTABLE) $(M1_MC_EV_EXECUTABLE)
+	rm -f *.o $(M1_EXECUTABLE) $(M2_EXECUTABLE) $(M1_EV_EXECUTABLE) $(FFLT_EXECUTABLE) $(M1_MC_EV_EXECUTABLE) $(CAMAPP_EXECUTABLE)
 
 # vim: tabstop=4 noexpandtab shiftwidth=4 softtabstop=4

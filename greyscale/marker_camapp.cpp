@@ -1,3 +1,6 @@
+// Compile with: g++ marker_camapp.cpp -lglut -lGLESv2 --std=c++14 -o marker_camapp
+
+
 #define MCA_VERSION "0.1"
 
 // There is one file where we should do these
