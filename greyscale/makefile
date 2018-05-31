@@ -8,21 +8,21 @@ CC=g++
 ifeq ($(CC),g++)
 	# g++ (ver 5.1+ tested)
 	CFLAGS=-c -std=c++14 -g -O3 #-funsafe-loop-optimizations -freorder-blocks-and-partition # -O0 #-Wall # sadly we are having a lot of unused functions for tests so this is undesirable...
-	LDFLAGS=-g -lpthread -lX11 -O3 -lglut -lGLESv2 #-funsafe-loop-optimizations -freorder-blocks-and-partition #-lglut -lGLESv2 -lm -g # -O0
-else 
-ifeq ($(CC),em++)
-	# TODO: This is just copy paste from old projects, please change accordingly
-	# em++ (ver 1.3+ tested)
-	# use 1y instead of 14 here, we need the LLVM libc so that streams are copyable (or a more recent gcc toolchain than the 4.9 at my work!)
-	CFLAGS=-c -stdlib=libc++ -std=c++1y -O2
-	LDFLAGS=--shell-file shell_minimal.html --preload-file models -lglut -stdlib=libc++ -O2 
+	LDFLAGS=-g -lpthread -lX11 -O3 -lGL -lX11 #-lglut -lGLESv2 #-funsafe-loop-optimizations -freorder-blocks-and-partition #-lglut -lGLESv2 -lm -g # -O0
+# else 
+# ifeq ($(CC),em++)
+# 	# TODO: This is just copy paste from old projects, please change accordingly
+# 	# em++ (ver 1.3+ tested)
+# 	# use 1y instead of 14 here, we need the LLVM libc so that streams are copyable (or a more recent gcc toolchain than the 4.9 at my work!)
+# 	CFLAGS=-c -stdlib=libc++ -std=c++1y -O2
+# 	LDFLAGS=--shell-file shell_minimal.html --preload-file models -lGL -lX11 -stdlib=libc++ -O2 
 else
 	# clang++ (ver 3.4+ tested)
 	# clang uses 1y instead of 14 here, we need the LLVM libc so that streams are copyable (or a more recent gcc toolchain than the 4.9 at my work!)
 	CFLAGS=-c -stdlib=libc++ -std=c++1y -g -O3 # -fsanitize=address -fno-omit-frame-pointer
-	LDFLAGS=-g -stdlib=libc++ -lpthread -lX11 -v -O3 -lglut -lGLESv2 -lm -stdlib=libc++ # -fsanitize=address -fsanitize-memory-track-origins
+	LDFLAGS=-g -stdlib=libc++ -lpthread -lX11 -v -O3 -lGL -lX11 -lm -stdlib=libc++ # -fsanitize=address -fsanitize-memory-track-origins
 endif
-endif
+#endif
 
 FFLT_SOURCES=ffltest.cpp
 FFLT_OBJECTS=$(FFLT_SOURCES:.cpp=.o)
