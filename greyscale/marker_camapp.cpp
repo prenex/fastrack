@@ -10,6 +10,26 @@
 #include <GL/gl.h>
 #include <GL/glx.h>
 
+#include <cmath>
+#include <linux/ioctl.h>
+#include <linux/types.h>
+#include <linux/v4l2-common.h>
+#include <linux/v4l2-controls.h>
+#include <linux/videodev2.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <sys/mman.h>
+#include <vector> /* vector */
+#include <cstdint> /*uint8_t */
+
+
+// Use this for wrapping video4linux
+#include "v4lwrapper.h"
+
+// Pixel-buffer to render as greyscale to the screen
+static uint8_t pixBuf[640 * 480];
+
 struct MyWin {
 	Display  *display;
 	Window win;
@@ -18,11 +38,14 @@ struct MyWin {
 	int height;
 };
 
-const int WIN_XPOS = 256;
-const int WIN_YPOS = 64;
-const int WIN_XRES = 640;
-const int WIN_YRES = 480;
-const int NUM_SAMPLES = 1;
+#define WIN_XPOS 256
+#define WIN_YPOS 64
+#define WIN_XRES 640
+#define WIN_YRES 480
+#define NUM_SAMPLES 1
+
+#define CAM_XRES 640
+#define CAM_YRES 480
 
 struct MyWin Win;
 
@@ -31,7 +54,14 @@ double elapsedMsec(const struct timeval *start, const struct timeval *stop) {
 			(stop->tv_usec - start->tv_usec) / 1000.0);
 }
 
+bool HAXHAX = false;
+
+/** This is where we need to show our frames */
 void draw() {
+
+	/** Created at first call of draw() and stays the same through the app run */
+	static V4LWrapper<CAM_XRES, CAM_YRES> cameraWrapper;
+
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
 	/*
@@ -42,15 +72,35 @@ void draw() {
 	glVertex3f( 1.0f, -1.0f, 0.0f);
 	glEnd();
 	*/
+
+	uint8_t *rawData = cameraWrapper.nextFrame();
+
+	int bufPos = 0, memBlockSize = 0;  // the position in the buffer and the amoun to copy from the buffer; The latter is 0 here because of hackz for first loop!
+	int remainingBufferSize = cameraWrapper.getBytesUsed(); // the remaining buffer size, is decremented by memBlockSize on each loop so we do not overwrite the buffer
+    while(remainingBufferSize > 0) {
+		bufPos += memBlockSize;
+		// We read the whole line as a buffered reading
+		memBlockSize = CAM_XRES; // ex. 640
+        memcpy(pixBuf, rawData+bufPos, memBlockSize);
+
+		// check for end of frame special cases...
+        if(memBlockSize > remainingBufferSize)
+            memBlockSize = remainingBufferSize;
+
+        // subtract the amount of data we have to copy
+        // from the remaining buffer size
+        remainingBufferSize -= memBlockSize;
+	}
+	/*
 	uint8_t col = rand() % 256;
-	uint8_t data[640 * 480];
 	for(size_t y = 0; y < WIN_YRES; ++y) {
 		for(size_t x = 0; x < WIN_XRES; ++x) {
-			data[x+y*WIN_XRES] = col;
+			pixBuf[x+y*WIN_XRES] = rawData[0];
 		}
 	}
+	*/
 
-	glDrawPixels(WIN_XRES, WIN_YRES, GL_LUMINANCE, GL_UNSIGNED_BYTE, data);
+	glDrawPixels(WIN_XRES, WIN_YRES, GL_LUMINANCE, GL_UNSIGNED_BYTE, pixBuf);
 	glFlush();
 	glXSwapBuffers(Win.display, Win.win);
 }

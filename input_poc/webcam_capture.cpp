@@ -15,7 +15,6 @@
 #include <sys/mman.h>
 #include <string.h>
 #include <fstream>
-#include <string>
 #include <vector> /* vector */
 #include <cstdint> /*uint8_t */
 
@@ -200,7 +199,7 @@ int main() {
     }
 
 
-    // 5. Quety the buffer to get raw data ie. ask for the you requested buffer
+    // 5. Query the buffer to get raw data ie. ask for the requested buffer
     // and allocate memory for it
     v4l2_buffer queryBuffer = {0};
     queryBuffer.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;

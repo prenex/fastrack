@@ -7,8 +7,8 @@ CC=g++
 
 ifeq ($(CC),g++)
 	# g++ (ver 5.1+ tested)
-	CFLAGS=-c -std=c++14 -g -O3 #-funsafe-loop-optimizations -freorder-blocks-and-partition # -O0 #-Wall # sadly we are having a lot of unused functions for tests so this is undesirable...
-	LDFLAGS=-g -lpthread -lX11 -O3 -lGL -lX11 #-lglut -lGLESv2 #-funsafe-loop-optimizations -freorder-blocks-and-partition #-lglut -lGLESv2 -lm -g # -O0
+	CFLAGS=-c -std=c++14 -g #-O3 #-funsafe-loop-optimizations -freorder-blocks-and-partition # -O0 #-Wall # sadly we are having a lot of unused functions for tests so this is undesirable...
+	LDFLAGS=-g -lpthread -lX11 -lGL -lX11 #-O3 #-lglut -lGLESv2 #-funsafe-loop-optimizations -freorder-blocks-and-partition #-lglut -lGLESv2 -lm -g # -O0
 # else 
 # ifeq ($(CC),em++)
 # 	# TODO: This is just copy paste from old projects, please change accordingly
