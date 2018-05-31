@@ -124,7 +124,7 @@ public:
 		bufferinfo.memory = V4L2_MEMORY_MMAP;
 		bufferinfo.index = 0;
 
-		// Activate streaming
+		// Activate streaming - I have read that on some devices there must be a QUEUE buffer beforehand!!!
 		type = bufferinfo.type;
 		if(ioctl(fd, VIDIOC_STREAMON, &type) < 0){
 			perror("Could not start streaming, VIDIOC_STREAMON");
