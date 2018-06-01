@@ -136,9 +136,6 @@ public:
 			// an address in memory
 			buffers[i] = (uint8_t*)mmap(NULL, queryBuffer.length, PROT_READ | PROT_WRITE, MAP_SHARED,
 								fd, queryBuffer.m.offset);
-#ifdef V4L_WRAPPER_DEBUG_LOG
-printf("buffers[i]: %u", buffers[i]);
-#endif
 			memset(buffers[i], 0, queryBuffer.length);
 
 

@@ -32,12 +32,16 @@ struct MyWin {
 
 #define WIN_XPOS 256
 #define WIN_YPOS 64
-#define WIN_XRES 640
-#define WIN_YRES 480
+/*#define WIN_XRES 640
+#define WIN_YRES 480*/
+#define WIN_XRES 320
+#define WIN_YRES 240
 #define NUM_SAMPLES 1
 
-#define CAM_XRES 640
-#define CAM_YRES 480
+/*#define CAM_XRES 640
+#define CAM_YRES 480*/
+#define CAM_XRES 320
+#define CAM_YRES 240
 
 struct MyWin Win;
 
@@ -77,6 +81,7 @@ void draw() {
 		// We read the whole line as a buffered reading
 		memBlockSize = CAM_XRES * (4/2); // 4byte = 2pixel in YUYV so reading 2 bytes get us a greyscale pixel!
         //memcpy(pixBuf, rawData+bufPos, memBlockSize);
+
 		for(int i = 0; i < memBlockSize; i += 2) {
 			// YUYV - so the two relevant grey values are in the Ys (every second byte)
 			uint8_t mag = (rawData+bufPos)[i];
