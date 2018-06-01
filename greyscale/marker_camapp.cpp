@@ -14,9 +14,13 @@
 
 // Use this for wrapping video4linux
 #include "v4lwrapper.h"
+// MarkerCenter frame parser
+#include "mcparser.h" 
 
 // Pixel-buffer to render as greyscale to the screen
 static uint8_t pixBuf[640 * 480];
+
+MCParser<> mcp;
 
 struct MyWin {
 	Display  *display;
@@ -78,6 +82,29 @@ void draw() {
 			uint8_t mag = (rawData+bufPos)[i];
 
 			// TODO: run marker detection code here with MCParser::next(mag);
+			auto res = mcp.next(mag);
+#ifdef DEBUG_POINTS // TODO
+			// do this only for debugging?
+			// These should not be on the image actually
+			if(res.isToken) {
+				// Cant do this now as it overwrites the next scanline:
+				// drawBoxAround(image, i, j, (unsigned char*)&blue);
+				// Much better debug indicator:
+				//image.draw_point(i, j, (unsigned char*)&blue);
+			}
+			// Check for 1D marker result
+			if(res.foundMarker) {
+				// Log and show this marker centerX
+				int centerX = mcp.tokenizer.getMarkerX();
+				auto order = mcp.tokenizer.getOrder();
+				if(order > 2) {
+					printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
+					//drawBoxAround(image, centerX, j, (unsigned char*)&green);
+				} else {
+					printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
+				}
+			}
+#endif // DEBUG_POINTS 
 
 			//Write our output buffer for showing the results
 			pixBuf[destOffset++] = mag;
@@ -93,19 +120,28 @@ void draw() {
 
 		// Increment line offset
 		lineOffset += memBlockSize;
+
+		mcp.endLine();
 	}
+	// Ends the frame: both for my parser and v4l2
 	// ! NEEDED !
-	cameraWrapper.finishFrame();
-	/*
-	uint8_t col = rand() % 256;
-	for(size_t y = 0; y < WIN_YRES; ++y) {
-		for(size_t x = 0; x < WIN_XRES; ++x) {
-			pixBuf[x+y*WIN_XRES] = rawData[0];
-		}
-	}
-	*/
+	cameraWrapper.finishFrame(); // TODO: might be optimised further by different loops for my processing
+	auto results = mcp.endImageFrame();
 
 	glDrawPixels(WIN_XRES, WIN_YRES, GL_LUMINANCE, GL_UNSIGNED_BYTE, pixBuf);
+
+	// Show the results
+	printf("Found %d 2D markers on the photo!\n", (int)results.markers.size());
+	for(int i = 0; i < results.markers.size(); ++i) {
+		auto mx = results.markers[i].x;
+		auto my = results.markers[i].y;
+		auto mc = results.markers[i].confidence;
+		auto mo = results.markers[i].order;
+		printf(" - (%d, %d)*%d @ %d confidence!\n", mx, my, mo, mc);
+		// TODO: draw out markers
+		// drawBoxAround(image, mx, my, (unsigned char*)&red);
+	}
+
 	glFlush();
 	glXSwapBuffers(Win.display, Win.win);
 }
