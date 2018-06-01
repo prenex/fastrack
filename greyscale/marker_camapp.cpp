@@ -128,8 +128,6 @@ void draw() {
 	cameraWrapper.finishFrame(); // TODO: might be optimised further by different loops for my processing
 	auto results = mcp.endImageFrame();
 
-	glDrawPixels(WIN_XRES, WIN_YRES, GL_LUMINANCE, GL_UNSIGNED_BYTE, pixBuf);
-
 	// Show the results
 	printf("Found %d 2D markers on the photo!\n", (int)results.markers.size());
 	for(int i = 0; i < results.markers.size(); ++i) {
@@ -139,8 +137,10 @@ void draw() {
 		auto mo = results.markers[i].order;
 		printf(" - (%d, %d)*%d @ %d confidence!\n", mx, my, mo, mc);
 		// TODO: draw out markers
-		// drawBoxAround(image, mx, my, (unsigned char*)&red);
+		pixBuf[mx + my*CAM_XRES] = 255;
 	}
+
+	glDrawPixels(WIN_XRES, WIN_YRES, GL_LUMINANCE, GL_UNSIGNED_BYTE, pixBuf);
 
 	glFlush();
 	glXSwapBuffers(Win.display, Win.win);
