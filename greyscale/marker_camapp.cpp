@@ -94,6 +94,8 @@ void draw() {
 		// Increment line offset
 		lineOffset += memBlockSize;
 	}
+	// ! NEEDED !
+	cameraWrapper.finishFrame();
 	/*
 	uint8_t col = rand() % 256;
 	for(size_t y = 0; y < WIN_YRES; ++y) {

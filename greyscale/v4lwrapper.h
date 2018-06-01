@@ -1,3 +1,17 @@
+/// --------------------------------------------------------
+/// Simple wrapper around video4linux2 to keep all low-level
+/// code at a single place. Tries to use hard coded data for
+/// fastest possible operations on my low-profile machines.
+///
+/// Useful links:
+/// https://lwn.net/Articles/203924/
+/// https://lightbits.github.io/v4l2_real_time/
+/// https://linuxtv.org/downloads/v4l-dvb-apis/uapi/v4l/mmap.html
+/// https://linuxtv.org/downloads/v4l-dvb-apis/uapi/v4l/buffer.html#c.v4l2_buffer
+/// https://linuxtv.org/downloads/v4l-dvb-apis/uapi/v4l/buffer.html#c.v4l2_plane
+/// http://jwhsmith.net/2014/12/capturing-a-webcam-stream-using-v4l2/
+/// --------------------------------------------------------
+
 #ifndef _V4L_WRAPPER_H
 #define _V4L_WRAPPER_H
 
@@ -15,7 +29,7 @@
 #include <sys/mman.h>
 
 // Define when you need debug logging data
-//#define V4L_WRAPPER_DEBUG_LOG 1
+#define V4L_WRAPPER_DEBUG_LOG 1
 
 // define if you want exit(1) got called on errors - otherwise just the flag is set
 #define EXIT_ON_ERROR 1
@@ -73,6 +87,7 @@ public:
 		imageFormat.fmt.pix.height = HEIGHT;
 		imageFormat.fmt.pix.pixelformat = V4L2_PIX_FMT_YUYV;
 		imageFormat.fmt.pix.field = V4L2_FIELD_NONE; // we could choose interlacing here - not interlaced
+		//imageFormat.fmt.pix.field = V4L2_FIELD_BOTTOM; // Only even lines? seems it does not work!
 		// tell the device you are using this format
 		if(ioctl(fd, VIDIOC_S_FMT, &imageFormat) < 0){
 			perror("Device could not set format, VIDIOC_S_FMT");
@@ -84,7 +99,8 @@ public:
 
 
 		// 4. Request Buffers from the device
-		requestBuffer.count = 1; // one request buffer
+		requestBuffer.count = 4; // one request buffer
+		//requestBuffer.count = 32; // TODO: need the code to handle it differently!
 		requestBuffer.type = V4L2_BUF_TYPE_VIDEO_CAPTURE; // request a buffer wich we an use for capturing frames
 		requestBuffer.memory = V4L2_MEMORY_MMAP;
 
@@ -96,57 +112,96 @@ public:
 			errorFlag = true;
 		}
 
-		// 5. Query the buffer to get raw data ie. ask for the requested buffer
-		// and allocate memory for it
-		memset(&queryBuffer, 0, sizeof(queryBuffer));
-		queryBuffer.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-		queryBuffer.memory = V4L2_MEMORY_MMAP;
-		queryBuffer.index = 0;
-		if(ioctl(fd, VIDIOC_QUERYBUF, &queryBuffer) < 0){
-			perror("Device did not return the buffer information, VIDIOC_QUERYBUF");
+#ifdef V4L_WRAPPER_DEBUG_LOG
+		printf("The number of request buffers is: %d\n", requestBuffer.count);
+#endif // V4L_WRAPPER_DEBUG_LOG
+
+		for(int i = 0; i < requestBuffer.count; ++i) {
+			// 5. Query the buffer to get raw data ie. ask for the requested buffer
+			// and allocate memory for it
+			v4l2_buffer queryBuffer = {0};
+			memset(&queryBuffer, 0, sizeof(queryBuffer));
+			queryBuffer.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+			queryBuffer.memory = V4L2_MEMORY_MMAP;
+			queryBuffer.index = i;
+			if(ioctl(fd, VIDIOC_QUERYBUF, &queryBuffer) < 0){
+				perror("Device did not return the buffer information, VIDIOC_QUERYBUF");
 #ifdef EXIT_ON_ERROR
-			exit(1);
+				exit(1);
 #endif
-			errorFlag = true;
+				errorFlag = true;
+			}
+			// use a pointer to point to the newly created buffer
+			// mmap() will map the memory address of the device to
+			// an address in memory
+			buffers[i] = (uint8_t*)mmap(NULL, queryBuffer.length, PROT_READ | PROT_WRITE, MAP_SHARED,
+								fd, queryBuffer.m.offset);
+#ifdef V4L_WRAPPER_DEBUG_LOG
+printf("buffers[i]: %u", buffers[i]);
+#endif
+			memset(buffers[i], 0, queryBuffer.length);
+
+
+			// 6. Prepare buffer to get a frame
+			// Create a new buffer type so the device knows whichbuffer we are talking about
+			memset(&bufferinfos[i], 0, sizeof(bufferinfos[i]));
+			bufferinfos[i].type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+			bufferinfos[i].memory = V4L2_MEMORY_MMAP;
+			bufferinfos[i].index = i;
+
+			// Activate streaming - I have read that on some devices there must be a QUEUE buffer beforehand!!!
+			if(ioctl(fd, VIDIOC_STREAMON, &bufferinfos[i].type) < 0){
+				perror("Could not start streaming, VIDIOC_STREAMON");
+#ifdef EXIT_ON_ERROR
+				exit(1);
+#endif
+				errorFlag = true;
+			}
 		}
-		// use a pointer to point to the newly created buffer
-		// mmap() will map the memory address of the device to
-		// an address in memory
-		buffer = (uint8_t*)mmap(NULL, queryBuffer.length, PROT_READ | PROT_WRITE, MAP_SHARED,
-							fd, queryBuffer.m.offset);
-		memset(buffer, 0, queryBuffer.length);
 
-
-		// 6. Prepare buffer to get a frame
-		// Create a new buffer type so the device knows whichbuffer we are talking about
 		memset(&bufferinfo, 0, sizeof(bufferinfo));
 		bufferinfo.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 		bufferinfo.memory = V4L2_MEMORY_MMAP;
-		bufferinfo.index = 0;
+	    //bufferinfo.index = 1; // UNUSED: only type, memory, reserved are used
 
-		// Activate streaming - I have read that on some devices there must be a QUEUE buffer beforehand!!!
-		type = bufferinfo.type;
-		if(ioctl(fd, VIDIOC_STREAMON, &type) < 0){
-			perror("Could not start streaming, VIDIOC_STREAMON");
+		// Queue the buffer - this asks the HW to start filling the buffer
+		for(int i = 0; i < requestBuffer.count; ++i) {
+			if(ioctl(fd, VIDIOC_QBUF, &bufferinfos[i]) < 0){
+				perror("Could not queue buffer, VIDIOC_QBUF");
 #ifdef EXIT_ON_ERROR
-			exit(1);
+				exit(1);
 #endif
-			errorFlag = true;
+				errorFlag = true;
+			}
 		}
 	}
 
 	/** Closes resources - or at least tries to do so*/
 	~V4LWrapper() {
 		// end streaming
-		if(ioctl(fd, VIDIOC_STREAMOFF, &type) < 0) {
-			perror("Could not end streaming, VIDIOC_STREAMOFF");
+		for(int i = 0; i < requestBuffer.count; ++i) {
+			if(ioctl(fd, VIDIOC_STREAMOFF, &bufferinfos[i].type) < 0) {
+				perror("Could not end streaming, VIDIOC_STREAMOFF");
+#ifdef EXIT_ON_ERROR
+				exit(1);
+#endif
+				errorFlag = true;
+			}
+		}
+
+		close(fd);
+	}
+
+	/** Should be ALWAYS called after a nextFrame after processing of memory area is done! */
+	void finishFrame() {
+		// Just ask the driver to refill the buffer we just processed
+		if(ioctl(fd, VIDIOC_QBUF, &bufferinfo) < 0){
+			perror("Could not queue buffer, VIDIOC_QBUF");
 #ifdef EXIT_ON_ERROR
 			exit(1);
 #endif
 			errorFlag = true;
 		}
-
-		close(fd);
 	}
 
 	/**
@@ -158,20 +213,6 @@ public:
 		// start measuring time
 		auto start = std::chrono::steady_clock::now();
 #endif // V4L_WRAPPER_DEBUG_TIME
-		// Queue the buffer - this asks the HW to start filling the buffer
-		if(ioctl(fd, VIDIOC_QBUF, &bufferinfo) < 0){
-			perror("Could not queue buffer, VIDIOC_QBUF");
-#ifdef EXIT_ON_ERROR
-			exit(1);
-#endif
-			errorFlag = true;
-		}
-
-#ifdef V4L_WRAPPER_DEBUG_TIME
-		// start measuring time
-		auto mid = std::chrono::steady_clock::now();
-#endif // V4L_WRAPPER_DEBUG_TIME
-
 		// Dequeue the buffer - this waits here until hardware finishes
 		if(ioctl(fd, VIDIOC_DQBUF, &bufferinfo) < 0){
 			perror("Could not dequeue the buffer, VIDIOC_DQBUF");
@@ -180,6 +221,11 @@ public:
 #endif
 			errorFlag = true;
 		}
+
+#ifdef V4L_WRAPPER_DEBUG_TIME
+		// start measuring time
+		auto end = std::chrono::steady_clock::now();
+#endif // V4L_WRAPPER_DEBUG_TIME
 		// Frames get written after dequeuing the buffer
 
 #ifdef V4L_WRAPPER_DEBUG_LOG
@@ -188,14 +234,11 @@ public:
 
 #ifdef V4L_WRAPPER_DEBUG_TIME
 		// start measuring time
-		auto end = std::chrono::steady_clock::now();
-		auto mdiff = mid - start;
 		auto diff = end - start;
 		printf("Videoframe grab took %f ms\n", std::chrono::duration<double, std::milli>(diff).count());
-		printf(" * Until midtime took %f ms\n", std::chrono::duration<double, std::milli>(mdiff).count());
 #endif // V4L_WRAPPER_DEBUG_TIME
 
-		return buffer;
+		return buffers[bufferinfo.index];
 	}
 
 	/** This tells the number of bytes filled into the buffer after nextFrame returns */
@@ -209,10 +252,10 @@ private:
 	v4l2_capability capability;
 	v4l2_format imageFormat;
 	v4l2_requestbuffers requestBuffer = {0};
-	v4l2_buffer queryBuffer = {0};
-	uint8_t *buffer;
-	v4l2_buffer bufferinfo;
-	int type;
+	//uint8_t *buffer;
+	uint8_t *buffers[32];
+	v4l2_buffer bufferinfo; // buffer that we successfully grabbed
+	v4l2_buffer bufferinfos[32];
 	bool errorFlag = false;
 };
 
