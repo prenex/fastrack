@@ -21,7 +21,8 @@
 //          exposure_auto_priority (bool)   : default=0 value=1
 // $ v4l2-ctl -d /dev/video0 "--set-ctrl=exposure_auto=1"
 // #This helps too - at least for me:
-// v4l2-ctl -d /dev/video0 "--set-ctrl=white_balance_temperature_auto=0"
+// $ v4l2-ctl -d /dev/video0 "--set-ctrl=white_balance_temperature_auto=0"
+// $ v4l2-ctl -d /dev/video0 "--set-ctrl=exposure_absolute=512"
 //
 // So basically you can turn off most "auto" things freely to suckless on lower end machines!
 
@@ -54,16 +55,16 @@ struct MyWin {
 
 #define WIN_XPOS 256
 #define WIN_YPOS 64
-/*#define WIN_XRES 640
-#define WIN_YRES 480*/
 #define WIN_XRES 640
 #define WIN_YRES 480
+/*#define WIN_XRES 320
+#define WIN_YRES 240*/
 #define NUM_SAMPLES 1
 
-/*#define CAM_XRES 640
-#define CAM_YRES 480*/
 #define CAM_XRES 640
 #define CAM_YRES 480
+/*##define CAM_XRES 320
+#define CAM_YRES 240*/
 
 // Pixel-buffer to render as greyscale to the screen
 static uint8_t pixBuf[WIN_XRES * WIN_YRES];
