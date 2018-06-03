@@ -1,4 +1,29 @@
 // Compile with: g++ marker_camapp.cpp -lGL -lX11 -o marker_camapp
+// When having very slow (5FPS) camera speed turn off auto_exposure:
+//
+// $ v4l2-ctl -d /dev/video0 -L
+//                      brightness (int)    : min=-127 max=127 step=1 default=0 value=0
+//                        contrast (int)    : min=0 max=127 step=1 default=64 value=64
+//                      saturation (int)    : min=0 max=255 step=1 default=64 value=64
+//                             hue (int)    : min=-16000 max=16000 step=1 default=0 value=0
+//  white_balance_temperature_auto (bool)   : default=1 value=1
+//                           gamma (int)    : min=16 max=500 step=1 default=100 value=100
+//            power_line_frequency (menu)   : min=0 max=2 default=1 value=1
+// 				0: Disabled
+// 				1: 50 Hz
+// 				2: 60 Hz
+//       white_balance_temperature (int)    : min=2800 max=6500 step=1 default=5200 value=5200 flags=inactive
+//                       sharpness (int)    : min=1 max=29 step=1 default=8 value=8
+//                   exposure_auto (menu)   : min=0 max=3 default=3 value=1
+// 				1: Manual Mode
+// 				3: Aperture Priority Mode
+//               exposure_absolute (int)    : min=1 max=2500 step=1 default=156 value=156
+//          exposure_auto_priority (bool)   : default=0 value=1
+// $ v4l2-ctl -d /dev/video0 "--set-ctrl=exposure_auto=1"
+// #This helps too - at least for me:
+// v4l2-ctl -d /dev/video0 "--set-ctrl=white_balance_temperature_auto=0"
+//
+// So basically you can turn off most "auto" things freely to suckless on lower end machines!
 
 #include <cstdio>
 #include <cstdlib>
@@ -17,9 +42,6 @@
 // MarkerCenter frame parser
 #include "mcparser.h" 
 
-// Pixel-buffer to render as greyscale to the screen
-static uint8_t pixBuf[640 * 480];
-
 MCParser<> mcp;
 
 struct MyWin {
@@ -34,14 +56,18 @@ struct MyWin {
 #define WIN_YPOS 64
 /*#define WIN_XRES 640
 #define WIN_YRES 480*/
-#define WIN_XRES 320
-#define WIN_YRES 240
+#define WIN_XRES 640
+#define WIN_YRES 480
 #define NUM_SAMPLES 1
 
 /*#define CAM_XRES 640
 #define CAM_YRES 480*/
-#define CAM_XRES 320
-#define CAM_YRES 240
+#define CAM_XRES 640
+#define CAM_YRES 480
+
+// Pixel-buffer to render as greyscale to the screen
+static uint8_t pixBuf[WIN_XRES * WIN_YRES];
+
 
 struct MyWin Win;
 
