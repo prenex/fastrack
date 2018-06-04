@@ -417,8 +417,8 @@ private:
 				// If it already has data, we step on the valid data and not be NIL
 				// Rem.: The above if ensures that we are on the beginning NIL_POS
 				if(!(mcCurrentList.isEmpty())) {
-					lastPos = listPos;
-					listPos = mcCurrentList.next(listPos);
+					lastPos = NIL_POS;
+					listPos = mcCurrentList.head();
 				}
 				/*
 				else  NIL_POS and NIL_POS for both
