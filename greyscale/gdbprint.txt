@@ -1,0 +1,16 @@
+
+(gdb) print mcCurrentList
+$1 = {curLen = 4, filledLenMax = 5, headIndex = 4, data = {_M_elems = {
+{first ={lastX = 326, minX = 324, maxX = 326, minY = 189, maxY = 194, signalCount = 3, confidence = 52, confidenceTemp = 52, 
+          ord = "\000\003\000"}, second = -1}, 
+{first ={lastX = 234, minX = 234, maxX = 234, minY = 349, maxY = 349, signalCount = 1, confidence = 50, confidenceTemp = 47, ord = "\000\001\000"}, second = 3},
+{first = {lastX = 340, minX = 340, maxX = 340, minY = 426, maxY = 426, signalCount = 1, confidence = 50, confidenceTemp = 50, ord = "\000\001\000"}, second = -1}, 
+{first ={lastX = 274, minX = 272, 
+          maxX = 274, minY = 353, maxY = 354, signalCount = 2, confidence = 51, confidenceTemp = 51, ord = "\000\001\001"}, second = 4}, 
+{first ={lastX = 260, minX = 256, maxX = 269, minY = 364, maxY = 379, 
+          signalCount = 5, confidence = 54, confidenceTemp = 54, ord = "\000\005\000"}, second = 1}, 
+{first ={lastX = 347, minX = 347, maxX = 349, minY = 471, maxY = 479, signalCount = 9, confidence = 58, 
+          confidenceTemp = 58, ord = "\000\000\t"}, second = 1}, 
+{first ={lastX = 0, minX = 0, maxX = 0, minY = 0, maxY = 0, signalCount = 0, confidence = 0, confidenceTemp = 0, ord = "\000\000\000"}, 
+        second = 0} <repeats 1018 times>}}, holeKeeper = {holes = {_M_elems = {0, 1, 2, 0 <repeats 1022 times>}}, holeStart = 1, holeEnd = 2}}
+(gdb) 

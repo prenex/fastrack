@@ -1,0 +1,6260 @@
+/ Hello rthier, Have a nice day on prenex \
+\ laptop!                                 /
+ -----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ --------
+| Status |
+ --------
+
+ UPTIME:
+ -------
+ 08:36:08 up  1:51,  4 users,  load average: 0,31, 0,19, 0,26
+
+ FORTUNE:
+ -------
+You will inherit some money or a small piece of land.
+
+Rem.: Please remember that /home/site/rdeDb contains the derby database ;-)
+rthier@prenex-laptop:~$ cdgit
+rthier@prenex-laptop:~/work/git$ cd PCK_IK3/fastrack/greyscale/
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ lat
+összesen 81M
+drwxrwxrwx 1 root root  20K máj   25 08:35 .
+-rwxrwxrwx 1 root root  16K máj   25 08:35 .marker1_mc_evaluator.cpp.swp
+-rwxrwxrwx 1 root root 6,9K máj   25 08:35 marker1_mc_evaluator.cpp
+-rwxrwxrwx 1 root root  16K máj   25 07:43 .mcparser.h.swp
+-rwxrwxrwx 1 root root  16K máj   25 07:43 .hoparser.h.swp
+-rwxrwxrwx 1 root root  16K máj   25 07:43 .homer.h.swp
+-rwxrwxrwx 1 root root  16K máj   25 07:43 .ffltest.cpp.swp
+-rwxrwxrwx 1 root root  16K máj   25 07:43 .fastforwardlist.h.swp
+-rwxrwxrwx 1 root root  16K máj   25 07:43 .marker1_gen.cpp.swp
+-rwxrwxrwx 1 root root  12K máj   25 07:43 .microshackz.h.swp
+-rwxrwxrwx 1 root root  16K máj   25 07:43 .makefile.swp
+-rwxrwxrwx 1 root root 3,7M máj   25 06:49 marker1_mc_eval
+-rwxrwxrwx 1 root root 8,0M máj   25 06:49 marker1_mc_evaluator.o
+-rwxrwxrwx 1 root root  90K máj   25 06:49 ffltest
+-rwxrwxrwx 1 root root 143K máj   25 06:49 ffltest.o
+-rwxrwxrwx 1 root root 3,7M máj   25 06:49 marker1_eval
+-rwxrwxrwx 1 root root 7,9M máj   25 06:49 marker1_evaluator.o
+-rwxrwxrwx 1 root root 3,1M máj   25 06:48 marker2_gen
+-rwxrwxrwx 1 root root 6,6M máj   25 06:48 marker2_gen.o
+-rwxrwxrwx 1 root root 3,1M máj   25 06:48 marker1_gen
+-rwxrwxrwx 1 root root 6,6M máj   25 06:48 marker1_gen.o
+-rwxrwxrwx 1 root root  363 máj   25 06:47 microshackz.h
+-rwxrwxrwx 1 root root  20K máj   25 06:47 hoparser.h
+-rwxrwxrwx 1 root root  19K máj   25 06:47 homer.h
+-rwxrwxrwx 1 root root 3,7K máj   24 16:34 makefile
+-rwxrwxrwx 1 root root 553K máj   24 16:19 callgrind.out.18932
+-rwxrwxrwx 1 root root 4,4K máj   24 16:12 marker2_gen.cpp
+-rwxrwxrwx 1 root root 3,7K máj   24 16:11 marker1_gen.cpp
+-rwxrwxrwx 1 root root  167 máj   24 12:56 devenv.sh
+-rwxrwxrwx 1 root root 6,4K máj   24 12:04 callgraph.dot.ps
+-rwxrwxrwx 1 root root  458 máj   24 12:04 callgraph.dot
+-rwxrwxrwx 1 root root  13K máj   24 11:06 fastforwardlist.h
+-rwxrwxrwx 1 root root 2,0M máj   24 11:01 .fuse_hidden000005c700000004
+-rwxrwxrwx 1 root root 2,6M máj   24 10:42 .fuse_hidden000005a900000003
+-rwxrwxrwx 1 root root  22K máj   24 10:41 mcparser.h
+-rwxrwxrwx 1 root root 2,6M máj   24 08:49 .fuse_hidden0000036c00000002
+-rwxrwxrwx 1 root root  28K máj   24 07:38 massif.out.4023
+-rwxrwxrwx 1 root root 2,6M máj   23 16:28 .fuse_hidden000002bb00000001
+-rwxrwxrwx 1 root root 2,6M máj   23 16:20 .fuse_hidden000060b700000003
+-rwxrwxrwx 1 root root 864K máj   23 16:00 vlcsnap-2018-05-23-16h00m32s442.png
+drwxrwxrwx 1 root root 4,0K máj   23 15:41 mcparser_test_v1
+-rwxrwxrwx 1 root root 4,4K máj   23 14:18 marker1_evaluator.cpp
+-rwxrwxrwx 1 root root 291K máj   23 13:14 cachegrind.out.16218
+-rwxrwxrwx 1 root root 295K máj   23 11:18 cachegrind.out.11806
+-rwxrwxrwx 1 root root  22M máj   23 11:17 profiling1.txt
+-rwxrwxrwx 1 root root 286K máj   23 10:58 cachegrind.out.10957
+drwxrwxrwx 1 root root 4,0K máj   23 10:37 v2_test
+-rwxrwxrwx 1 root root    0 máj   23 10:25 .fuse_hidden0000207d00000002
+-rwxrwxrwx 1 root root 4,2K máj   14 16:24 ffltest.cpp
+drwxrwxrwx 1 root root 4,0K máj    8 16:24 v0_test
+drwxrwxrwx 1 root root 4,0K máj    8 16:23 v1_test
+-rwxrwxrwx 1 root root 193K máj    3 10:52 __builtin_expect.png
+drwxrwxrwx 1 root root 4,0K ápr   27 17:33 ..
+-rwxrwxrwx 1 root root 140K ápr   27 11:13 real_test4_b.jpg
+-rwxrwxrwx 1 root root  954 ápr   27 09:33 on_ubuntu.sh
+-rwxrwxrwx 1 root root 769K ápr   27 09:33 marker2.bmp
+-rwxrwxrwx 1 root root 463K ápr   27 09:33 lena.png
+-rwxrwxrwx 1 root root  88K ápr   27 09:33 lena.jpg
+-rwxrwxrwx 1 root root  782 ápr   27 09:33 lena.cpp
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/lores_07_56_00_Pro.jpg 
+Processing image (640, 360) with pixelcount: 230400
+calculation took 11.4111 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.437 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/lores_07_56_00_Pro.jpg 
+Processing image (640, 360) with pixelcount: 230400
+calculation took 11.1893 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2018 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2061 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1898 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1517 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.4292 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1313 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1362 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.2996 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1392 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1575 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.142 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.162 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.137 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.232 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.9536 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.108 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2192 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.97 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.0913 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1917 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1626 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.4897 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1055 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1423 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.0253 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1682 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2866 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2723 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1974 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1665 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.4655 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.6388 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.0697 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2358 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1359 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.148 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.5689 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.0337 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.856 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2442 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2078 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1922 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.175 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1952 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2938 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1488 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1824 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.174 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2236 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.9648 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.9285 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2576 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2482 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1805 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2303 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1387 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.9386 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1599 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.2615 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1403 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.15 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.3824 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.8903 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 11.1427 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 125.885 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 127.314 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 127.412 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 125.428 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ make
+g++ -c -std=c++14 -g -O3  marker1_mc_evaluator.cpp -o marker1_mc_evaluator.o
+g++ marker1_mc_evaluator.o -o marker1_mc_eval -g -lpthread -lX11 -O3 
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 79.5335 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.4245 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7671 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.5542 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.5462 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5913 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.8548 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ make
+g++ -c -std=c++14 -g -O3  marker1_mc_evaluator.cpp -o marker1_mc_evaluator.o
+g++ marker1_mc_evaluator.o -o marker1_mc_eval -g -lpthread -lX11 -O3 
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 121.23 ms
+Found 0 2D markers on the photo!
+calculation took 123.395 ms
+Found 0 2D markers on the photo!
+calculation took 122.16 ms
+Found 0 2D markers on the photo!
+calculation took 122.429 ms
+Found 0 2D markers on the photo!
+calculation took 122.384 ms
+Found 0 2D markers on the photo!
+calculation took 122.102 ms
+Found 0 2D markers on the photo!
+calculation took 84.8962 ms
+Found 0 2D markers on the photo!
+calculation took 120.946 ms
+Found 0 2D markers on the photo!
+calculation took 122.155 ms
+Found 0 2D markers on the photo!
+calculation took 122.398 ms
+Found 0 2D markers on the photo!
+calculation took 122.107 ms
+Found 0 2D markers on the photo!
+calculation took 122.023 ms
+Found 0 2D markers on the photo!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ make
+g++ -c -std=c++14 -g -O3  marker1_mc_evaluator.cpp -o marker1_mc_evaluator.o
+g++ marker1_mc_evaluator.o -o marker1_mc_eval -g -lpthread -lX11 -O3 
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 78.8687 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.5214 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.2883 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.427 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.208 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.6198 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5886 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.7475 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7525 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.3038 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.6239 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.9409 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5848 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.693 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.4764 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.1144 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.4278 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5945 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.4678 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.8126 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7593 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7026 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.414 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5627 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.6385 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ make
+g++ -c -std=c++14 -g -O3  marker1_mc_evaluator.cpp -o marker1_mc_evaluator.o
+g++ marker1_mc_evaluator.o -o marker1_mc_eval -g -lpthread -lX11 -O3 
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 77.5305 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8956 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8198 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.5848 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8415 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8357 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.0972 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.7521 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8801 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6939 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.9442 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5113 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6072 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.3966 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.6295 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.9545 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.1804 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.125 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.1937 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.2731 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.9142 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.0693 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8505 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8414 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8669 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.0526 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.995 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.9137 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8307 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8376 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.7743 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.775 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8639 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8495 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.3868 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.864 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8093 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.0916 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8145 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.6526 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.9731 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.1381 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.9438 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.1673 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.1499 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.3829 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.0187 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.3357 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.9419 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8572 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.6309 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6019 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6158 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8796 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ make
+g++ -c -std=c++14 -g -O3  marker1_mc_evaluator.cpp -o marker1_mc_evaluator.o
+g++ marker1_mc_evaluator.o -o marker1_mc_eval -g -lpthread -lX11 -O3 
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+branch_1_isho   = 2309
+branch_2_noho   = 283
+branch_1_isho   = 2300
+branch_2_noho   = 292
+branch_1_isho   = 2304
+branch_2_noho   = 288
+branch_1_isho   = 2286
+branch_2_noho   = 306
+branch_1_isho   = 2294
+branch_2_noho   = 298
+branch_1_isho   = 2287
+branch_2_noho   = 305
+branch_1_isho   = 2280
+branch_2_noho   = 312
+branch_1_isho   = 2257
+branch_2_noho   = 335
+branch_1_isho   = 2261
+branch_2_noho   = 331
+branch_1_isho   = 2264
+branch_2_noho   = 328
+branch_1_isho   = 2271
+branch_2_noho   = 321
+branch_1_isho   = 2283
+branch_2_noho   = 309
+branch_1_isho   = 2281
+branch_2_noho   = 311
+branch_1_isho   = 2264
+branch_2_noho   = 328
+branch_1_isho   = 2270
+branch_2_noho   = 322
+branch_1_isho   = 2284
+branch_2_noho   = 308
+branch_1_isho   = 2266
+branch_2_noho   = 326
+branch_1_isho   = 2280
+branch_2_noho   = 312
+branch_1_isho   = 2289
+branch_2_noho   = 303
+branch_1_isho   = 2315
+branch_2_noho   = 277
+branch_1_isho   = 2290
+branch_2_noho   = 302
+branch_1_isho   = 2295
+branch_2_noho   = 297
+branch_1_isho   = 2289
+branch_2_noho   = 303
+branch_1_isho   = 2310
+branch_2_noho   = 282
+branch_1_isho   = 2288
+branch_2_noho   = 304
+branch_1_isho   = 2296
+branch_2_noho   = 296
+branch_1_isho   = 2352
+branch_2_noho   = 240
+branch_1_isho   = 2371
+branch_2_noho   = 221
+branch_1_isho   = 2353
+branch_2_noho   = 239
+branch_1_isho   = 2364
+branch_2_noho   = 228
+branch_1_isho   = 2367
+branch_2_noho   = 225
+branch_1_isho   = 2364
+branch_2_noho   = 228
+branch_1_isho   = 2369
+branch_2_noho   = 223
+branch_1_isho   = 2356
+branch_2_noho   = 236
+branch_1_isho   = 2365
+branch_2_noho   = 227
+branch_1_isho   = 2389
+branch_2_noho   = 203
+branch_1_isho   = 2379
+branch_2_noho   = 213
+branch_1_isho   = 2381
+branch_2_noho   = 211
+branch_1_isho   = 2382
+branch_2_noho   = 210
+branch_1_isho   = 2377
+branch_2_noho   = 215
+branch_1_isho   = 2354
+branch_2_noho   = 238
+branch_1_isho   = 2335
+branch_2_noho   = 257
+branch_1_isho   = 2357
+branch_2_noho   = 235
+branch_1_isho   = 2350
+branch_2_noho   = 242
+branch_1_isho   = 2353
+branch_2_noho   = 239
+branch_1_isho   = 2365
+branch_2_noho   = 227
+branch_1_isho   = 2361
+branch_2_noho   = 231
+branch_1_isho   = 2348
+branch_2_noho   = 244
+branch_1_isho   = 2339
+branch_2_noho   = 253
+branch_1_isho   = 2359
+branch_2_noho   = 233
+branch_1_isho   = 2360
+branch_2_noho   = 232
+branch_1_isho   = 2335
+branch_2_noho   = 257
+branch_1_isho   = 2338
+branch_2_noho   = 254
+branch_1_isho   = 2337
+branch_2_noho   = 255
+branch_1_isho   = 2336
+branch_2_noho   = 256
+branch_1_isho   = 2342
+branch_2_noho   = 250
+branch_1_isho   = 2324
+branch_2_noho   = 268
+branch_1_isho   = 2338
+branch_2_noho   = 254
+branch_1_isho   = 2320
+branch_2_noho   = 272
+branch_1_isho   = 2319
+branch_2_noho   = 273
+branch_1_isho   = 2307
+branch_2_noho   = 285
+branch_1_isho   = 2309
+branch_2_noho   = 283
+branch_1_isho   = 2303
+branch_2_noho   = 289
+branch_1_isho   = 2321
+branch_2_noho   = 271
+branch_1_isho   = 2304
+branch_2_noho   = 288
+branch_1_isho   = 2343
+branch_2_noho   = 249
+branch_1_isho   = 2307
+branch_2_noho   = 285
+branch_1_isho   = 2276
+branch_2_noho   = 316
+branch_1_isho   = 2258
+branch_2_noho   = 334
+branch_1_isho   = 2251
+branch_2_noho   = 341
+branch_1_isho   = 2262
+branch_2_noho   = 330
+branch_1_isho   = 2250
+branch_2_noho   = 342
+branch_1_isho   = 2247
+branch_2_noho   = 345
+branch_1_isho   = 2262
+branch_2_noho   = 330
+branch_1_isho   = 2244
+branch_2_noho   = 348
+branch_1_isho   = 2251
+branch_2_noho   = 341
+branch_1_isho   = 2268
+branch_2_noho   = 324
+branch_1_isho   = 2262
+branch_2_noho   = 330
+branch_1_isho   = 2271
+branch_2_noho   = 321
+branch_1_isho   = 2264
+branch_2_noho   = 328
+branch_1_isho   = 2245
+branch_2_noho   = 347
+branch_1_isho   = 2225
+branch_2_noho   = 367
+branch_1_isho   = 2260
+branch_2_noho   = 332
+branch_1_isho   = 2260
+branch_2_noho   = 332
+branch_1_isho   = 2272
+branch_2_noho   = 320
+branch_1_isho   = 2242
+branch_2_noho   = 350
+branch_1_isho   = 2249
+branch_2_noho   = 343
+branch_1_isho   = 2251
+branch_2_noho   = 341
+branch_1_isho   = 2262
+branch_2_noho   = 330
+branch_1_isho   = 2267
+branch_2_noho   = 325
+branch_1_isho   = 2273
+branch_2_noho   = 319
+branch_1_isho   = 2272
+branch_2_noho   = 320
+branch_1_isho   = 2248
+branch_2_noho   = 344
+branch_1_isho   = 2242
+branch_2_noho   = 350
+branch_1_isho   = 2247
+branch_2_noho   = 345
+branch_1_isho   = 2250
+branch_2_noho   = 342
+branch_1_isho   = 2249
+branch_2_noho   = 343
+branch_1_isho   = 2262
+branch_2_noho   = 330
+branch_1_isho   = 2277
+branch_2_noho   = 315
+branch_1_isho   = 2280
+branch_2_noho   = 312
+branch_1_isho   = 2300
+branch_2_noho   = 292
+branch_1_isho   = 2276
+branch_2_noho   = 316
+branch_1_isho   = 2285
+branch_2_noho   = 307
+branch_1_isho   = 2261
+branch_2_noho   = 331
+branch_1_isho   = 2252
+branch_2_noho   = 340
+branch_1_isho   = 2252
+branch_2_noho   = 340
+branch_1_isho   = 2247
+branch_2_noho   = 345
+branch_1_isho   = 2241
+branch_2_noho   = 351
+branch_1_isho   = 2251
+branch_2_noho   = 341
+branch_1_isho   = 2268
+branch_2_noho   = 324
+branch_1_isho   = 2275
+branch_2_noho   = 317
+branch_1_isho   = 2277
+branch_2_noho   = 315
+branch_1_isho   = 2283
+branch_2_noho   = 309
+branch_1_isho   = 2274
+branch_2_noho   = 318
+branch_1_isho   = 2291
+branch_2_noho   = 301
+branch_1_isho   = 2327
+branch_2_noho   = 265
+branch_1_isho   = 2324
+branch_2_noho   = 268
+branch_1_isho   = 2308
+branch_2_noho   = 284
+branch_1_isho   = 2279
+branch_2_noho   = 313
+branch_1_isho   = 2241
+branch_2_noho   = 351
+branch_1_isho   = 2274
+branch_2_noho   = 318
+branch_1_isho   = 2252
+branch_2_noho   = 340
+branch_1_isho   = 2279
+branch_2_noho   = 313
+branch_1_isho   = 2297
+branch_2_noho   = 295
+branch_1_isho   = 2284
+branch_2_noho   = 308
+branch_1_isho   = 2275
+branch_2_noho   = 317
+branch_1_isho   = 2266
+branch_2_noho   = 326
+branch_1_isho   = 2243
+branch_2_noho   = 349
+branch_1_isho   = 2226
+branch_2_noho   = 366
+branch_1_isho   = 2225
+branch_2_noho   = 367
+branch_1_isho   = 2245
+branch_2_noho   = 347
+branch_1_isho   = 2245
+branch_2_noho   = 347
+branch_1_isho   = 2252
+branch_2_noho   = 340
+branch_1_isho   = 2266
+branch_2_noho   = 326
+branch_1_isho   = 2266
+branch_2_noho   = 326
+branch_1_isho   = 2243
+branch_2_noho   = 349
+branch_1_isho   = 2249
+branch_2_noho   = 343
+branch_1_isho   = 2237
+branch_2_noho   = 355
+branch_1_isho   = 2231
+branch_2_noho   = 361
+branch_1_isho   = 2234
+branch_2_noho   = 358
+branch_1_isho   = 2220
+branch_2_noho   = 372
+branch_1_isho   = 2218
+branch_2_noho   = 374
+branch_1_isho   = 2209
+branch_2_noho   = 383
+branch_1_isho   = 2185
+branch_2_noho   = 407
+branch_1_isho   = 2216
+branch_2_noho   = 376
+branch_1_isho   = 2211
+branch_2_noho   = 381
+branch_1_isho   = 2229
+branch_2_noho   = 363
+branch_1_isho   = 2258
+branch_2_noho   = 334
+branch_1_isho   = 2266
+branch_2_noho   = 326
+branch_1_isho   = 2265
+branch_2_noho   = 327
+branch_1_isho   = 2258
+branch_2_noho   = 334
+branch_1_isho   = 2269
+branch_2_noho   = 323
+branch_1_isho   = 2215
+branch_2_noho   = 377
+branch_1_isho   = 2278
+branch_2_noho   = 314
+branch_1_isho   = 2286
+branch_2_noho   = 306
+branch_1_isho   = 2244
+branch_2_noho   = 348
+branch_1_isho   = 2261
+branch_2_noho   = 331
+branch_1_isho   = 2284
+branch_2_noho   = 308
+branch_1_isho   = 2301
+branch_2_noho   = 291
+branch_1_isho   = 2270
+branch_2_noho   = 322
+branch_1_isho   = 2270
+branch_2_noho   = 322
+branch_1_isho   = 2308
+branch_2_noho   = 284
+branch_1_isho   = 2295
+branch_2_noho   = 297
+branch_1_isho   = 2284
+branch_2_noho   = 308
+branch_1_isho   = 2308
+branch_2_noho   = 284
+branch_1_isho   = 2310
+branch_2_noho   = 282
+branch_1_isho   = 2332
+branch_2_noho   = 260
+branch_1_isho   = 2316
+branch_2_noho   = 276
+branch_1_isho   = 2340
+branch_2_noho   = 252
+branch_1_isho   = 2385
+branch_2_noho   = 207
+branch_1_isho   = 2384
+branch_2_noho   = 208
+branch_1_isho   = 2389
+branch_2_noho   = 203
+branch_1_isho   = 2390
+branch_2_noho   = 202
+branch_1_isho   = 2405
+branch_2_noho   = 187
+branch_1_isho   = 2408
+branch_2_noho   = 184
+branch_1_isho   = 2410
+branch_2_noho   = 182
+branch_1_isho   = 2398
+branch_2_noho   = 194
+branch_1_isho   = 2394
+branch_2_noho   = 198
+branch_1_isho   = 2407
+branch_2_noho   = 185
+branch_1_isho   = 2404
+branch_2_noho   = 188
+branch_1_isho   = 2390
+branch_2_noho   = 202
+branch_1_isho   = 2406
+branch_2_noho   = 186
+branch_1_isho   = 2406
+branch_2_noho   = 186
+branch_1_isho   = 2387
+branch_2_noho   = 205
+branch_1_isho   = 2407
+branch_2_noho   = 185
+branch_1_isho   = 2400
+branch_2_noho   = 192
+branch_1_isho   = 2398
+branch_2_noho   = 194
+branch_1_isho   = 2421
+branch_2_noho   = 171
+branch_1_isho   = 2420
+branch_2_noho   = 172
+branch_1_isho   = 2418
+branch_2_noho   = 174
+branch_1_isho   = 2408
+branch_2_noho   = 184
+branch_1_isho   = 2396
+branch_2_noho   = 196
+branch_1_isho   = 2412
+branch_2_noho   = 180
+branch_1_isho   = 2401
+branch_2_noho   = 191
+branch_1_isho   = 2409
+branch_2_noho   = 183
+branch_1_isho   = 2410
+branch_2_noho   = 182
+branch_1_isho   = 2411
+branch_2_noho   = 181
+branch_1_isho   = 2458
+branch_2_noho   = 134
+branch_1_isho   = 2460
+branch_2_noho   = 132
+branch_1_isho   = 2451
+branch_2_noho   = 141
+branch_1_isho   = 2464
+branch_2_noho   = 128
+branch_1_isho   = 2470
+branch_2_noho   = 122
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2475
+branch_2_noho   = 117
+branch_1_isho   = 2482
+branch_2_noho   = 110
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2504
+branch_2_noho   = 88
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2517
+branch_2_noho   = 75
+branch_1_isho   = 2517
+branch_2_noho   = 75
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2511
+branch_2_noho   = 81
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2516
+branch_2_noho   = 76
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2543
+branch_2_noho   = 49
+branch_1_isho   = 2543
+branch_2_noho   = 49
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2543
+branch_2_noho   = 49
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2542
+branch_2_noho   = 50
+branch_1_isho   = 2542
+branch_2_noho   = 50
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2543
+branch_2_noho   = 49
+branch_1_isho   = 2540
+branch_2_noho   = 52
+branch_1_isho   = 2540
+branch_2_noho   = 52
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2500
+branch_2_noho   = 92
+branch_1_isho   = 2434
+branch_2_noho   = 158
+branch_1_isho   = 2435
+branch_2_noho   = 157
+branch_1_isho   = 2432
+branch_2_noho   = 160
+branch_1_isho   = 2432
+branch_2_noho   = 160
+branch_1_isho   = 2421
+branch_2_noho   = 171
+branch_1_isho   = 2428
+branch_2_noho   = 164
+branch_1_isho   = 2428
+branch_2_noho   = 164
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2440
+branch_2_noho   = 152
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2533
+branch_2_noho   = 59
+branch_1_isho   = 2551
+branch_2_noho   = 41
+branch_1_isho   = 2552
+branch_2_noho   = 40
+branch_1_isho   = 2552
+branch_2_noho   = 40
+branch_1_isho   = 2550
+branch_2_noho   = 42
+branch_1_isho   = 2552
+branch_2_noho   = 40
+branch_1_isho   = 2552
+branch_2_noho   = 40
+branch_1_isho   = 2545
+branch_2_noho   = 47
+branch_1_isho   = 2543
+branch_2_noho   = 49
+branch_1_isho   = 2549
+branch_2_noho   = 43
+branch_1_isho   = 2548
+branch_2_noho   = 44
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2476
+branch_2_noho   = 116
+branch_1_isho   = 2457
+branch_2_noho   = 135
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2514
+branch_2_noho   = 78
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2516
+branch_2_noho   = 76
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2532
+branch_2_noho   = 60
+branch_1_isho   = 2532
+branch_2_noho   = 60
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2542
+branch_2_noho   = 50
+branch_1_isho   = 2542
+branch_2_noho   = 50
+branch_1_isho   = 2548
+branch_2_noho   = 44
+branch_1_isho   = 2541
+branch_2_noho   = 51
+branch_1_isho   = 2542
+branch_2_noho   = 50
+branch_1_isho   = 2540
+branch_2_noho   = 52
+branch_1_isho   = 2534
+branch_2_noho   = 58
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2518
+branch_2_noho   = 74
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2528
+branch_2_noho   = 64
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2511
+branch_2_noho   = 81
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2516
+branch_2_noho   = 76
+branch_1_isho   = 2514
+branch_2_noho   = 78
+branch_1_isho   = 2511
+branch_2_noho   = 81
+branch_1_isho   = 2511
+branch_2_noho   = 81
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2514
+branch_2_noho   = 78
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2502
+branch_2_noho   = 90
+branch_1_isho   = 2493
+branch_2_noho   = 99
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2493
+branch_2_noho   = 99
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2498
+branch_2_noho   = 94
+branch_1_isho   = 2516
+branch_2_noho   = 76
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2535
+branch_2_noho   = 57
+branch_1_isho   = 2541
+branch_2_noho   = 51
+branch_1_isho   = 2542
+branch_2_noho   = 50
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2540
+branch_2_noho   = 52
+branch_1_isho   = 2550
+branch_2_noho   = 42
+branch_1_isho   = 2556
+branch_2_noho   = 36
+branch_1_isho   = 2564
+branch_2_noho   = 28
+branch_1_isho   = 2562
+branch_2_noho   = 30
+branch_1_isho   = 2570
+branch_2_noho   = 22
+branch_1_isho   = 2568
+branch_2_noho   = 24
+branch_1_isho   = 2570
+branch_2_noho   = 22
+branch_1_isho   = 2570
+branch_2_noho   = 22
+branch_1_isho   = 2570
+branch_2_noho   = 22
+branch_1_isho   = 2569
+branch_2_noho   = 23
+branch_1_isho   = 2573
+branch_2_noho   = 19
+branch_1_isho   = 2573
+branch_2_noho   = 19
+branch_1_isho   = 2568
+branch_2_noho   = 24
+branch_1_isho   = 2570
+branch_2_noho   = 22
+branch_1_isho   = 2568
+branch_2_noho   = 24
+branch_1_isho   = 2569
+branch_2_noho   = 23
+branch_1_isho   = 2574
+branch_2_noho   = 18
+branch_1_isho   = 2574
+branch_2_noho   = 18
+branch_1_isho   = 2568
+branch_2_noho   = 24
+branch_1_isho   = 2568
+branch_2_noho   = 24
+branch_1_isho   = 2568
+branch_2_noho   = 24
+branch_1_isho   = 2570
+branch_2_noho   = 22
+branch_1_isho   = 2567
+branch_2_noho   = 25
+branch_1_isho   = 2570
+branch_2_noho   = 22
+branch_1_isho   = 2568
+branch_2_noho   = 24
+branch_1_isho   = 2558
+branch_2_noho   = 34
+branch_1_isho   = 2552
+branch_2_noho   = 40
+branch_1_isho   = 2539
+branch_2_noho   = 53
+branch_1_isho   = 2538
+branch_2_noho   = 54
+branch_1_isho   = 2532
+branch_2_noho   = 60
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2521
+branch_2_noho   = 71
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2489
+branch_2_noho   = 103
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2500
+branch_2_noho   = 92
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2502
+branch_2_noho   = 90
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2483
+branch_2_noho   = 109
+branch_1_isho   = 2490
+branch_2_noho   = 102
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2498
+branch_2_noho   = 94
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2496
+branch_2_noho   = 96
+branch_1_isho   = 2493
+branch_2_noho   = 99
+branch_1_isho   = 2499
+branch_2_noho   = 93
+branch_1_isho   = 2489
+branch_2_noho   = 103
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2456
+branch_2_noho   = 136
+branch_1_isho   = 2444
+branch_2_noho   = 148
+branch_1_isho   = 2435
+branch_2_noho   = 157
+branch_1_isho   = 2441
+branch_2_noho   = 151
+branch_1_isho   = 2434
+branch_2_noho   = 158
+branch_1_isho   = 2435
+branch_2_noho   = 157
+branch_1_isho   = 2434
+branch_2_noho   = 158
+branch_1_isho   = 2443
+branch_2_noho   = 149
+branch_1_isho   = 2445
+branch_2_noho   = 147
+branch_1_isho   = 2457
+branch_2_noho   = 135
+branch_1_isho   = 2458
+branch_2_noho   = 134
+branch_1_isho   = 2459
+branch_2_noho   = 133
+branch_1_isho   = 2433
+branch_2_noho   = 159
+branch_1_isho   = 2427
+branch_2_noho   = 165
+branch_1_isho   = 2438
+branch_2_noho   = 154
+branch_1_isho   = 2443
+branch_2_noho   = 149
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2422
+branch_2_noho   = 170
+branch_1_isho   = 2408
+branch_2_noho   = 184
+branch_1_isho   = 2397
+branch_2_noho   = 195
+branch_1_isho   = 2411
+branch_2_noho   = 181
+branch_1_isho   = 2405
+branch_2_noho   = 187
+branch_1_isho   = 2408
+branch_2_noho   = 184
+branch_1_isho   = 2408
+branch_2_noho   = 184
+branch_1_isho   = 2425
+branch_2_noho   = 167
+branch_1_isho   = 2425
+branch_2_noho   = 167
+branch_1_isho   = 2412
+branch_2_noho   = 180
+branch_1_isho   = 2407
+branch_2_noho   = 185
+branch_1_isho   = 2415
+branch_2_noho   = 177
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2443
+branch_2_noho   = 149
+branch_1_isho   = 2418
+branch_2_noho   = 174
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2425
+branch_2_noho   = 167
+branch_1_isho   = 2420
+branch_2_noho   = 172
+branch_1_isho   = 2426
+branch_2_noho   = 166
+branch_1_isho   = 2423
+branch_2_noho   = 169
+branch_1_isho   = 2428
+branch_2_noho   = 164
+branch_1_isho   = 2432
+branch_2_noho   = 160
+branch_1_isho   = 2429
+branch_2_noho   = 163
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2433
+branch_2_noho   = 159
+branch_1_isho   = 2432
+branch_2_noho   = 160
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2410
+branch_2_noho   = 182
+branch_1_isho   = 2443
+branch_2_noho   = 149
+branch_1_isho   = 2438
+branch_2_noho   = 154
+branch_1_isho   = 2445
+branch_2_noho   = 147
+branch_1_isho   = 2444
+branch_2_noho   = 148
+branch_1_isho   = 2441
+branch_2_noho   = 151
+branch_1_isho   = 2435
+branch_2_noho   = 157
+branch_1_isho   = 2428
+branch_2_noho   = 164
+branch_1_isho   = 2440
+branch_2_noho   = 152
+branch_1_isho   = 2429
+branch_2_noho   = 163
+branch_1_isho   = 2426
+branch_2_noho   = 166
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2419
+branch_2_noho   = 173
+branch_1_isho   = 2424
+branch_2_noho   = 168
+branch_1_isho   = 2422
+branch_2_noho   = 170
+branch_1_isho   = 2411
+branch_2_noho   = 181
+branch_1_isho   = 2419
+branch_2_noho   = 173
+branch_1_isho   = 2427
+branch_2_noho   = 165
+branch_1_isho   = 2429
+branch_2_noho   = 163
+branch_1_isho   = 2455
+branch_2_noho   = 137
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2437
+branch_2_noho   = 155
+branch_1_isho   = 2411
+branch_2_noho   = 181
+branch_1_isho   = 2423
+branch_2_noho   = 169
+branch_1_isho   = 2427
+branch_2_noho   = 165
+branch_1_isho   = 2434
+branch_2_noho   = 158
+branch_1_isho   = 2439
+branch_2_noho   = 153
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2432
+branch_2_noho   = 160
+branch_1_isho   = 2427
+branch_2_noho   = 165
+branch_1_isho   = 2423
+branch_2_noho   = 169
+branch_1_isho   = 2415
+branch_2_noho   = 177
+branch_1_isho   = 2397
+branch_2_noho   = 195
+branch_1_isho   = 2395
+branch_2_noho   = 197
+branch_1_isho   = 2408
+branch_2_noho   = 184
+branch_1_isho   = 2371
+branch_2_noho   = 221
+branch_1_isho   = 2396
+branch_2_noho   = 196
+branch_1_isho   = 2402
+branch_2_noho   = 190
+branch_1_isho   = 2392
+branch_2_noho   = 200
+branch_1_isho   = 2425
+branch_2_noho   = 167
+branch_1_isho   = 2415
+branch_2_noho   = 177
+branch_1_isho   = 2424
+branch_2_noho   = 168
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2411
+branch_2_noho   = 181
+branch_1_isho   = 2400
+branch_2_noho   = 192
+branch_1_isho   = 2417
+branch_2_noho   = 175
+branch_1_isho   = 2419
+branch_2_noho   = 173
+branch_1_isho   = 2426
+branch_2_noho   = 166
+branch_1_isho   = 2429
+branch_2_noho   = 163
+branch_1_isho   = 2455
+branch_2_noho   = 137
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2440
+branch_2_noho   = 152
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2426
+branch_2_noho   = 166
+branch_1_isho   = 2441
+branch_2_noho   = 151
+branch_1_isho   = 2421
+branch_2_noho   = 171
+branch_1_isho   = 2421
+branch_2_noho   = 171
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2444
+branch_2_noho   = 148
+branch_1_isho   = 2432
+branch_2_noho   = 160
+branch_1_isho   = 2447
+branch_2_noho   = 145
+branch_1_isho   = 2441
+branch_2_noho   = 151
+branch_1_isho   = 2461
+branch_2_noho   = 131
+branch_1_isho   = 2450
+branch_2_noho   = 142
+branch_1_isho   = 2419
+branch_2_noho   = 173
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2407
+branch_2_noho   = 185
+branch_1_isho   = 2408
+branch_2_noho   = 184
+branch_1_isho   = 2420
+branch_2_noho   = 172
+branch_1_isho   = 2413
+branch_2_noho   = 179
+branch_1_isho   = 2424
+branch_2_noho   = 168
+branch_1_isho   = 2395
+branch_2_noho   = 197
+branch_1_isho   = 2421
+branch_2_noho   = 171
+branch_1_isho   = 2413
+branch_2_noho   = 179
+branch_1_isho   = 2409
+branch_2_noho   = 183
+branch_1_isho   = 2397
+branch_2_noho   = 195
+branch_1_isho   = 2375
+branch_2_noho   = 217
+branch_1_isho   = 2416
+branch_2_noho   = 176
+branch_1_isho   = 2415
+branch_2_noho   = 177
+branch_1_isho   = 2423
+branch_2_noho   = 169
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2446
+branch_2_noho   = 146
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2416
+branch_2_noho   = 176
+branch_1_isho   = 2438
+branch_2_noho   = 154
+branch_1_isho   = 2425
+branch_2_noho   = 167
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2422
+branch_2_noho   = 170
+branch_1_isho   = 2425
+branch_2_noho   = 167
+branch_1_isho   = 2422
+branch_2_noho   = 170
+branch_1_isho   = 2423
+branch_2_noho   = 169
+branch_1_isho   = 2434
+branch_2_noho   = 158
+branch_1_isho   = 2444
+branch_2_noho   = 148
+branch_1_isho   = 2436
+branch_2_noho   = 156
+branch_1_isho   = 2426
+branch_2_noho   = 166
+branch_1_isho   = 2436
+branch_2_noho   = 156
+branch_1_isho   = 2427
+branch_2_noho   = 165
+branch_1_isho   = 2436
+branch_2_noho   = 156
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2451
+branch_2_noho   = 141
+branch_1_isho   = 2443
+branch_2_noho   = 149
+branch_1_isho   = 2438
+branch_2_noho   = 154
+branch_1_isho   = 2443
+branch_2_noho   = 149
+branch_1_isho   = 2437
+branch_2_noho   = 155
+branch_1_isho   = 2439
+branch_2_noho   = 153
+branch_1_isho   = 2423
+branch_2_noho   = 169
+branch_1_isho   = 2416
+branch_2_noho   = 176
+branch_1_isho   = 2432
+branch_2_noho   = 160
+branch_1_isho   = 2440
+branch_2_noho   = 152
+branch_1_isho   = 2438
+branch_2_noho   = 154
+branch_1_isho   = 2439
+branch_2_noho   = 153
+branch_1_isho   = 2433
+branch_2_noho   = 159
+branch_1_isho   = 2419
+branch_2_noho   = 173
+branch_1_isho   = 2428
+branch_2_noho   = 164
+branch_1_isho   = 2423
+branch_2_noho   = 169
+branch_1_isho   = 2424
+branch_2_noho   = 168
+branch_1_isho   = 2450
+branch_2_noho   = 142
+branch_1_isho   = 2411
+branch_2_noho   = 181
+branch_1_isho   = 2419
+branch_2_noho   = 173
+branch_1_isho   = 2440
+branch_2_noho   = 152
+branch_1_isho   = 2450
+branch_2_noho   = 142
+branch_1_isho   = 2445
+branch_2_noho   = 147
+branch_1_isho   = 2443
+branch_2_noho   = 149
+branch_1_isho   = 2437
+branch_2_noho   = 155
+branch_1_isho   = 2435
+branch_2_noho   = 157
+branch_1_isho   = 2450
+branch_2_noho   = 142
+branch_1_isho   = 2442
+branch_2_noho   = 150
+branch_1_isho   = 2449
+branch_2_noho   = 143
+branch_1_isho   = 2467
+branch_2_noho   = 125
+branch_1_isho   = 2464
+branch_2_noho   = 128
+branch_1_isho   = 2456
+branch_2_noho   = 136
+branch_1_isho   = 2452
+branch_2_noho   = 140
+branch_1_isho   = 2460
+branch_2_noho   = 132
+branch_1_isho   = 2463
+branch_2_noho   = 129
+branch_1_isho   = 2483
+branch_2_noho   = 109
+branch_1_isho   = 2492
+branch_2_noho   = 100
+branch_1_isho   = 2492
+branch_2_noho   = 100
+branch_1_isho   = 2499
+branch_2_noho   = 93
+branch_1_isho   = 2487
+branch_2_noho   = 105
+branch_1_isho   = 2499
+branch_2_noho   = 93
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2489
+branch_2_noho   = 103
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2468
+branch_2_noho   = 124
+branch_1_isho   = 2473
+branch_2_noho   = 119
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2492
+branch_2_noho   = 100
+branch_1_isho   = 2489
+branch_2_noho   = 103
+branch_1_isho   = 2487
+branch_2_noho   = 105
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2485
+branch_2_noho   = 107
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2519
+branch_2_noho   = 73
+branch_1_isho   = 2519
+branch_2_noho   = 73
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2504
+branch_2_noho   = 88
+branch_1_isho   = 2519
+branch_2_noho   = 73
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2508
+branch_2_noho   = 84
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2535
+branch_2_noho   = 57
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2541
+branch_2_noho   = 51
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2517
+branch_2_noho   = 75
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2533
+branch_2_noho   = 59
+branch_1_isho   = 2539
+branch_2_noho   = 53
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2539
+branch_2_noho   = 53
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2539
+branch_2_noho   = 53
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2541
+branch_2_noho   = 51
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2542
+branch_2_noho   = 50
+branch_1_isho   = 2542
+branch_2_noho   = 50
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2532
+branch_2_noho   = 60
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2533
+branch_2_noho   = 59
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2533
+branch_2_noho   = 59
+branch_1_isho   = 2518
+branch_2_noho   = 74
+branch_1_isho   = 2543
+branch_2_noho   = 49
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2514
+branch_2_noho   = 78
+branch_1_isho   = 2521
+branch_2_noho   = 71
+branch_1_isho   = 2518
+branch_2_noho   = 74
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2539
+branch_2_noho   = 53
+branch_1_isho   = 2544
+branch_2_noho   = 48
+branch_1_isho   = 2547
+branch_2_noho   = 45
+branch_1_isho   = 2546
+branch_2_noho   = 46
+branch_1_isho   = 2546
+branch_2_noho   = 46
+branch_1_isho   = 2539
+branch_2_noho   = 53
+branch_1_isho   = 2547
+branch_2_noho   = 45
+branch_1_isho   = 2546
+branch_2_noho   = 46
+branch_1_isho   = 2548
+branch_2_noho   = 44
+branch_1_isho   = 2551
+branch_2_noho   = 41
+branch_1_isho   = 2543
+branch_2_noho   = 49
+branch_1_isho   = 2545
+branch_2_noho   = 47
+branch_1_isho   = 2540
+branch_2_noho   = 52
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2545
+branch_2_noho   = 47
+branch_1_isho   = 2546
+branch_2_noho   = 46
+branch_1_isho   = 2554
+branch_2_noho   = 38
+branch_1_isho   = 2552
+branch_2_noho   = 40
+branch_1_isho   = 2545
+branch_2_noho   = 47
+branch_1_isho   = 2550
+branch_2_noho   = 42
+branch_1_isho   = 2551
+branch_2_noho   = 41
+branch_1_isho   = 2549
+branch_2_noho   = 43
+branch_1_isho   = 2538
+branch_2_noho   = 54
+branch_1_isho   = 2528
+branch_2_noho   = 64
+branch_1_isho   = 2549
+branch_2_noho   = 43
+branch_1_isho   = 2555
+branch_2_noho   = 37
+branch_1_isho   = 2537
+branch_2_noho   = 55
+branch_1_isho   = 2556
+branch_2_noho   = 36
+branch_1_isho   = 2556
+branch_2_noho   = 36
+branch_1_isho   = 2554
+branch_2_noho   = 38
+branch_1_isho   = 2555
+branch_2_noho   = 37
+branch_1_isho   = 2554
+branch_2_noho   = 38
+branch_1_isho   = 2554
+branch_2_noho   = 38
+branch_1_isho   = 2555
+branch_2_noho   = 37
+branch_1_isho   = 2548
+branch_2_noho   = 44
+branch_1_isho   = 2555
+branch_2_noho   = 37
+branch_1_isho   = 2548
+branch_2_noho   = 44
+branch_1_isho   = 2549
+branch_2_noho   = 43
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2519
+branch_2_noho   = 73
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2528
+branch_2_noho   = 64
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2539
+branch_2_noho   = 53
+branch_1_isho   = 2521
+branch_2_noho   = 71
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2532
+branch_2_noho   = 60
+branch_1_isho   = 2533
+branch_2_noho   = 59
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2538
+branch_2_noho   = 54
+branch_1_isho   = 2534
+branch_2_noho   = 58
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2532
+branch_2_noho   = 60
+branch_1_isho   = 2521
+branch_2_noho   = 71
+branch_1_isho   = 2521
+branch_2_noho   = 71
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2521
+branch_2_noho   = 71
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2519
+branch_2_noho   = 73
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2533
+branch_2_noho   = 59
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2517
+branch_2_noho   = 75
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2518
+branch_2_noho   = 74
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2532
+branch_2_noho   = 60
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2516
+branch_2_noho   = 76
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2538
+branch_2_noho   = 54
+branch_1_isho   = 2539
+branch_2_noho   = 53
+branch_1_isho   = 2532
+branch_2_noho   = 60
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2533
+branch_2_noho   = 59
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2534
+branch_2_noho   = 58
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2521
+branch_2_noho   = 71
+branch_1_isho   = 2514
+branch_2_noho   = 78
+branch_1_isho   = 2518
+branch_2_noho   = 74
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2508
+branch_2_noho   = 84
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2519
+branch_2_noho   = 73
+branch_1_isho   = 2508
+branch_2_noho   = 84
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2504
+branch_2_noho   = 88
+branch_1_isho   = 2510
+branch_2_noho   = 82
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2508
+branch_2_noho   = 84
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2500
+branch_2_noho   = 92
+branch_1_isho   = 2504
+branch_2_noho   = 88
+branch_1_isho   = 2514
+branch_2_noho   = 78
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2528
+branch_2_noho   = 64
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2519
+branch_2_noho   = 73
+branch_1_isho   = 2528
+branch_2_noho   = 64
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2516
+branch_2_noho   = 76
+branch_1_isho   = 2516
+branch_2_noho   = 76
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2510
+branch_2_noho   = 82
+branch_1_isho   = 2517
+branch_2_noho   = 75
+branch_1_isho   = 2498
+branch_2_noho   = 94
+branch_1_isho   = 2518
+branch_2_noho   = 74
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2511
+branch_2_noho   = 81
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2496
+branch_2_noho   = 96
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2517
+branch_2_noho   = 75
+branch_1_isho   = 2503
+branch_2_noho   = 89
+branch_1_isho   = 2492
+branch_2_noho   = 100
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2471
+branch_2_noho   = 121
+branch_1_isho   = 2446
+branch_2_noho   = 146
+branch_1_isho   = 2471
+branch_2_noho   = 121
+branch_1_isho   = 2493
+branch_2_noho   = 99
+branch_1_isho   = 2490
+branch_2_noho   = 102
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2504
+branch_2_noho   = 88
+branch_1_isho   = 2499
+branch_2_noho   = 93
+branch_1_isho   = 2485
+branch_2_noho   = 107
+branch_1_isho   = 2476
+branch_2_noho   = 116
+branch_1_isho   = 2496
+branch_2_noho   = 96
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2489
+branch_2_noho   = 103
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2463
+branch_2_noho   = 129
+branch_1_isho   = 2461
+branch_2_noho   = 131
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2490
+branch_2_noho   = 102
+branch_1_isho   = 2480
+branch_2_noho   = 112
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2503
+branch_2_noho   = 89
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2500
+branch_2_noho   = 92
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2511
+branch_2_noho   = 81
+branch_1_isho   = 2504
+branch_2_noho   = 88
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2480
+branch_2_noho   = 112
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2466
+branch_2_noho   = 126
+branch_1_isho   = 2468
+branch_2_noho   = 124
+branch_1_isho   = 2475
+branch_2_noho   = 117
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2472
+branch_2_noho   = 120
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2485
+branch_2_noho   = 107
+branch_1_isho   = 2489
+branch_2_noho   = 103
+branch_1_isho   = 2483
+branch_2_noho   = 109
+branch_1_isho   = 2472
+branch_2_noho   = 120
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2482
+branch_2_noho   = 110
+branch_1_isho   = 2485
+branch_2_noho   = 107
+branch_1_isho   = 2464
+branch_2_noho   = 128
+branch_1_isho   = 2447
+branch_2_noho   = 145
+branch_1_isho   = 2480
+branch_2_noho   = 112
+branch_1_isho   = 2468
+branch_2_noho   = 124
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2460
+branch_2_noho   = 132
+branch_1_isho   = 2476
+branch_2_noho   = 116
+branch_1_isho   = 2482
+branch_2_noho   = 110
+branch_1_isho   = 2466
+branch_2_noho   = 126
+branch_1_isho   = 2460
+branch_2_noho   = 132
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2485
+branch_2_noho   = 107
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2480
+branch_2_noho   = 112
+branch_1_isho   = 2475
+branch_2_noho   = 117
+branch_1_isho   = 2476
+branch_2_noho   = 116
+branch_1_isho   = 2470
+branch_2_noho   = 122
+branch_1_isho   = 2444
+branch_2_noho   = 148
+branch_1_isho   = 2490
+branch_2_noho   = 102
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2475
+branch_2_noho   = 117
+branch_1_isho   = 2493
+branch_2_noho   = 99
+branch_1_isho   = 2471
+branch_2_noho   = 121
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2479
+branch_2_noho   = 113
+branch_1_isho   = 2450
+branch_2_noho   = 142
+branch_1_isho   = 2470
+branch_2_noho   = 122
+branch_1_isho   = 2481
+branch_2_noho   = 111
+branch_1_isho   = 2470
+branch_2_noho   = 122
+branch_1_isho   = 2472
+branch_2_noho   = 120
+branch_1_isho   = 2473
+branch_2_noho   = 119
+branch_1_isho   = 2468
+branch_2_noho   = 124
+branch_1_isho   = 2470
+branch_2_noho   = 122
+branch_1_isho   = 2460
+branch_2_noho   = 132
+branch_1_isho   = 2473
+branch_2_noho   = 119
+branch_1_isho   = 2471
+branch_2_noho   = 121
+branch_1_isho   = 2462
+branch_2_noho   = 130
+branch_1_isho   = 2463
+branch_2_noho   = 129
+branch_1_isho   = 2449
+branch_2_noho   = 143
+branch_1_isho   = 2463
+branch_2_noho   = 129
+branch_1_isho   = 2460
+branch_2_noho   = 132
+branch_1_isho   = 2456
+branch_2_noho   = 136
+branch_1_isho   = 2467
+branch_2_noho   = 125
+branch_1_isho   = 2481
+branch_2_noho   = 111
+branch_1_isho   = 2438
+branch_2_noho   = 154
+branch_1_isho   = 2450
+branch_2_noho   = 142
+branch_1_isho   = 2452
+branch_2_noho   = 140
+branch_1_isho   = 2449
+branch_2_noho   = 143
+branch_1_isho   = 2464
+branch_2_noho   = 128
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2476
+branch_2_noho   = 116
+branch_1_isho   = 2475
+branch_2_noho   = 117
+branch_1_isho   = 2469
+branch_2_noho   = 123
+branch_1_isho   = 2463
+branch_2_noho   = 129
+branch_1_isho   = 2464
+branch_2_noho   = 128
+branch_1_isho   = 2470
+branch_2_noho   = 122
+branch_1_isho   = 2472
+branch_2_noho   = 120
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2500
+branch_2_noho   = 92
+branch_1_isho   = 2492
+branch_2_noho   = 100
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2484
+branch_2_noho   = 108
+branch_1_isho   = 2489
+branch_2_noho   = 103
+branch_1_isho   = 2498
+branch_2_noho   = 94
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2479
+branch_2_noho   = 113
+branch_1_isho   = 2493
+branch_2_noho   = 99
+branch_1_isho   = 2479
+branch_2_noho   = 113
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2483
+branch_2_noho   = 109
+branch_1_isho   = 2500
+branch_2_noho   = 92
+branch_1_isho   = 2492
+branch_2_noho   = 100
+branch_1_isho   = 2482
+branch_2_noho   = 110
+branch_1_isho   = 2484
+branch_2_noho   = 108
+branch_1_isho   = 2487
+branch_2_noho   = 105
+branch_1_isho   = 2473
+branch_2_noho   = 119
+branch_1_isho   = 2475
+branch_2_noho   = 117
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2475
+branch_2_noho   = 117
+branch_1_isho   = 2467
+branch_2_noho   = 125
+branch_1_isho   = 2479
+branch_2_noho   = 113
+branch_1_isho   = 2482
+branch_2_noho   = 110
+branch_1_isho   = 2489
+branch_2_noho   = 103
+branch_1_isho   = 2485
+branch_2_noho   = 107
+branch_1_isho   = 2492
+branch_2_noho   = 100
+branch_1_isho   = 2469
+branch_2_noho   = 123
+branch_1_isho   = 2492
+branch_2_noho   = 100
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2475
+branch_2_noho   = 117
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2489
+branch_2_noho   = 103
+branch_1_isho   = 2475
+branch_2_noho   = 117
+branch_1_isho   = 2471
+branch_2_noho   = 121
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2485
+branch_2_noho   = 107
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2485
+branch_2_noho   = 107
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2465
+branch_2_noho   = 127
+branch_1_isho   = 2479
+branch_2_noho   = 113
+branch_1_isho   = 2472
+branch_2_noho   = 120
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2519
+branch_2_noho   = 73
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2493
+branch_2_noho   = 99
+branch_1_isho   = 2503
+branch_2_noho   = 89
+branch_1_isho   = 2496
+branch_2_noho   = 96
+branch_1_isho   = 2496
+branch_2_noho   = 96
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2496
+branch_2_noho   = 96
+branch_1_isho   = 2511
+branch_2_noho   = 81
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2479
+branch_2_noho   = 113
+branch_1_isho   = 2484
+branch_2_noho   = 108
+branch_1_isho   = 2503
+branch_2_noho   = 89
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2499
+branch_2_noho   = 93
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2516
+branch_2_noho   = 76
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2504
+branch_2_noho   = 88
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2503
+branch_2_noho   = 89
+branch_1_isho   = 2498
+branch_2_noho   = 94
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2514
+branch_2_noho   = 78
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2480
+branch_2_noho   = 112
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2502
+branch_2_noho   = 90
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2502
+branch_2_noho   = 90
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2518
+branch_2_noho   = 74
+branch_1_isho   = 2511
+branch_2_noho   = 81
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2511
+branch_2_noho   = 81
+branch_1_isho   = 2508
+branch_2_noho   = 84
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2521
+branch_2_noho   = 71
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2499
+branch_2_noho   = 93
+branch_1_isho   = 2518
+branch_2_noho   = 74
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2521
+branch_2_noho   = 71
+branch_1_isho   = 2514
+branch_2_noho   = 78
+branch_1_isho   = 2493
+branch_2_noho   = 99
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2481
+branch_2_noho   = 111
+branch_1_isho   = 2487
+branch_2_noho   = 105
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2492
+branch_2_noho   = 100
+branch_1_isho   = 2508
+branch_2_noho   = 84
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2500
+branch_2_noho   = 92
+branch_1_isho   = 2492
+branch_2_noho   = 100
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2508
+branch_2_noho   = 84
+branch_1_isho   = 2496
+branch_2_noho   = 96
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2514
+branch_2_noho   = 78
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2511
+branch_2_noho   = 81
+branch_1_isho   = 2500
+branch_2_noho   = 92
+branch_1_isho   = 2510
+branch_2_noho   = 82
+branch_1_isho   = 2500
+branch_2_noho   = 92
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2490
+branch_2_noho   = 102
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2503
+branch_2_noho   = 89
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2500
+branch_2_noho   = 92
+branch_1_isho   = 2517
+branch_2_noho   = 75
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2510
+branch_2_noho   = 82
+branch_1_isho   = 2503
+branch_2_noho   = 89
+branch_1_isho   = 2504
+branch_2_noho   = 88
+branch_1_isho   = 2508
+branch_2_noho   = 84
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2490
+branch_2_noho   = 102
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2470
+branch_2_noho   = 122
+branch_1_isho   = 2469
+branch_2_noho   = 123
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2480
+branch_2_noho   = 112
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2487
+branch_2_noho   = 105
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2498
+branch_2_noho   = 94
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2489
+branch_2_noho   = 103
+branch_1_isho   = 2462
+branch_2_noho   = 130
+branch_1_isho   = 2473
+branch_2_noho   = 119
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2470
+branch_2_noho   = 122
+branch_1_isho   = 2479
+branch_2_noho   = 113
+branch_1_isho   = 2471
+branch_2_noho   = 121
+branch_1_isho   = 2485
+branch_2_noho   = 107
+branch_1_isho   = 2466
+branch_2_noho   = 126
+branch_1_isho   = 2496
+branch_2_noho   = 96
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2481
+branch_2_noho   = 111
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2460
+branch_2_noho   = 132
+branch_1_isho   = 2456
+branch_2_noho   = 136
+branch_1_isho   = 2463
+branch_2_noho   = 129
+branch_1_isho   = 2471
+branch_2_noho   = 121
+branch_1_isho   = 2450
+branch_2_noho   = 142
+branch_1_isho   = 2450
+branch_2_noho   = 142
+branch_1_isho   = 2432
+branch_2_noho   = 160
+branch_1_isho   = 2436
+branch_2_noho   = 156
+branch_1_isho   = 2458
+branch_2_noho   = 134
+branch_1_isho   = 2455
+branch_2_noho   = 137
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2475
+branch_2_noho   = 117
+branch_1_isho   = 2480
+branch_2_noho   = 112
+branch_1_isho   = 2462
+branch_2_noho   = 130
+branch_1_isho   = 2451
+branch_2_noho   = 141
+branch_1_isho   = 2454
+branch_2_noho   = 138
+branch_1_isho   = 2457
+branch_2_noho   = 135
+branch_1_isho   = 2468
+branch_2_noho   = 124
+branch_1_isho   = 2458
+branch_2_noho   = 134
+branch_1_isho   = 2434
+branch_2_noho   = 158
+branch_1_isho   = 2441
+branch_2_noho   = 151
+branch_1_isho   = 2448
+branch_2_noho   = 144
+branch_1_isho   = 2443
+branch_2_noho   = 149
+branch_1_isho   = 2462
+branch_2_noho   = 130
+branch_1_isho   = 2433
+branch_2_noho   = 159
+branch_1_isho   = 2437
+branch_2_noho   = 155
+branch_1_isho   = 2416
+branch_2_noho   = 176
+branch_1_isho   = 2414
+branch_2_noho   = 178
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2424
+branch_2_noho   = 168
+branch_1_isho   = 2415
+branch_2_noho   = 177
+branch_1_isho   = 2421
+branch_2_noho   = 171
+branch_1_isho   = 2456
+branch_2_noho   = 136
+branch_1_isho   = 2434
+branch_2_noho   = 158
+branch_1_isho   = 2426
+branch_2_noho   = 166
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2422
+branch_2_noho   = 170
+branch_1_isho   = 2431
+branch_2_noho   = 161
+branch_1_isho   = 2429
+branch_2_noho   = 163
+branch_1_isho   = 2434
+branch_2_noho   = 158
+branch_1_isho   = 2428
+branch_2_noho   = 164
+branch_1_isho   = 2412
+branch_2_noho   = 180
+branch_1_isho   = 2418
+branch_2_noho   = 174
+branch_1_isho   = 2381
+branch_2_noho   = 211
+branch_1_isho   = 2388
+branch_2_noho   = 204
+branch_1_isho   = 2388
+branch_2_noho   = 204
+branch_1_isho   = 2375
+branch_2_noho   = 217
+branch_1_isho   = 2406
+branch_2_noho   = 186
+branch_1_isho   = 2406
+branch_2_noho   = 186
+branch_1_isho   = 2393
+branch_2_noho   = 199
+branch_1_isho   = 2398
+branch_2_noho   = 194
+branch_1_isho   = 2384
+branch_2_noho   = 208
+branch_1_isho   = 2372
+branch_2_noho   = 220
+branch_1_isho   = 2366
+branch_2_noho   = 226
+branch_1_isho   = 2372
+branch_2_noho   = 220
+branch_1_isho   = 2348
+branch_2_noho   = 244
+branch_1_isho   = 2357
+branch_2_noho   = 235
+branch_1_isho   = 2358
+branch_2_noho   = 234
+branch_1_isho   = 2359
+branch_2_noho   = 233
+branch_1_isho   = 2379
+branch_2_noho   = 213
+branch_1_isho   = 2385
+branch_2_noho   = 207
+branch_1_isho   = 2405
+branch_2_noho   = 187
+branch_1_isho   = 2387
+branch_2_noho   = 205
+branch_1_isho   = 2379
+branch_2_noho   = 213
+branch_1_isho   = 2385
+branch_2_noho   = 207
+branch_1_isho   = 2369
+branch_2_noho   = 223
+branch_1_isho   = 2373
+branch_2_noho   = 219
+branch_1_isho   = 2379
+branch_2_noho   = 213
+branch_1_isho   = 2377
+branch_2_noho   = 215
+branch_1_isho   = 2376
+branch_2_noho   = 216
+branch_1_isho   = 2378
+branch_2_noho   = 214
+branch_1_isho   = 2372
+branch_2_noho   = 220
+branch_1_isho   = 2361
+branch_2_noho   = 231
+branch_1_isho   = 2382
+branch_2_noho   = 210
+branch_1_isho   = 2381
+branch_2_noho   = 211
+branch_1_isho   = 2376
+branch_2_noho   = 216
+branch_1_isho   = 2375
+branch_2_noho   = 217
+branch_1_isho   = 2377
+branch_2_noho   = 215
+branch_1_isho   = 2369
+branch_2_noho   = 223
+branch_1_isho   = 2345
+branch_2_noho   = 247
+branch_1_isho   = 2362
+branch_2_noho   = 230
+branch_1_isho   = 2385
+branch_2_noho   = 207
+branch_1_isho   = 2359
+branch_2_noho   = 233
+branch_1_isho   = 2361
+branch_2_noho   = 231
+branch_1_isho   = 2366
+branch_2_noho   = 226
+branch_1_isho   = 2399
+branch_2_noho   = 193
+branch_1_isho   = 2394
+branch_2_noho   = 198
+branch_1_isho   = 2385
+branch_2_noho   = 207
+branch_1_isho   = 2394
+branch_2_noho   = 198
+branch_1_isho   = 2384
+branch_2_noho   = 208
+branch_1_isho   = 2385
+branch_2_noho   = 207
+branch_1_isho   = 2358
+branch_2_noho   = 234
+branch_1_isho   = 2376
+branch_2_noho   = 216
+branch_1_isho   = 2378
+branch_2_noho   = 214
+branch_1_isho   = 2365
+branch_2_noho   = 227
+branch_1_isho   = 2404
+branch_2_noho   = 188
+branch_1_isho   = 2404
+branch_2_noho   = 188
+branch_1_isho   = 2396
+branch_2_noho   = 196
+branch_1_isho   = 2416
+branch_2_noho   = 176
+branch_1_isho   = 2402
+branch_2_noho   = 190
+branch_1_isho   = 2426
+branch_2_noho   = 166
+branch_1_isho   = 2422
+branch_2_noho   = 170
+branch_1_isho   = 2434
+branch_2_noho   = 158
+branch_1_isho   = 2436
+branch_2_noho   = 156
+branch_1_isho   = 2427
+branch_2_noho   = 165
+branch_1_isho   = 2417
+branch_2_noho   = 175
+branch_1_isho   = 2459
+branch_2_noho   = 133
+branch_1_isho   = 2438
+branch_2_noho   = 154
+branch_1_isho   = 2452
+branch_2_noho   = 140
+branch_1_isho   = 2447
+branch_2_noho   = 145
+branch_1_isho   = 2452
+branch_2_noho   = 140
+branch_1_isho   = 2449
+branch_2_noho   = 143
+branch_1_isho   = 2456
+branch_2_noho   = 136
+branch_1_isho   = 2452
+branch_2_noho   = 140
+branch_1_isho   = 2465
+branch_2_noho   = 127
+branch_1_isho   = 2447
+branch_2_noho   = 145
+branch_1_isho   = 2451
+branch_2_noho   = 141
+branch_1_isho   = 2456
+branch_2_noho   = 136
+branch_1_isho   = 2435
+branch_2_noho   = 157
+branch_1_isho   = 2446
+branch_2_noho   = 146
+branch_1_isho   = 2469
+branch_2_noho   = 123
+branch_1_isho   = 2473
+branch_2_noho   = 119
+branch_1_isho   = 2469
+branch_2_noho   = 123
+branch_1_isho   = 2470
+branch_2_noho   = 122
+branch_1_isho   = 2444
+branch_2_noho   = 148
+branch_1_isho   = 2469
+branch_2_noho   = 123
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2457
+branch_2_noho   = 135
+branch_1_isho   = 2451
+branch_2_noho   = 141
+branch_1_isho   = 2432
+branch_2_noho   = 160
+branch_1_isho   = 2446
+branch_2_noho   = 146
+branch_1_isho   = 2439
+branch_2_noho   = 153
+branch_1_isho   = 2441
+branch_2_noho   = 151
+branch_1_isho   = 2428
+branch_2_noho   = 164
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2480
+branch_2_noho   = 112
+branch_1_isho   = 2466
+branch_2_noho   = 126
+branch_1_isho   = 2482
+branch_2_noho   = 110
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2466
+branch_2_noho   = 126
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2481
+branch_2_noho   = 111
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2492
+branch_2_noho   = 100
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2460
+branch_2_noho   = 132
+branch_1_isho   = 2453
+branch_2_noho   = 139
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2441
+branch_2_noho   = 151
+branch_1_isho   = 2468
+branch_2_noho   = 124
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2471
+branch_2_noho   = 121
+branch_1_isho   = 2481
+branch_2_noho   = 111
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2503
+branch_2_noho   = 89
+branch_1_isho   = 2496
+branch_2_noho   = 96
+branch_1_isho   = 2507
+branch_2_noho   = 85
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2498
+branch_2_noho   = 94
+branch_1_isho   = 2498
+branch_2_noho   = 94
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2498
+branch_2_noho   = 94
+branch_1_isho   = 2495
+branch_2_noho   = 97
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2479
+branch_2_noho   = 113
+branch_1_isho   = 2459
+branch_2_noho   = 133
+branch_1_isho   = 2469
+branch_2_noho   = 123
+branch_1_isho   = 2487
+branch_2_noho   = 105
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2514
+branch_2_noho   = 78
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2538
+branch_2_noho   = 54
+branch_1_isho   = 2518
+branch_2_noho   = 74
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2536
+branch_2_noho   = 56
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2535
+branch_2_noho   = 57
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2519
+branch_2_noho   = 73
+branch_1_isho   = 2519
+branch_2_noho   = 73
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2528
+branch_2_noho   = 64
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2534
+branch_2_noho   = 58
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2521
+branch_2_noho   = 71
+branch_1_isho   = 2532
+branch_2_noho   = 60
+branch_1_isho   = 2538
+branch_2_noho   = 54
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2528
+branch_2_noho   = 64
+branch_1_isho   = 2532
+branch_2_noho   = 60
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2518
+branch_2_noho   = 74
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2530
+branch_2_noho   = 62
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2534
+branch_2_noho   = 58
+branch_1_isho   = 2527
+branch_2_noho   = 65
+branch_1_isho   = 2531
+branch_2_noho   = 61
+branch_1_isho   = 2529
+branch_2_noho   = 63
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2525
+branch_2_noho   = 67
+branch_1_isho   = 2521
+branch_2_noho   = 71
+branch_1_isho   = 2510
+branch_2_noho   = 82
+branch_1_isho   = 2508
+branch_2_noho   = 84
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2506
+branch_2_noho   = 86
+branch_1_isho   = 2510
+branch_2_noho   = 82
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2523
+branch_2_noho   = 69
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2516
+branch_2_noho   = 76
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2528
+branch_2_noho   = 64
+branch_1_isho   = 2526
+branch_2_noho   = 66
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2520
+branch_2_noho   = 72
+branch_1_isho   = 2534
+branch_2_noho   = 58
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2453
+branch_2_noho   = 139
+branch_1_isho   = 2485
+branch_2_noho   = 107
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2473
+branch_2_noho   = 119
+branch_1_isho   = 2485
+branch_2_noho   = 107
+branch_1_isho   = 2490
+branch_2_noho   = 102
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2480
+branch_2_noho   = 112
+branch_1_isho   = 2494
+branch_2_noho   = 98
+branch_1_isho   = 2499
+branch_2_noho   = 93
+branch_1_isho   = 2489
+branch_2_noho   = 103
+branch_1_isho   = 2490
+branch_2_noho   = 102
+branch_1_isho   = 2505
+branch_2_noho   = 87
+branch_1_isho   = 2484
+branch_2_noho   = 108
+branch_1_isho   = 2500
+branch_2_noho   = 92
+branch_1_isho   = 2503
+branch_2_noho   = 89
+branch_1_isho   = 2498
+branch_2_noho   = 94
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2498
+branch_2_noho   = 94
+branch_1_isho   = 2502
+branch_2_noho   = 90
+branch_1_isho   = 2488
+branch_2_noho   = 104
+branch_1_isho   = 2484
+branch_2_noho   = 108
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2499
+branch_2_noho   = 93
+branch_1_isho   = 2499
+branch_2_noho   = 93
+branch_1_isho   = 2491
+branch_2_noho   = 101
+branch_1_isho   = 2486
+branch_2_noho   = 106
+branch_1_isho   = 2497
+branch_2_noho   = 95
+branch_1_isho   = 2502
+branch_2_noho   = 90
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2528
+branch_2_noho   = 64
+branch_1_isho   = 2524
+branch_2_noho   = 68
+branch_1_isho   = 2513
+branch_2_noho   = 79
+branch_1_isho   = 2515
+branch_2_noho   = 77
+branch_1_isho   = 2509
+branch_2_noho   = 83
+branch_1_isho   = 2528
+branch_2_noho   = 64
+branch_1_isho   = 2522
+branch_2_noho   = 70
+branch_1_isho   = 2516
+branch_2_noho   = 76
+branch_1_isho   = 2512
+branch_2_noho   = 80
+branch_1_isho   = 2503
+branch_2_noho   = 89
+branch_1_isho   = 2511
+branch_2_noho   = 81
+branch_1_isho   = 2502
+branch_2_noho   = 90
+branch_1_isho   = 2501
+branch_2_noho   = 91
+branch_1_isho   = 2469
+branch_2_noho   = 123
+branch_1_isho   = 2468
+branch_2_noho   = 124
+branch_1_isho   = 2450
+branch_2_noho   = 142
+branch_1_isho   = 2459
+branch_2_noho   = 133
+branch_1_isho   = 2444
+branch_2_noho   = 148
+branch_1_isho   = 2468
+branch_2_noho   = 124
+branch_1_isho   = 2460
+branch_2_noho   = 132
+branch_1_isho   = 2466
+branch_2_noho   = 126
+branch_1_isho   = 2445
+branch_2_noho   = 147
+branch_1_isho   = 2444
+branch_2_noho   = 148
+branch_1_isho   = 2446
+branch_2_noho   = 146
+branch_1_isho   = 2444
+branch_2_noho   = 148
+branch_1_isho   = 2435
+branch_2_noho   = 157
+branch_1_isho   = 2434
+branch_2_noho   = 158
+branch_1_isho   = 2468
+branch_2_noho   = 124
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2474
+branch_2_noho   = 118
+branch_1_isho   = 2478
+branch_2_noho   = 114
+branch_1_isho   = 2469
+branch_2_noho   = 123
+branch_1_isho   = 2440
+branch_2_noho   = 152
+branch_1_isho   = 2437
+branch_2_noho   = 155
+branch_1_isho   = 2437
+branch_2_noho   = 155
+branch_1_isho   = 2439
+branch_2_noho   = 153
+branch_1_isho   = 2430
+branch_2_noho   = 162
+branch_1_isho   = 2445
+branch_2_noho   = 147
+branch_1_isho   = 2453
+branch_2_noho   = 139
+branch_1_isho   = 2461
+branch_2_noho   = 131
+branch_1_isho   = 2427
+branch_2_noho   = 165
+branch_1_isho   = 2444
+branch_2_noho   = 148
+branch_1_isho   = 2449
+branch_2_noho   = 143
+branch_1_isho   = 2477
+branch_2_noho   = 115
+branch_1_isho   = 2468
+branch_2_noho   = 124
+branch_1_isho   = 2461
+branch_2_noho   = 131
+branch_1_isho   = 2455
+branch_2_noho   = 137
+branch_1_isho   = 2458
+branch_2_noho   = 134
+branch_1_isho   = 2466
+branch_2_noho   = 126
+branch_1_isho   = 2447
+branch_2_noho   = 145
+branch_1_isho   = 2462
+branch_2_noho   = 130
+branch_1_isho   = 2460
+branch_2_noho   = 132
+branch_1_isho   = 2455
+branch_2_noho   = 137
+calculation took 98.3539 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ make
+g++ -c -std=c++14 -g -O3  marker1_mc_evaluator.cpp -o marker1_mc_evaluator.o
+g++ marker1_mc_evaluator.o -o marker1_mc_eval -g -lpthread -lX11 -O3 
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 73.2095 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.9695 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.998 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.832 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.1288 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.3154 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.9756 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8118 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ make
+g++ -c -std=c++14 -g -O3  marker1_mc_evaluator.cpp -o marker1_mc_evaluator.o
+g++ marker1_mc_evaluator.o -o marker1_mc_eval -g -lpthread -lX11 -O3 
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ make
+g++ -c -std=c++14 -g -O3  marker1_mc_evaluator.cpp -o marker1_mc_evaluator.o
+In file included from marker1_mc_evaluator.cpp:14:0:
+homer.h:48:68: error: non-member function ‘T lenAffect(T, int, LenAffectParams)’ cannot have cv-qualifier
+ inline T lenAffect(T value, int len, LenAffectParams params) const noexcept {
+                                                                    ^
+make: *** [marker1_mc_evaluator.o] Error 1
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ make
+g++ -c -std=c++14 -g -O3  marker1_mc_evaluator.cpp -o marker1_mc_evaluator.o
+In file included from marker1_mc_evaluator.cpp:14:0:
+homer.h:48:62: error: non-member function ‘T lenAffect(T, int, LenAffectParams)’ cannot have cv-qualifier
+ inline T lenAffect(T value, int len, LenAffectParams params) const {
+                                                              ^
+make: *** [marker1_mc_evaluator.o] Error 1
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ make
+g++ -c -std=c++14 -g -O3  marker1_mc_evaluator.cpp -o marker1_mc_evaluator.o
+g++ marker1_mc_evaluator.o -o marker1_mc_eval -g -lpthread -lX11 -O3 
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 78.4594 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.8694 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.4273 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.3665 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.3742 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.0203 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.3663 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 61.4288 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.1299 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7581 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 71.5083 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 83.4834 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.6819 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.8845 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 53.2626 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 47.8127 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.874 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7078 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 64.1281 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 70.2492 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.6152 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.3705 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.9825 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6262 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5274 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.827 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7678 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.5663 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 68.3135 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 80.9053 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 80.1226 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.1058 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 82.567 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4975 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.379 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 83.029 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.9241 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 81.5701 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 83.0071 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 83.0349 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 81.2795 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.6249 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 81.5121 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 82.1147 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 81.6135 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 82.5134 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.5388 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7656 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 80.9167 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 81.2551 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 81.7922 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.4084 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.406 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 81.3026 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.1435 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.1188 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4531 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7242 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.8082 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6786 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7848 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4504 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.8438 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.1386 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7323 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7931 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8518 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.9744 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8156 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5444 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.8623 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.0799 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7764 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.9193 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.3437 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8451 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7563 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7345 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.2272 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.932 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6908 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5949 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/lores_07_56_00_Pro.jpg 
+Processing image (640, 360) with pixelcount: 230400
+calculation took 6.0188 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.44712 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.17349 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.47362 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.48526 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.45413 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.4684 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.436 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.45588 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.47113 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 7.03433 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.0187 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.94454 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.47011 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.46876 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.43751 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.86464 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 8.80228 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.45863 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.86938 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.44976 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.44114 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.95079 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.44532 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.14541 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.43659 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.44914 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.44913 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.75156 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.57676 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.47182 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.42952 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.53945 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.48549 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.62793 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.44339 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.51477 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.44744 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.44832 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 10.7001 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.33227 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.25011 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.02847 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.99313 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.47505 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.34732 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.4653 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.44593 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 4.76996 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.65696 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.4564 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 4.27854 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.09359 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.29352 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.32508 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.81967 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ make
+g++ -c -std=c++14 -g -O3  marker1_mc_evaluator.cpp -o marker1_mc_evaluator.o
+g++ marker1_mc_evaluator.o -o marker1_mc_eval -g -lpthread -lX11 -O3 
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/lores_07_56_00_Pro.jpg 
+Processing image (640, 360) with pixelcount: 230400
+calculation took 6.02682 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 7.11677 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.50994 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.18206 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.32064 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.98983 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.47977 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.48694 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.46959 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.15552 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.07205 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.4651 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.96023 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.45241 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.99995 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.08059 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.47728 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.72392 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.42111 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.13678 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.34346 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.02653 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.79756 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 4.98258 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 3.6812 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.469 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.45276 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.51965 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.84559 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.24399 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.20716 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.16988 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.44912 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.59828 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 5.96414 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+calculation took 6.45989 ms
+Found 2 2D markers on the photo!
+ - (379, 220)*3 @ 52 confidence!
+ - (383, 135)*3 @ 57 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 78.1286 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8189 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.4632 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.2703 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7007 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.0796 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.9326 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7281 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7426 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5014 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4304 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5372 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4907 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5574 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5877 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7222 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4781 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.672 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5435 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.918 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.3733 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.9657 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5479 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5437 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8905 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.9133 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5121 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.2758 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6239 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5567 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.797 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.9314 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5533 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6299 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7191 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8551 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4492 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5773 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8023 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4518 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5984 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6283 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.9783 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7145 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.3049 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 56.2908 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.956 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 38.9508 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 64.4919 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7595 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.6537 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.0992 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.9159 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8413 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6718 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 56.0696 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 54.1475 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.4556 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.6443 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4361 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4346 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.87 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 61.6266 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.7731 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 72.5668 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.2325 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5295 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.3791 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5988 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.2818 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.4965 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.3819 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5849 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4412 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.1504 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7837 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.2279 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.608 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 69.6455 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.3532 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.989 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4302 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5725 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.1973 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.1827 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.3579 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.513 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4519 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8271 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.3963 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4845 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5186 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 70.1995 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.2054 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 55.7669 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.6447 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ perf stat ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+A(z) „perf” program jelenleg nincs telepítve. A következő beírásával telepítheti:
+sudo apt-get install linux-tools-common
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ sudo apt-get install linux-tools-common
+[sudo] password for rthier: 
+Csomaglisták olvasása... Kész
+Függőségi fa építése       
+Állapotinformációk olvasása... Kész
+A következő csomagok automatikusan lettek telepítve, és már nincs rájuk szükség:
+  aufs-tools cgroup-lite checkbox-ng checkbox-ng-service gyp
+  libandroid-properties1 libc-ares-dev libc-ares2 libdbusmenu-qt5 libhud2
+  libjs-node-uuid libmono-addins-gui0.2-cil libmono-addins0.2-cil
+  libmono-c5-1.1-cil libmono-corlib2.0-cil
+  libmono-entityframework-sqlserver6.0-cil libmono-entityframework6.0-cil
+  libmono-opensystem-c4.0-cil libmono-sharpzip2.6-cil libmono-system2.0-cil
+  libmono-web4.0-cil libmonoboehm-2.0-1 libmonoboehm-2.0-dev libntdb1
+  libopenimageio1.3 libpocketsphinx1 libsphinxbase1 libtar0 libthumbnailer0
+  libufe-xidgetter0 libv8-3.14-dev libv8-3.14.5 node-abbrev node-ansi
+  node-archy node-async node-block-stream node-combined-stream node-cookie-jar
+  node-delayed-stream node-forever-agent node-form-data node-fstream
+  node-fstream-ignore node-github-url-from-git node-glob node-graceful-fs
+  node-gyp node-inherits node-ini node-json-stringify-safe node-lockfile
+  node-lru-cache node-mime node-minimatch node-mkdirp node-mute-stream
+  node-node-uuid node-nopt node-normalize-package-data node-npmlog node-once
+  node-osenv node-qs node-read node-read-package-json node-request node-retry
+  node-rimraf node-semver node-sha node-sigmund node-slide node-tar
+  node-tunnel-agent node-which oxideqt-codecs plainbox-provider-checkbox
+  plainbox-provider-resource-generic plainbox-secure-policy primus-libs
+  primus-libs:i386 primus-libs-ia32:i386 python-ntdb python3-checkbox-ng
+  python3-checkbox-support python3-plainbox python3-pyparsing
+  qtdeclarative5-ubuntu-ui-extras-browser-plugin-assets qttranslations5-l10n
+  socat sphinx-voxforge-hmm-en sphinx-voxforge-lm-en ubuntu-ui-toolkit-theme
+  vlc-plugin-pulse
+Ezeket az „apt-get autoremove” paranccsal törölheti.
+Az alábbi ÚJ csomagok lesznek telepítve:
+  linux-tools-common
+0 frissített, 1 újonnan telepített, 0 eltávolítandó és 955 nem frissített.
+Letöltendő adatmennyiség: 84,5 kB.
+A művelet után 384 kB lemezterület kerül felhasználásra.
+Letöltés:1 http://hu.archive.ubuntu.com/ubuntu/ trusty-updates/main linux-tools-common all 3.13.0-149.199 [84,5 kB]
+Letöltve 84,5 kB 0mp alatt (217 kB/s)       
+A korábban ki nem választott linux-tools-common csomag kiválasztása.
+(Adatbázis olvasása ... jelenleg 344784 fájl vagy könyvtár van telepítve.)
+Preparing to unpack .../linux-tools-common_3.13.0-149.199_all.deb ...
+Unpacking linux-tools-common (3.13.0-149.199) ...
+Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+Beállítás: linux-tools-common (3.13.0-149.199) ...
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ perf stat ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+WARNING: perf not found for kernel 3.19.0-25
+
+  You may need to install the following packages for this specific kernel:
+    linux-tools-3.19.0-25-generic
+    linux-cloud-tools-3.19.0-25-generic
+
+  You may also want to install one of the following packages to keep up to date:
+    linux-tools-generic-lts-<series>
+    linux-cloud-tools-generic-lts-<series>
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ uname -a
+Linux prenex-laptop 3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ sudo apt-get install linux-tools-3.19.0-25-generic
+Csomaglisták olvasása... Kész
+Függőségi fa építése       
+Állapotinformációk olvasása... Kész
+A következő csomagok automatikusan lettek telepítve, és már nincs rájuk szükség:
+  aufs-tools cgroup-lite checkbox-ng checkbox-ng-service gyp
+  libandroid-properties1 libc-ares-dev libc-ares2 libdbusmenu-qt5 libhud2
+  libjs-node-uuid libmono-addins-gui0.2-cil libmono-addins0.2-cil
+  libmono-c5-1.1-cil libmono-corlib2.0-cil
+  libmono-entityframework-sqlserver6.0-cil libmono-entityframework6.0-cil
+  libmono-opensystem-c4.0-cil libmono-sharpzip2.6-cil libmono-system2.0-cil
+  libmono-web4.0-cil libmonoboehm-2.0-1 libmonoboehm-2.0-dev libntdb1
+  libopenimageio1.3 libpocketsphinx1 libsphinxbase1 libtar0 libthumbnailer0
+  libufe-xidgetter0 libv8-3.14-dev libv8-3.14.5 node-abbrev node-ansi
+  node-archy node-async node-block-stream node-combined-stream node-cookie-jar
+  node-delayed-stream node-forever-agent node-form-data node-fstream
+  node-fstream-ignore node-github-url-from-git node-glob node-graceful-fs
+  node-gyp node-inherits node-ini node-json-stringify-safe node-lockfile
+  node-lru-cache node-mime node-minimatch node-mkdirp node-mute-stream
+  node-node-uuid node-nopt node-normalize-package-data node-npmlog node-once
+  node-osenv node-qs node-read node-read-package-json node-request node-retry
+  node-rimraf node-semver node-sha node-sigmund node-slide node-tar
+  node-tunnel-agent node-which oxideqt-codecs plainbox-provider-checkbox
+  plainbox-provider-resource-generic plainbox-secure-policy primus-libs
+  primus-libs:i386 primus-libs-ia32:i386 python-ntdb python3-checkbox-ng
+  python3-checkbox-support python3-plainbox python3-pyparsing
+  qtdeclarative5-ubuntu-ui-extras-browser-plugin-assets qttranslations5-l10n
+  socat sphinx-voxforge-hmm-en sphinx-voxforge-lm-en ubuntu-ui-toolkit-theme
+  vlc-plugin-pulse
+Ezeket az „apt-get autoremove” paranccsal törölheti.
+Az alábbi extra csomagok kerülnek telepítésre:
+  libdw1 libunwind8 linux-lts-vivid-tools-3.19.0-25
+Az alábbi ÚJ csomagok lesznek telepítve:
+  libdw1 libunwind8 linux-lts-vivid-tools-3.19.0-25
+  linux-tools-3.19.0-25-generic
+0 frissített, 4 újonnan telepített, 0 eltávolítandó és 955 nem frissített.
+Letöltendő adatmennyiség: 774 kB.
+A művelet után 2.765 kB lemezterület kerül felhasználásra.
+Folytatni akarja? [I/n] I
+Letöltés:1 http://hu.archive.ubuntu.com/ubuntu/ trusty-updates/main libdw1 amd64 0.158-0ubuntu5.2 [174 kB]
+Letöltés:2 http://hu.archive.ubuntu.com/ubuntu/ trusty/main libunwind8 amd64 1.1-2.2ubuntu3 [48,3 kB]
+Letöltés:3 http://hu.archive.ubuntu.com/ubuntu/ trusty-updates/main linux-lts-vivid-tools-3.19.0-25 amd64 3.19.0-25.26~14.04.1 [551 kB]
+Letöltés:4 http://hu.archive.ubuntu.com/ubuntu/ trusty-updates/main linux-tools-3.19.0-25-generic amd64 3.19.0-25.26~14.04.1 [1.900 B]
+Letöltve 774 kB 4mp alatt (176 kB/s)                       
+A korábban ki nem választott libdw1:amd64 csomag kiválasztása.
+(Adatbázis olvasása ... jelenleg 344828 fájl vagy könyvtár van telepítve.)
+Preparing to unpack .../libdw1_0.158-0ubuntu5.2_amd64.deb ...
+Unpacking libdw1:amd64 (0.158-0ubuntu5.2) ...
+A korábban ki nem választott libunwind8 csomag kiválasztása.
+Preparing to unpack .../libunwind8_1.1-2.2ubuntu3_amd64.deb ...
+Unpacking libunwind8 (1.1-2.2ubuntu3) ...
+A korábban ki nem választott linux-lts-vivid-tools-3.19.0-25 csomag kiválasztása.
+Preparing to unpack .../linux-lts-vivid-tools-3.19.0-25_3.19.0-25.26~14.04.1_amd64.deb ...
+Unpacking linux-lts-vivid-tools-3.19.0-25 (3.19.0-25.26~14.04.1) ...
+A korábban ki nem választott linux-tools-3.19.0-25-generic csomag kiválasztása.
+Preparing to unpack .../linux-tools-3.19.0-25-generic_3.19.0-25.26~14.04.1_amd64.deb ...
+Unpacking linux-tools-3.19.0-25-generic (3.19.0-25.26~14.04.1) ...
+Beállítás: libdw1:amd64 (0.158-0ubuntu5.2) ...
+Beállítás: libunwind8 (1.1-2.2ubuntu3) ...
+Beállítás: linux-lts-vivid-tools-3.19.0-25 (3.19.0-25.26~14.04.1) ...
+Beállítás: linux-tools-3.19.0-25-generic (3.19.0-25.26~14.04.1) ...
+Processing triggers for libc-bin (2.19-0ubuntu6.6) ...
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ perf stat ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 77.9053 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+
+ Performance counter stats for './marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg':
+
+        266,278395      task-clock (msec)         #    0,050 CPUs utilized          
+             2.466      context-switches          #    0,009 M/sec                  
+                 7      cpu-migrations            #    0,026 K/sec                  
+             5.337      page-faults               #    0,020 M/sec                  
+       449.799.979      cycles                    #    1,689 GHz                    
+       159.922.190      stalled-cycles-frontend   #   35,55% frontend cycles idle   
+                 0      stalled-cycles-backend    #    0,00% backend  cycles idle   
+       987.188.136      instructions              #    2,19  insns per cycle        
+                                                  #    0,16  stalled cycles per insn
+       106.899.644      branches                  #  401,458 M/sec                  
+         1.224.804      branch-misses             #    1,15% of all branches        
+
+       5,309546422 seconds time elapsed
+
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ perf stat ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 75.529 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.3689 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5199 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.6422 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5813 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5577 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.6061 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.6438 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.3536 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5287 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.6193 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5566 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.6666 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.4172 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.2688 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.4804 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.4538 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.9593 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7434 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5933 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.4187 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5731 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.6213 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.8273 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5819 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.7068 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.0895 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.3471 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.6704 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.4006 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.5324 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 79.203 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7407 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 56.77 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8846 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.7916 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+
+ Performance counter stats for './marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg':
+
+       3321,553308      task-clock (msec)         #    0,431 CPUs utilized          
+             4.982      context-switches          #    0,001 M/sec                  
+                24      cpu-migrations            #    0,007 K/sec                  
+             5.319      page-faults               #    0,002 M/sec                  
+     5.123.090.922      cycles                    #    1,542 GHz                    
+     1.156.201.822      stalled-cycles-frontend   #   22,57% frontend cycles idle   
+                 0      stalled-cycles-backend    #    0,00% backend  cycles idle   
+    14.658.794.751      instructions              #    2,86  insns per cycle        
+                                                  #    0,08  stalled cycles per insn
+     2.103.086.083      branches                  #  633,163 M/sec                  
+        14.309.885      branch-misses             #    0,68% of all branches        
+
+       7,708519163 seconds time elapsed
+
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ perf stat ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 77.1832 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.5576 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 70.5311 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 72.0515 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 35.7531 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 49.1913 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 46.6848 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 55.1668 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 61.2017 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 73.8134 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6082 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 50.7687 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 61.113 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 50.3461 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 67.9073 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 56.4863 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 71.8097 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 82.3443 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 84.6606 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 83.4164 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 52.8257 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.637 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 61.9902 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 61.8007 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8565 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 67.3748 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.1798 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5877 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+
+ Performance counter stats for './marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg':
+
+       2238,413867      task-clock (msec)         #    0,386 CPUs utilized          
+             4.168      context-switches          #    0,002 M/sec                  
+                74      cpu-migrations            #    0,033 K/sec                  
+             4.809      page-faults               #    0,002 M/sec                  
+     4.140.367.365      cycles                    #    1,850 GHz                    
+     1.001.475.291      stalled-cycles-frontend   #   24,19% frontend cycles idle   
+                 0      stalled-cycles-backend    #    0,00% backend  cycles idle   
+    11.529.599.069      instructions              #    2,78  insns per cycle        
+                                                  #    0,09  stalled cycles per insn
+     1.645.913.405      branches                  #  735,303 M/sec                  
+        11.263.202      branch-misses             #    0,68% of all branches        
+
+       5,794870445 seconds time elapsed
+
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ perf stat ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 77.2867 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+
+ Performance counter stats for './marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg':
+
+        253,757845      task-clock (msec)         #    0,139 CPUs utilized          
+             2.175      context-switches          #    0,009 M/sec                  
+                18      cpu-migrations            #    0,071 K/sec                  
+             4.297      page-faults               #    0,017 M/sec                  
+       458.930.672      cycles                    #    1,809 GHz                    
+       174.546.950      stalled-cycles-frontend   #   38,03% frontend cycles idle   
+                 0      stalled-cycles-backend    #    0,00% backend  cycles idle   
+       976.635.985      instructions              #    2,13  insns per cycle        
+                                                  #    0,18  stalled cycles per insn
+       104.382.271      branches                  #  411,346 M/sec                  
+         1.061.061      branch-misses             #    1,02% of all branches        
+
+       1,826299415 seconds time elapsed
+
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ perf stat ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 122.652 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+
+ Performance counter stats for './marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg':
+
+        222,392247      task-clock (msec)         #    0,091 CPUs utilized          
+             6.066      context-switches          #    0,027 M/sec                  
+                11      cpu-migrations            #    0,049 K/sec                  
+             4.836      page-faults               #    0,022 M/sec                  
+       698.896.633      cycles                    #    3,143 GHz                    
+       405.632.629      stalled-cycles-frontend   #   58,04% frontend cycles idle   
+                 0      stalled-cycles-backend    #    0,00% backend  cycles idle   
+       993.609.458      instructions              #    1,42  insns per cycle        
+                                                  #    0,41  stalled cycles per insn
+       108.311.346      branches                  #  487,028 M/sec                  
+         1.051.302      branch-misses             #    0,97% of all branches        
+
+       2,448336904 seconds time elapsed
+
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ perf stat ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 72.1012 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+
+ Performance counter stats for './marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg':
+
+        204,190894      task-clock (msec)         #    0,148 CPUs utilized          
+             1.933      context-switches          #    0,009 M/sec                  
+                14      cpu-migrations            #    0,069 K/sec                  
+             5.835      page-faults               #    0,029 M/sec                  
+       424.776.028      cycles                    #    2,080 GHz                    
+       139.651.690      stalled-cycles-frontend   #   32,88% frontend cycles idle   
+                 0      stalled-cycles-backend    #    0,00% backend  cycles idle   
+       978.744.659      instructions              #    2,30  insns per cycle        
+                                                  #    0,14  stalled cycles per insn
+       104.751.002      branches                  #  513,005 M/sec                  
+         1.032.102      branch-misses             #    0,99% of all branches        
+
+       1,376158220 seconds time elapsed
+
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ perf stat ./marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg
+Processing image (2592, 1456) with pixelcount: 3773952
+calculation took 78.2188 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.2735 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6979 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.3475 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.706 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 75.133 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6038 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 57.7613 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.9437 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.4113 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 58.3462 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8605 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 57.4097 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.8866 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6016 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6439 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 78.262 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 57.6817 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.3838 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6808 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 58.1353 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.0987 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.5498 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 74.7324 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6205 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 55.6436 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.6928 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 54.4418 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.7093 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.9497 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.7561 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.9571 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 58.106 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 76.7365 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+calculation took 77.8366 ms
+Found 4 2D markers on the photo!
+ - (1533, 896)*4 @ 88 confidence!
+ - (1551, 548)*3 @ 76 confidence!
+ - (1341, 1186)*4 @ 78 confidence!
+ - (1734, 1197)*4 @ 73 confidence!
+
+ Performance counter stats for './marker1_mc_eval v2_test/WP_20180507_07_56_00_Pro.jpg':
+
+       3063,082811      task-clock (msec)         #    0,353 CPUs utilized          
+             5.042      context-switches          #    0,002 M/sec                  
+                21      cpu-migrations            #    0,007 K/sec                  
+             4.830      page-faults               #    0,002 M/sec                  
+     4.962.376.751      cycles                    #    1,620 GHz                    
+     1.088.838.494      stalled-cycles-frontend   #   21,94% frontend cycles idle   
+                 0      stalled-cycles-backend    #    0,00% backend  cycles idle   
+    14.267.588.147      instructions              #    2,88  insns per cycle        
+                                                  #    0,08  stalled cycles per insn
+     2.045.972.209      branches                  #  667,945 M/sec                  
+        13.958.583      branch-misses             #    0,68% of all branches        
+
+       8,688984660 seconds time elapsed
+
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ ^C
+rthier@prenex-laptop:~/work/git/PCK_IK3/fastrack/greyscale$ 

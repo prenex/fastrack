@@ -71,13 +71,6 @@ struct MCParserConfig {
  */
 struct MarkerCenter {
 public:
-	/** Result of a tryExtend(..) operation */
-	enum class ExtendResult {
-		SKIPPED,
-		EXTENDED,
-		CLOSED,
-	};
-
 	// Always the X coordinate of the last-line center from hoparser
 	// !! SHOULD BE FIRST!!!
 	unsigned int lastX;
@@ -228,7 +221,7 @@ public:
 	 * Rem.: Best used when this center became "CLOSED" (but will return data anyways)
 	 * Rem.: Returns an order of zero is signalCount was smaller than the configured threshold!
 	 */
-	inline Marker2D constructMarker(unsigned int ignoreWhenSignalCountLessThan) {
+	inline Marker2D constructMarker(unsigned int ignoreWhenSignalCountLessThan) const {
 		// TODO: maybe do better than this avarage?
 		unsigned int x = ((maxX - minX) / 2) + minX;
 		unsigned int y = ((maxY - minY) / 2) + minY;

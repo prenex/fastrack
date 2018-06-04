@@ -3,9 +3,13 @@
 
 #include<array>         // std::array
 #include<utility>       // std::pair
+#include<cassert>
 
 /** This is a logical position before the head of any FastForwardList. Useful for inserting before head! */
 #define NIL_POS  FFLPosition(-1)
+
+// Uncomment to log debug messages to stdout...
+#define FFL_DEBUG_MODE 1
 
 // You need to define this if you want range checks:
 /*#define FFL_INSERT_RANGE_CHECK 1*/
@@ -116,6 +120,9 @@ class FastForwardList {
 			  ||(unlinkPos < 0)
 			  // Rem.: Here we deliberately use MAX and not (MAX+1)!
 			  ||(unlinkPos > MAX)) {
+#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "Range error!\n");
+#endif // FFL_DEBUG_MODE 
 				return;
 			}
 #endif
@@ -190,6 +197,9 @@ public:
 	 * Rem.: Every earlier handle is considered invalid!
 	 */
 	inline void reset() noexcept {
+#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "R\n");
+#endif // FFL_DEBUG_MODE 
 		// This should be enough
 		headIndex = -1;
 		curLen=0;
@@ -230,6 +240,9 @@ public:
 	 * Returns false only when there is no more place to insert the element!
 	 */
 	inline bool push_front(T element) noexcept {
+#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "Pf_");
+#endif // FFL_DEBUG_MODE 
 		// When -1 is given it is basically the same as if insertAfter(head())
 		// is called on the very first element - and handled of course properly.
 		return insertAfter(element, FFLPosition(-1));
@@ -257,6 +270,9 @@ public:
 	 *         (beware that we always return true if range checking is off!)
 	 */
 	inline bool insertAfter(T element, FFLPosition position) noexcept {
+#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "I(%d)\n", position.index);
+#endif // FFL_DEBUG_MODE 
 #ifdef FFL_INSERT_RANGE_CHECK
 		// Do range check to ensure: (curLen+1 <= MAX)
 		if(curLen < MAX) {
@@ -282,6 +298,10 @@ public:
 				// Fast-path: adding non-head element
 				nextToUse = data[position.index].second;
 				data[position.index].second = targetInsertPos;
+#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "[%d]->[%d]\n", position.index, targetInsertPos);
+		assert(position.index != targetInsertPos);
+#endif // FFL_DEBUG_MODE 
 			} else {
 				// Slower-path: adding new head
 				if(isEmpty()) {
@@ -297,6 +317,10 @@ public:
 			// 3.) Update the 'next' of the added node holding the new element to the saved one.
 			//     This ensures the proper linkage
 			data[targetInsertPos].second = nextToUse;
+#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "[%d]->[%d]\n", targetInsertPos, nextToUse);
+		assert(targetInsertPos != nextToUse);
+#endif // FFL_DEBUG_MODE 
 
 			// 4.) Update head pointer when we add at the front
 			if(position.isNil()) {
@@ -314,6 +338,9 @@ public:
 			return true;
 #ifdef FFL_INSERT_RANGE_CHECK
 		} else {
+#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "Range error!\n");
+#endif // FFL_DEBUG_MODE 
 			// Range check failed and there is no place
 			return false;
 		}
@@ -333,8 +360,14 @@ public:
 	 * Rem.: The element at position will get changed to point to the successor!
 	 */
 	inline FFLPosition unlinkAfter(FFLPosition position) noexcept {
+#ifdef FFL_DEBUG_MODE 
+			fprintf(stderr, "U\n");
+#endif // FFL_DEBUG_MODE 
 #ifdef FFL_INSERT_RANGE_CHECK
 		if(position.index > MAX) {
+#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "Range error!\n");
+#endif // FFL_DEBUG_MODE 
 			// No deletion because of index-checking
 			return NIL_POS;
 		}
@@ -353,6 +386,9 @@ public:
 		if((unlinkPos < 0) || unlinkPos > MAX) {
 			// No deletion because there is nothing to delete
 			// (just another index checking)
+#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "Range error!\n");
+#endif // FFL_DEBUG_MODE 
 			return NIL_POS;
 		}
 #endif
@@ -367,6 +403,10 @@ public:
 		} else {
 			// Unlink - quite literally - by 
 			data[position.index].second = succUnlinkPos.index;
+#ifdef FFL_DEBUG_MODE 
+			fprintf(stderr, "[%d]->[%d]\n", position.index, succUnlinkPos.index);
+			assert(position.index != succUnlinkPos.index);
+#endif // FFL_DEBUG_MODE 
 		}
 
 		// Mark hole for reuse
