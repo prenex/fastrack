@@ -299,7 +299,7 @@ public:
 				nextToUse = data[position.index].second;
 				data[position.index].second = targetInsertPos;
 #ifdef FFL_DEBUG_MODE 
-		fprintf(stderr, "[%d]->[%d]\n", position.index, targetInsertPos);
+		fprintf(stderr, "*[%d]->[%d]\n", position.index, targetInsertPos);
 		assert(position.index != targetInsertPos);
 #endif // FFL_DEBUG_MODE 
 			} else {
@@ -361,7 +361,7 @@ public:
 	 */
 	inline FFLPosition unlinkAfter(FFLPosition position) noexcept {
 #ifdef FFL_DEBUG_MODE 
-			fprintf(stderr, "U\n");
+			fprintf(stderr, "U(%d)\n", position.index);
 #endif // FFL_DEBUG_MODE 
 #ifdef FFL_INSERT_RANGE_CHECK
 		if(position.index > MAX) {
