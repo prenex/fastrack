@@ -149,7 +149,7 @@ class FastForwardList {
 			// OR the end is earlier than the start (it is one loopNo ahead in circular buffer modulo group)
 			// and start is not at the end of the buffer (as that would be the only case of too small difference).
 			return ((int)holeStart < ((int)holeEnd - 1))
-			   	|| ((holeStart != MAX-1) && (holeEnd < holeStart));
+			   	|| ((holeStart != MAX) && (holeEnd < holeStart));
 		}
 
 		/** Resets the holekeeper structure */
