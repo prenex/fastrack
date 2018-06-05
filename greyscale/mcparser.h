@@ -157,7 +157,7 @@ public:
 		//       criteria as a non-skipped value.
 		int wdmx = minX + widthDiffMax - 1;
 		// Use the smaller value - it tells the rightmost X-pos that would be 'extensible'
-		return ((ddmx > wdmx) ? ddmx : wdmx);
+		return ((ddmx < wdmx) ? ddmx : wdmx);
 	}
 
 	/**
