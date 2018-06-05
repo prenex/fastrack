@@ -150,12 +150,12 @@ public:
 	 */
 	inline int getRightMostCurrentAcceptableX(unsigned int deltaDiffMax, unsigned int widthDiffMax) {
 		// RightMost X calculated by the DelteDiffMax criteria
-		int ddmx = lastX + deltaDiffMax;
+		int ddmx = lastX + deltaDiffMax - 1;
 		// Rightmost X calculated by teh widthDiffMax criteria
 		// Rem.: This is minX+widthDiffMax because that is the last X
 		//       coordinate that will work with the "if((newMaxX - newMinX) > widthDiffMax)"
 		//       criteria as a non-skipped value.
-		int wdmx = minX + widthDiffMax;
+		int wdmx = minX + widthDiffMax - 1;
 		// Use the smaller value - it tells the rightmost X-pos that would be 'extensible'
 		return ((ddmx > wdmx) ? ddmx : wdmx);
 	}
@@ -454,13 +454,6 @@ private:
 			bool tokenProcessed = false;
 			while(!tokenProcessed) {
 				if(listPos.isNil()) {
-					// FIXME: THIS BREAKS INVARIANT!
-					//        The list is not sorted because a mistake here:
-					//        - we come here after a newline on empty list
-					//        - every other marker on this scanline will be coming HERE
-					//        - thus inserted BEFORE the earlier ones - completely opposite ordering!
-					//        - it seems this happens rarely and is not deadly maybe...
-
 					// End of list is reached and the token is not processed yet.
 					// In this case we need to add it to the end of the list right
 					// after the last list Position. We need to insert at the last
@@ -470,6 +463,13 @@ private:
 					mcCurrentList.insertAfter(
 							std::move(MarkerCenter(centerX, y, order)),
 							lastPos);
+					// Increment position!
+					// Rem.: Needed otherwise we could stuck in this 'if' for the
+					//       scanline that added the first marker for us!
+					// Rem.: In the current implementation we "let" the next token
+					//       to extend the directly previous if they are so close
+					//       in the very same scanline which seems positive!
+					listPos = mcCurrentList.next(lastPos);
 					tokenProcessed = true;
 #ifdef MC_DEBUG_LOG
 printf("+(%d,%d) ", centerX, y);
@@ -508,6 +508,7 @@ printf("E(%d,%d) ", centerX, y);
 						// is so much before the one in the earlier list that
 						// it should be added as a new element at the current
 						// lastPos insertion position or not:
+// FIXME: currentCenter(326, 294) only one element AND centerX==336 case seems it was handled badly!
 						if(currentCenter.getRightMostCurrentAcceptableX(config.deltaDiffMax, config.widthDiffMax)
 								> centerX) {
 							// Completely new suspected marker - in the middle of the list
