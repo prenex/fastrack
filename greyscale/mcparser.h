@@ -454,6 +454,13 @@ private:
 			bool tokenProcessed = false;
 			while(!tokenProcessed) {
 				if(listPos.isNil()) {
+					// FIXME: THIS BREAKS INVARIANT!
+					//        The list is not sorted because a mistake here:
+					//        - we come here after a newline on empty list
+					//        - every other marker on this scanline will be coming HERE
+					//        - thus inserted BEFORE the earlier ones - completely opposite ordering!
+					//        - it seems this happens rarely and is not deadly maybe...
+
 					// End of list is reached and the token is not processed yet.
 					// In this case we need to add it to the end of the list right
 					// after the last list Position. We need to insert at the last
