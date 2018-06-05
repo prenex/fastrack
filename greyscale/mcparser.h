@@ -452,6 +452,7 @@ private:
 			// Add this new token we have found as a new marker centerline or
 			// extend an already existing marker centerline! Loop until processed.
 			bool tokenProcessed = false;
+			// This while loop search the position to extend or to insert and do that
 			while(!tokenProcessed) {
 				if(listPos.isNil()) {
 					// End of list is reached and the token is not processed yet.
@@ -460,16 +461,16 @@ private:
 					// valid position - we cannot insert at a NIL position as that
 					// means insertion at the head - the case of empty list is 
 					// handled here too and exactly that way as you can see!
-					mcCurrentList.insertAfter(
-							std::move(MarkerCenter(centerX, y, order)),
-							lastPos);
+					//
 					// Increment position!
 					// Rem.: Needed otherwise we could stuck in this 'if' for the
 					//       scanline that added the first marker for us!
 					// Rem.: In the current implementation we "let" the next token
 					//       to extend the directly previous if they are so close
 					//       in the very same scanline which seems positive!
-					listPos = mcCurrentList.next(lastPos);
+					listPos = mcCurrentList.insertAfter(
+							std::move(MarkerCenter(centerX, y, order)),
+							lastPos);
 					tokenProcessed = true;
 #ifdef MC_DEBUG_LOG
 printf("+(%d,%d) ", centerX, y);
@@ -508,7 +509,6 @@ printf("E(%d,%d) ", centerX, y);
 						// is so much before the one in the earlier list that
 						// it should be added as a new element at the current
 						// lastPos insertion position or not:
-// FIXME: currentCenter(326, 294) only one element AND centerX==336 case seems it was handled badly!
 						if(currentCenter.getRightMostCurrentAcceptableX(config.deltaDiffMax, config.widthDiffMax)
 								> centerX) {
 							// Completely new suspected marker - in the middle of the list
@@ -516,12 +516,12 @@ printf("E(%d,%d) ", centerX, y);
 							//       to extend, because the list is ordered by the 'x' coordinate and next()
 							//       is called also in an ordered way. Because of insertion, the list also
 							//       kept ordered now so later iterations and calls to next() work as well!
-							mcCurrentList.insertAfter(
-									std::move(MarkerCenter(centerX, y, order)),
-									lastPos); // Rem.: lastPos insertion is needed as we insert BEFORE listPos
+							// 
 							// Increment is needed to keep invariant that lastPost is literally the position 
 							// "before" the listpos. Because of the above insertion it would be not true anymore!
-							lastPos = mcCurrentList.next(lastPos);
+							lastPos = mcCurrentList.insertAfter(
+									std::move(MarkerCenter(centerX, y, order)),
+									lastPos); // Rem.: lastPos insertion is needed as we insert BEFORE listPos
 							// Mark this token as processed
 							// Rem.: We should not move with the list iteraor as the next time of the next(..)
 							//       call might return extension/continuation of what is under the head now!

@@ -9,8 +9,8 @@ ifeq ($(CC),g++)
 	# g++ (ver 5.1+ tested)
 	# sadly we are having a lot of unused functions for tests so -Wall is undesirable...
 # TODO: check -funroll-loops and -funroll-all-loops
-	CFLAGS=-c -std=c++14 -g -O3 -ffast-math -funsafe-loop-optimizations -freorder-blocks-and-partition # -O0 #-Wall
-	LDFLAGS=-g -lpthread -lX11 -lGL -lX11 -O3 -ffast-math -funsafe-loop-optimizations -freorder-blocks-and-partition #-lm # -O0
+	CFLAGS=-c -std=c++14 -g -O3 -ffast-math -funsafe-loop-optimizations -Wunsafe-loop-optimizations -freorder-blocks-and-partition # -O0 #-Wall
+	LDFLAGS=-g -lpthread -lX11 -lGL -lX11 -O3 -ffast-math -funsafe-loop-optimizations -Wunsafe-loop-optimizations -freorder-blocks-and-partition #-lm # -O0
 # else 
 # ifeq ($(CC),em++)
 # 	# TODO: This is just copy paste from old projects, please change accordingly

@@ -12,7 +12,7 @@
 #define FFL_DEBUG_MODE 1
 
 // You need to define this if you want range checks:
-/*#define FFL_INSERT_RANGE_CHECK 1*/
+//#define FFL_INSERT_RANGE_CHECK 1
 
 // Rem.: BASICALLY JUST AN INTEGER WITH MORE TYPE SAFETY :-)
 /**
@@ -124,11 +124,18 @@ class FastForwardList {
 			  // Rem.: Here we deliberately use MAX and not (MAX+1)!
 			  ||(unlinkPos > MAX)) {
 #ifdef FFL_DEBUG_MODE 
-		fprintf(stderr, "Range error!\n");
+		fprintf(stderr, "addHole: Range error!\n");
 #endif // FFL_DEBUG_MODE 
 				return;
 			}
 #endif
+#ifdef FFL_DEBUG_MODE 
+		// Exit on range errors in debug mode!
+		assert(!((holeStart == holeEnd)
+			  ||(unlinkPos < 0)
+			  // Rem.: Here we deliberately use MAX and not (MAX+1)!
+			  ||(unlinkPos > MAX)));
+#endif // FFL_DEBUG_MODE 
 			// Rem.: Because the two arrays are of the same size
 			//       theoretically we never get the state when holeStart == holeEnd
 			// Save the unlink position
@@ -191,7 +198,7 @@ public:
 	 * Get a handle to the head.
 	 * Rem.:  In case of empty list returned.isNil() == true
 	 */
-	inline FFLPosition head() noexcept {
+	inline FFLPosition head() const noexcept {
 		// This is just a return of an integer - but typesafe
 		// Rem.: (-1) means that head() is called on an empty list 
 		return FFLPosition(headIndex);
@@ -219,7 +226,16 @@ public:
 	 * This function returns an invalid position in case
 	 * the list ended with the provided current position!
 	 */
-	inline FFLPosition next(FFLPosition current) noexcept {
+	inline FFLPosition next(FFLPosition current) const noexcept {
+#ifdef FFL_INSERT_RANGE_CHECK 
+		if(current.isNil()) {
+			fprintf(stderr, "next: Range error!\n");
+			return NIL_POS;
+		}
+#endif // FFL_INSERT_RANGE_CHECK
+#ifdef FFL_DEBUG_MODE 
+		assert(!current.isNil());
+#endif // FFL_DEBUG_MODE 
 		// This is just a return of an integer - but typesafe
 		return FFLPosition(data[current.index].second);
 	}
@@ -243,9 +259,9 @@ public:
 	/**
 	 * Inserts a copy of the provided element as the new head. The earlier
 	 * head becomes the "next" after the new one - if there was space for it.
-	 * Returns false only when there is no more place to insert the element!
+	 * Returns NIL_POS in case of failure, otherwise the index-position of the newly inserted element!
 	 */
-	inline bool push_front(T element) noexcept {
+	inline FFLPosition push_front(T element) noexcept {
 #ifdef FFL_DEBUG_MODE 
 		fprintf(stderr, "Pf_");
 #endif // FFL_DEBUG_MODE 
@@ -255,27 +271,26 @@ public:
 	}
 
 	/** Tells if the list is empty or not */
-	inline bool isEmpty() {
+	inline bool isEmpty() const noexcept {
 		return (curLen == 0);
 	}
 
 	/** Tells the number of elements in the list */
-	inline int size() {
+	inline int size() const noexcept {
 		return curLen;
 	}
 
 	/** Tells the number of remaining free positions in the list */
-	inline int freeCapacity() {
+	inline int freeCapacity() const noexcept {
 		return MAX - curLen;
 	}
 
 	/**
 	 * Inserts a copy of the provided element AFTER the provided position.
 	 * Rem.: insertAfter(elem, head()); ensured to work for an empty list!
-	 * Returns false only when there is no more place to insert the element!
-	 *         (beware that we always return true if range checking is off!)
+	 * Returns NIL_POS in case of failure, otherwise the index-position of the newly inserted element!
 	 */
-	inline bool insertAfter(T element, FFLPosition position) noexcept {
+	inline FFLPosition insertAfter(T element, FFLPosition position) noexcept {
 #ifdef FFL_DEBUG_MODE 
 		fprintf(stderr, "I(%d)\n", position.index);
 #endif // FFL_DEBUG_MODE 
@@ -338,17 +353,17 @@ public:
 			// Update state that defines if we are isEmpty() or not:
 			// Update size if range checking is on
 			++curLen;
-			// If we are here we surely return true as
+			// If we are here we surely return pos as
 			// either the range check was ok, or we do 
 			// not care for range checking...
-			return true;
+			return FFLPosition(targetInsertPos);
 #ifdef FFL_INSERT_RANGE_CHECK
 		} else {
 #ifdef FFL_DEBUG_MODE 
-		fprintf(stderr, "Range error!\n");
+		fprintf(stderr, "insertAfter: Range error!\n");
 #endif // FFL_DEBUG_MODE 
-			// Range check failed and there is no place
-			return false;
+			// Range check failed and there is no such place
+			return NIL_POS;
 		}
 #endif
 	}
@@ -372,11 +387,20 @@ public:
 #ifdef FFL_INSERT_RANGE_CHECK
 		if(position.index > MAX) {
 #ifdef FFL_DEBUG_MODE 
-		fprintf(stderr, "Range error!\n");
+			fprintf(stderr, "unlinkAfter: Range error!\n");
 #endif // FFL_DEBUG_MODE 
 			// No deletion because of index-checking
 			return NIL_POS;
 		}
+
+		if(isEmpty()) {
+			fprintf(stderr, "unlinkAfter3: Range error!\n");
+			return NIL_POS;
+		}
+#endif // FFL_INSERT_RANGE_CHECK
+#ifdef FFL_DEBUG_MODE 
+		// should not unlink from an empty list!
+		assert(!isEmpty());
 #endif
 		// Get successor position
 		int unlinkPos;
@@ -392,13 +416,16 @@ public:
 		if((unlinkPos < 0) || unlinkPos > MAX) {
 			// No deletion because there is nothing to delete
 			// (just another index checking)
-#ifdef FFL_DEBUG_MODE 
-		fprintf(stderr, "Range error!\n");
-#endif // FFL_DEBUG_MODE 
+	#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "unlinkAfter2: Range error!\n");
+	#endif // FFL_DEBUG_MODE 
 			return NIL_POS;
 		}
-#endif
+#endif // FFL_INSERT_RANGE_CHECK
 		// Get the 'next' of the unlinked position
+#ifdef FFL_DEBUG_MODE 
+		assert(unlinkPos >= 0);
+#endif
 		FFLPosition succUnlinkPos = next(FFLPosition(unlinkPos));
 
 		// Get the position that is the 'next' of the elem to 'unlink'
