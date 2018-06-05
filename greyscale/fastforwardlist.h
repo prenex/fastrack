@@ -111,6 +111,9 @@ class FastForwardList {
 	public:
 		// Updates holeStart, holeEnd and unlinkHoles
 		inline void addHolePos(int unlinkPos) {
+#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "addHolePos(%d)!\n", unlinkPos);
+#endif // FFL_DEBUG_MODE 
 #ifdef FFL_INSERT_RANGE_CHECK
 			// When range checking is on, we should do nothing if:
 			// - The two indices are equal and the circular queue is full!
@@ -147,6 +150,9 @@ class FastForwardList {
 			int ret = holes[holeStart];	
 			// Rem.: This operation is fastest when MAX is (power of two) - 1
 			// as the compiler should optimise it as a binary & operator!
+#ifdef FFL_DEBUG_MODE 
+		fprintf(stderr, "getHolePos() = %d!\n", ret);
+#endif // FFL_DEBUG_MODE 
 			return ret;
 		}
 
@@ -283,6 +289,8 @@ public:
 				targetInsertPos = holeKeeper.getHolePos();
 			} else {
 				targetInsertPos = filledLenMax;
+				// Update pointer to use when there are no holes
+				++filledLenMax;
 			}
 
 			// Do the core stuff:
@@ -330,8 +338,6 @@ public:
 			// Update state that defines if we are isEmpty() or not:
 			// Update size if range checking is on
 			++curLen;
-			// Update pointer to use when there are no holes
-			++filledLenMax;
 			// If we are here we surely return true as
 			// either the range check was ok, or we do 
 			// not care for range checking...
@@ -354,7 +360,7 @@ public:
 	}	
 
 	/**
-	 * Unlink/delete the node at the given position.
+	 * Unlink/delete the node AFTER the given position.
 	 * Returns a position AFTER the unlinked element
 	 * Rem.: Might return NIL_POS on range check errors! 
 	 * Rem.: The element at position will get changed to point to the successor!
@@ -401,7 +407,7 @@ public:
 			// so we need to update the head pointer only after the deletion
 			headIndex = succUnlinkPos.index;
 		} else {
-			// Unlink - quite literally - by 
+			// Unlink - quite literally by: 
 			data[position.index].second = succUnlinkPos.index;
 #ifdef FFL_DEBUG_MODE 
 			fprintf(stderr, "[%d]->[%d]\n", position.index, succUnlinkPos.index);

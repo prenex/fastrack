@@ -330,9 +330,6 @@ public:
 	 *       This is not a strict requirement, but no resizing will happen along the changes!
 	 */
 	inline void endLine() noexcept {
-		// Reset read head in the ordered list
-		listPos = NIL_POS;
-		lastPos = NIL_POS;
 		// Reset x book-keeping
 		x = 0;
 		// Increment y book-keeping
@@ -367,9 +364,6 @@ public:
 			readHead = mcCurrentList.next(readHead);
 		}
 
-		// Reset state
-		listPos = NIL_POS;
-		lastPos = NIL_POS;
 		// Reset x book-keeping
 		x = 0;
 		// Reset y book-keeping
@@ -409,7 +403,11 @@ private:
 				// If the list is empty stays: lastPos == listPos == NIL_POS
 				// If it already has data, we step on the valid data and not be NIL
 				// Rem.: The above if ensures that we are on the beginning NIL_POS
-				if(!(mcCurrentList.isEmpty())) {
+				if((mcCurrentList.isEmpty())) {
+					// Reset state
+					listPos = NIL_POS;
+					lastPos = NIL_POS;
+				} else {
 					lastPos = NIL_POS;
 					listPos = mcCurrentList.head();
 				}

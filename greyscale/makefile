@@ -8,8 +8,9 @@ CC=g++
 ifeq ($(CC),g++)
 	# g++ (ver 5.1+ tested)
 	# sadly we are having a lot of unused functions for tests so -Wall is undesirable...
-	CFLAGS=-c -std=c++14 -g -O3 -funsafe-loop-optimizations -freorder-blocks-and-partition # -O0 #-Wall
-	LDFLAGS=-g -lpthread -lX11 -lGL -lX11 -O3 -funsafe-loop-optimizations -freorder-blocks-and-partition #-lm # -O0
+# TODO: check -funroll-loops and -funroll-all-loops
+	CFLAGS=-c -std=c++14 -g -O3 -ffast-math -funsafe-loop-optimizations -freorder-blocks-and-partition # -O0 #-Wall
+	LDFLAGS=-g -lpthread -lX11 -lGL -lX11 -O3 -ffast-math -funsafe-loop-optimizations -freorder-blocks-and-partition #-lm # -O0
 # else 
 # ifeq ($(CC),em++)
 # 	# TODO: This is just copy paste from old projects, please change accordingly
@@ -20,8 +21,8 @@ ifeq ($(CC),g++)
 else
 	# clang++ (ver 3.4+ tested)
 	# clang uses 1y instead of 14 here, we need the LLVM libc so that streams are copyable (or a more recent gcc toolchain than the 4.9 at my work!)
-	CFLAGS=-c -stdlib=libc++ -std=c++1y -g -O3 # -fsanitize=address -fno-omit-frame-pointer
-	LDFLAGS=-g -stdlib=libc++ -lpthread -lX11 -v -O3 -lGL -lX11 -lm -stdlib=libc++ # -fsanitize=address -fsanitize-memory-track-origins
+	CFLAGS=-c -stdlib=libc++ -std=c++1y -g -O3 -ffast-math # -fsanitize=address -fno-omit-frame-pointer
+	LDFLAGS=-g -stdlib=libc++ -lpthread -lX11 -v -O3 -lGL -lX11 -lm -stdlib=libc++ -ffast-math # -fsanitize=address -fsanitize-memory-track-origins
 endif
 #endif
 
