@@ -14,6 +14,13 @@
 // You need to define this if you want range checks:
 //#define FFL_INSERT_RANGE_CHECK 1
 
+// Let the user code define what happens in debug mode when assertions are on!
+#ifndef FFL_ASSERT
+#define FFL_ASSERTION assert
+#else
+#define FFL_ASSERTION FFL_ASSERT
+#endif
+
 // Rem.: BASICALLY JUST AN INTEGER WITH MORE TYPE SAFETY :-)
 /**
  * Simple iterator-like index to an element of a FastForwardList. Useful for getting the successor and the value.
@@ -112,7 +119,7 @@ class FastForwardList {
 		// Updates holeStart, holeEnd and unlinkHoles
 		inline void addHolePos(int unlinkPos) {
 #ifdef FFL_DEBUG_MODE 
-		fprintf(stderr, "addHolePos(%d)!\n", unlinkPos);
+		fprintf(stderr, "\taddHolePos(%d)!\n", unlinkPos);
 #endif // FFL_DEBUG_MODE 
 #ifdef FFL_INSERT_RANGE_CHECK
 			// When range checking is on, we should do nothing if:
@@ -124,14 +131,14 @@ class FastForwardList {
 			  // Rem.: Here we deliberately use MAX and not (MAX+1)!
 			  ||(unlinkPos > MAX)) {
 #ifdef FFL_DEBUG_MODE 
-		fprintf(stderr, "addHole: Range error!\n");
+		fprintf(stderr, "\taddHole: Range error!\n");
 #endif // FFL_DEBUG_MODE 
 				return;
 			}
 #endif
 #ifdef FFL_DEBUG_MODE 
 		// Exit on range errors in debug mode!
-		assert(!((holeStart == holeEnd)
+		FFL_ASSERTION(!((holeStart == holeEnd)
 			  ||(unlinkPos < 0)
 			  // Rem.: Here we deliberately use MAX and not (MAX+1)!
 			  ||(unlinkPos > MAX)));
@@ -158,7 +165,7 @@ class FastForwardList {
 			// Rem.: This operation is fastest when MAX is (power of two) - 1
 			// as the compiler should optimise it as a binary & operator!
 #ifdef FFL_DEBUG_MODE 
-		fprintf(stderr, "getHolePos() = %d!\n", ret);
+		fprintf(stderr, "\tgetHolePos() = %d!\n", ret);
 #endif // FFL_DEBUG_MODE 
 			return ret;
 		}
@@ -234,7 +241,7 @@ public:
 		}
 #endif // FFL_INSERT_RANGE_CHECK
 #ifdef FFL_DEBUG_MODE 
-		assert(!current.isNil());
+		FFL_ASSERTION(!current.isNil());
 #endif // FFL_DEBUG_MODE 
 		// This is just a return of an integer - but typesafe
 		return FFLPosition(data[current.index].second);
@@ -322,8 +329,8 @@ public:
 				nextToUse = data[position.index].second;
 				data[position.index].second = targetInsertPos;
 #ifdef FFL_DEBUG_MODE 
-		fprintf(stderr, "*[%d]->[%d]\n", position.index, targetInsertPos);
-		assert(position.index != targetInsertPos);
+		fprintf(stderr, "\t[%d]->[%d]\n", position.index, targetInsertPos);
+		FFL_ASSERTION(position.index != targetInsertPos);
 #endif // FFL_DEBUG_MODE 
 			} else {
 				// Slower-path: adding new head
@@ -341,8 +348,8 @@ public:
 			//     This ensures the proper linkage
 			data[targetInsertPos].second = nextToUse;
 #ifdef FFL_DEBUG_MODE 
-		fprintf(stderr, "[%d]->[%d]\n", targetInsertPos, nextToUse);
-		assert(targetInsertPos != nextToUse);
+		fprintf(stderr, "\t*[%d]->[%d]\n", targetInsertPos, nextToUse);
+		FFL_ASSERTION(targetInsertPos != nextToUse);
 #endif // FFL_DEBUG_MODE 
 
 			// 4.) Update head pointer when we add at the front
@@ -400,7 +407,7 @@ public:
 #endif // FFL_INSERT_RANGE_CHECK
 #ifdef FFL_DEBUG_MODE 
 		// should not unlink from an empty list!
-		assert(!isEmpty());
+		FFL_ASSERTION(!isEmpty());
 #endif
 		// Get successor position
 		int unlinkPos;
@@ -424,7 +431,7 @@ public:
 #endif // FFL_INSERT_RANGE_CHECK
 		// Get the 'next' of the unlinked position
 #ifdef FFL_DEBUG_MODE 
-		assert(unlinkPos >= 0);
+		FFL_ASSERTION(unlinkPos >= 0);
 #endif
 		FFLPosition succUnlinkPos = next(FFLPosition(unlinkPos));
 
@@ -437,8 +444,8 @@ public:
 			// Unlink - quite literally by: 
 			data[position.index].second = succUnlinkPos.index;
 #ifdef FFL_DEBUG_MODE 
-			fprintf(stderr, "[%d]->[%d]\n", position.index, succUnlinkPos.index);
-			assert(position.index != succUnlinkPos.index);
+			fprintf(stderr, "\t[%d]->[%d]\n", position.index, succUnlinkPos.index);
+			FFL_ASSERTION(position.index != succUnlinkPos.index);
 #endif // FFL_DEBUG_MODE 
 		}
 

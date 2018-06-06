@@ -1,3 +1,5 @@
+// Sample application that runs 2D marker tracking on /dev/video0 camera
+//
 // Compile with: g++ marker_camapp.cpp -lGL -lX11 -o marker_camapp
 // When having very slow (5FPS) camera speed turn off auto_exposure:
 //
@@ -26,10 +28,77 @@
 //
 // So basically you can turn off most "auto" things freely to suckless on lower end machines!
 
+// ======== //
+// SETTINGS //
+// ======== //
+
+#define WIN_XPOS 256
+#define WIN_YPOS 64
+#define WIN_XRES 640
+#define WIN_YRES 480
+/*#define WIN_XRES 320
+#define WIN_YRES 240*/
+#define NUM_SAMPLES 1
+
+// Must be the same as WIN_*RES as of now!
+#define CAM_XRES 640
+#define CAM_YRES 480
+/*##define CAM_XRES 320
+#define CAM_YRES 240*/
+
+// MUST BE HERE FOR TECHNICAL REASONS to have uint8_t for below!
+#include <cstdint> // (*)
+
+// Pixel-buffer to render as greyscale to the screen
+// Rem.: Must have same size as camera buf as of now!
+static uint8_t pixBuf[WIN_XRES * WIN_YRES];
+
+// ===== //
+// DEBUG //
+// ===== //
+
+// Define this if you want your last frame image to be saved on errors
+#define SAVE_LAST_FRAME_ON_FFL_ASSERT 1
+
+// Rem.: This must be before mcparser include as that includes fastforwardlist.h
+#ifdef SAVE_LAST_FRAME_ON_FFL_ASSERT
+// because we look for a cryptic error and want to save the frame
+// we redefine what happens when assertions fail
+#define FFL_ASSERT myassertfun
+// We only include CImg (for image saving) when we need to!
+#include "CImg.h"
+#define LAST_FRAME_FILE "lastErrorFrame.png"
+// The assert function
+void myassertfun(bool pred) {
+	// check if assertion failed
+	if(!pred) {
+		// Create CImg from the last camera frame
+		cimg_library::CImg<unsigned char> lastFrameImg(CAM_XRES,CAM_YRES,1,3,0);
+		cimg_forXY(lastFrameImg,x,y) {
+			// Rem.: red channel is used in marker1_mceval
+			lastFrameImg(x,y,0,0) = pixBuf[x + y*CAM_XRES];
+		}
+		// Save the last camera frame - if we can
+		lastFrameImg.save(LAST_FRAME_FILE);
+
+		// Print to the user that it has been saved
+		fprintf(stderr, "SOME ASSERT FAILED! Saved the erronous frame as: " LAST_FRAME_FILE "\n");
+
+		// Quit application immediately!
+		exit(1);
+	}
+}
+#endif
+
+// ======== //
+// Includes //
+// ======== //
+
 #include <cstdio>
 #include <cstdlib>
-#include <cstring>
+#include <cstdint> // Have it already at (*), but better show up here too...
 #include <cctype>
+#include <cstring>
 #include <sys/time.h>
 #define GL_GLEXT_PROTOTYPES
 #define GLX_GLXEXT_PROTOTYPES
@@ -40,8 +109,13 @@
 
 // Use this for wrapping video4linux
 #include "v4lwrapper.h"
+
 // MarkerCenter frame parser
 #include "mcparser.h" 
+
+// ==== //
+// CODE //
+// ==== //
 
 MCParser<> mcp;
 
@@ -52,23 +126,6 @@ struct MyWin {
 	int width;
 	int height;
 };
-
-#define WIN_XPOS 256
-#define WIN_YPOS 64
-#define WIN_XRES 640
-#define WIN_YRES 480
-/*#define WIN_XRES 320
-#define WIN_YRES 240*/
-#define NUM_SAMPLES 1
-
-#define CAM_XRES 640
-#define CAM_YRES 480
-/*##define CAM_XRES 320
-#define CAM_YRES 240*/
-
-// Pixel-buffer to render as greyscale to the screen
-static uint8_t pixBuf[WIN_XRES * WIN_YRES];
-
 
 struct MyWin Win;
 
