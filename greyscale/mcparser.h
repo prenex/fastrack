@@ -191,7 +191,9 @@ public:
 		lastX = x;
 
 		// Update order counts
-		++ord[order - MIN_ORDER];
+		if(order <= MAX_ORDER) {
+			++ord[order - MIN_ORDER];
+		}
 
 		// Update min-max X
 		minX = newMinX;
