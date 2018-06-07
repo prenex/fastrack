@@ -1,0 +1,6 @@
+[submodule "deps/opengv"]
+	path = deps/opengv
+	url = https://github.com/laurentkneip/opengv.git
+[submodule "deps/eigen3"]
+	path = deps/eigen3
+	url = https://github.com/OPM/eigen3.git

@@ -50,11 +50,18 @@ CAMAPP_SOURCES=marker_camapp.cpp
 CAMAPP_OBJECTS=$(CAMAPP_SOURCES:.cpp=.o)
 CAMAPP_EXECUTABLE=marker_camapp
 
-all: marker1gen marker2gen marker1_ev ffl_test marker1_mc_ev camapp
+CAMAPP_3D_SOURCES=marker3d_camapp.cpp
+CAMAPP_3D_OBJECTS=$(CAMAPP_3D_SOURCES:.cpp=.o)
+CAMAPP_3D_EXECUTABLE=marker3d_camapp
+
+default: marker1gen marker2gen marker1_ev ffl_test marker1_mc_ev camapp
+# Rem.: The default make target is not "all" because it seems not good to rely on heavyweight libraries like Eigen3 or OpenGV
+all: default camapp3d
 ffl_test: $(FFLT_SOURCES) $(FFLT_EXECUTABLE)
 marker1gen: $(M1_SOURCES) $(M1_EXECUTABLE)
 marker2gen: $(M2_SOURCES) $(M2_EXECUTABLE)
 camapp: $(CAMAPP_SOURCES) $(CAMAPP_EXECUTABLE)
+camapp3d: $(CAMAPP_3D_SOURCES) $(CAMAPP_3D_EXECUTABLE)
 
 marker1_mc_ev: $(M1_MC_EV_SOURCES) $(M1_MC_EV_EXECUTABLE)
 $(M1_MC_EV_EXECUTABLE): $(M1_MC_EV_OBJECTS)
@@ -92,6 +99,14 @@ else
 	$(CC) $(CAMAPP_OBJECTS) -o $@ $(LDFLAGS)
 endif
 
+$(CAMAPP_3D_EXECUTABLE): $(CAMAPP_3D_OBJECTS)
+# In case of emscripten build, we make a html5/webgl output
+ifeq ($(CC),em++)
+	$(CC) $(CAMAPP_3D_OBJECTS) -o $@.html $(LDFLAGS)
+else
+	$(CC) $(CAMAPP_3D_OBJECTS) -o $@ $(LDFLAGS)
+endif
+
 # The LDFLAGS should be after the files
 # because of some lazyness in newer toolchains!
 $(M1_EXECUTABLE): $(M1_OBJECTS) 
@@ -116,6 +131,6 @@ endif
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -f *.o $(M1_EXECUTABLE) $(M2_EXECUTABLE) $(M1_EV_EXECUTABLE) $(FFLT_EXECUTABLE) $(M1_MC_EV_EXECUTABLE) $(CAMAPP_EXECUTABLE)
+	rm -f *.o $(M1_EXECUTABLE) $(M2_EXECUTABLE) $(M1_EV_EXECUTABLE) $(FFLT_EXECUTABLE) $(M1_MC_EV_EXECUTABLE) $(CAMAPP_EXECUTABLE) $(CAMAPP_3D_EXECUTABLE)
 
 # vim: tabstop=4 noexpandtab shiftwidth=4 softtabstop=4
