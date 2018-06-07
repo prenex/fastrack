@@ -110,7 +110,9 @@ public:
 		confidenceTemp = START_CONFIDENCE;
 		// We try to count the various supported order values
 		// and return the most common one later when closing this.
-		ord[order - MIN_ORDER] = 1;
+		if(order <= MAX_ORDER) {
+			ord[order - MIN_ORDER] = 1;
+		}
 	}
 
 	/**
