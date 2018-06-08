@@ -1,3 +1,6 @@
 
 OpenGV usage:
 https://laurentkneip.github.io/opengv/page_how_to_use.html
+
+Solution number for perspective inversion in PnP problems (for n=3):
+http://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL_COPIES/MARBLE/high/pia/solving.htm
