@@ -114,6 +114,11 @@ int main(int argc, char** argv) {
 					lenAffImg.draw_line(j, 0, j, lenAffImg.height(), (unsigned char*)&lenAffCol);
 				}
 				lenAffImg.display(lenAffDisp);
+
+				// Only for showing the debug points - as other way is used in the loop 
+				// by not having i,j coordinates, but a j base-offset and i as the extra 
+				// offset in the line! For drawing we need to count lines though here.
+				int jj = 0;
 #endif // DEBUG_POINTS 
 
 				// start measuring time
@@ -140,16 +145,16 @@ for(int k = 0; k < RUNS_PER_FRAME; ++k) {
 							// Cant do this now as it overwrites the next scanline:
 							// drawBoxAround(image, i, j, (unsigned char*)&blue);
 							// Muh better debug indicator:
-							image.draw_point(i, j, (unsigned char*)&blue);
+							image.draw_point(i, jj, (unsigned char*)&blue);
 						}
 						// Check for 1D marker result
 						if(res.foundMarker) {
 							// Log and show this marker centerX
 							int centerX = mcp.tokenizer.getMarkerX();
 							auto order = mcp.tokenizer.getOrder();
-							if(order > 2) {
+							if(order >= 2) {
 								printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
-								drawBoxAround(image, centerX, j, (unsigned char*)&green);
+								drawBoxAround(image, centerX, jj, (unsigned char*)&green);
 							} else {
 								printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
 							}
@@ -159,6 +164,11 @@ for(int k = 0; k < RUNS_PER_FRAME; ++k) {
 
 					// Notify MCParser about the end of the line
 					mcp.endLine();
+#ifdef DEBUG_POINTS 
+					// Count lines if needed
+					++jj;
+#endif // DEBUG_POINTS 
+
 				}
 
 				// notify MCParserv about the end of the image frame and get the results
