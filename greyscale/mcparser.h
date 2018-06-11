@@ -169,10 +169,16 @@ public:
 	 */
 	inline bool tryExtend(unsigned int x, unsigned int y, uint8_t order,
 		   	unsigned int deltaDiffMax, unsigned int widthDiffMax) {
+#ifdef MC_DEBUG_LOG 
+		printf("Ext??? ");
+#endif // MC_DEBUG_LOG 
 		// lastX access loads cache properly
 		if(abs(lastX - x) > deltaDiffMax) {
 			// Skipped
 			skipUpd();
+#ifdef MC_DEBUG_LOG 
+		printf("No: LastX!\n");
+#endif // MC_DEBUG_LOG 
 			return false;
 		}
 
@@ -185,6 +191,9 @@ public:
 		if((newMaxX - newMinX) > widthDiffMax) {
 			// Skipped
 			skipUpd();
+#ifdef MC_DEBUG_LOG 
+		printf("No: Width too big!\n");
+#endif // MC_DEBUG_LOG 
 			return false;
 		}
 
@@ -215,6 +224,10 @@ public:
 		//       confidence between minY and maxY and not counting the 
 		//       lot of missing values AFTER the marker center.
 		confidence = confidenceTemp;
+
+#ifdef MC_DEBUG_LOG 
+		printf("Yes(%d)!\n", signalCount);
+#endif // MC_DEBUG_LOG 
 
 		// Indicate that we extended!
 		return true;
@@ -356,14 +369,12 @@ public:
 		auto readHead = mcCurrentList.head();
 		while(!readHead.isNil()) {
 			auto currentCenter = mcCurrentList[readHead];
-			if(currentCenter.shouldClose(y, config.closeDiffY)) {
-				// Add the generated marker from it to the frame results
-				// Rem.: This adds poor quality markers too, but with small confidence
-				auto marker2d = currentCenter.constructMarker(config.ignoreWhenSignalCountLessThan);
-				if(marker2d.order > 0) {
-					// negative order means that the signal count was too small for the threshold!
-					frameResult.markers.push_back(marker2d);
-				}
+			// Add the generated marker from it to the frame results
+			// Rem.: This adds poor quality markers too, but with small confidence
+			auto marker2d = currentCenter.constructMarker(config.ignoreWhenSignalCountLessThan);
+			if(marker2d.order > 0) {
+				// negative order means that the signal count was too small for the threshold!
+				frameResult.markers.push_back(marker2d);
 			}
 			readHead = mcCurrentList.next(readHead);
 		}
@@ -394,7 +405,7 @@ private:
 		// get marker data
 		int centerX = tokenizer.getMarkerX();
 		auto order = tokenizer.getOrder();
-		if(config.ignoreOrderSmallerThan < order) {
+		if(config.ignoreOrderSmallerThan <= order) {
 			// If not too small to ignore, process it!
 
 			// PRE-READ TECHNIQUE
