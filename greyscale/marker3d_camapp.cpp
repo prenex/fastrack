@@ -28,15 +28,14 @@
 //
 // So basically you can turn off most "auto" things freely to suckless on lower end machines!
 
-// =============== //
-// EIGEN3 INCLUDES //
-// =============== //
+// ========================== //
+// OpenGV and EIGEN3 INCLUDES //
+// ========================== //
 
 #include <opengv/absolute_pose/methods.hpp>
 #include <opengv/absolute_pose/CentralAbsoluteAdapter.hpp>
 #include <opengv/math/cayley.hpp>
 #undef Success // Needed because X11 library will redefine it!
-
 
 // ======== //
 // SETTINGS //
