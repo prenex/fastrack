@@ -186,7 +186,7 @@ void draw() {
 				// Log and show this marker centerX
 				int centerX = mcp.tokenizer.getMarkerX();
 				auto order = mcp.tokenizer.getOrder();
-				if(order > 2) {
+				if(order >= 2) {
 					printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
 					//drawBoxAround(image, centerX, j, (unsigned char*)&green);
 				} else {

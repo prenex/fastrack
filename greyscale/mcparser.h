@@ -39,13 +39,13 @@ struct MCParserConfig {
 	/**
 	 * Ignore every markercenter that has smaller than this many signals
 	 */
-	unsigned int ignoreWhenSignalCountLessThan = 2;
+	unsigned int ignoreWhenSignalCountLessThan = 3;
 
 	/**
 	 * Ignore every suspected marker-pos in the scanlines
 	 * which has smaller order than this value
 	 */
-	unsigned int ignoreOrderSmallerThan = 2;
+	unsigned int ignoreOrderSmallerThan = 3;
 
 	/**
 	 * Maximum difference between the marker center position 
@@ -53,14 +53,14 @@ struct MCParserConfig {
 	 * and "extension" of the last scanlines marker-center position.
 	 * When bigger is the value, we "SKIP" extending at this scanline.
 	 */
-	unsigned int deltaDiffMax = 10;
+	unsigned int deltaDiffMax = 7;
 
 	/**
 	 * Maximum difference between the minimum and maximum X coordinates
 	 * in a MarkerCenter when consecutive scanlines would grow this
 	 * difference too much. When bigger, we "SKIP" extending.
 	 */
-	unsigned int widthDiffMax = 30;
+	unsigned int widthDiffMax = 20;
 
 	/** Marker is closed if there was no pixel for it in the last 50 rows */
 	unsigned int closeDiffY = 20;

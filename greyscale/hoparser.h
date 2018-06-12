@@ -25,7 +25,7 @@ struct HoparserSetup final {
 	 * At least this many pixels of homogenous colour must be present before
 	 * the start of the marker is suspected on a transition.
 	 */
-	int markStartPrefixHomoLenMin = 30;
+	int markStartPrefixHomoLenMin = 20;
 
 	/** 
 	 * Maximum this many pixels can pass on the marker start 

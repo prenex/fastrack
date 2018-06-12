@@ -1,3 +1,5 @@
+// TODO: Maybe create a fuller app that uses https://github.com/dlbeer/quirc to get QR code encrypted data?
+
 // Sample application that runs 2D marker tracking on /dev/video0 camera
 //
 // Compile with: g++ marker_camapp.cpp -lGL -lX11 -o marker_camapp
@@ -28,15 +30,6 @@
 //
 // So basically you can turn off most "auto" things freely to suckless on lower end machines!
 
-// ========================== //
-// OpenGV and EIGEN3 INCLUDES //
-// ========================== //
-
-#include <opengv/absolute_pose/methods.hpp>
-#include <opengv/absolute_pose/CentralAbsoluteAdapter.hpp>
-#include <opengv/math/cayley.hpp>
-#undef Success // Needed because X11 library will redefine it!
-
 // ======== //
 // SETTINGS //
 // ======== //
@@ -47,7 +40,6 @@
 #define WIN_YRES 480
 /*#define WIN_XRES 320
 #define WIN_YRES 240*/
-#define NUM_SAMPLES 1
 
 // Must be the same as WIN_*RES as of now!
 #define CAM_XRES 640
@@ -122,6 +114,7 @@ void myassertfun(bool pred) {
 // MarkerCenter frame parser
 #include "mcparser.h" 
 
+#include "qr3dposer.h"
 
 // ==== //
 // CODE //
@@ -408,7 +401,6 @@ void createWindow() {
 	if (! glXMakeCurrent(display, win, context))
 		printf("glXMakeCurrent failed.\n");
 	printf("Window Size    = %d x %d\n", WIN_XRES, WIN_YRES);
-	printf("Window Samples = %d\n", NUM_SAMPLES);
 }
 
 void processXEvents(Atom wm_protocols, Atom wm_delete_window) {
