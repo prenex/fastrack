@@ -11,9 +11,12 @@
 #include <opengv/absolute_pose/CentralAbsoluteAdapter.hpp>
 #include <opengv/math/cayley.hpp>
 
-/** Uses fasttrack MCParser to get 3D pose estimates from circle-patterned QR codes */
+/** Uses the given fasttrack MCParser to get 3D pose estimates from circle-patterned QR codes */
+template<typename MCPT>
 class Qr3DPoser {
 
+	// The MCParser as given by the user
+	MCPT mcp;
 }
 
 // X11 library conflicts with Eigen3 if this is not done
