@@ -34,6 +34,9 @@
 // SETTINGS //
 // ======== //
 
+// With this we get a default perspective-4-point algorithm solver using OpenGV
+#define _USE_OPENGV 1
+
 #define WIN_XPOS 256
 #define WIN_YPOS 64
 #define WIN_XRES 640
@@ -114,13 +117,15 @@ void myassertfun(bool pred) {
 // MarkerCenter frame parser
 #include "mcparser.h" 
 
-#include "qr3dposer.h"
+// 3D pose estimations
+#include "fast3dposer.h"
 
 // ==== //
 // CODE //
 // ==== //
 
-MCParser<> mcp;
+// Using deafults everywhere: only possible with _USE_OPENGV defined!
+Fast3DPoser<> poser;
 
 struct MyWin {
 	Display  *display;
@@ -174,7 +179,7 @@ void draw() {
 			uint8_t mag = (rawData+bufPos)[i];
 
 			// TODO: run marker detection code here with MCParser::next(mag);
-			auto res = mcp.next(mag);
+			auto res = poser.next(mag);
 #ifdef DEBUG_POINTS // TODO
 			// do this only for debugging?
 			// These should not be on the image actually
@@ -187,14 +192,8 @@ void draw() {
 			// Check for 1D marker result
 			if(res.foundMarker) {
 				// Log and show this marker centerX
-				int centerX = mcp.tokenizer.getMarkerX();
-				auto order = mcp.tokenizer.getOrder();
-				if(order > 2) {
-					printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
-					//drawBoxAround(image, centerX, j, (unsigned char*)&green);
-				} else {
-					printf("*** Found marker at %d and centerX: %d and order: %d***\n", i, centerX, order);
-				}
+				printf("*** Found marker at %d and centerX: ??? and order: ??? ***\n", i);
+				//drawBoxAround(image, centerX, j, (unsigned char*)&green);
 			}
 #endif // DEBUG_POINTS 
 
@@ -213,27 +212,28 @@ void draw() {
 		// Increment line offset
 		lineOffset += memBlockSize;
 
-		mcp.endLine();
+		poser.endLine();
 	}
 	// Ends the frame: both for my parser and v4l2
 	// ! NEEDED !
 	cameraWrapper.finishFrame(); // TODO: might be optimised further by different loops for my processing
-	auto results = mcp.endImageFrame();
+	// Get results for this camera frame
+	auto results = poser.endImageFrame();
+
+	double x,y,z;
+	results.readPosInto(x, y, z);
 
 	// Show the results
-	printf("Found %d 2D markers on the photo!\n", (int)results.markers.size());
-	for(int i = 0; i < results.markers.size(); ++i) {
-		auto mx = results.markers[i].x;
-		auto my = results.markers[i].y;
-		auto mc = results.markers[i].confidence;
-		auto mo = results.markers[i].order;
-		printf(" - (%d, %d)*%d @ %d confidence!\n", mx, my, mo, mc);
-		// TODO: draw out markers
-		pixBuf[mx + my*CAM_XRES] = 255;
-	}
+	// Print x,y,z of the camera
+	printf("POSE(%f, %f, %f)\n", x, y, z);
+	// TODO: print the matrix too?
 
+	// Draw the camera frame image
 	glDrawPixels(WIN_XRES, WIN_YRES, GL_LUMINANCE, GL_UNSIGNED_BYTE, pixBuf);
 
+	// TODO: Draw some 3D object on top of the image?
+
+	// Render on screen
 	glFlush();
 	glXSwapBuffers(Win.display, Win.win);
 }
